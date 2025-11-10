@@ -1,0 +1,42 @@
+[tool.poetry]
+name         = "llm-fux"
+version      = "0.1.0"
+description  = "Framework for analyzing Fux counterpoint using LLMs using in-context learning and chain-of-thought."
+authors      = ["Liam Pond <liam.pond@mail.mcgill.ca>"]
+readme       = "README.md"
+
+# Your Python package code lives under src/llm_fux
+packages = [
+  { include = "llm_fux", from = "src" }
+]
+
+
+[tool.poetry.dependencies]
+python                = "^3.11"
+requests              = "^2.31.0"
+pyyaml                = "^6.0.1"
+tqdm                  = "^4.66.1"
+python-dotenv         = "^1.0.1"
+# Keep OpenAI mandatory because tests rely on chatgpt model by default
+openai                = "^1.78.1"
+# Make other providers optional so users install only what they need
+google-genai          = "^1.29.0"
+anthropic             = { version = "^0.50.0", optional = true }
+
+[tool.poetry.extras]
+anthropic = ["anthropic"]
+google    = ["google-genai"]
+all       = ["anthropic", "google-genai"]
+
+[tool.poetry.group.dev.dependencies]
+pytest                = "^8.1.1"
+pytest-cov           = "^4.0.0"
+
+[tool.poetry.scripts]
+# Now you can run with `poetry run run-single` or `poetry run run-batch`
+run-single  = "llm_fux.cli.run_single:main"
+run-batch   = "llm_fux.cli.run_batch:main"
+
+[build-system]
+requires    = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
