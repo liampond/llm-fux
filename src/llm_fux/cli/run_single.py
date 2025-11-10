@@ -220,10 +220,16 @@ def main(argv: list[str] | None = None) -> int:
         args.model = config['model']
     if not args.datatype and 'datatype' in config:
         args.datatype = config['datatype']
-    if not args.context and config.get('context', False):
+    
+    # Handle guide config: if guide is set and not "none", enable context
+    guide_from_config = config.get('guide', 'none')
+    if not args.guide and guide_from_config and guide_from_config.lower() != 'none':
+        args.guide = guide_from_config
         args.context = True
-    if not args.guide and 'guide' in config:
-        args.guide = config['guide']
+    elif not args.context and not args.guide:
+        # No guide specified via CLI or config, so no context
+        args.context = False
+    
     if args.temperature == 0.0 and 'temperature' in config:
         args.temperature = config['temperature']
     if not args.max_tokens and 'max_tokens' in config:

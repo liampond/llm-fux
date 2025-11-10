@@ -11,8 +11,7 @@ timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no ti
 datatype: musicxml         # Default format: musicxml, mei, abc, humdrum
 
 # Context Settings
-context: false             # Include guides by default
-# guide: LLM-Guide         # Uncomment to use a specific guide
+guide: none                # Guide to use: LLM-Guide, Pierre-Guide, or none
 
 # Directory Settings
 data_dir: ./data
