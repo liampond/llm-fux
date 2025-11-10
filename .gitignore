@@ -45,8 +45,8 @@ htmlcov/
 # Poetry
 poetry.lock
 
-# Outputs
-outputs/*.txt
+# Outputs - ignore all generated files but keep directory structure
+outputs/
 !outputs/.gitkeep
 
 # OS
