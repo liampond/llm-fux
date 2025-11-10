@@ -465,8 +465,8 @@ class TestPromptRunnerOutputContract:
             
             assert runner.save_to == expected_path
     
-    def test_prompt_runner_no_save_path_when_save_false(self, tmp_path):
-        """PromptRunner MUST NOT configure save path when save=False."""
+    def test_prompt_runner_save_path_always_configured(self, tmp_path):
+        """PromptRunner MUST always configure save path (save is always True)."""
         mock_model = MockLLM()
         base_dirs = {"prompts": tmp_path, "encoded": tmp_path, "outputs": tmp_path}
         
@@ -477,10 +477,10 @@ class TestPromptRunnerOutputContract:
             context=False,
             exam_date="test_exam",
             base_dirs=base_dirs,
-            save=False
+            save=True  # Always save
         )
         
-        assert runner.save_to is None
+        assert runner.save_to is not None
 
 
 class TestPromptRunnerDefaultValues:

@@ -131,11 +131,6 @@ def build_argument_parser() -> argparse.ArgumentParser:
         default=None,
         help="Optional max tokens for the response",
     )
-    run_group.add_argument(
-        "--no-save",
-        action="store_true",
-        help="Don't save response to outputs/ directory (default: save responses)",
-    )
 
     # --- Data & output directories ---
     parser.add_argument(
@@ -295,7 +290,7 @@ def main(argv: list[str] | None = None) -> int:
             base_dirs=base_dirs,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
-            save=not args.no_save,  # Save by default, unless --no-save is specified
+            save=True,  # Always save
         )
 
         logging.info(
@@ -321,11 +316,11 @@ def main(argv: list[str] | None = None) -> int:
             logging.error("Unexpected error during prompt execution: %s", e)
             return 1
 
-        # Print and optionally save the response
+        # Print and save the response
         print("\n=== Model Response ===\n")
         print(response)
 
-        if not args.no_save and runner.save_to:
+        if runner.save_to:
             # Show the organized output structure
             actual_path = getattr(runner, "actual_response_path", runner.save_to)
             outputs_root = runner.base_dirs.get("outputs", Path("outputs"))

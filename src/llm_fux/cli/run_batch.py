@@ -157,11 +157,6 @@ def build_argument_parser() -> argparse.ArgumentParser:
         help="Optional token cap",
     )
     parser.add_argument(
-        "--no-save",
-        action="store_true",
-        help="Don't save outputs to disk (default: save outputs)",
-    )
-    parser.add_argument(
         "--overwrite",
         action="store_true",
         help="Overwrite existing outputs",
@@ -244,7 +239,7 @@ def prepare_tasks(
             guide=args.guide,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
-            save=not args.no_save,  # Save by default, unless --no-save is specified
+            save=True,  # Always save
             overwrite=args.overwrite,
             dataset=args.dataset,
         )

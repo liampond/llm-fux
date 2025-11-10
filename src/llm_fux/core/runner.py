@@ -51,7 +51,7 @@ class PromptRunner:
         base_dirs: Optional[Dict[str, Path]] = None,
         temperature: float = 0.0,
         max_tokens: Optional[int] = None,
-        save: bool = False,
+        save: bool = True,  # Always save outputs
         # Legacy aliases
         question_number: Optional[str] = None,
         exam_date: Optional[str] = None,
