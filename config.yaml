@@ -1,6 +1,10 @@
 # LLM-Fux Configuration
 # Edit these values to set your preferred defaults
 
+# =============================================================================
+# DEFAULT SETTINGS (used when no CLI flags provided)
+# =============================================================================
+
 # Model Configuration
 model: claude              # Default provider: chatgpt, claude, or gemini
 temperature: 0.0           # Sampling temperature (0.0-1.0)
@@ -22,6 +26,98 @@ outputs_dir: ./outputs
 save: true
 overwrite: false
 
-# Batch Settings (for run-batch command)
-parallel: 1
-retry: 0
+# =============================================================================
+# SINGLE RUN CONFIGURATION
+# =============================================================================
+# Configure a specific single run - useful for repeated testing of one setup
+# Set enabled: true to use these settings, or use CLI for ad-hoc runs
+
+single_run:
+  enabled: false           # Set to true to enable single run mode
+  file: Fux_CantusFirmus_C # File to test (e.g., Fux_CantusFirmus_C)
+  model: claude            # Override default model if desired
+  datatype: musicxml       # Override default datatype if desired
+  guide: none              # Override default guide if desired (LLM-Guide, Pierre-Guide, or none)
+  temperature: 0.0         # Override temperature if desired
+  max_tokens: 16000        # Override max_tokens if desired
+
+# =============================================================================
+# BATCH RUN CONFIGURATION
+# =============================================================================
+# Configure batch runs to test multiple combinations
+# Set enabled: true to use these settings
+
+batch_run:
+  enabled: false           # Set to true to enable batch run mode
+  
+  # Models to test (list one or more)
+  models:
+    - claude
+    # - chatgpt
+    # - gemini
+  
+  # Datatypes/formats to test (list one or more)
+  datatypes:
+    - musicxml
+    # - mei
+    # - abc
+    # - humdrum
+  
+  # Files to test (list one or more file IDs)
+  files:
+    - Fux_CantusFirmus_C
+    # - Fux_CantusFirmus_A
+    # - Fux_CantusFirmus_D
+    # - Fux_CantusFirmus_E
+    # - Fux_CantusFirmus_F
+    # - Fux_CantusFirmus_G
+  
+  # Context settings
+  contexts:
+    - without              # Options: with, without (can list both)
+    # - with
+  
+  guide: LLM-Guide         # Guide to use when context is "with"
+  
+  # Batch execution settings
+  delay: 2                 # Seconds to wait between API calls
+  parallel: 1              # Number of parallel runs (1 = sequential)
+  retry: 0                 # Number of retries on failure
+
+# =============================================================================
+# EXAMPLE CONFIGURATIONS
+# =============================================================================
+#
+# Example 1: Test all models with MusicXML
+# batch_run:
+#   enabled: true
+#   models: [chatgpt, claude, gemini]
+#   datatypes: [musicxml]
+#   files: [Fux_CantusFirmus_C]
+#   contexts: [without]
+#
+# Example 2: Test all formats with Claude
+# batch_run:
+#   enabled: true
+#   models: [claude]
+#   datatypes: [musicxml, mei, abc, humdrum]
+#   files: [Fux_CantusFirmus_C]
+#   contexts: [without]
+#
+# Example 3: Compare with/without context for one model
+# batch_run:
+#   enabled: true
+#   models: [claude]
+#   datatypes: [musicxml]
+#   files: [Fux_CantusFirmus_C]
+#   contexts: [with, without]
+#   guide: LLM-Guide
+#
+# Example 4: Full comparison matrix
+# batch_run:
+#   enabled: true
+#   models: [chatgpt, claude, gemini]
+#   datatypes: [musicxml, mei, abc, humdrum]
+#   files: [Fux_CantusFirmus_C]
+#   contexts: [with, without]
+#   guide: LLM-Guide

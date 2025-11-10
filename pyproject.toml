@@ -34,8 +34,9 @@ pytest-cov           = "^4.0.0"
 
 [tool.poetry.scripts]
 # Now you can run with `poetry run run-single` or `poetry run run-batch`
-run-single  = "llm_fux.cli.run_single:main"
-run-batch   = "llm_fux.cli.run_batch:main"
+run-single     = "llm_fux.cli.run_single:main"
+run-batch      = "llm_fux.cli.run_batch:main"
+run-config     = "llm_fux.cli.run_configured:main"
 
 [build-system]
 requires    = ["poetry-core"]

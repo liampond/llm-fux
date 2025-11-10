@@ -40,28 +40,63 @@ llm-fux/
 
 ## Configuration (config.yaml)
 
-All default settings are in `config.yaml`:
+All default settings are in `config.yaml`. This file now supports three modes of operation:
 
+### 1. Default Settings (Always Used)
 ```yaml
-# Model Settings
 model: claude                    # chatgpt, claude, or gemini
 datatype: musicxml              # musicxml, mei, abc, or humdrum
 temperature: 0.0                # 0.0-1.0
-
-# Context Settings
 guide: none                     # LLM-Guide, Pierre-Guide, or none
-                               # If set to a guide name, context is automatically enabled
-
-# API Settings
-max_tokens: 16000              # Maximum response length (16000 prevents truncation)
+max_tokens: 16000              # Maximum response length
 timeout: 600                   # API timeout in seconds (0 = no timeout)
 ```
 
+### 2. Single Run Configuration
+Configure a specific single run for repeated testing:
+
+```yaml
+single_run:
+  enabled: true                # Set to true to enable
+  file: Fux_CantusFirmus_C    # File to test
+  model: claude                # Override default if desired
+  datatype: musicxml          # Override default if desired
+  guide: LLM-Guide            # Use guide (or 'none')
+```
+
+Then run with: `poetry run run-config`
+
+### 3. Batch Run Configuration
+Configure batch runs to test multiple combinations:
+
+```yaml
+batch_run:
+  enabled: true                # Set to true to enable
+  models:
+    - claude
+    - chatgpt
+    - gemini
+  datatypes:
+    - musicxml
+    - mei
+  files:
+    - Fux_CantusFirmus_C
+  contexts:
+    - with                     # Options: with, without (can list both)
+    - without
+  guide: LLM-Guide            # Guide for 'with' context runs
+  delay: 2                    # Seconds between API calls
+```
+
+Then run with: `poetry run run-config`
+
 **Key Points:**
+- Only enable ONE of `single_run` or `batch_run` at a time
 - Setting `guide: LLM-Guide` automatically enables context
 - Setting `guide: none` means no context/guide
-- Users can edit this file to change defaults
-- CLI flags override config settings
+- Batch runs with both `with` and `without` contexts will run twice
+- Users can edit config.yaml to set up their test scenario, then run `poetry run run-config`
+- CLI flags always override config settings
 
 ## Running Commands
 
@@ -71,6 +106,58 @@ timeout: 600                   # API timeout in seconds (0 = no timeout)
 cd /Users/liampond/Documents/GitHub/llm-fux
 
 # API keys must be set in .env file
+```
+
+### Config-Based Run (NEW - Easiest Method)
+
+**Run using config.yaml settings:**
+```bash
+poetry run run-config
+```
+
+This reads your configured single_run or batch_run from config.yaml and executes it automatically. 
+
+**Examples:**
+
+1. **Quick single test setup:**
+   Edit config.yaml:
+   ```yaml
+   single_run:
+     enabled: true
+     file: Fux_CantusFirmus_C
+     model: claude
+     datatype: musicxml
+   ```
+   Then run: `poetry run run-config`
+
+2. **Batch test all models with MusicXML:**
+   Edit config.yaml:
+   ```yaml
+   batch_run:
+     enabled: true
+     models: [claude, chatgpt, gemini]
+     datatypes: [musicxml]
+     files: [Fux_CantusFirmus_C]
+     contexts: [without]
+   ```
+   Then run: `poetry run run-config`
+
+3. **Compare all formats with Claude:**
+   Edit config.yaml:
+   ```yaml
+   batch_run:
+     enabled: true
+     models: [claude]
+     datatypes: [musicxml, mei, abc, humdrum]
+     files: [Fux_CantusFirmus_C]
+     contexts: [without]
+   ```
+   Then run: `poetry run run-config`
+
+**Force specific mode:**
+```bash
+poetry run run-config single   # Force single run
+poetry run run-config batch    # Force batch run
 ```
 
 ### Single Run Command
@@ -131,14 +218,14 @@ poetry run run-single --list-guides     # Show available guides
 
 **Basic syntax:**
 ```bash
-poetry run run-batch [OPTIONS]
+poetry run run-batch --models <model1,model2> [OPTIONS]
 ```
 
 **Common batch patterns:**
 
 1. **All models, one format:**
    ```bash
-   poetry run run-batch --models chatgpt claude gemini --datatypes abc --files Fux_CantusFirmus_C
+   poetry run run-batch --models chatgpt,claude,gemini --datatypes abc --files Fux_CantusFirmus_C
    ```
 
 2. **One model, all formats:**
@@ -146,9 +233,9 @@ poetry run run-batch [OPTIONS]
    poetry run run-batch --models claude --datatypes musicxml mei abc humdrum --files Fux_CantusFirmus_C
    ```
 
-3. **With and without context:**
+3. **With context:**
    ```bash
-   poetry run run-batch --models chatgpt claude --datatypes musicxml --contexts with without --files Fux_CantusFirmus_C
+   poetry run run-batch --models chatgpt,claude --datatypes musicxml --context --guide LLM-Guide --files Fux_CantusFirmus_C
    ```
 
 4. **Multiple files, one format:**
@@ -156,20 +243,24 @@ poetry run run-batch [OPTIONS]
    poetry run run-batch --models claude --datatypes musicxml --files Fux_CantusFirmus_A Fux_CantusFirmus_C Fux_CantusFirmus_D
    ```
 
-5. **Full comparison (all models, all formats, with/without context):**
+5. **Full comparison (all models, all formats):**
    ```bash
-   poetry run run-batch --models chatgpt claude gemini --datatypes musicxml mei abc humdrum --contexts with without --files Fux_CantusFirmus_C
+   poetry run run-batch --models chatgpt,claude,gemini --datatypes musicxml mei abc humdrum --files Fux_CantusFirmus_C
    ```
-   (This runs 24 API calls: 3 models × 4 formats × 2 contexts)
+   (This runs 12 API calls: 3 models × 4 formats)
+   
+   For with/without context comparison, run the command twice (once with --context, once without)
 
 **Batch Options:**
-- `--models`: Space-separated list (chatgpt, claude, gemini)
-- `--datatypes`: Space-separated list (musicxml, mei, abc, humdrum)
-- `--contexts`: with, without, or both (space-separated)
+- `--models`: Comma-separated list (chatgpt,claude,gemini) or 'all'
+- `--datatypes`: Space-separated list (musicxml mei abc humdrum)
+- `--context`: Include context guide (flag)
 - `--files`: Space-separated file IDs
-- `--guide`: Guide to use when contexts includes "with"
+- `--guide`: Guide to use when --context is specified
 - `--temperature`: Temperature for all runs
+- `--jobs`: Number of parallel jobs (default: 1)
 - `--delay`: Seconds between API calls (default: 2)
+- `--retry`: Number of retries for failed runs (default: 0)
 
 ## Output Organization
 
@@ -216,12 +307,12 @@ outputs/
 | User Says | Command to Run |
 |-----------|----------------|
 | "Run Claude on file C in MusicXML" | `poetry run run-single --file Fux_CantusFirmus_C --model claude --datatype musicxml` |
-| "Test all models with ABC format" | `poetry run run-batch --models chatgpt claude gemini --datatypes abc --files Fux_CantusFirmus_C` |
-| "Compare with and without context" | `poetry run run-batch --models claude --datatypes musicxml --contexts with without --files Fux_CantusFirmus_C` |
-| "Run all formats for ChatGPT" | `poetry run run-batch --models chatgpt --datatypes musicxml mei abc humdrum --files Fux_CantusFirmus_C` |
-| "Test everything" | `poetry run run-batch --models chatgpt claude gemini --datatypes musicxml mei abc humdrum --contexts with without --files Fux_CantusFirmus_C` |
-| "Use the LLM guide" | `poetry run run-single --file Fux_CantusFirmus_C --context --guide LLM-Guide` |
-| "No context, just raw" | `poetry run run-single --file Fux_CantusFirmus_C` (with guide: none in config) |
+| "Test all models with ABC format" | Configure batch_run in config.yaml with models: [chatgpt, claude, gemini], datatypes: [abc], then `poetry run run-config` |
+| "Compare with and without context" | Configure batch_run with contexts: [with, without], then `poetry run run-config` |
+| "Run all formats for ChatGPT" | Configure batch_run with models: [chatgpt], datatypes: [musicxml, mei, abc, humdrum], then `poetry run run-config` |
+| "Test everything" | Configure batch_run with all models, all datatypes, both contexts, then `poetry run run-config` |
+| "Use the LLM guide" | Set guide: LLM-Guide in config.yaml |
+| "No context, just raw" | Set guide: none in config.yaml |
 
 ### Understanding Context
 - **With context**: Includes guide documents (LLM-Guide.md or Pierre-Guide.md) in the prompt
@@ -250,27 +341,54 @@ Each file represents a cantus firmus in a different key (A, C, D, E, F, G).
 2. Run: `poetry run run-single --file Fux_CantusFirmus_C`
 3. Report: "Running Claude with MusicXML format (from config). Output will be saved to outputs/response/claude/..."
 
-### Example 2: Batch Comparison
+### Example 2: Batch Comparison Using Config
 **User**: "Compare all three models using ABC format"
 
 **Agent Actions**:
-1. Run: `poetry run run-batch --models chatgpt claude gemini --datatypes abc --files Fux_CantusFirmus_C`
-2. Report: "Running 3 tests (ChatGPT, Claude, Gemini with ABC). This will take approximately 6-30 seconds..."
-3. After completion: "Results saved to outputs/response/{model}/no-context/abc/"
+1. Update config.yaml:
+   ```yaml
+   batch_run:
+     enabled: true
+     models: [chatgpt, claude, gemini]
+     datatypes: [abc]
+     files: [Fux_CantusFirmus_C]
+     contexts: [without]
+   ```
+2. Run: `poetry run run-config`
+3. Report: "Running 3 tests (ChatGPT, Claude, Gemini with ABC). Results saved to outputs/response/{model}/no-context/abc/"
 
 ### Example 3: Format Testing
 **User**: "Test MusicXML and MEI with Gemini"
 
 **Agent Actions**:
-1. Run: `poetry run run-batch --models gemini --datatypes musicxml mei --files Fux_CantusFirmus_C`
-2. Report: "Testing Gemini with 2 formats (MusicXML, MEI)..."
+1. Update config.yaml:
+   ```yaml
+   batch_run:
+     enabled: true
+     models: [gemini]
+     datatypes: [musicxml, mei]
+     files: [Fux_CantusFirmus_C]
+     contexts: [without]
+   ```
+2. Run: `poetry run run-config`
+3. Report: "Testing Gemini with 2 formats (MusicXML, MEI)..."
 
 ### Example 4: Context Comparison
 **User**: "Does the LLM guide help Claude?"
 
 **Agent Actions**:
-1. Run: `poetry run run-batch --models claude --datatypes musicxml --contexts with without --guide LLM-Guide --files Fux_CantusFirmus_C`
-2. Report: "Running Claude twice: once with LLM-Guide context, once without. Compare outputs in outputs/response/claude/context/ vs outputs/response/claude/no-context/"
+1. Update config.yaml:
+   ```yaml
+   batch_run:
+     enabled: true
+     models: [claude]
+     datatypes: [musicxml]
+     files: [Fux_CantusFirmus_C]
+     contexts: [with, without]
+     guide: LLM-Guide
+   ```
+2. Run: `poetry run run-config`
+3. Report: "Running Claude twice: once with LLM-Guide context, once without. Compare outputs in outputs/response/claude/context/ vs outputs/response/claude/no-context/"
 
 ## Troubleshooting Common Issues
 
@@ -365,29 +483,50 @@ poetry run run-single --list-files
 poetry run run-single --list-datatypes
 poetry run run-single --list-guides
 
-# Simple single run (uses config.yaml)
+# === CONFIG-BASED RUNS (Recommended) ===
+# Edit config.yaml first, then:
+poetry run run-config              # Auto-detect single or batch
+poetry run run-config single       # Force single run
+poetry run run-config batch        # Force batch run
+
+# === DIRECT CLI RUNS ===
+# Simple single run (uses config.yaml defaults)
 poetry run run-single --file Fux_CantusFirmus_C
 
 # Single run with overrides
 poetry run run-single --file Fux_CantusFirmus_C --model chatgpt --datatype abc
 
 # Batch: All models, one format
-poetry run run-batch --models chatgpt claude gemini --datatypes musicxml --files Fux_CantusFirmus_C
+poetry run run-batch --models chatgpt,claude,gemini --datatypes musicxml --files Fux_CantusFirmus_C
 
-# Batch: Compare contexts
-poetry run run-batch --models claude --datatypes musicxml --contexts with without --files Fux_CantusFirmus_C
+# Batch: One model, all formats
+poetry run run-batch --models claude --datatypes musicxml mei abc humdrum --files Fux_CantusFirmus_C
 
-# Batch: Full test matrix
-poetry run run-batch --models chatgpt claude gemini --datatypes musicxml mei abc humdrum --contexts with without --files Fux_CantusFirmus_C
+# Batch: With context
+poetry run run-batch --models claude --datatypes musicxml --context --guide LLM-Guide --files Fux_CantusFirmus_C
 ```
 
 ## Summary
 
 This repository provides a clean, organized way to test LLM models on music theory tasks. As an LLM agent:
-1. Parse user's natural language request
-2. Map to appropriate CLI command(s)
-3. Execute with `run_in_terminal` tool
-4. Report results and output locations
-5. Help user interpret results if needed
 
-Focus on understanding the user's research question (comparing models, formats, or contexts) and translate that into the appropriate batch or single run command.
+### Recommended Workflow:
+1. **Parse user's natural language request**
+2. **Edit config.yaml** to set up single_run or batch_run configuration
+3. **Execute with** `poetry run run-config`
+4. **Report results** and output locations
+5. **Help user interpret** results if needed
+
+### Key Commands:
+- **`poetry run run-config`** - Run tests based on config.yaml (easiest)
+- **`poetry run run-single --file <FILE>`** - Ad-hoc single test
+- **`poetry run run-batch --models <MODELS> ...`** - Ad-hoc batch test
+
+### Config-Based Approach Benefits:
+- No long CLI commands to construct
+- User can easily tweak settings in YAML
+- Repeatable test configurations
+- Clear documentation of test parameters
+- Easy to version control test scenarios
+
+Focus on understanding the user's research question (comparing models, formats, or contexts) and translate that into the appropriate config.yaml settings or CLI command.
