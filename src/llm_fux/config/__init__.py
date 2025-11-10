@@ -3,6 +3,9 @@
 from llm_fux.config.config import (
     load_config,
     find_config_file,
+    get_config,
+    get_timeout,
+    get_max_tokens,
     DEFAULT_MODELS,
     API_KEYS,
 )
@@ -10,6 +13,9 @@ from llm_fux.config.config import (
 __all__ = [
     "load_config",
     "find_config_file",
+    "get_config",
+    "get_timeout",
+    "get_max_tokens",
     "DEFAULT_MODELS",
     "API_KEYS",
 ]

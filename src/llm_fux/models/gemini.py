@@ -6,7 +6,7 @@ from typing import Optional
 from google import genai
 
 from llm_fux.models.base import LLMInterface, PromptInput
-from llm_fux.config.config import DEFAULT_MODELS
+from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 
 
 class GeminiModel(LLMInterface):
@@ -57,8 +57,10 @@ class GeminiModel(LLMInterface):
         config = {
             "temperature": input.temperature
         }
-        if getattr(input, "max_tokens", None):
-            config["max_output_tokens"] = input.max_tokens
+        # Get max_tokens from input, or fall back to config default
+        max_tokens = getattr(input, "max_tokens", None) or get_max_tokens()
+        if max_tokens:
+            config["max_output_tokens"] = max_tokens
         
         # Log the model name being used
         print(f"Using model: {model_id}")

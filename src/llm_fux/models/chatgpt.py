@@ -2,6 +2,7 @@ import os
 from typing import Optional
 from openai import OpenAI
 from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.config.config import get_timeout, get_max_tokens
 
 
 class ChatGPTModel(LLMInterface):
@@ -16,7 +17,9 @@ class ChatGPTModel(LLMInterface):
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise EnvironmentError("OPENAI_API_KEY is not set in the environment.")
-        self.client = OpenAI(api_key=self.api_key)
+        # Get timeout from config (None = no timeout)
+        timeout = get_timeout()
+        self.client = OpenAI(api_key=self.api_key, timeout=timeout)
         self.model_name = model_name
 
     def query(self, input: PromptInput) -> str:
@@ -35,7 +38,8 @@ class ChatGPTModel(LLMInterface):
             str: The assistant's response text.
         """
         model = input.model_name or self.model_name
-        max_tokens = getattr(input, "max_tokens", None) or 2048
+        # Get max_tokens from input, or fall back to config default
+        max_tokens = getattr(input, "max_tokens", None) or get_max_tokens()
 
         messages = [
             {"role": "system", "content": input.system_prompt},

@@ -29,6 +29,31 @@ API_KEYS = {
     "google": os.getenv("GOOGLE_API_KEY"),
 }
 
+# Cache loaded config to avoid re-reading file
+_cached_config: Optional[Dict[str, Any]] = None
+
+
+def get_config() -> Dict[str, Any]:
+    """Get cached config or load it."""
+    global _cached_config
+    if _cached_config is None:
+        _cached_config = load_config()
+    return _cached_config
+
+
+def get_timeout() -> Optional[float]:
+    """Get timeout from config. Returns None for no timeout."""
+    timeout = get_config().get('timeout', 600)
+    # 0 or None means no timeout
+    if timeout == 0:
+        return None
+    return float(timeout)
+
+
+def get_max_tokens() -> int:
+    """Get max_tokens from config."""
+    return get_config().get('max_tokens', 16000)
+
 
 def find_config_file(start_path: Optional[Path] = None) -> Optional[Path]:
     """Search for config.yaml in current directory or project root."""

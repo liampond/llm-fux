@@ -4,6 +4,8 @@
 # Model Configuration
 model: claude              # Default provider: chatgpt, claude, or gemini
 temperature: 0.0           # Sampling temperature (0.0-1.0)
+max_tokens: 16000          # Maximum response tokens (set high to avoid truncation)
+timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no timeout)
 
 # Input Settings
 datatype: musicxml         # Default format: musicxml, mei, abc, humdrum

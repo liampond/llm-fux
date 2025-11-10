@@ -2,7 +2,7 @@ import os
 from typing import Optional
 from anthropic import Anthropic
 from llm_fux.models.base import LLMInterface, PromptInput
-from llm_fux.config.config import DEFAULT_MODELS
+from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 
 
 class ClaudeModel(LLMInterface):
@@ -16,7 +16,9 @@ class ClaudeModel(LLMInterface):
         if not self.api_key:
             raise EnvironmentError("ANTHROPIC_API_KEY is not set in the environment.")
         self.model_name = model_name or DEFAULT_MODELS["anthropic"]
-        self.client = Anthropic(api_key=self.api_key)
+        # Get timeout from config (None = no timeout)
+        timeout = get_timeout()
+        self.client = Anthropic(api_key=self.api_key, timeout=timeout)
 
     def query(self, input: PromptInput) -> str:
         """
@@ -34,7 +36,8 @@ class ClaudeModel(LLMInterface):
             str: LLM-generated response.
         """
         model = input.model_name or self.model_name
-        max_tokens = input.max_tokens if hasattr(input, "max_tokens") and input.max_tokens else 1024
+        # Get max_tokens from input, or fall back to config default
+        max_tokens = input.max_tokens if hasattr(input, "max_tokens") and input.max_tokens else get_max_tokens()
 
         response = self.client.messages.create(
             model=model,
