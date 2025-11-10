@@ -10,10 +10,10 @@ import datetime as _dt
 import json
 import yaml
 
-from llm_music_theory.prompts.prompt_builder import PromptBuilder
-from llm_music_theory.core.dispatcher import get_llm, list_available_models
-from llm_music_theory.models.base import PromptInput
-from llm_music_theory.utils.path_utils import find_encoded_file
+from llm_fux.prompts.prompt_builder import PromptBuilder
+from llm_fux.core.dispatcher import get_llm, list_available_models
+from llm_fux.models.base import PromptInput
+from llm_fux.utils.path_utils import find_encoded_file
 
 
 @dataclass

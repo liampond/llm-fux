@@ -8,8 +8,8 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 from typing import Dict
 
-from llm_music_theory.core.runner import PromptRunner
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.core.runner import PromptRunner
+from llm_fux.models.base import LLMInterface, PromptInput
 
 
 class MockLLM(LLMInterface):
@@ -452,7 +452,7 @@ class TestPromptRunnerOutputContract:
         
         # Mock get_output_path to return a predictable path
         expected_path = tmp_path / "test_output.txt"
-        with patch('llm_music_theory.core.runner.get_output_path', return_value=expected_path):
+        with patch('llm_fux.core.runner.get_output_path', return_value=expected_path):
             runner = PromptRunner(
                 model=mock_model,
                 question_number="Q1b",

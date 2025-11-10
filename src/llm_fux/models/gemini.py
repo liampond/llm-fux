@@ -5,8 +5,8 @@ from typing import Optional
 
 from google import genai
 
-from llm_music_theory.models.base import LLMInterface, PromptInput
-from llm_music_theory.config.settings import DEFAULT_MODELS
+from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.config.settings import DEFAULT_MODELS
 
 
 class GeminiModel(LLMInterface):

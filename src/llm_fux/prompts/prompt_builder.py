@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import List, Optional, Dict, Iterable, Sequence, Union
-from llm_music_theory.models.base import PromptInput
+from llm_fux.models.base import PromptInput
 
 __all__ = ["PromptBuilder"]
 

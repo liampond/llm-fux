@@ -1,7 +1,7 @@
 """Tests for model detection functionality."""
 
 import pytest
-from llm_music_theory.core.dispatcher import detect_model_provider, get_llm_with_model_name
+from llm_fux.core.dispatcher import detect_model_provider, get_llm_with_model_name
 
 
 class TestModelDetection:

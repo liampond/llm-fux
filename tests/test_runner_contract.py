@@ -1,14 +1,14 @@
 import pytest
 from unittest.mock import Mock, patch
 
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, PromptInput
 
 pytestmark = pytest.mark.contract
 
 
 def make_runner(tmp_path, mock_model=None, **kwargs):
     """Factory to build a PromptRunner with temp data dirs and a mock model."""
-    from llm_music_theory.core.runner import PromptRunner
+    from llm_fux.core.runner import PromptRunner
 
     if mock_model is None:
         class Dummy(LLMInterface):
@@ -40,7 +40,7 @@ def make_runner(tmp_path, mock_model=None, **kwargs):
 
 class TestRunnerInterface:
     def test_runner_exists(self, tmp_path):
-        from llm_music_theory.core.runner import PromptRunner
+        from llm_fux.core.runner import PromptRunner
         assert PromptRunner is not None
         runner = make_runner(tmp_path)
         assert runner is not None

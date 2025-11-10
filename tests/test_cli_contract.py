@@ -18,21 +18,21 @@ class TestCLIModuleExistence:
         """CLI modules MUST be importable."""
         # Single query CLI
         try:
-            from llm_music_theory.cli import run_single
+            from llm_fux.cli import run_single
             assert run_single is not None
         except ImportError:
             pytest.fail("run_single CLI module should be importable")
         
         # Batch processing CLI  
         try:
-            from llm_music_theory.cli import run_batch
+            from llm_fux.cli import run_batch
             assert run_batch is not None
         except ImportError:
             pytest.fail("run_batch CLI module should be importable")
     
     def test_cli_modules_have_main_functions(self):
         """CLI modules MUST have main/entry functions."""
-        from llm_music_theory.cli import run_single, run_batch
+        from llm_fux.cli import run_single, run_batch
         
         # Check for standard entry point patterns
         entry_point_names = ['main', 'cli_main', 'run', 'execute', 'entry_point']
@@ -57,7 +57,7 @@ class TestSingleQueryCLI:
     
     def test_single_query_argument_parsing(self):
         """Single query CLI MUST parse required arguments."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         # Mock sys.argv to test argument parsing
         test_args = [
@@ -92,7 +92,7 @@ class TestSingleQueryCLI:
     
     def test_single_query_required_arguments(self):
         """Single query CLI MUST require essential arguments."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         # Test missing required arguments
         incomplete_args = [
@@ -121,7 +121,7 @@ class TestSingleQueryCLI:
     
     def test_single_query_execution_integration(self):
         """Single query CLI SHOULD integrate with the runner properly."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         test_args = [
             "run_single.py",
@@ -134,7 +134,7 @@ class TestSingleQueryCLI:
         
         with patch('sys.argv', test_args):
             # Mock the runner to verify integration
-            with patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+            with patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
                 mock_runner = Mock()
                 mock_runner.run.return_value = "CLI test result"
                 mock_runner_class.return_value = mock_runner
@@ -167,7 +167,7 @@ class TestBatchProcessingCLI:
     
     def test_batch_argument_parsing(self):
         """Batch CLI MUST parse batch-specific arguments.""" 
-        from llm_music_theory.cli import run_batch
+        from llm_fux.cli import run_batch
         
         test_args = [
             "run_batch.py",
@@ -181,11 +181,11 @@ class TestBatchProcessingCLI:
         with patch('sys.argv', test_args):
             try:
                 if hasattr(run_batch, 'main'):
-                    with patch('llm_music_theory.core.runner.PromptRunner') as mock_runner:
+                    with patch('llm_fux.core.runner.PromptRunner') as mock_runner:
                         mock_runner.return_value.run.return_value = "batch result"
                         run_batch.main()
                 elif hasattr(run_batch, 'cli_main'):
-                    with patch('llm_music_theory.core.runner.PromptRunner') as mock_runner:
+                    with patch('llm_fux.core.runner.PromptRunner') as mock_runner:
                         mock_runner.return_value.run.return_value = "batch result"
                         run_batch.cli_main()
                 else:
@@ -199,7 +199,7 @@ class TestBatchProcessingCLI:
     
     def test_batch_multiple_combinations(self):
         """Batch CLI SHOULD process multiple parameter combinations."""
-        from llm_music_theory.cli import run_batch
+        from llm_fux.cli import run_batch
         
         test_args = [
             "run_batch.py",
@@ -211,7 +211,7 @@ class TestBatchProcessingCLI:
         ]
         
         with patch('sys.argv', test_args):
-            with patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+            with patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
                 mock_runner = Mock()
                 mock_runner.run.return_value = "batch test result"
                 mock_runner_class.return_value = mock_runner
@@ -238,7 +238,7 @@ class TestCLIUserExperience:
     
     def test_help_messages(self):
         """CLI SHOULD provide helpful usage information."""
-        from llm_music_theory.cli import run_single, run_batch
+        from llm_fux.cli import run_single, run_batch
         
         # Test help for single query
         with patch('sys.argv', ['run_single.py', '--help']):
@@ -264,7 +264,7 @@ class TestCLIUserExperience:
     
     def test_progress_reporting(self):
         """Batch CLI SHOULD provide progress feedback for long operations."""
-        from llm_music_theory.cli import run_batch
+        from llm_fux.cli import run_batch
         
         test_args = [
             "run_batch.py",
@@ -278,7 +278,7 @@ class TestCLIUserExperience:
         # Capture stdout to check for progress messages
         with patch('sys.argv', test_args), \
              patch('sys.stdout', new_callable=StringIO) as mock_stdout, \
-             patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+             patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
             
             mock_runner = Mock()
             mock_runner.run.return_value = "progress test result"
@@ -303,7 +303,7 @@ class TestCLIUserExperience:
     
     def test_error_handling_user_friendly(self):
         """CLI SHOULD provide user-friendly error messages."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         test_args = [
             "run_single.py",
@@ -316,7 +316,7 @@ class TestCLIUserExperience:
         
         with patch('sys.argv', test_args), \
              patch('sys.stderr', new_callable=StringIO) as mock_stderr, \
-             patch('llm_music_theory.core.dispatcher.get_llm', side_effect=ValueError("Unknown model: invalid_model")):
+             patch('llm_fux.core.dispatcher.get_llm', side_effect=ValueError("Unknown model: invalid_model")):
             
             try:
                 if hasattr(run_single, 'main'):
@@ -343,7 +343,7 @@ class TestCLIConfiguration:
     
     def test_environment_variable_support(self):
         """CLI SHOULD support configuration via environment variables."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         # Mock environment variables
         with patch.dict('os.environ', {
@@ -359,7 +359,7 @@ class TestCLIConfiguration:
             ]
             
             with patch('sys.argv', test_args), \
-                 patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+                 patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
                 
                 mock_runner = Mock()
                 mock_runner.run.return_value = "env var test result"
@@ -385,14 +385,14 @@ class TestCLIConfiguration:
         # This is a nice-to-have feature
         # Implementation is optional but if present should be testable
         
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         # Test is optional - just document the expectation
         pytest.skip("Config file support is optional")
     
     def test_output_format_options(self):
         """CLI SHOULD support different output formats."""
-        from llm_music_theory.cli import run_single
+        from llm_fux.cli import run_single
         
         for output_format in ['json', 'text', 'csv']:
             test_args = [
@@ -407,7 +407,7 @@ class TestCLIConfiguration:
             
             with patch('sys.argv', test_args), \
                  patch('sys.stdout', new_callable=StringIO) as mock_stdout, \
-                 patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+                 patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
                 
                 mock_runner = Mock()
                 mock_runner.run.return_value = f"result for {output_format}"
@@ -446,7 +446,7 @@ class TestCLIPerformance:
         start_time = time.time()
         
         try:
-            from llm_music_theory.cli import run_single
+            from llm_fux.cli import run_single
             import_time = time.time() - start_time
             
             # Should import quickly (< 2 seconds)
@@ -459,7 +459,7 @@ class TestCLIPerformance:
     def test_batch_processing_efficiency(self):
         """Batch processing SHOULD handle multiple items efficiently."""
         import time
-        from llm_music_theory.cli import run_batch
+        from llm_fux.cli import run_batch
         
         test_args = [
             "run_batch.py",
@@ -471,7 +471,7 @@ class TestCLIPerformance:
         ]
         
         with patch('sys.argv', test_args), \
-             patch('llm_music_theory.core.runner.PromptRunner') as mock_runner_class:
+             patch('llm_fux.core.runner.PromptRunner') as mock_runner_class:
             
             mock_runner = Mock()
             

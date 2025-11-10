@@ -20,14 +20,14 @@ class TestConfigurationContract:
     def test_settings_module_exists(self):
         """System MUST provide a settings/configuration module."""
         try:
-            from llm_music_theory.config import settings
+            from llm_fux.config import settings
             assert settings is not None
         except ImportError:
             pytest.fail("Configuration module should be importable")
     
     def test_api_keys_configuration(self):
         """System MUST provide API key configuration mechanism."""
-        from llm_music_theory.config import settings
+        from llm_fux.config import settings
         
         # Should have some way to access API keys
         api_key_attributes = ['API_KEYS', 'api_keys', 'KEYS', 'keys']
@@ -37,7 +37,7 @@ class TestConfigurationContract:
     
     def test_environment_variable_support(self):
         """Configuration SHOULD support environment variables."""
-        from llm_music_theory.config import settings
+        from llm_fux.config import settings
         
         # Mock environment variables
         env_vars = {
@@ -63,7 +63,7 @@ class TestConfigurationContract:
     
     def test_configuration_validation(self):
         """Configuration SHOULD validate settings appropriately."""
-        from llm_music_theory.config import settings
+        from llm_fux.config import settings
         
         # Test that configuration can detect missing required settings
         with patch.dict('os.environ', {}, clear=True):
@@ -93,14 +93,14 @@ class TestPathUtilitiesContract:
     def test_path_utils_module_exists(self):
         """System MUST provide path utilities."""
         try:
-            from llm_music_theory.utils import path_utils
+            from llm_fux.utils import path_utils
             assert path_utils is not None
         except ImportError:
             pytest.fail("Path utilities module should be importable")
     
     def test_file_path_resolution(self):
         """Path utilities SHOULD resolve file paths correctly."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Should have functions for path resolution
         path_functions = ['resolve_path', 'get_path', 'find_file', 'resolve_file_path']
@@ -129,7 +129,7 @@ class TestPathUtilitiesContract:
     
     def test_file_existence_checking(self):
         """Path utilities SHOULD check file existence safely."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Should have functions for existence checking
         check_functions = ['file_exists', 'path_exists', 'check_file', 'exists']
@@ -159,7 +159,7 @@ class TestPathUtilitiesContract:
     
     def test_safe_path_handling(self):
         """Path utilities MUST handle paths safely."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Test with various problematic paths
         problematic_paths = [
@@ -198,7 +198,7 @@ class TestLoggingContract:
     def test_logger_module_exists(self):
         """System SHOULD provide logging utilities."""
         try:
-            from llm_music_theory.utils import logger
+            from llm_fux.utils import logger
             assert logger is not None
         except ImportError:
             # Logging is optional but recommended
@@ -207,7 +207,7 @@ class TestLoggingContract:
     def test_logger_configuration(self):
         """Logger SHOULD be properly configured."""
         try:
-            from llm_music_theory.utils import logger
+            from llm_fux.utils import logger
         except ImportError:
             pytest.skip("Logging module not available")
         
@@ -244,7 +244,7 @@ class TestDataPathContract:
     
     def test_data_directory_structure(self):
         """System SHOULD have consistent data directory structure."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Should be able to resolve paths for different data types
         data_types = ["encoded", "prompts", "questions"]
@@ -272,7 +272,7 @@ class TestDataPathContract:
     
     def test_format_specific_paths(self):
         """System SHOULD handle format-specific data paths."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         formats = ["mei", "musicxml", "abc", "humdrum"]
         
@@ -302,7 +302,7 @@ class TestErrorHandlingContract:
     
     def test_graceful_missing_file_handling(self):
         """Utilities SHOULD handle missing files gracefully."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Test with non-existent files
         path_functions = ['resolve_path', 'get_path', 'find_file']
@@ -326,7 +326,7 @@ class TestErrorHandlingContract:
     
     def test_invalid_parameter_handling(self):
         """Utilities SHOULD validate parameters appropriately."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Test with invalid parameters
         invalid_params = [
@@ -366,7 +366,7 @@ class TestPerformanceContract:
     def test_path_resolution_speed(self):
         """Path resolution SHOULD be fast for typical use cases."""
         import time
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         path_functions = ['resolve_path', 'get_path', 'find_file']
         
@@ -398,7 +398,7 @@ class TestPerformanceContract:
     def test_configuration_access_speed(self):
         """Configuration access SHOULD be fast."""
         import time
-        from llm_music_theory.config import settings
+        from llm_fux.config import settings
         
         # Time multiple configuration accesses
         start_time = time.time()
@@ -426,7 +426,7 @@ class TestSecurityContract:
     
     def test_path_traversal_protection(self):
         """Path utilities MUST prevent directory traversal attacks."""
-        from llm_music_theory.utils import path_utils
+        from llm_fux.utils import path_utils
         
         # Test directory traversal attempts
         malicious_paths = [
@@ -465,7 +465,7 @@ class TestSecurityContract:
     
     def test_api_key_security(self):
         """Configuration SHOULD handle API keys securely."""
-        from llm_music_theory.config import settings
+        from llm_fux.config import settings
         
         # API keys should not be logged or exposed in debug output
         try:

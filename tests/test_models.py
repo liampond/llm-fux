@@ -6,8 +6,8 @@ This file intentionally keeps only minimal implementation smoke coverage.
 """
 import pytest
 
-from llm_music_theory.core.dispatcher import get_llm
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.core.dispatcher import get_llm
+from llm_fux.models.base import LLMInterface, PromptInput
 
 pytestmark = pytest.mark.unit
 

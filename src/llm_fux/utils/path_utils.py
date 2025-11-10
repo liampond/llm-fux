@@ -213,59 +213,62 @@ def get_output_path(
     dataset: Optional[str] = None,
     ext: str = ".txt",
     question_number: Optional[str] = None,
+    output_type: str = "response",  # 'response', 'prompt', or 'input'
 ) -> Path:
-    """Return path for model output file with folder-based organization.
+    """Return path for model output file with deeply nested folder-based organization.
 
-    Structure: ``outputs/<dataset>/<model>/[context|no-context]/[<guide>/]<file_id>_N<ext>``
-    Only creates directories when they're actually needed.
+    Structure: ``outputs/<output_type>/<model>/<context-folder>/[<guide>/]<datatype>/<file_id>_N<ext>``
+    
+    Args:
+        outputs_dir: Root outputs directory
+        model_name: Name of the model (ChatGPT, Claude, Gemini)
+        file_id: File identifier (e.g., Fux_CantusFirmus_C)
+        datatype: Format (mei, musicxml, abc, humdrum)
+        context: Whether guide/context was used
+        guide: Specific guide name if applicable
+        dataset: Dataset name (unused in new structure)
+        ext: File extension
+        question_number: Legacy parameter (alias for file_id)
+        output_type: Type of output file ('response', 'prompt', or 'input')
+    
+    Returns:
+        Path object for the output file
     """
     fid = file_id or question_number
     if not fid:
         raise ValueError("file_id (or legacy question_number) is required for output path")
     
-    if dataset:
-        # New structure: outputs/dataset/model/context-folder/[guide-folder/]filename
-        model_folder = outputs_dir / dataset / model_name
-        
-        # Create context-based subfolder
-        if context:
-            context_folder = model_folder / "context"
-            if guide:
-                # Further organize by guide when one is specified
-                final_folder = context_folder / guide
-            else:
-                # Context enabled but no specific guide (uses all guides)
-                final_folder = context_folder / "all-guides"
+    # Structure: outputs/<output_type>/<model>/<context-folder>/[<guide>/]<datatype>/
+    
+    # Start with output type (response/prompt/input)
+    type_folder = outputs_dir / output_type
+    
+    # Then model
+    model_folder = type_folder / model_name
+    
+    # Then context folder
+    if context:
+        if guide:
+            # Specific guide used
+            context_folder = model_folder / "context" / guide
         else:
-            final_folder = model_folder / "no-context"
+            # Context enabled but no specific guide (uses all guides)
+            context_folder = model_folder / "context" / "all-guides"
     else:
-        # Legacy structure: outputs/model/filename (with metadata in filename for backward compatibility)
-        context_flag = "context" if context else "nocontext"
-        guide_suffix = f"_{guide}" if guide else ""
-        base_filename = f"{fid}_{datatype}_{context_flag}{guide_suffix}"
-        final_folder = outputs_dir / model_name
-        
-        # Create the base path to check for existing files
-        base_path = final_folder / f"{base_filename}{ext}"
-        ensure_dir(final_folder)
-        
-        # Get the next run number for legacy format
-        run_number = _get_next_run_number(base_path)
-        final_filename = f"{base_filename}_{run_number}{ext}"
-        return final_folder / final_filename
+        context_folder = model_folder / "no-context"
     
-    # For new structure, create clean filename
-    base_filename = f"{fid}"
+    # Then datatype (format)
+    format_folder = context_folder / datatype
     
-    # Only create the directory when we actually need it
-    ensure_dir(final_folder)
+    # Create the directory structure
+    ensure_dir(format_folder)
     
     # Create the base path to check for existing files
-    base_path = final_folder / f"{base_filename}{ext}"
+    base_path = format_folder / f"{fid}{ext}"
     
     # Get the next run number
     run_number = _get_next_run_number(base_path)
     
     # Create the final filename with run number
-    final_filename = f"{base_filename}_{run_number}{ext}"
-    return final_folder / final_filename
+    final_filename = f"{fid}_{run_number}{ext}"
+    return format_folder / final_filename

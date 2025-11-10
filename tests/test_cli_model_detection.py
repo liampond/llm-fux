@@ -2,15 +2,15 @@
 
 import pytest
 from unittest.mock import patch, MagicMock
-from llm_music_theory.cli.run_single import main
+from llm_fux.cli.run_single import main
 
 
 class TestCLIModelDetection:
     """Test CLI model name detection and argument handling."""
 
-    @patch('llm_music_theory.cli.run_single.get_llm_with_model_name')
-    @patch('llm_music_theory.cli.run_single.validate_api_key')
-    @patch('llm_music_theory.cli.run_single.find_encoded_file')
+    @patch('llm_fux.cli.run_single.get_llm_with_model_name')
+    @patch('llm_fux.cli.run_single.validate_api_key')
+    @patch('llm_fux.cli.run_single.find_encoded_file')
     def test_model_name_only_gpt(self, mock_find_file, mock_validate, mock_get_llm):
         """Should work with just --model-name for GPT models."""
         # Setup mocks
@@ -27,7 +27,7 @@ class TestCLIModelDetection:
             "--no-save"
         ]
         
-        with patch('llm_music_theory.cli.run_single.PromptRunner') as mock_runner:
+        with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
             mock_runner_instance = MagicMock()
             mock_runner_instance.run.return_value = "Test response"
             mock_runner.return_value = mock_runner_instance
@@ -41,9 +41,9 @@ class TestCLIModelDetection:
             mock_get_llm.assert_called_once_with("gpt-4o", "chatgpt")
             mock_validate.assert_called_once_with("chatgpt")
 
-    @patch('llm_music_theory.cli.run_single.get_llm_with_model_name')
-    @patch('llm_music_theory.cli.run_single.validate_api_key')
-    @patch('llm_music_theory.cli.run_single.find_encoded_file')
+    @patch('llm_fux.cli.run_single.get_llm_with_model_name')
+    @patch('llm_fux.cli.run_single.validate_api_key')
+    @patch('llm_fux.cli.run_single.find_encoded_file')
     def test_model_name_only_claude(self, mock_find_file, mock_validate, mock_get_llm):
         """Should work with just --model-name for Claude models."""
         # Setup mocks
@@ -59,7 +59,7 @@ class TestCLIModelDetection:
             "--no-save"
         ]
         
-        with patch('llm_music_theory.cli.run_single.PromptRunner') as mock_runner:
+        with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
             mock_runner_instance = MagicMock()
             mock_runner_instance.run.return_value = "Test response"
             mock_runner.return_value = mock_runner_instance
@@ -73,9 +73,9 @@ class TestCLIModelDetection:
             mock_get_llm.assert_called_once_with("claude-3-haiku-20240307", "claude")
             mock_validate.assert_called_once_with("claude")
 
-    @patch('llm_music_theory.cli.run_single.get_llm')
-    @patch('llm_music_theory.cli.run_single.validate_api_key')
-    @patch('llm_music_theory.cli.run_single.find_encoded_file')
+    @patch('llm_fux.cli.run_single.get_llm')
+    @patch('llm_fux.cli.run_single.validate_api_key')
+    @patch('llm_fux.cli.run_single.find_encoded_file')
     def test_backwards_compatibility_model_only(self, mock_find_file, mock_validate, mock_get_llm):
         """Should still work with just --model for backwards compatibility."""
         # Setup mocks
@@ -91,7 +91,7 @@ class TestCLIModelDetection:
             "--no-save"
         ]
         
-        with patch('llm_music_theory.cli.run_single.PromptRunner') as mock_runner:
+        with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
             mock_runner_instance = MagicMock()
             mock_runner_instance.run.return_value = "Test response"
             mock_runner.return_value = mock_runner_instance
@@ -132,9 +132,9 @@ class TestCLIModelDetection:
         result = main(args)
         assert result == 2
 
-    @patch('llm_music_theory.cli.run_single.get_llm_with_model_name')
-    @patch('llm_music_theory.cli.run_single.validate_api_key')
-    @patch('llm_music_theory.cli.run_single.find_encoded_file')
+    @patch('llm_fux.cli.run_single.get_llm_with_model_name')
+    @patch('llm_fux.cli.run_single.validate_api_key')
+    @patch('llm_fux.cli.run_single.find_encoded_file')
     def test_explicit_model_overrides_detection(self, mock_find_file, mock_validate, mock_get_llm):
         """When both --model and --model-name provided, --model should take precedence."""
         # Setup mocks
@@ -151,7 +151,7 @@ class TestCLIModelDetection:
             "--no-save"
         ]
         
-        with patch('llm_music_theory.cli.run_single.PromptRunner') as mock_runner:
+        with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
             mock_runner_instance = MagicMock()
             mock_runner_instance.run.return_value = "Test response"
             mock_runner.return_value = mock_runner_instance

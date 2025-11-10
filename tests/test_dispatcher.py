@@ -7,8 +7,8 @@ internal import patterns or attribute names.
 
 import pytest
 
-from llm_music_theory.core.dispatcher import get_llm
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.core.dispatcher import get_llm
+from llm_fux.models.base import LLMInterface, PromptInput
 
 
 @pytest.mark.unit

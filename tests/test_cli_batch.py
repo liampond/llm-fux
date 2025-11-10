@@ -13,7 +13,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from llm_music_theory.cli.run_batch import main, worker, load_project_env
+from llm_fux.cli.run_batch import main, worker, load_project_env
 
 
 @pytest.mark.unit
@@ -26,8 +26,8 @@ class TestBatchCLI:
         env_file = temp_project_dir / ".env"
         env_file.write_text("API_KEY=test_value\nANOTHER_VAR=another_value")
 
-        with patch("llm_music_theory.cli.run_batch.find_project_root", return_value=temp_project_dir), \
-             patch("llm_music_theory.cli.run_batch.load_dotenv") as mock_load_dotenv:
+        with patch("llm_fux.cli.run_batch.find_project_root", return_value=temp_project_dir), \
+             patch("llm_fux.cli.run_batch.load_dotenv") as mock_load_dotenv:
             load_project_env()
             mock_load_dotenv.assert_called_once_with(dotenv_path=env_file)
 
@@ -43,8 +43,8 @@ class TestBatchCLI:
 
         task = ("chatgpt", "Q1b", "abc", True, dirs, 0.2, None, True, False)
 
-        with patch("llm_music_theory.cli.run_batch.get_llm") as mock_get_llm, \
-             patch("llm_music_theory.cli.run_batch.PromptRunner") as mock_runner_cls:
+        with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
+             patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
             mock_get_llm.return_value = Mock()
             mock_runner = Mock()
             mock_runner.save_to = dirs["outputs"] / "dummy.txt"
@@ -74,8 +74,8 @@ class TestBatchCLI:
 
         task = ("chatgpt", "Q1b", "abc", True, dirs, 0.0, None, True, False)
 
-        with patch("llm_music_theory.cli.run_batch.get_llm") as mock_get_llm, \
-             patch("llm_music_theory.cli.run_batch.PromptRunner") as mock_runner_cls:
+        with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
+             patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
             mock_get_llm.return_value = Mock()
             mock_runner = Mock()
             mock_runner.save_to = existing
@@ -98,8 +98,8 @@ class TestBatchCLI:
 
         task = ("chatgpt", "Q1b", "abc", True, dirs, 0.0, None, True, False)
 
-        with patch("llm_music_theory.cli.run_batch.get_llm") as mock_get_llm, \
-             patch("llm_music_theory.cli.run_batch.PromptRunner") as mock_runner_cls:
+        with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
+             patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
             mock_get_llm.return_value = Mock()
             mock_runner = Mock()
             mock_runner.save_to = dirs["outputs"] / "file.txt"
@@ -110,10 +110,10 @@ class TestBatchCLI:
 
     def _invoke_main(self, argv, list_questions=None, list_datatypes=None, worker_result=True):
         """Helper to run main() with patched dependencies and capture exit code."""
-        with patch("llm_music_theory.cli.run_batch.load_project_env"), \
-             patch("llm_music_theory.cli.run_batch.list_questions", return_value=list_questions or ["Q1a"]), \
-             patch("llm_music_theory.cli.run_batch.list_datatypes", return_value=list_datatypes or ["abc"]), \
-             patch("llm_music_theory.cli.run_batch.worker", return_value=worker_result), \
+        with patch("llm_fux.cli.run_batch.load_project_env"), \
+             patch("llm_fux.cli.run_batch.list_questions", return_value=list_questions or ["Q1a"]), \
+             patch("llm_fux.cli.run_batch.list_datatypes", return_value=list_datatypes or ["abc"]), \
+             patch("llm_fux.cli.run_batch.worker", return_value=worker_result), \
              patch.object(sys, "argv", argv):
             with pytest.raises(SystemExit) as exc:
                 main()

@@ -6,9 +6,9 @@ from pathlib import Path
 import pytest
 from unittest.mock import Mock
 
-from llm_music_theory.core.runner import PromptRunner
-from llm_music_theory.models.base import LLMInterface, PromptInput
-from llm_music_theory.utils.path_utils import find_project_root, list_questions, list_datatypes
+from llm_fux.core.runner import PromptRunner
+from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.utils.path_utils import find_project_root, list_questions, list_datatypes
 
 
 class ComprehensiveTestLLM(LLMInterface):

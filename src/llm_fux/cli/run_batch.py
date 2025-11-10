@@ -24,9 +24,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed, Future
 from time import sleep
 from dotenv import load_dotenv
 
-from llm_music_theory.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
-from llm_music_theory.core.runner import PromptRunner
-from llm_music_theory.utils.path_utils import (
+from llm_fux.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
+from llm_fux.core.runner import PromptRunner
+from llm_fux.utils.path_utils import (
     find_project_root,
     list_file_ids,
     list_datatypes,
@@ -135,8 +135,8 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--dataset",
-        default="fux-counterpoint",
-        help="Dataset name inside data-dir (default: fux-counterpoint)",
+        default="",
+        help="Dataset name inside data-dir (default: root of data-dir)",
     )
     parser.add_argument(
         "--outputs-dir",
@@ -217,7 +217,7 @@ def expand_models(raw: str) -> tuple[List[str], List[str]]:
             providers.append(provider)
         except ValueError:
             # Not a specific model name, try to validate as provider name
-            from llm_music_theory.core.dispatcher import list_available_models
+            from llm_fux.core.dispatcher import list_available_models
             available = list_available_models()
             if model.lower() not in available and model not in available:
                 raise ValueError(
@@ -334,7 +334,7 @@ def worker(task_tuple) -> bool:  # type: ignore
         max_tokens=max_tokens,
         save=save,
         overwrite=overwrite,
-        dataset="fux-counterpoint",  # default dataset for legacy tests
+        dataset="",  # default dataset for legacy tests
     )
     return run_task(task, base_dirs)
 
@@ -391,7 +391,7 @@ def run_main(argv: list[str] | None = None) -> int:
         logging.error("--jobs must be >= 1")
         return 2
 
-    dataset_root = args.data_dir / args.dataset
+    dataset_root = args.data_dir / args.dataset if args.dataset else args.data_dir
     base_dirs: Dict[str, Path] = {
         "encoded": dataset_root / "encoded",
         "prompts": dataset_root / "prompts",
@@ -414,7 +414,7 @@ def run_main(argv: list[str] | None = None) -> int:
     
     if args.guide:
         # Validate that the specified guide exists
-        from llm_music_theory.utils.path_utils import list_guides
+        from llm_fux.utils.path_utils import list_guides
         available_guides = list_guides(base_dirs["guides"])
         if args.guide not in available_guides:
             logging.error("Guide '%s' not found. Available guides: %s", args.guide, ', '.join(available_guides))

@@ -9,7 +9,7 @@ pytestmark = pytest.mark.contract
 from unittest.mock import Mock, patch
 from pathlib import Path
 
-from llm_music_theory.models.base import PromptInput
+from llm_fux.models.base import PromptInput
 
 
 class TestPromptCompositionContract:
@@ -17,7 +17,7 @@ class TestPromptCompositionContract:
     
     def test_prompt_builder_exists(self):
         """System MUST provide a prompt building mechanism."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Should be importable and instantiable
         assert PromptBuilder is not None
@@ -35,7 +35,7 @@ class TestPromptCompositionContract:
     
     def test_prompt_builder_creates_prompt_input(self):
         """PromptBuilder MUST create valid PromptInput objects."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         builder = PromptBuilder(
             system_prompt="You are a music expert",
@@ -56,7 +56,7 @@ class TestPromptCompositionContract:
     
     def test_prompt_component_integration(self):
         """All prompt components MUST be integrated into the final prompt."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         components = {
             "system_prompt": "System instruction",
@@ -86,7 +86,7 @@ class TestPromptCompositionContract:
     
     def test_prompt_component_separation(self):
         """Prompt components SHOULD be clearly separated in output."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         builder = PromptBuilder(
             system_prompt="System",
@@ -118,7 +118,7 @@ class TestPromptValidation:
     
     def test_required_component_validation(self):
         """PromptBuilder MUST validate required components."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Missing system_prompt
         with pytest.raises((TypeError, ValueError)):
@@ -142,7 +142,7 @@ class TestPromptValidation:
     
     def test_temperature_validation(self):
         """PromptBuilder MUST validate temperature parameter (enforced on build)."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         valid_components = {
             "system_prompt": "system",
@@ -166,7 +166,7 @@ class TestPromptValidation:
     
     def test_empty_component_handling(self):
         """PromptBuilder SHOULD handle empty components gracefully."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Empty guides list should be acceptable
         builder = PromptBuilder(
@@ -201,7 +201,7 @@ class TestPromptFormatSupport:
     @pytest.mark.parametrize("format_name", ["mei", "musicxml", "abc", "humdrum"])
     def test_format_specific_prompts(self, format_name):
         """System SHOULD support format-specific prompt templates."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Each format should have appropriate base prompt content
         format_prompts = {
@@ -225,7 +225,7 @@ class TestPromptFormatSupport:
     
     def test_format_data_validation(self):
         """System SHOULD validate format-specific data appropriately."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # This is a design requirement - the system should eventually
         # validate that encoded_data matches the specified format
@@ -257,7 +257,7 @@ class TestPromptContextHandling:
     
     def test_context_mode_support(self):
         """System SHOULD support both context and non-context modes."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         base_components = {
             "system_prompt": "system",
@@ -294,7 +294,7 @@ class TestPromptContextHandling:
     
     def test_guide_content_integration(self):
         """Guide content SHOULD be properly integrated in context mode."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         guides = [
             "Step 1: Identify the key signature",
@@ -332,7 +332,7 @@ class TestPromptBuilderPerformance:
     def test_prompt_building_speed(self):
         """Prompt building SHOULD be fast for typical use cases."""
         import time
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Typical prompt components
         components = {
@@ -360,7 +360,7 @@ class TestPromptBuilderPerformance:
     
     def test_memory_efficiency(self):
         """Prompt building SHOULD be memory efficient."""
-        from llm_music_theory.prompts.prompt_builder import PromptBuilder
+        from llm_fux.prompts.prompt_builder import PromptBuilder
         
         # Build many prompts to test memory usage
         prompts = []

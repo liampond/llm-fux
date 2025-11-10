@@ -6,8 +6,8 @@ These tests define what the PromptBuilder should do, independent of implementati
 import pytest
 from unittest.mock import Mock, patch
 
-from llm_music_theory.prompts.prompt_builder import PromptBuilder
-from llm_music_theory.models.base import PromptInput
+from llm_fux.prompts.prompt_builder import PromptBuilder
+from llm_fux.models.base import PromptInput
 
 
 class TestPromptBuilderInterfaceContract:

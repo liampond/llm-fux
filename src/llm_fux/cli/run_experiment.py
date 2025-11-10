@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 import logging
 from pathlib import Path
-from llm_music_theory.experiments.spec import load_experiment, run_experiment
+from llm_fux.experiments.spec import load_experiment, run_experiment
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser("Run an experiment spec")

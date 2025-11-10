@@ -4,7 +4,7 @@ Centralized helpers to configure and retrieve loggers consistently across the
 project without each module invoking ``basicConfig`` independently.
 
 Usage (simple):
-	from llm_music_theory.utils.logger import configure_logging, get_logger
+	from llm_fux.utils.logger import configure_logging, get_logger
 	configure_logging()  # safe to call multiple times
 	log = get_logger(__name__)
 	log.info("Hello")

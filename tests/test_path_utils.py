@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import pytest
 
-from llm_music_theory.utils.path_utils import (
+from llm_fux.utils.path_utils import (
     load_text_file,
     find_encoded_file,
     find_question_file,

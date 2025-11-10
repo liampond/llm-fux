@@ -8,7 +8,7 @@ import pytest
 pytestmark = pytest.mark.contract
 from unittest.mock import Mock, patch
 
-from llm_music_theory.models.base import LLMInterface
+from llm_fux.models.base import LLMInterface
 
 
 class TestDispatcherInterface:
@@ -16,12 +16,12 @@ class TestDispatcherInterface:
     
     def test_get_llm_function_exists(self):
         """Dispatcher MUST provide a get_llm function."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         assert callable(get_llm)
     
     def test_get_llm_returns_llm_interface(self, mock_api_keys):
         """get_llm MUST return objects implementing LLMInterface."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Test with each expected model
         expected_models = ["chatgpt", "claude", "gemini"]
@@ -35,7 +35,7 @@ class TestDispatcherInterface:
     
     def test_get_llm_invalid_model_error(self):
         """get_llm MUST raise clear errors for invalid model names."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         invalid_names = [
             "invalid_model",
@@ -57,7 +57,7 @@ class TestDispatcherInterface:
     
     def test_get_llm_case_handling(self, mock_api_keys):
         """get_llm SHOULD handle model names consistently."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Define expected behavior for case sensitivity
         # The system should either be case-insensitive OR clearly document case requirements
@@ -92,7 +92,7 @@ class TestDispatcherInterface:
     
     def test_get_llm_returns_fresh_instances(self, mock_api_keys):
         """get_llm SHOULD return fresh instances (not singletons)."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         try:
             model1 = get_llm("chatgpt")
@@ -111,28 +111,28 @@ class TestDispatcherErrorHandling:
     
     def test_model_initialization_failure_propagation(self, mock_api_keys):
         """Dispatcher SHOULD propagate model initialization failures clearly."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Mock a model that fails during initialization
-        with patch('llm_music_theory.models.chatgpt.ChatGPTModel', side_effect=ValueError("API key missing")):
+        with patch('llm_fux.models.chatgpt.ChatGPTModel', side_effect=ValueError("API key missing")):
             with pytest.raises(ValueError, match="API key missing"):
                 get_llm("chatgpt")
     
     def test_import_failure_handling(self):
         """Dispatcher SHOULD handle missing model modules gracefully."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Mock import failure for a model by patching the model class at its import path
-        with patch('llm_music_theory.models.chatgpt.ChatGPTModel', side_effect=ImportError("Module not found")):
+        with patch('llm_fux.models.chatgpt.ChatGPTModel', side_effect=ImportError("Module not found")):
             with pytest.raises((ImportError, ValueError)):
                 get_llm("chatgpt")
     
     def test_configuration_error_handling(self):
         """Dispatcher SHOULD provide clear errors for configuration issues."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Mock missing API keys
-        with patch('llm_music_theory.config.settings.API_KEYS', {}):
+        with patch('llm_fux.config.settings.API_KEYS', {}):
             try:
                 model = get_llm("chatgpt")
                 # If it doesn't raise an error, that's fine too - depends on implementation
@@ -150,7 +150,7 @@ class TestDispatcherConfiguration:
         # This might be a separate function or part of get_llm
         # The exact interface is flexible, but there should be some way to discover available models
         
-        from llm_music_theory.core import dispatcher
+        from llm_fux.core import dispatcher
         
         # Check if there's a list_models function or similar
         if hasattr(dispatcher, 'list_available_models'):
@@ -165,7 +165,7 @@ class TestDispatcherConfiguration:
         
         for model_name in expected_models:
             try:
-                from llm_music_theory.core.dispatcher import get_llm
+                from llm_fux.core.dispatcher import get_llm
                 get_llm(model_name)
                 available_count += 1
             except Exception:
@@ -176,7 +176,7 @@ class TestDispatcherConfiguration:
     
     def test_model_aliases_support(self, mock_api_keys):
         """Dispatcher MAY support model aliases for user convenience."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Test common aliases that users might expect
         alias_mappings = {
@@ -207,7 +207,7 @@ class TestDispatcherPerformance:
     def test_model_lookup_speed(self, mock_api_keys):
         """Model lookup and instantiation SHOULD be reasonably fast."""
         import time
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         # Test multiple lookups
         lookups = 5
@@ -231,7 +231,7 @@ class TestDispatcherPerformance:
         """Dispatcher SHOULD handle concurrent model access safely."""
         import threading
         import queue
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         results = queue.Queue()
         
@@ -273,7 +273,7 @@ class TestDispatcherExtensibility:
         # This test documents the expected pattern for adding new models
         # The exact mechanism depends on implementation, but should be consistent
         
-        from llm_music_theory.core import dispatcher
+        from llm_fux.core import dispatcher
         
         # Check the structure of the dispatcher module
         assert hasattr(dispatcher, 'get_llm')
@@ -301,7 +301,7 @@ class TestDispatcherExtensibility:
         assert isinstance(model, LLMInterface)
         
         # Should work with the expected interface
-        from llm_music_theory.models.base import PromptInput
+        from llm_fux.models.base import PromptInput
         prompt = PromptInput(
             system_prompt="test",
             user_prompt="test",

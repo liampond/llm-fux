@@ -23,9 +23,9 @@ from pathlib import Path
 from typing import Dict, Any
 from dotenv import load_dotenv
 
-from llm_music_theory.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
-from llm_music_theory.core.runner import PromptRunner
-from llm_music_theory.utils.path_utils import (
+from llm_fux.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
+from llm_fux.core.runner import PromptRunner
+from llm_fux.utils.path_utils import (
     find_project_root,
     find_encoded_file,
     list_file_ids,
@@ -146,8 +146,8 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--dataset",
-        default="fux-counterpoint",
-        help="Dataset name inside data-dir (default: fux-counterpoint)",
+        default="",
+        help="Dataset name inside data-dir (default: root of data-dir)",
     )
     parser.add_argument(
         "--outputs-dir",
@@ -184,7 +184,7 @@ def validate_api_key(model_name: str) -> None:
 
 
 def build_base_dirs(data_dir: Path, dataset: str) -> Dict[str, Path]:
-    dataset_root = data_dir / dataset
+    dataset_root = data_dir / dataset if dataset else data_dir
     return {
         "encoded": dataset_root / "encoded",
         "prompts": dataset_root / "prompts",
@@ -323,8 +323,17 @@ def main(argv: list[str] | None = None) -> int:
         print(response)
 
         if not args.no_save and runner.save_to:
-            logging.info("Response saved to %s", runner.save_to)
-            print(f"\nSaved response to: {runner.save_to}")
+            # Show the organized output structure
+            actual_path = getattr(runner, "actual_response_path", runner.save_to)
+            outputs_root = runner.base_dirs.get("outputs", Path("outputs"))
+            
+            logging.info("Response saved to %s", actual_path)
+            print(f"\nOutputs saved under: {outputs_root}/")
+            print(f"  📄 Response: {actual_path.relative_to(outputs_root)}")
+            if hasattr(runner, "prompt_file_path"):
+                print(f"  📝 Prompt:   {runner.prompt_file_path.relative_to(outputs_root)}")
+            if hasattr(runner, "input_bundle_path"):
+                print(f"  📦 Input:    {runner.input_bundle_path.relative_to(outputs_root)}")
         
     return 0
 

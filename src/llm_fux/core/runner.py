@@ -22,9 +22,9 @@ from typing import Dict, List, Optional, Any
 import time
 import zoneinfo
 
-from llm_music_theory.models.base import LLMInterface, PromptInput
-from llm_music_theory.prompts.prompt_builder import PromptBuilder
-from llm_music_theory.utils.path_utils import (
+from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.prompts.prompt_builder import PromptBuilder
+from llm_fux.utils.path_utils import (
     load_text_file,
     find_encoded_file,
     find_question_file,
@@ -47,7 +47,7 @@ class PromptRunner:
         datatype: str = "mei",
         context: bool = False,
         guide: Optional[str] = None,
-        dataset: str = "fux-counterpoint",
+        dataset: str = "",
         base_dirs: Optional[Dict[str, Path]] = None,
         temperature: float = 0.0,
         max_tokens: Optional[int] = None,
@@ -85,6 +85,7 @@ class PromptRunner:
             try:
                 # Use the same extension as the input encoded file
                 ext = f".{self.datatype}"
+                # Get the base path for responses
                 self.save_to = get_output_path(
                     outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
                     model_name=self._get_clean_model_name(self.model),
@@ -94,6 +95,7 @@ class PromptRunner:
                     guide=self.guide,
                     dataset=self.dataset,
                     ext=ext,
+                    output_type="response",
                 )
             except Exception as e:  # pragma: no cover (rare path issues)
                 self.logger.error("Failed to compute output path: %s", e)
@@ -158,12 +160,12 @@ class PromptRunner:
             "guides": guides,
             "question_prompt": question_text,
         }
-        # Dataset-specific ordering logic. For the new fux-counterpoint dataset
+        # Dataset-specific ordering logic. For the default fux counterpoint dataset
         # the user requested ordering: prompt.md (question), guides, base_<FORMAT>, encoded file.
-        # Legacy datasets retain previous ordering.
+        # Legacy datasets with explicit names retain previous ordering.
         ordering = None
         section_headers = None
-        if self.dataset == "fux-counterpoint":
+        if self.dataset in ("", "fux-counterpoint"):
             ordering = [
                 "question_prompt",  # prompt.md baseline instructions
                 "guides",  # contextual guide(s)
@@ -264,9 +266,12 @@ class PromptRunner:
     def _save_response(self, response: str) -> None:
         if not self.save_to:
             return
+        # Response is already in the correct location from get_output_path with output_type="response"
         self.save_to.parent.mkdir(parents=True, exist_ok=True)
         self.save_to.write_text(response, encoding="utf-8")
         self.logger.info("Saved response to %s", self.save_to)
+        # Store the actual path for later reference
+        self.actual_response_path = self.save_to
 
     def _persist_artifacts(self, response: str, prompt_input: PromptInput) -> None:
         """Persist response & prompt file (best effort)."""
@@ -287,13 +292,24 @@ class PromptRunner:
     def _save_prompt_file(self, prompt_input: PromptInput) -> None:
         """Write a companion .prompt.txt file with metadata and complete prompt.
 
-        File naming: <base>.prompt.txt next to the response file.
+        File saved in: prompts/<model>/<context>/<datatype>/ subfolder.
         Contains metadata header + system prompt + user prompt with all formatting preserved.
         """
         if not self.save_to:
             return
-        prompt_path = self.save_to.with_suffix("")  # strip extension
-        prompt_path = prompt_path.parent / (prompt_path.name + ".prompt.txt")
+        # Get path in prompts structure
+        from llm_fux.utils.path_utils import get_output_path
+        prompt_path = get_output_path(
+            outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
+            model_name=self._get_clean_model_name(self.model),
+            file_id=self.file_id,
+            datatype=self.datatype,
+            context=self.context,
+            guide=self.guide,
+            dataset=self.dataset,
+            ext=".txt",
+            output_type="prompt",
+        )
 
         # Build metadata section
         try:
@@ -321,7 +337,9 @@ class PromptRunner:
         if api_duration is not None:
             metadata_lines.append(f"API Duration: {api_duration:.2f} seconds")
             
-        metadata_lines.append(f"Save Path: {self.save_to}")
+        # Update save path in metadata to show actual response location
+        actual_path = getattr(self, "actual_response_path", self.save_to)
+        metadata_lines.append(f"Response Path: {actual_path}")
         
         if prompt_input.model_name:
             metadata_lines.append(f"Model Name Override: {prompt_input.model_name}")
@@ -360,14 +378,25 @@ class PromptRunner:
     def _save_input_bundle(self, prompt_input: PromptInput) -> None:
         """Write a companion .input.json file with prompt components and metadata.
         
-        File naming: <base>.input.json next to the response file.
+        File saved in: inputs/<model>/<context>/<datatype>/ subfolder.
         Contains all input components used to build the prompt.
         """
         if not self.save_to:
             return
         
-        bundle_path = self.save_to.with_suffix("")  # strip extension
-        bundle_path = bundle_path.parent / (bundle_path.name + ".input.json")
+        # Get path in inputs structure
+        from llm_fux.utils.path_utils import get_output_path
+        bundle_path = get_output_path(
+            outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
+            model_name=self._get_clean_model_name(self.model),
+            file_id=self.file_id,
+            datatype=self.datatype,
+            context=self.context,
+            guide=self.guide,
+            dataset=self.dataset,
+            ext=".json",
+            output_type="input",
+        )
         
         # Build input bundle with components and metadata
         components = getattr(self, "_last_components", {})

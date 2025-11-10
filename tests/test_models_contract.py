@@ -9,7 +9,7 @@ pytestmark = pytest.mark.contract
 from abc import ABC
 from unittest.mock import Mock, patch
 
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, PromptInput
 
 
 class TestLLMInterfaceContract:
@@ -18,7 +18,7 @@ class TestLLMInterfaceContract:
     @pytest.mark.parametrize("model_name", ["chatgpt", "claude", "gemini"])
     def test_model_implements_interface(self, model_name, mock_api_keys):
         """All models MUST implement LLMInterface."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         try:
             model = get_llm(model_name)
@@ -29,7 +29,7 @@ class TestLLMInterfaceContract:
     @pytest.mark.parametrize("model_name", ["chatgpt", "claude", "gemini"])
     def test_model_has_query_method(self, model_name, mock_api_keys):
         """All models MUST have a callable query method."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         try:
             model = get_llm(model_name)
@@ -41,7 +41,7 @@ class TestLLMInterfaceContract:
     @pytest.mark.parametrize("model_name", ["chatgpt", "claude", "gemini"])
     def test_model_query_accepts_prompt_input(self, model_name, mock_api_keys, sample_prompt_input):
         """All models MUST accept PromptInput objects in their query method."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         try:
             model = get_llm(model_name)
@@ -58,7 +58,7 @@ class TestLLMInterfaceContract:
     @pytest.mark.parametrize("model_name", ["chatgpt", "claude", "gemini"])
     def test_model_query_returns_string(self, model_name, mock_api_keys, sample_prompt_input):
         """All models MUST return string responses."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         try:
             model = get_llm(model_name)
@@ -76,7 +76,7 @@ class TestLLMErrorHandling:
     
     def test_invalid_prompt_input_type(self, mock_api_keys):
         """Models SHOULD handle invalid input types gracefully."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         model = get_llm("chatgpt")  # Use any available model
         
@@ -89,7 +89,7 @@ class TestLLMErrorHandling:
     
     def test_api_failure_handling(self, mock_api_keys, sample_prompt_input):
         """Models SHOULD propagate API failures as appropriate exceptions."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         model = get_llm("chatgpt")
         
@@ -100,7 +100,7 @@ class TestLLMErrorHandling:
     
     def test_empty_response_handling(self, mock_api_keys, sample_prompt_input):
         """Models SHOULD handle empty API responses appropriately."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         model = get_llm("chatgpt")
         
@@ -229,7 +229,7 @@ class TestLLMPerformanceRequirements:
     def test_model_instantiation_speed(self, mock_api_keys):
         """Model instantiation SHOULD be reasonably fast."""
         import time
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         start_time = time.time()
         
@@ -246,7 +246,7 @@ class TestLLMPerformanceRequirements:
     @pytest.mark.slow  
     def test_query_timeout_handling(self, mock_api_keys, sample_prompt_input):
         """Models SHOULD document or handle query timeouts; if no timeout, the call should eventually return."""
-        from llm_music_theory.core.dispatcher import get_llm
+        from llm_fux.core.dispatcher import get_llm
         
         model = get_llm("chatgpt")
         

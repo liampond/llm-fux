@@ -5,8 +5,8 @@ from pathlib import Path
 from unittest.mock import patch
 import pytest
 
-from llm_music_theory.core.runner import PromptRunner
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.core.runner import PromptRunner
+from llm_fux.models.base import LLMInterface, PromptInput
 
 
 class MockLLMForIntegration(LLMInterface):

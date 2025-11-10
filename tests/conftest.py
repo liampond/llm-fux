@@ -25,7 +25,7 @@ _SRC = _ROOT / "src"
 if str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, PromptInput
 
 __all__ = [
     "mock_llm",
@@ -168,7 +168,7 @@ def mock_api_keys(monkeypatch) -> Dict[str, str]:
     }
     for key, value in mock_keys.items():
         monkeypatch.setenv(f"{key.upper()}_API_KEY", value)
-    monkeypatch.setattr("llm_music_theory.config.settings.API_KEYS", mock_keys)
+    monkeypatch.setattr("llm_fux.config.settings.API_KEYS", mock_keys)
     return mock_keys
 
 

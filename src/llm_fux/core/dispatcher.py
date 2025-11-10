@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from typing import Callable, Dict, List
 
-from llm_music_theory.models.base import LLMInterface
+from llm_fux.models.base import LLMInterface
 
 # Canonical model keys recognised by the project.
 _CANONICAL: List[str] = ["chatgpt", "gemini", "claude"]
@@ -32,16 +32,16 @@ _ALIASES: Dict[str, str] = {
 # Using lambdas keeps imports lazy.
 _REGISTRY: Dict[str, Callable[[], LLMInterface]] = {
     "chatgpt": lambda: __import__(
-        "llm_music_theory.models.chatgpt", fromlist=["ChatGPTModel"]
+        "llm_fux.models.chatgpt", fromlist=["ChatGPTModel"]
     ).ChatGPTModel(),
     "gemini": lambda: _load_optional(
-        module="llm_music_theory.models.gemini",
+        module="llm_fux.models.gemini",
         cls="GeminiModel",
         extra="google",
         human_name="Google Gemini",
     ),
     "claude": lambda: _load_optional(
-        module="llm_music_theory.models.claude",
+        module="llm_fux.models.claude",
         cls="ClaudeModel",
         extra="anthropic",
         human_name="Anthropic Claude",

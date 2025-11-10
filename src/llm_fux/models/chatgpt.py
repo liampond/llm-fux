@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 from openai import OpenAI
-from llm_music_theory.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, PromptInput
 
 
 class ChatGPTModel(LLMInterface):
