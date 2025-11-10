@@ -323,6 +323,7 @@ class PromptRunner:
             f"Dataset: {self.dataset}",
             f"Datatype: {self.datatype}",
             f"Context: {'context' if self.context else 'nocontext'}",
+            f"Guide File: {self.guide if self.guide else 'None'}",
             f"Model: {type(self.model).__name__}",
             f"Temperature: {self.temperature}",
             f"Max Tokens: {self.max_tokens}",
@@ -400,6 +401,7 @@ class PromptRunner:
             "dataset": self.dataset,
             "datatype": self.datatype,
             "context": self.context,
+            "guide_path": self.guide if self.guide else None,  # Show the actual guide file path
             "exam_date": self.exam_date,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
