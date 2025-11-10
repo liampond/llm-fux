@@ -25,6 +25,7 @@ from dotenv import load_dotenv
 
 from llm_fux.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
 from llm_fux.core.runner import PromptRunner
+from llm_fux.config import load_config
 from llm_fux.utils.path_utils import (
     find_project_root,
     find_encoded_file,
@@ -201,6 +202,9 @@ def main(argv: list[str] | None = None) -> int:
     """
     # Load env first (logging not configured yet; only debug message inside)
     load_project_env()
+    
+    # Load config.yaml for defaults
+    config = load_config()
 
     # Configure logging (idempotent; if already configured in tests this won't duplicate handlers)
     logging.basicConfig(
@@ -210,6 +214,20 @@ def main(argv: list[str] | None = None) -> int:
 
     parser = build_argument_parser()
     args = parser.parse_args(argv)
+    
+    # Apply config defaults if args not provided
+    if not args.model and not args.model_name_override and 'model' in config:
+        args.model = config['model']
+    if not args.datatype and 'datatype' in config:
+        args.datatype = config['datatype']
+    if not args.context and config.get('context', False):
+        args.context = True
+    if not args.guide and 'guide' in config:
+        args.guide = config['guide']
+    if args.temperature == 0.0 and 'temperature' in config:
+        args.temperature = config['temperature']
+    if not args.max_tokens and 'max_tokens' in config:
+        args.max_tokens = config['max_tokens']
 
     base_dirs = build_base_dirs(args.data_dir, args.dataset)
     base_dirs["outputs"] = args.outputs_dir  # apply override
