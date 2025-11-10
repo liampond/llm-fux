@@ -168,7 +168,7 @@ def mock_api_keys(monkeypatch) -> Dict[str, str]:
     }
     for key, value in mock_keys.items():
         monkeypatch.setenv(f"{key.upper()}_API_KEY", value)
-    monkeypatch.setattr("llm_fux.config.settings.API_KEYS", mock_keys)
+    monkeypatch.setattr("llm_fux.config.config.API_KEYS", mock_keys)
     return mock_keys
 
 

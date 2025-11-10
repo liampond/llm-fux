@@ -1,0 +1,40 @@
+# LLM-Fux Configuration File
+# Place this file as config.yaml in your project root
+# All settings are optional - CLI arguments will override these defaults
+
+# Model Configuration
+model: claude              # Default provider: chatgpt, claude, or gemini
+# model_name: claude-sonnet-4-5  # Uncomment to specify exact model
+temperature: 0.0           # Sampling temperature (0.0-1.0)
+# max_tokens: 4000         # Uncomment to limit response length
+
+# Input Settings
+# file: Fux_CantusFirmus_C # Default file to process
+datatype: musicxml         # Default format: musicxml, mei, abc, humdrum
+
+# Context Settings
+context: false             # Include guides by default
+# guide: LLM-Guide         # Specific guide to use (requires context: true)
+
+# Directory Settings
+data_dir: ./data          # Location of input data
+dataset: ""               # Dataset subdirectory (empty = root of data_dir)
+outputs_dir: ./outputs    # Where to save responses
+
+# Output Settings
+save: true                # Save responses by default
+overwrite: false          # Don't overwrite existing outputs
+
+# Batch Run Settings (for run-batch command)
+# models:                 # List of models to test
+#   - chatgpt
+#   - claude
+#   - gemini
+# files:                  # List of files to process
+#   - Fux_CantusFirmus_A
+#   - Fux_CantusFirmus_C
+# datatypes:              # List of formats to test
+#   - musicxml
+#   - mei
+parallel: 1               # Number of parallel workers
+retry: 0                  # Retries on failure

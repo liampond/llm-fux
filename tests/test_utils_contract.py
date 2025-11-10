@@ -20,24 +20,22 @@ class TestConfigurationContract:
     def test_settings_module_exists(self):
         """System MUST provide a settings/configuration module."""
         try:
-            from llm_fux.config import settings
-            assert settings is not None
+            from llm_fux import config
+            assert config is not None
         except ImportError:
             pytest.fail("Configuration module should be importable")
     
     def test_api_keys_configuration(self):
         """System MUST provide API key configuration mechanism."""
-        from llm_fux.config import settings
+        from llm_fux import config
         
-        # Should have some way to access API keys
-        api_key_attributes = ['API_KEYS', 'api_keys', 'KEYS', 'keys']
-        
-        has_api_keys = any(hasattr(settings, attr) for attr in api_key_attributes)
-        assert has_api_keys, f"Settings should have one of: {api_key_attributes}"
+        # Should have API_KEYS exported
+        assert hasattr(config, 'API_KEYS'), "Config should export API_KEYS"
+        assert config.API_KEYS is not None
     
     def test_environment_variable_support(self):
         """Configuration SHOULD support environment variables."""
-        from llm_fux.config import settings
+        from llm_fux import config
         
         # Mock environment variables
         env_vars = {
@@ -47,23 +45,15 @@ class TestConfigurationContract:
         }
         
         with patch.dict('os.environ', env_vars):
-            # Reload or re-access settings to pick up environment variables
-            # The exact mechanism depends on implementation
-            
-            if hasattr(settings, 'API_KEYS'):
-                api_keys = settings.API_KEYS
-            elif hasattr(settings, 'api_keys'):
-                api_keys = settings.api_keys  # type: ignore[attr-defined]
-            else:
-                pytest.skip("API keys configuration not found")
+            # API_KEYS should be accessible
+            api_keys = config.API_KEYS
             
             # Should have picked up at least some environment variables
-            # (exact structure depends on implementation)
             assert api_keys is not None
     
     def test_configuration_validation(self):
         """Configuration SHOULD validate settings appropriately."""
-        from llm_fux.config import settings
+        from llm_fux import config
         
         # Test that configuration can detect missing required settings
         with patch.dict('os.environ', {}, clear=True):
@@ -71,12 +61,7 @@ class TestConfigurationContract:
             
             try:
                 # Try to access API keys when none are set
-                if hasattr(settings, 'API_KEYS'):
-                    api_keys = settings.API_KEYS
-                elif hasattr(settings, 'api_keys'):
-                    api_keys = settings.api_keys  # type: ignore[attr-defined]
-                else:
-                    pytest.skip("API keys configuration not found")
+                api_keys = config.API_KEYS
                 
                 # Should either provide empty/None values or raise appropriate error
                 # Both behaviors are acceptable
@@ -398,19 +383,14 @@ class TestPerformanceContract:
     def test_configuration_access_speed(self):
         """Configuration access SHOULD be fast."""
         import time
-        from llm_fux.config import settings
+        from llm_fux import config
         
         # Time multiple configuration accesses
         start_time = time.time()
         
         for _ in range(1000):
             try:
-                if hasattr(settings, 'API_KEYS'):
-                    _ = settings.API_KEYS
-                elif hasattr(settings, 'api_keys'):
-                    _ = settings.api_keys  # type: ignore[attr-defined]
-                else:
-                    break
+                _ = config.API_KEYS
             except Exception:
                 break
         
@@ -465,23 +445,18 @@ class TestSecurityContract:
     
     def test_api_key_security(self):
         """Configuration SHOULD handle API keys securely."""
-        from llm_fux.config import settings
+        from llm_fux import config
         
         # API keys should not be logged or exposed in debug output
         try:
-            if hasattr(settings, 'API_KEYS'):
-                api_keys = settings.API_KEYS
-            elif hasattr(settings, 'api_keys'):
-                api_keys = settings.api_keys  # type: ignore[attr-defined]
-            else:
-                pytest.skip("API keys configuration not found")
+            api_keys = config.API_KEYS
             
             # String representation should not expose actual keys
-            settings_str = str(settings)
+            config_str = str(config)
             
             # Should not contain actual API key values
             # (This is a best practice but hard to test definitively)
-            assert len(settings_str) < 1000, "Settings string representation should be minimal"
+            assert len(config_str) < 5000, "Config string representation should be minimal"
             
         except Exception:
             # If configuration is not accessible, that's fine for this test

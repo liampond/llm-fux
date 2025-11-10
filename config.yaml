@@ -1,0 +1,26 @@
+# LLM-Fux Configuration
+# Edit these values to set your preferred defaults
+
+# Model Configuration
+model: claude              # Default provider: chatgpt, claude, or gemini
+temperature: 0.0           # Sampling temperature (0.0-1.0)
+
+# Input Settings
+datatype: musicxml         # Default format: musicxml, mei, abc, humdrum
+
+# Context Settings
+context: false             # Include guides by default
+# guide: LLM-Guide         # Uncomment to use a specific guide
+
+# Directory Settings
+data_dir: ./data
+dataset: ""
+outputs_dir: ./outputs
+
+# Output Settings
+save: true
+overwrite: false
+
+# Batch Settings (for run-batch command)
+parallel: 1
+retry: 0

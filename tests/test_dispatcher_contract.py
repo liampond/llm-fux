@@ -132,7 +132,7 @@ class TestDispatcherErrorHandling:
         from llm_fux.core.dispatcher import get_llm
         
         # Mock missing API keys
-        with patch('llm_fux.config.settings.API_KEYS', {}):
+        with patch('llm_fux.config.config.API_KEYS', {}):
             try:
                 model = get_llm("chatgpt")
                 # If it doesn't raise an error, that's fine too - depends on implementation
