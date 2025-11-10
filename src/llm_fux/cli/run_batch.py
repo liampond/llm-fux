@@ -114,7 +114,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--guide",
         type=str,
-        help="Specific guide to use (requires --context). Use --list-guides to see available guides.",
+        help="Path to guide file (e.g., data/guides/LLM-Guide.md). Requires --context.",
     )
     parser.add_argument(
         "--files",
@@ -413,11 +413,14 @@ def run_main(argv: list[str] | None = None) -> int:
         return 2
     
     if args.guide:
-        # Validate that the specified guide exists
-        from llm_fux.utils.path_utils import list_guides
-        available_guides = list_guides(base_dirs["guides"])
-        if args.guide not in available_guides:
-            logging.error("Guide '%s' not found. Available guides: %s", args.guide, ', '.join(available_guides))
+        # Validate that the guide file exists
+        from pathlib import Path
+        guide_path = Path(args.guide)
+        if not guide_path.exists():
+            logging.error("Guide file not found: %s", args.guide)
+            return 2
+        if not guide_path.is_file():
+            logging.error("Guide path is not a file: %s", args.guide)
             return 2
 
     selected_files = parse_csv_or_list(args.files) or parse_csv_or_list(args.questions)

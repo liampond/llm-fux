@@ -25,7 +25,6 @@ from dotenv import load_dotenv
 
 from llm_fux.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
 from llm_fux.core.runner import PromptRunner
-from llm_fux.config import load_config
 from llm_fux.utils.path_utils import (
     find_project_root,
     find_encoded_file,
@@ -113,7 +112,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     run_group.add_argument(
         "--guide",
         type=str,
-        help="Specific guide to use (requires --context). Use --list-guides to see available guides.",
+        help="Path to guide file (e.g., data/guides/LLM-Guide.md). Requires --context.",
     )
     run_group.add_argument(
         "--examdate",
@@ -202,9 +201,6 @@ def main(argv: list[str] | None = None) -> int:
     """
     # Load env first (logging not configured yet; only debug message inside)
     load_project_env()
-    
-    # Load config.yaml for defaults
-    config = load_config()
 
     # Configure logging (idempotent; if already configured in tests this won't duplicate handlers)
     logging.basicConfig(
@@ -214,26 +210,6 @@ def main(argv: list[str] | None = None) -> int:
 
     parser = build_argument_parser()
     args = parser.parse_args(argv)
-    
-    # Apply config defaults if args not provided
-    if not args.model and not args.model_name_override and 'model' in config:
-        args.model = config['model']
-    if not args.datatype and 'datatype' in config:
-        args.datatype = config['datatype']
-    
-    # Handle guide config: if guide is set and not "none", enable context
-    guide_from_config = config.get('guide', 'none')
-    if not args.guide and guide_from_config and guide_from_config.lower() != 'none':
-        args.guide = guide_from_config
-        args.context = True
-    elif not args.context and not args.guide:
-        # No guide specified via CLI or config, so no context
-        args.context = False
-    
-    if args.temperature == 0.0 and 'temperature' in config:
-        args.temperature = config['temperature']
-    if not args.max_tokens and 'max_tokens' in config:
-        args.max_tokens = config['max_tokens']
 
     base_dirs = build_base_dirs(args.data_dir, args.dataset)
     base_dirs["outputs"] = args.outputs_dir  # apply override
@@ -278,10 +254,13 @@ def main(argv: list[str] | None = None) -> int:
             parser.error("--guide requires --context")
         
         if args.guide:
-            # Validate that the specified guide exists
-            available_guides = list_guides(base_dirs["guides"])
-            if args.guide not in available_guides:
-                parser.error(f"Guide '{args.guide}' not found. Available guides: {', '.join(available_guides)}")
+            # Validate that the guide file exists
+            guide_path = Path(args.guide)
+            if not guide_path.exists():
+                parser.error(f"Guide file not found: {args.guide}")
+            if not guide_path.is_file():
+                parser.error(f"Guide path is not a file: {args.guide}")
+        
         if missing:
             parser.error(f"The following arguments are required: {', '.join(missing)}")
 

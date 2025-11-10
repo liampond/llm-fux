@@ -243,24 +243,18 @@ class PromptRunner:
         return load_text_file(path)
 
     def _load_guides(self) -> List[str]:
-        guides_dir = self.base_dirs.get("guides", Path("guides"))
         collected: List[str] = []
-        if self.context and guides_dir.exists():
+        if self.context:
             if self.guide:
-                # Load only the specified guide
-                for ext in [".txt", ".md"]:
-                    guide_file = guides_dir / f"{self.guide}{ext}"
-                    if guide_file.is_file():
-                        collected.append(load_text_file(guide_file))
-                        break
+                # Load guide from specified path
+                guide_path = Path(self.guide)
+                if guide_path.is_file():
+                    collected.append(load_text_file(guide_path))
                 else:
-                    # Guide file not found
-                    self.logger.warning("Guide file '%s' not found in %s", self.guide, guides_dir)
+                    self.logger.warning("Guide file not found: %s", self.guide)
             else:
-                # Load all guides (original behavior)
-                for f in sorted(guides_dir.iterdir()):
-                    if f.is_file() and f.suffix in {".txt", ".md"}:
-                        collected.append(load_text_file(f))
+                # No guide specified - context enabled but no guide path
+                self.logger.warning("Context enabled but no guide path specified")
         return collected
 
     def _save_response(self, response: str) -> None:

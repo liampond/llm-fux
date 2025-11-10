@@ -1,70 +1,62 @@
 # LLM-Fux Configuration
-# Edit these values to set your preferred defaults
+# Choose ONE mode: single_run OR batch_run. Set enabled: true for the mode you want.
+# Then run: poetry run run-config
 
 # =============================================================================
-# DEFAULT SETTINGS (used when no CLI flags provided)
+# GLOBAL SETTINGS (applied to all runs)
 # =============================================================================
 
-# Model Configuration
-model: claude              # Default provider: chatgpt, claude, or gemini
-temperature: 0.0           # Sampling temperature (0.0-1.0)
-max_tokens: 16000          # Maximum response tokens (set high to avoid truncation)
+# API Settings
 timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no timeout)
 
-# Input Settings
-datatype: musicxml         # Default format: musicxml, mei, abc, humdrum
-
-# Context Settings
-guide: none                # Guide to use: LLM-Guide, Pierre-Guide, or none
-
-# Directory Settings
+# Directory Settings (usually don't need to change these)
 data_dir: ./data
 dataset: ""
 outputs_dir: ./outputs
 
-# Output Settings
-save: true
-overwrite: false
-
 # =============================================================================
 # SINGLE RUN CONFIGURATION
 # =============================================================================
-# Configure a specific single run - useful for repeated testing of one setup
-# Set enabled: true to use these settings, or use CLI for ad-hoc runs
+# For testing one specific configuration repeatedly
+# Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
-  enabled: false           # Set to true to enable single run mode
+  enabled: true            # Set to true to enable single run mode
+  
+  # Required
   file: Fux_CantusFirmus_C # File to test (e.g., Fux_CantusFirmus_C)
-  model: claude            # Override default model if desired
-  datatype: musicxml       # Override default datatype if desired
-  guide: none              # Override default guide if desired (LLM-Guide, Pierre-Guide, or none)
-  temperature: 0.0         # Override temperature if desired
-  max_tokens: 16000        # Override max_tokens if desired
+  
+  # Test configuration
+  model: claude            # chatgpt, claude, or gemini
+  datatype: musicxml       # musicxml, mei, abc, or humdrum
+  guide_path: null         # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
+  
+  # Model parameters
+  temperature: 0.0         # 0.0-1.0
+  max_tokens: 16000        # Maximum response length (16000 prevents truncation)
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
 # =============================================================================
-# Configure batch runs to test multiple combinations
-# Set enabled: true to use these settings
+# For testing multiple combinations (models × datatypes × files × contexts)
+# Set enabled: true, configure your tests, then run: poetry run run-config
 
 batch_run:
   enabled: false           # Set to true to enable batch run mode
   
-  # Models to test (list one or more)
-  models:
+  # What to test (list one or more of each)
+  models:                  # One or more: chatgpt, claude, gemini
     - claude
     # - chatgpt
     # - gemini
   
-  # Datatypes/formats to test (list one or more)
-  datatypes:
+  datatypes:               # One or more: musicxml, mei, abc, humdrum
     - musicxml
     # - mei
     # - abc
     # - humdrum
   
-  # Files to test (list one or more file IDs)
-  files:
+  files:                   # One or more file IDs
     - Fux_CantusFirmus_C
     # - Fux_CantusFirmus_A
     # - Fux_CantusFirmus_D
@@ -72,23 +64,27 @@ batch_run:
     # - Fux_CantusFirmus_F
     # - Fux_CantusFirmus_G
   
-  # Context settings
-  contexts:
-    - without              # Options: with, without (can list both)
+  # Context configuration
+  contexts:                # Options: with, without (can include both!)
+    - without
     # - with
   
-  guide: LLM-Guide         # Guide to use when context is "with"
+  guide_path: data/guides/LLM-Guide.md  # Path to guide file when contexts includes "with"
   
-  # Batch execution settings
-  delay: 2                 # Seconds to wait between API calls
-  parallel: 1              # Number of parallel runs (1 = sequential)
-  retry: 0                 # Number of retries on failure
+  # Model parameters
+  temperature: 0.0         # 0.0-1.0
+  max_tokens: 16000        # Maximum response length
+  
+  # Execution settings
+  delay: 2                 # Seconds between API calls (respects rate limits)
+  parallel: 1              # Parallel jobs (1 = sequential, safer for rate limits)
+  retry: 0                 # Retries on failure
 
 # =============================================================================
 # EXAMPLE CONFIGURATIONS
 # =============================================================================
 #
-# Example 1: Test all models with MusicXML
+# Example 1: Test all models with MusicXML (no guide)
 # batch_run:
 #   enabled: true
 #   models: [chatgpt, claude, gemini]
@@ -104,20 +100,20 @@ batch_run:
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [without]
 #
-# Example 3: Compare with/without context for one model
+# Example 3: Compare with/without context using LLM guide
 # batch_run:
 #   enabled: true
 #   models: [claude]
 #   datatypes: [musicxml]
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [with, without]
-#   guide: LLM-Guide
+#   guide_path: data/guides/LLM-Guide.md
 #
-# Example 4: Full comparison matrix
+# Example 4: Full comparison matrix with custom guide
 # batch_run:
 #   enabled: true
 #   models: [chatgpt, claude, gemini]
 #   datatypes: [musicxml, mei, abc, humdrum]
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [with, without]
-#   guide: LLM-Guide
+#   guide_path: data/guides/Pierre-Guide.md

@@ -47,8 +47,8 @@ def build_single_run_args(config: Dict[str, Any]) -> List[str]:
     if 'datatype' in single_config:
         args.extend(['--datatype', single_config['datatype']])
     
-    if 'guide' in single_config and single_config['guide'] and single_config['guide'].lower() != 'none':
-        args.extend(['--context', '--guide', single_config['guide']])
+    if 'guide_path' in single_config and single_config['guide_path']:
+        args.extend(['--context', '--guide', single_config['guide_path']])
     
     if 'temperature' in single_config:
         args.extend(['--temperature', str(single_config['temperature'])])
@@ -97,8 +97,8 @@ def build_batch_run_args(config: Dict[str, Any]) -> List[str]:
     if use_context:
         args.append('--context')
         # Guide
-        if 'guide' in batch_config and batch_config['guide'] and batch_config['guide'].lower() != 'none':
-            args.extend(['--guide', batch_config['guide']])
+        if 'guide_path' in batch_config and batch_config['guide_path']:
+            args.extend(['--guide', batch_config['guide_path']])
     
     # Delay
     if 'delay' in batch_config:
