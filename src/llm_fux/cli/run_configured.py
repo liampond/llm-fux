@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""CLI wrapper that runs single or batch tests based on config.yaml settings.
+"""Main CLI entry point - runs tests based on config.yaml settings.
 
-This script reads the single_run or batch_run configuration from config.yaml
-and executes the appropriate command. It provides a simple way to run
-pre-configured test scenarios without typing long CLI commands.
+This is the primary way to run llm-fux. Simply:
+1. Edit config.yaml to configure your test
+2. Run: poetry run run
 
 Usage:
-    poetry run run-config         # Run whatever is enabled in config.yaml
-    poetry run run-config single  # Force single run mode
-    poetry run run-config batch   # Force batch run mode
+    poetry run run           # Run whatever is enabled in config.yaml
+    poetry run run single    # Force single run mode
+    poetry run run batch     # Force batch run mode
 """
 
 from __future__ import annotations

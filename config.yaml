@@ -27,7 +27,7 @@ single_run:
   file: Fux_CantusFirmus_C # File to test (e.g., Fux_CantusFirmus_C)
   
   # Test configuration
-  model: gemini            # chatgpt, claude, or gemini
+  model: claude            # chatgpt, claude, or gemini
   model_name: null         # Specific model version (optional)
   datatype: musicxml       # musicxml, mei, abc, or humdrum
   guide_path: data/guides/Pierre-Guide.md  # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
