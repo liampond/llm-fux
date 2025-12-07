@@ -93,7 +93,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     run_group.add_argument(
         "--model-name",
         dest="model_name_override",
-        help="Specific model to use (e.g., 'gpt-4o', 'claude-3-sonnet', 'gemini-1.5-pro'). Provider will be auto-detected.",
+        help="Specific model to use (e.g., 'gpt-5.1-2025-11-13', 'claude-opus-4-5', 'gemini-3-pro-preview'). Provider will be auto-detected.",
     )
     run_group.add_argument(
         "--file",

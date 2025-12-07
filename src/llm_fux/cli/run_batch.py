@@ -104,7 +104,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--models",
         required=True,
-        help="Comma-separated models (e.g. chatgpt,claude or gpt-4o,claude-3-sonnet) or 'all'",
+        help="Comma-separated models (e.g. chatgpt,claude or gpt-5.1-2025-11-13,claude-opus-4-5) or 'all'",
     )
     parser.add_argument(
         "--context",
@@ -187,8 +187,8 @@ def expand_models(raw: str) -> tuple[List[str], List[str]]:
     Supports:
     - "all" -> ["chatgpt", "claude", "gemini"] 
     - Comma-separated provider names: "chatgpt,claude"
-    - Comma-separated specific model names: "gpt-4o,claude-3-sonnet"
-    - Mixed: "chatgpt,gpt-4o,claude-3-sonnet"
+    - Comma-separated specific model names: "gpt-5.1-2025-11-13,claude-opus-4-5"
+    - Mixed: "chatgpt,gpt-5.1-2025-11-13,claude-opus-4-5"
     
     Returns:
         tuple of (original_models, provider_names) where:
@@ -217,7 +217,7 @@ def expand_models(raw: str) -> tuple[List[str], List[str]]:
             if model.lower() not in available and model not in available:
                 raise ValueError(
                     f"Unknown model: '{model}'. Supported providers: {', '.join(available)}. "
-                    f"Or use specific model names like 'gpt-4o', 'claude-3-sonnet', 'gemini-1.5-pro'."
+                    f"Or use specific model names like 'gpt-5.1-2025-11-13', 'claude-opus-4-5', 'gemini-3-pro-preview'."
                 )
             providers.append(model)
     

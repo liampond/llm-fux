@@ -17,9 +17,9 @@ load_dotenv()
 
 # Default models by provider
 DEFAULT_MODELS = {
-    "openai": "gpt-5-pro-2025-10-06",
-    "anthropic": "claude-sonnet-4-5",
-    "google": "gemini-2.5-pro",
+    "openai": "gpt-5.1-2025-11-13",
+    "anthropic": "claude-opus-4-5",
+    "google": "gemini-3-pro-preview",
 }
 
 # API keys from environment

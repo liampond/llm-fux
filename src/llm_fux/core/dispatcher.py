@@ -115,7 +115,7 @@ def detect_model_provider(model_name: str) -> str:
     """Detect the model provider based on model name patterns.
     
     Args:
-        model_name: The specific model name (e.g., "gpt-4o", "claude-3-sonnet", "gemini-1.5-pro")
+        model_name: The specific model name (e.g., "gpt-5.1-2025-11-13", "claude-opus-4-5", "gemini-3-pro-preview")
         
     Returns:
         The canonical provider name ("chatgpt", "claude", or "gemini")
@@ -158,7 +158,7 @@ def get_llm_with_model_name(model_name: str, provider: str | None = None) -> LLM
     """Get an LLM instance with automatic provider detection or explicit provider.
     
     Args:
-        model_name: The specific model name (e.g., "gpt-4o", "claude-3-sonnet")
+        model_name: The specific model name (e.g., "gpt-5.1-2025-11-13", "claude-opus-4-5")
         provider: Optional explicit provider ("chatgpt", "claude", "gemini"). 
                  If None, will auto-detect from model_name.
                  

@@ -165,7 +165,7 @@ poetry run run-single [OPTIONS]
 ```
 
 **Options:**
-- `--model {chatgpt,claude,gemini}`: LLM provider (required) or specific model name (e.g., gpt-4o, claude-3-sonnet, gemini-2.5-pro)
+- `--model {chatgpt,claude,gemini}`: LLM provider (required) or specific model name (e.g., gpt-5.1-2025-11-13, claude-opus-4-5, gemini-3-pro-preview)
 - `--file-id TEXT` / `--question TEXT`: Identifier (legacy alias retained)
 - `--datatype {mei,musicxml,abc,humdrum}`: Music format (required)
 - `--context`: Include context guides
@@ -182,7 +182,7 @@ poetry run run-batch [OPTIONS]
 ```
 
 **Options:**
-- `--models TEXT`: Comma-separated list of models (supports provider names like 'chatgpt,claude' or specific models like 'gpt-4o,claude-3-sonnet,gemini-2.5-pro')
+- `--models TEXT`: Comma-separated list of models (supports provider names like 'chatgpt,claude' or specific models like 'gpt-5.1-2025-11-13,claude-opus-4-5,gemini-3-pro-preview')
 - `--questions TEXT`: Comma-separated list of questions  
 - `--datatypes TEXT`: Comma-separated list of formats
 - `--context`: Include context guides

@@ -2,25 +2,24 @@ import os
 from typing import Optional
 from openai import OpenAI
 from llm_fux.models.base import LLMInterface, PromptInput
-from llm_fux.config.config import get_timeout, get_max_tokens
+from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 
 
 class ChatGPTModel(LLMInterface):
     """
-    ChatGPTModel wraps OpenAI's ChatCompletion API (e.g., gpt-4, gpt-4o) 
-    behind a uniform interface. It reads the API key from the environment,
-    supports per-call model overrides, temperature tuning, and optional
-    token limits.
+    ChatGPTModel wraps OpenAI's ChatCompletion API behind a uniform interface.
+    It reads the API key from the environment, supports per-call model overrides,
+    temperature tuning, and optional token limits.
     """
 
-    def __init__(self, model_name: Optional[str] = "gpt-4o"):
+    def __init__(self, model_name: Optional[str] = None):
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise EnvironmentError("OPENAI_API_KEY is not set in the environment.")
         # Get timeout from config (None = no timeout)
         timeout = get_timeout()
         self.client = OpenAI(api_key=self.api_key, timeout=timeout)
-        self.model_name = model_name
+        self.model_name = model_name or DEFAULT_MODELS["openai"]
 
     def query(self, input: PromptInput) -> str:
         """
@@ -50,7 +49,7 @@ class ChatGPTModel(LLMInterface):
             model=model,
             messages=messages,
             temperature=input.temperature,
-            max_tokens=max_tokens,
+            max_completion_tokens=max_tokens,
         )
 
         # TODO: Add logging of request/response here for auditing if enabled
