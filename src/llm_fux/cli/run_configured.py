@@ -44,6 +44,9 @@ def build_single_run_args(config: Dict[str, Any]) -> List[str]:
     if 'model' in single_config:
         args.extend(['--model', single_config['model']])
     
+    if 'model_name' in single_config and single_config['model_name']:
+        args.extend(['--model-name', single_config['model_name']])
+    
     if 'datatype' in single_config:
         args.extend(['--datatype', single_config['datatype']])
     

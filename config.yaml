@@ -27,9 +27,10 @@ single_run:
   file: Fux_CantusFirmus_C # File to test (e.g., Fux_CantusFirmus_C)
   
   # Test configuration
-  model: claude            # chatgpt, claude, or gemini
+  model: gemini            # chatgpt, claude, or gemini
+  model_name: null         # Specific model version (optional)
   datatype: musicxml       # musicxml, mei, abc, or humdrum
-  guide_path: null         # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
+  guide_path: data/guides/Pierre-Guide.md  # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
   
   # Model parameters
   temperature: 0.0         # 0.0-1.0
@@ -46,9 +47,9 @@ batch_run:
   
   # What to test (list one or more of each)
   models:                  # One or more: chatgpt, claude, gemini
-    - claude
+    # - claude
     # - chatgpt
-    # - gemini
+    - gemini
   
   datatypes:               # One or more: musicxml, mei, abc, humdrum
     - musicxml
@@ -58,16 +59,16 @@ batch_run:
   
   files:                   # One or more file IDs
     - Fux_CantusFirmus_C
-    # - Fux_CantusFirmus_A
-    # - Fux_CantusFirmus_D
-    # - Fux_CantusFirmus_E
-    # - Fux_CantusFirmus_F
-    # - Fux_CantusFirmus_G
+    - Fux_CantusFirmus_A
+    - Fux_CantusFirmus_D
+    - Fux_CantusFirmus_E
+    - Fux_CantusFirmus_F
+    - Fux_CantusFirmus_G
   
   # Context configuration
   contexts:                # Options: with, without (can include both!)
-    - without
-    # - with
+    # - without
+    - with
   
   guide_path: data/guides/LLM-Guide.md  # Path to guide file when contexts includes "with"
   

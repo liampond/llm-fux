@@ -217,7 +217,11 @@ def get_output_path(
 ) -> Path:
     """Return path for model output file with deeply nested folder-based organization.
 
-    Structure: ``outputs/<output_type>/<model>/<context-folder>/[<guide>/]<datatype>/<file_id>_N<ext>``
+    Structure: ``outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context>_<run><ext>``
+    
+    Context folder naming:
+        - no-context: When context=False or no guide specified
+        - context-<guide>: When context=True with specific guide (e.g., context-LLM, context-Pierre)
     
     Args:
         outputs_dir: Root outputs directory
@@ -225,7 +229,7 @@ def get_output_path(
         file_id: File identifier (e.g., Fux_CantusFirmus_C)
         datatype: Format (mei, musicxml, abc, humdrum)
         context: Whether guide/context was used
-        guide: Specific guide name if applicable
+        guide: Specific guide path (required when context=True)
         dataset: Dataset name (unused in new structure)
         ext: File extension
         question_number: Legacy parameter (alias for file_id)
@@ -238,7 +242,7 @@ def get_output_path(
     if not fid:
         raise ValueError("file_id (or legacy question_number) is required for output path")
     
-    # Structure: outputs/<output_type>/<model>/<context-folder>/[<guide>/]<datatype>/
+    # Structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/
     
     # Start with output type (response/prompt/input)
     type_folder = outputs_dir / output_type
@@ -246,16 +250,22 @@ def get_output_path(
     # Then model
     model_folder = type_folder / model_name
     
-    # Then context folder
-    if context:
-        if guide:
-            # Specific guide used
-            context_folder = model_folder / "context" / guide
-        else:
-            # Context enabled but no specific guide (uses all guides)
-            context_folder = model_folder / "context" / "all-guides"
+    # Then context folder and determine context label for filename
+    if context and guide:
+        # Specific guide used - extract guide name from filename
+        # e.g., "data/guides/Pierre-Guide.md" -> "Pierre"
+        # e.g., "data/guides/LLM-Guide.md" -> "LLM"
+        guide_path = Path(guide)
+        guide_name = guide_path.stem  # "Pierre-Guide.md" -> "Pierre-Guide"
+        # If it ends with "-Guide", take just the prefix
+        if guide_name.endswith("-Guide"):
+            guide_name = guide_name[:-6]  # "Pierre-Guide" -> "Pierre"
+        context_folder = model_folder / f"context-{guide_name}"
+        context_label = guide_name
     else:
+        # No context or no guide specified
         context_folder = model_folder / "no-context"
+        context_label = "no-context"
     
     # Then datatype (format)
     format_folder = context_folder / datatype
@@ -263,12 +273,14 @@ def get_output_path(
     # Create the directory structure
     ensure_dir(format_folder)
     
-    # Create the base path to check for existing files
-    base_path = format_folder / f"{fid}{ext}"
+    # Create the base filename pattern for run number detection
+    # Pattern: <file_id>_<context_label>_<run>.<ext>
+    base_filename = f"{fid}_{context_label}"
+    base_path = format_folder / f"{base_filename}{ext}"
     
     # Get the next run number
     run_number = _get_next_run_number(base_path)
     
-    # Create the final filename with run number
-    final_filename = f"{fid}_{run_number}{ext}"
+    # Create the final filename with context label and run number
+    final_filename = f"{fid}_{context_label}_{run_number}{ext}"
     return format_folder / final_filename
