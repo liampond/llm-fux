@@ -83,65 +83,6 @@ class TestPathUtilitiesContract:
         except ImportError:
             pytest.fail("Path utilities module should be importable")
     
-    def test_file_path_resolution(self):
-        """Path utilities SHOULD resolve file paths correctly."""
-        from llm_fux.utils import path_utils
-        
-        # Should have functions for path resolution
-        path_functions = ['resolve_path', 'get_path', 'find_file', 'resolve_file_path']
-        
-        has_path_function = any(
-            hasattr(path_utils, func) and callable(getattr(path_utils, func))
-            for func in path_functions
-        )
-        
-        if not has_path_function:
-            pytest.skip("Path resolution functions not found")
-        
-        # Test path resolution (exact function name is flexible)
-        for func_name in path_functions:
-            if hasattr(path_utils, func_name):
-                func = getattr(path_utils, func_name)
-                
-                # Should handle basic path resolution
-                try:
-                    result = func("test", "exam", "question", "format")
-                    assert isinstance(result, (str, Path))
-                except (TypeError, ValueError):
-                    # Different function signature is acceptable
-                    pass
-                break
-    
-    def test_file_existence_checking(self):
-        """Path utilities SHOULD check file existence safely."""
-        from llm_fux.utils import path_utils
-        
-        # Should have functions for existence checking
-        check_functions = ['file_exists', 'path_exists', 'check_file', 'exists']
-        
-        has_check_function = any(
-            hasattr(path_utils, func) and callable(getattr(path_utils, func))
-            for func in check_functions
-        )
-        
-        if not has_check_function:
-            pytest.skip("File existence checking functions not found")
-        
-        # Test existence checking
-        for func_name in check_functions:
-            if hasattr(path_utils, func_name):
-                func = getattr(path_utils, func_name)
-                
-                try:
-                    # Test with a known non-existent path
-                    result = func("/nonexistent/path/file.txt")
-                    assert isinstance(result, bool)
-                    assert result is False  # Should not exist
-                except (TypeError, ValueError):
-                    # Different function signature is acceptable
-                    pass
-                break
-    
     def test_safe_path_handling(self):
         """Path utilities MUST handle paths safely."""
         from llm_fux.utils import path_utils

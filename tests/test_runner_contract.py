@@ -170,10 +170,6 @@ class TestFormatSupport:
 
 
 class TestErrorHandling:
-    def test_invalid_model_error_scope(self, tmp_path):
-        # Model selection/validation is outside PromptRunner in current design.
-        pytest.skip("Model selection is outside PromptRunner scope in current design")
-
     def test_llm_query_error_propagation(self, mock_api_keys, tmp_path):
         mock_llm = Mock(spec=LLMInterface)
         mock_llm.query.side_effect = Exception("API Error")
@@ -186,10 +182,6 @@ class TestErrorHandling:
              patch.object(runner, "_load_guides", return_value=["g1"]):
             with pytest.raises(Exception, match="API Error"):
                 runner.run()
-
-    def test_invalid_parameters_validation_scope(self, tmp_path):
-        # Parameter validation occurs at construction in current design.
-        pytest.skip("Parameter validation occurs at construction in current design")
 
 
 class TestRunnerPerformance:

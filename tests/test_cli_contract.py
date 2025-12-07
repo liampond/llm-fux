@@ -380,16 +380,6 @@ class TestCLIConfiguration:
                     # May not be implemented yet, which is fine
                     pass
     
-    def test_config_file_support(self):
-        """CLI MAY support configuration files."""
-        # This is a nice-to-have feature
-        # Implementation is optional but if present should be testable
-        
-        from llm_fux.cli import run_single
-        
-        # Test is optional - just document the expectation
-        pytest.skip("Config file support is optional")
-    
     def test_output_format_options(self):
         """CLI SHOULD support different output formats."""
         from llm_fux.cli import run_single

@@ -2,7 +2,7 @@ import os
 from typing import Optional
 from openai import OpenAI
 from llm_fux.models.base import LLMInterface, PromptInput
-from llm_fux.config.config import get_default_models, get_timeout, get_max_tokens
+from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 
 
 class ChatGPTModel(LLMInterface):
@@ -19,7 +19,7 @@ class ChatGPTModel(LLMInterface):
         # Get timeout from config (None = no timeout)
         timeout = get_timeout()
         self.client = OpenAI(api_key=self.api_key, timeout=timeout)
-        self.model_name = model_name or get_default_models()["openai"]
+        self.model_name = model_name or DEFAULT_MODELS["openai"]
 
     def query(self, input: PromptInput) -> str:
         """

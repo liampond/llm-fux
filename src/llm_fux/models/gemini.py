@@ -6,7 +6,7 @@ from typing import Optional
 from google import genai
 
 from llm_fux.models.base import LLMInterface, PromptInput
-from llm_fux.config.config import get_default_models, get_timeout, get_max_tokens
+from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 
 
 class GeminiModel(LLMInterface):
@@ -26,7 +26,7 @@ class GeminiModel(LLMInterface):
         self.client = genai.Client(api_key=self.api_key)
         
         # Choose default model from settings if not overridden
-        self.model_name = model_name or get_default_models()["google"]
+        self.model_name = model_name or DEFAULT_MODELS["google"]
 
     def query(self, input: PromptInput) -> str:
         """

@@ -34,22 +34,6 @@ class TestDispatcherBasics:
         assert a is not b
 
 
-@pytest.mark.integration
-@pytest.mark.skip(reason="Requires real API key - run with pytest -m integration with valid API keys")
-class TestDispatcherQuerySmoke:
-    def test_model_query_returns_string(self, mock_api_keys):
-        pi = PromptInput(
-            system_prompt="You are a music theory expert.",
-            user_prompt="Analyze: C major scale",
-            temperature=0.2,
-            max_tokens=32,
-        )
-        model = get_llm("chatgpt")
-        out = model.query(pi)
-        assert isinstance(out, str)
-        assert out != ""
-
-
 @pytest.mark.slow
 class TestDispatcherPerformance:
     def test_repeated_instantiation_fast_enough(self, mock_api_keys):

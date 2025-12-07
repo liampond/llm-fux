@@ -15,17 +15,6 @@ dataset: ""
 outputs_dir: ./outputs
 
 # =============================================================================
-# MODEL DEFAULTS
-# =============================================================================
-# Default model versions for each provider (used when model_name is null)
-# Update these when new model versions are released
-
-models:
-  openai: gpt-5.1-2025-11-13     # OpenAI ChatGPT model
-  anthropic: claude-opus-4-5     # Anthropic Claude model  
-  google: gemini-3-pro-preview   # Google Gemini model
-
-# =============================================================================
 # SINGLE RUN CONFIGURATION
 # =============================================================================
 # For testing one specific configuration repeatedly

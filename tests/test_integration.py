@@ -33,9 +33,9 @@ class TestCLIIntegration:
     @patch.dict(os.environ, {"OPENAI_API_KEY": "x", "ANTHROPIC_API_KEY": "x", "GOOGLE_API_KEY": "x"})
     def test_prompt_compilation_workflow(self, mock_all_models):
         root = Path(__file__).parent.parent
-        data_dir = root / "data" / "fux-counterpoint"
+        data_dir = root / "data"
         if not data_dir.exists():
-            pytest.skip("fux-counterpoint dataset missing")
+            pytest.skip("data directory missing")
         mei_file = data_dir / "encoded" / "mei" / "Fux_CantusFirmus.mei"
         if not mei_file.exists():
             pytest.skip("cantus firmus file missing")
