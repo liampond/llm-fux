@@ -75,51 +75,52 @@ def load_text_file(path: Path) -> str:
 
 
 def find_encoded_file(
-    question_number: str,
+    file_id: str,
     datatype: str,
     encoded_dir: Path,
     required: bool = True,
 ) -> Optional[Path]:
-    """Locate encoded music file for ``question_number`` with given ``datatype``.
+    """Locate encoded music file for ``file_id`` with given ``datatype``.
 
     Returns the first match (exact first, fallback glob) or None if ``required`` is False.
     Raises ValueError for unsupported datatypes & FileNotFoundError when required and missing.
     """
     key = _normalize_datatype(datatype)
     ext = _DATATYPE_EXT[key]
-    candidate = encoded_dir / f"{question_number}{ext}"
+    candidate = encoded_dir / f"{file_id}{ext}"
     if candidate.exists():
         return candidate
     if encoded_dir.exists():
-        matches = list(encoded_dir.glob(f"*{question_number}{ext}"))
+        matches = list(encoded_dir.glob(f"*{file_id}{ext}"))
         if matches:
             return matches[0]
     if required:
-        raise FileNotFoundError(f"No encoded file found for {question_number} in {encoded_dir}")
+        raise FileNotFoundError(f"No encoded file found for {file_id} in {encoded_dir}")
     return None
 
 
 def find_question_file(
-    question_number: str,
+    file_id: str,
     context: bool,
     questions_dir: Path,
     required: bool = True,
 ) -> Optional[Path]:
-    """Locate contextual / non‑contextual question prompt file.
+    """Locate contextual / non‑contextual question prompt file (legacy datasets).
 
-    Supports both exact legacy naming and pattern-based fallback.
+    Note: This is for legacy datasets that don't have a single prompt.md file.
+    Modern datasets should use a single prompt.md file instead.
     """
     suffix = "context" if context else "nocontext"
-    candidate = questions_dir / f"{question_number}.{suffix}.txt"
+    candidate = questions_dir / f"{file_id}.{suffix}.txt"
     if candidate.exists():
         return candidate
     if questions_dir.exists():
-        pattern = f"*{question_number}*{'Context' if context else 'NoContext'}Prompt.txt"
+        pattern = f"*{file_id}*{'Context' if context else 'NoContext'}Prompt.txt"
         matches = list(questions_dir.glob(pattern))
         if matches:
             return matches[0]
     if required:
-        raise FileNotFoundError(f"Question file not found for {question_number} in {questions_dir}")
+        raise FileNotFoundError(f"Question file not found for {file_id} in {questions_dir}")
     return None
 
 
@@ -206,13 +207,12 @@ def _get_next_run_number(base_path: Path) -> int:
 def get_output_path(
     outputs_dir: Path,
     model_name: str,
-    file_id: Optional[str] = None,
+    file_id: str,
     datatype: str = "mei",
     context: bool = False,
     guide: Optional[str] = None,
     dataset: Optional[str] = None,
     ext: str = ".txt",
-    question_number: Optional[str] = None,
     output_type: str = "response",  # 'response', 'prompt', or 'input'
 ) -> Path:
     """Return path for model output file with deeply nested folder-based organization.
@@ -232,15 +232,13 @@ def get_output_path(
         guide: Specific guide path (required when context=True)
         dataset: Dataset name (unused in new structure)
         ext: File extension
-        question_number: Legacy parameter (alias for file_id)
         output_type: Type of output file ('response', 'prompt', or 'input')
     
     Returns:
         Path object for the output file
     """
-    fid = file_id or question_number
-    if not fid:
-        raise ValueError("file_id (or legacy question_number) is required for output path")
+    if not file_id:
+        raise ValueError("file_id is required for output path")
     
     # Structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/
     
@@ -275,12 +273,12 @@ def get_output_path(
     
     # Create the base filename pattern for run number detection
     # Pattern: <file_id>_<context_label>_<run>.<ext>
-    base_filename = f"{fid}_{context_label}"
+    base_filename = f"{file_id}_{context_label}"
     base_path = format_folder / f"{base_filename}{ext}"
     
     # Get the next run number
     run_number = _get_next_run_number(base_path)
     
     # Create the final filename with context label and run number
-    final_filename = f"{fid}_{context_label}_{run_number}{ext}"
+    final_filename = f"{file_id}_{context_label}_{run_number}{ext}"
     return format_folder / final_filename

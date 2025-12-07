@@ -23,8 +23,7 @@ class TestCLIModelDetection:
         args = [
             "--model-name", "gpt-4o",
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
@@ -55,8 +54,7 @@ class TestCLIModelDetection:
         args = [
             "--model-name", "claude-3-haiku-20240307",
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
@@ -87,8 +85,7 @@ class TestCLIModelDetection:
         args = [
             "--model", "claude",
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:
@@ -109,8 +106,7 @@ class TestCLIModelDetection:
         """Should fail when neither --model nor --model-name is provided."""
         args = [
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         # Should raise SystemExit with code 2 due to missing model arguments
@@ -124,8 +120,7 @@ class TestCLIModelDetection:
         args = [
             "--model-name", "unknown-model-xyz",
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         # Should return error code 2 due to model detection error
@@ -147,8 +142,7 @@ class TestCLIModelDetection:
             "--model", "claude",  # Explicit Claude
             "--model-name", "gpt-4o",  # GPT model name
             "--file", "Fux_CantusFirmus", 
-            "--datatype", "mei",
-            "--no-save"
+            "--datatype", "mei"
         ]
         
         with patch('llm_fux.cli.run_single.PromptRunner') as mock_runner:

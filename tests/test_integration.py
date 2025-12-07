@@ -49,10 +49,9 @@ class TestCLIIntegration:
         llm = mock_all_models["chatgpt"]
         resp = PromptRunner(
             model=llm,
-            question_number="Fux_CantusFirmus",
+            file_id="Fux_CantusFirmus",
             datatype="mei",
             context=True,
-            exam_date="",
             base_dirs=base_dirs,
             temperature=0.0,
             save=False,
@@ -73,10 +72,9 @@ class TestCLIIntegration:
             with pytest.raises(FileNotFoundError):
                 PromptRunner(
                     model=dummy,
-                    question_number="NoFile",
+                    file_id="NoFile",
                     datatype="mei",
                     context=False,
-                    exam_date="",
                     base_dirs=base_dirs,
                     temperature=0.0,
                     save=False
@@ -109,10 +107,9 @@ class TestCLIIntegration:
             
             runner = PromptRunner(
                 model=mock_llm,
-                question_number="Q1a",
+                file_id="Q1a",
                 datatype="mei",
                 context=False,
-                exam_date="test",
                 base_dirs=base_dirs,
                 temperature=0.0,
                 save=False

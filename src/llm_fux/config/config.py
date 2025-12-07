@@ -15,12 +15,30 @@ import yaml
 # Load environment variables from .env
 load_dotenv()
 
-# Default models by provider
-DEFAULT_MODELS = {
+# Default models by provider (fallback if not in config.yaml)
+_DEFAULT_MODELS_FALLBACK = {
     "openai": "gpt-5.1-2025-11-13",
     "anthropic": "claude-opus-4-5",
     "google": "gemini-3-pro-preview",
 }
+
+
+def get_default_models() -> Dict[str, str]:
+    """Get default model versions from config.yaml, falling back to hardcoded defaults."""
+    config = get_config()
+    models_config = config.get("models", {})
+    
+    # Merge config models with fallback defaults
+    return {
+        "openai": models_config.get("openai", _DEFAULT_MODELS_FALLBACK["openai"]),
+        "anthropic": models_config.get("anthropic", _DEFAULT_MODELS_FALLBACK["anthropic"]),
+        "google": models_config.get("google", _DEFAULT_MODELS_FALLBACK["google"]),
+    }
+
+
+# For backwards compatibility - use the fallback defaults at import time
+# Code should use get_default_models() to get config.yaml values
+DEFAULT_MODELS = _DEFAULT_MODELS_FALLBACK.copy()
 
 # API keys from environment
 API_KEYS = {

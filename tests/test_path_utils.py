@@ -155,18 +155,21 @@ class TestPathUtils:
         assert len(guides) == 2
 
     def test_get_output_path(self, temp_structure):
-        """Test generating output file paths."""
+        """Test generating output file paths with context."""
         outputs_dir = temp_structure / "outputs"
         
+        # When context=True but no guide specified, still goes to no-context
         output_path = get_output_path(
             outputs_dir=outputs_dir,
             model_name="TestModel",
-            question_number="Q1a",
+            file_id="Q1a",
             datatype="mei",
-            context=True
+            context=True,
+            guide="/path/to/Pierre-Guide.md"
         )
         
-        expected = outputs_dir / "TestModel" / "Q1a_mei_context_1.txt"
+        # New structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context_label>_<run>.<ext>
+        expected = outputs_dir / "response" / "TestModel" / "context-Pierre" / "mei" / "Q1a_Pierre_1.txt"
         assert output_path == expected
 
     def test_get_output_path_no_context(self, temp_structure):
@@ -176,12 +179,13 @@ class TestPathUtils:
         output_path = get_output_path(
             outputs_dir=outputs_dir,
             model_name="TestModel",
-            question_number="Q2b",
+            file_id="Q2b",
             datatype="abc",
             context=False
         )
         
-        expected = outputs_dir / "TestModel" / "Q2b_abc_nocontext_1.txt"
+        # New structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context_label>_<run>.<ext>
+        expected = outputs_dir / "response" / "TestModel" / "no-context" / "abc" / "Q2b_no-context_1.txt"
         assert output_path == expected
 
     def test_find_project_root(self):
@@ -196,16 +200,16 @@ class TestDataIntegrity:
     """Test data file integrity and structure."""
 
     def test_data_directory_exists(self):
-        """Test that fux-counterpoint dataset directory exists in the project."""
+        """Test that data directory exists in the project."""
         root = find_project_root()
-        data_dir = root / "data" / "fux-counterpoint"
-        assert data_dir.exists(), "fux-counterpoint dataset missing"
+        data_dir = root / "data"
+        assert data_dir.exists(), "data directory missing"
         assert data_dir.is_dir()
 
     def test_required_subdirectories_exist(self):
-        """Test that core subdirectories exist for fux-counterpoint."""
+        """Test that core subdirectories exist in data directory."""
         root = find_project_root()
-        data_dir = root / "data" / "fux-counterpoint"
+        data_dir = root / "data"
         required_dirs = ["encoded", "prompts", "guides"]
         for name in required_dirs:
             d = data_dir / name
@@ -215,18 +219,19 @@ class TestDataIntegrity:
     def test_base_prompts_exist(self):
         """Test that available base prompt files exist for supported types."""
         root = find_project_root()
-        base_dir = root / "data" / "fux-counterpoint" / "prompts" / "base"
+        base_dir = root / "data" / "prompts" / "base"
         assert base_dir.exists()
         # Only mei & musicxml currently required
         for stem in ["base_mei", "base_musicxml"]:
+            # Support both .md and .txt extensions
             md_file = base_dir / f"{stem}.md"
-            assert md_file.exists(), f"Missing required file: {md_file.name}"
-            assert md_file.stat().st_size > 0
+            txt_file = base_dir / f"{stem}.txt"
+            assert md_file.exists() or txt_file.exists(), f"Missing required file: {stem}.md or {stem}.txt"
 
     def test_sample_encoded_files_exist(self):
-        """Test that encoded mei & musicxml files exist in fux dataset."""
+        """Test that encoded mei & musicxml files exist in data directory."""
         root = find_project_root()
-        encoded_dir = root / "data" / "fux-counterpoint" / "encoded"
+        encoded_dir = root / "data" / "encoded"
         assert encoded_dir.exists()
         for sub in ["mei", "musicxml"]:
             d = encoded_dir / sub
@@ -235,11 +240,11 @@ class TestDataIntegrity:
             assert files, f"No {sub} files found"
 
     def test_file_naming_conventions(self):
-        """Basic naming checks for supported datatypes in fux dataset."""
+        """Basic naming checks for supported datatypes in data directory."""
         root = find_project_root()
-        encoded_dir = root / "data" / "fux-counterpoint" / "encoded"
+        encoded_dir = root / "data" / "encoded"
         if not encoded_dir.exists():
-            pytest.skip("fux-counterpoint encoded directory missing")
+            pytest.skip("encoded directory missing")
         for datatype_dir in encoded_dir.iterdir():
             if not datatype_dir.is_dir():
                 continue

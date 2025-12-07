@@ -27,10 +27,9 @@ def make_runner(tmp_path, mock_model=None, **kwargs):
 
     defaults = dict(
         model=mock_model,
-        question_number="Q1b",
+        file_id="Q1b",
         datatype="mei",
         context=True,
-        exam_date="test_exam",
         base_dirs=base_dirs,
         temperature=0.2,
     )

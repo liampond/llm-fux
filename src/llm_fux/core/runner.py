@@ -8,10 +8,6 @@ Responsibilities:
 Non‑goals:
     * Network retries / rate limiting (leave to model wrapper).
     * Complex caching (could be layered later if needed).
-
-Backward compatibility:
-    * Retains support for legacy parameter names (`question_number`, `exam_date`).
-    * Maintains existing attribute names used by tests (e.g. `question_number`).
 """
 
 import logging
@@ -36,6 +32,18 @@ class PromptRunner:
     """Build and execute a single prompt run.
 
     Instances are lightweight; create a new runner per prompt.
+    
+    Args:
+        model: LLM interface to use for queries
+        file_id: File identifier (e.g., Fux_CantusFirmus_C)
+        datatype: Encoding format (mei, musicxml, abc, humdrum)
+        context: Whether to include guide context
+        guide: Path to guide file when context=True
+        dataset: Dataset subdirectory name
+        base_dirs: Override paths for data directories
+        temperature: Sampling temperature (0.0-1.0)
+        max_tokens: Maximum response tokens
+        save: Whether to save outputs (always True)
     """
 
     _EXT_MAP = {"mei": ".mei", "musicxml": ".musicxml", "abc": ".abc", "humdrum": ".krn"}
@@ -51,31 +59,22 @@ class PromptRunner:
         base_dirs: Optional[Dict[str, Path]] = None,
         temperature: float = 0.0,
         max_tokens: Optional[int] = None,
-        save: bool = True,  # Always save outputs
-        # Legacy aliases
-        question_number: Optional[str] = None,
-        exam_date: Optional[str] = None,
+        save: bool = True,
     ) -> None:
         self.logger = logging.getLogger(__name__)
         self.model: LLMInterface = model
-        # Accept both new (file_id) and legacy (question_number)
-        self.file_id: str = file_id or question_number or ""
+        self.file_id: str = file_id or ""
         if not self.file_id:
-            raise ValueError("file_id (or legacy question_number) is required")
-            raise ValueError("file_id (or legacy question_number) is required")
-        # Maintain legacy attribute names for tests
-        self.question_number: str = self.file_id
+            raise ValueError("file_id is required")
         self.datatype: str = datatype.lower().strip()
         if self.datatype not in self._EXT_MAP:
             self.logger.warning("Unrecognized datatype '%s'; proceeding anyway", self.datatype)
         self.context: bool = bool(context)
         self.guide: Optional[str] = guide
-        # exam_date kept for backward compatibility; dataset is new
-        self.exam_date: str = exam_date or ""
         self.dataset: str = dataset
         self.base_dirs: Dict[str, Path] = base_dirs or {}
         self.temperature: float = float(temperature)
-        if not (0.0 <= self.temperature <= 1.0):  # soft validation
+        if not (0.0 <= self.temperature <= 1.0):
             self.logger.warning("Temperature %.3f outside [0,1]; model may clamp internally", self.temperature)
         self.max_tokens: Optional[int] = max_tokens
         self.save: bool = bool(save)
@@ -211,22 +210,11 @@ class PromptRunner:
         raise FileNotFoundError(f"Base format prompt not found for {self.datatype} in {base_dir}")
 
     def _load_encoded(self) -> str:
-        # New layout first: encoded/<datatype>/<file_id>.<ext>
-        new_dir = self.base_dirs.get("encoded", Path("encoded")) / self.datatype
-        path = find_encoded_file(self.file_id, self.datatype, new_dir, required=False)
-        if path:
-            return load_text_file(path)
-        # Legacy with exam_date subfolder: encoded/<exam_date>/<datatype>/<file_id>.<ext>
-        if self.exam_date:
-            legacy_exam_dir = self.base_dirs.get("encoded", Path("encoded")) / self.exam_date / self.datatype
-            path = find_encoded_file(self.file_id, self.datatype, legacy_exam_dir, required=False)
-            if path:
-                return load_text_file(path)
-        # Plain legacy: encoded/<datatype>/<file_id>.<ext>
-        legacy_plain = self.base_dirs.get("encoded", Path("encoded")) / self.datatype
-        path = find_encoded_file(self.file_id, self.datatype, legacy_plain, required=True)
+        # Standard layout: encoded/<datatype>/<file_id>.<ext>
+        encoded_dir = self.base_dirs.get("encoded", Path("encoded")) / self.datatype
+        path = find_encoded_file(self.file_id, self.datatype, encoded_dir, required=True)
         if not path:
-            raise FileNotFoundError(f"Encoded file not found: {self.file_id}.{self._EXT_MAP.get(self.datatype, '')} in {legacy_plain}")
+            raise FileNotFoundError(f"Encoded file not found: {self.file_id}.{self._EXT_MAP.get(self.datatype, '')} in {encoded_dir}")
         return load_text_file(path)
 
     def _load_question(self) -> str:
@@ -334,8 +322,6 @@ class PromptRunner:
         
         if prompt_input.model_name:
             metadata_lines.append(f"Model Name Override: {prompt_input.model_name}")
-        if self.exam_date:
-            metadata_lines.append(f"Exam Date: {self.exam_date}")
             
         # Add component lengths for reference
         if components:
@@ -397,8 +383,7 @@ class PromptRunner:
             "dataset": self.dataset,
             "datatype": self.datatype,
             "context": self.context,
-            "guide_path": self.guide if self.guide else None,  # Show the actual guide file path
-            "exam_date": self.exam_date,
+            "guide_path": self.guide if self.guide else None,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
             "model": type(self.model).__name__,

@@ -166,12 +166,12 @@ poetry run run-single [OPTIONS]
 
 **Options:**
 - `--model {chatgpt,claude,gemini}`: LLM provider (required) or specific model name (e.g., gpt-5.1-2025-11-13, claude-opus-4-5, gemini-3-pro-preview)
-- `--file-id TEXT` / `--question TEXT`: Identifier (legacy alias retained)
+- `--file TEXT`: File identifier (e.g., Fux_CantusFirmus_C)
 - `--datatype {mei,musicxml,abc,humdrum}`: Music format (required)
 - `--context`: Include context guides
-- `--temperature FLOAT`: Sampling temperature
+- `--guide PATH`: Path to guide file (requires --context)
+- `--temperature FLOAT`: Sampling temperature (0.0-1.0)
 - `--max-tokens INTEGER`: Response length limit
-- `--no-save`: Don't save response to file (default: automatically save)
 
 #### `run-batch`
 
