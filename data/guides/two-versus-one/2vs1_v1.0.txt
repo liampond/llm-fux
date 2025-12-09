@@ -1,0 +1,211 @@
+“Human” Version
+Second Species Counterpoint — Operational Guide 
+I. Metric Framework and General Principles
+Second-species counterpoint unfolds within a binary metric organization. Each bar is divided into a thesis (downbeat) and an arsis (upbeat). The contrapuntal texture consists of two half notes set against each whole note of the cantus firmus. All rules of first species remain valid unless explicitly modified below.
+II. Intervallic Status of the Two Half Notes
+A. Downbeat (thesis)
+– The first half note must be consonant: perfect intervals (unison, fifth, octave) and imperfect intervals (thirds and sixths).
+– No dissonance is tolerated on the downbeat.
+B. Upbeat (arsis)
+– The second half note may be dissonant only as part of a passing motion by step connecting two consonant downbeats.
+– Any skip to or from the upbeat obliges the resulting interval with the cantus to be consonant.
+– A dissonance on the upbeat is valid only as a stepwise diminution.
+C. Diminution of a third
+– Filling a third by step (e.g. E–D–C) legitimates the intermediate pitch whether consonant or dissonant: diminution grants this exception.
+III. Forbidden Successions and Compensatory Techniques
+Because the upbeat is metrically and perceptually weakened, Fux treats it as quasi-nonexistent in evaluating successive vertical intervals. Consequently:
+– A skip of a third from one downbeat to the next may yield implicit parallel fifths or octaves, even in contrary motion, because the upbeat does not interrupt the perceptual continuity of the consonances.
+– Therefore, a third-skip does not suffice to avoid parallel perfect intervals.
+Compensation:
+– Larger skips (fourth, fifth, sixth, octave) between the imperfect and the perfect consonance interrupt perceptual continuity, thereby neutralizing the parallelism.
+IV. Cadential Requirements
+Cadences must be planned before writing the counterpoint.
+A. Counterpoint above the cantus
+– Penultimate bar: a fifth above the cantus, resolving to a minor third on the final bar.
+B. Counterpoint below the cantus
+– Penultimate bar: a fifth followed by a major sixth.
+– In modes where the fifth is dissonant (e.g., mi–fa species), it must be replaced by a consonant sixth.
+V. Initial Position
+A second-species counterpoint below the cantus may begin with a half rest on the downbeat to avoid problematic closeness or instability.
+VI. Voice-Leading Management
+1.	When the voices become excessively close and contrary motion is impossible, two exceptional devices are allowed:
+– a minor sixth leap,
+– or an octave leap.
+These prevent forbidden parallels or forced voice leading.
+2.	The composer must anticipate the following measure before writing the present one: planning is structurally essential in second species.
+VII. Avoiding Latent Parallels
+A typical mistake:
+– Imperfect consonance (downbeat) → skip of a third → perfect consonance (next downbeat).
+Even under contrary motion, this may produce:
+– latent parallel fifths,
+– latent parallel octaves,
+because the upbeat is not structurally sufficient to break continuity.
+Solution:
+– Employ a skip larger than a third,
+– or adjust the prior voice-leading.
+VIII. Ternary Meter (Three-to-One Extension)
+Fux indicates the following rules:
+1.	Three half notes against one whole note.
+2.	The middle note may be dissonant only if approached and left by stepwise motion.
+3.	If any of the three notes moves by skip, all three must be consonant.
+4.	Horizontal constraints remain analogous to second species in binary meter.
+
+
+ 
+“LLM” Version
+
+
+
+ 
+FORMAL RULE-SET — SECOND SPECIES COUNTERPOINT (FUX)
+
+1. Type definitions
+type Pitch
+type Interval = PerfectConsonance | ImperfectConsonance | Dissonance
+type Mode = I | II | III | IV | V | VI | VII
+
+enum PositionInMeasure = THESIS | ARSIS
+enum Motion = Parallel | Contrary | Similar | Oblique
+
+struct CFNote {
+    pitch : Pitch
+}
+
+struct CPNote {
+    pitch : Pitch
+    pos : PositionInMeasure
+}
+
+struct Measure {
+    cf : CFNote  // one per measure
+    cp : (CPNote, CPNote)  // (thesis, arsis)
+}
+Predicates:
+is_consonant(interval) -> Bool
+is_perfect(interval) -> Bool
+is_imperfect(interval) -> Bool
+is_dissonant(interval) -> Bool
+
+is_step(pitch_a, pitch_b) -> Bool
+is_skip(pitch_a, pitch_b) -> Bool
+
+motion(cf_prev, cf_curr, cp_prev, cp_curr) -> Motion
+interval(cf_pitch, cp_pitch) -> Interval
+ 
+2. Global structural constraints
+2.1 Two notes per CF note
+∀ measure: measure.cp = (cp_thesis, cp_arsis)
+cp_thesis.pos = THESIS
+cp_arsis.pos = ARSIS
+2.2 Meter
+Binary meter with equal-length thesis and arsis — implicit in structure.
+ 
+3. Vertical interval rules
+3.1 Thesis must be consonant
+∀ measure:
+    is_consonant(interval(measure.cf.pitch, measure.cp.thesis.pitch)) = true
+3.2 Arsis may be dissonant ONLY as passing motion
+∀ measure:
+    if is_dissonant(interval(measure.cf.pitch, measure.cp.arsis.pitch)) then
+        is_step(measure.cp.thesis.pitch, measure.cp.arsis.pitch) = true
+        AND is_step(measure.cp.arsis.pitch, next_measure.cp.thesis.pitch) = true
+3.3 If arsis is reached by skip → arsis must be consonant
+∀ measure:
+    if is_skip(measure.cp.thesis.pitch, measure.cp.arsis.pitch) then
+        is_consonant(interval(measure.cf.pitch, measure.cp.arsis.pitch)) = true
+3.4 Diminution of a third is permitted
+If next_measure.cp.thesis.pitch and measure.cp.thesis.pitch form a third
+and cp_arsis lies stepwise between them:
+    arsis is allowed even if dissonant
+ 
+4. Forbidden successions and perceptual continuity
+4.1 Successive perfect consonances cannot be connected by a simple third skip
+
+(arsis is “non-compensatory”)
+Let:
+I1 = interval(cf[i], cp_thesis[i])
+I2 = interval(cf[i+1], cp_thesis[i+1])
+Rule:
+if is_imperfect(I1) AND is_perfect(I2)
+AND is_skip(cp_thesis[i].pitch, cp_arsis[i].pitch) = false
+AND is_skip(cp_arsis[i].pitch, cp_thesis[i+1].pitch) = false
+then
+    transition must NOT create parallel perfect motion:
+        motion ≠ Parallel OR perfect_intervals_not_equal
+This formalizes Fux’s rule:
+A skip of a third does not interrupt the perception of parallel perfect consonances.
+4.2 Larger skips compensate (quartes, quintes, sixtes, octaves)
+If is_skip(cp_arsis[i].pitch, cp_thesis[i+1].pitch)
+AND skip_size ≥ 4th:
+    then allow perfect->perfect transitions under contrary or oblique motion.
+ 
+5. Horizontal voice-leading rules
+5.1 No leaps that contradict standard species rules
+(same as first species)
+No augmented intervals
+No dissonant leaps
+No tritone leaps unless demanded modally (rare; normally excluded)
+5.2 Correct approach to perfect consonances
+If interval(cf[i+1], cp[i+1].thesis) is Perfect:
+    motion(cf[i], cf[i+1], cp[i].thesis, cp[i+1].thesis) must be Contrary or Oblique
+5.3 Exception for large leaps
+If the connection into a perfect interval is preceded by a leap ≥ 4th:
+    motion may be Similar but never Parallel.
+ 
+6. Cadential constraints
+Given:
+last_measure = n
+penultimate = n-1
+6.1 Counterpoint above the cantus
+interval(cf[n-1], cp[n-1].thesis) = P5
+interval(cf[n], cp[n].thesis) = m3
+6.2 Counterpoint below the cantus
+Case 1 (normal):
+    interval(cf[n-1], cp[n-1].thesis) = P5
+    interval(cf[n], cp[n].thesis) = M6
+
+Case 2 (mode where P5 is dissonant: mi–fa):
+    interval(cf[n-1], cp[n-1].thesis) = consonant_6th
+    interval(cf[n], cp[n].thesis) = M6
+ 
+7. Initial position rules (CP below CF)
+
+7.1 Half-rest on first thesis allowed
+If cp is below cf at measure 1:
+    cp[1].thesis = Rest
+    cp[1].arsis = consonant interval
+ 
+8. Closeness-correction rules
+8.1 When voices approach dangerously close and contrary motion is impossible
+permitted corrective leaps:
+Allowed corrective leaps:
+    leap = minor 6th
+    OR leap = octave
+
+Constraint:
+    corrective leap must not create a forbidden vertical interval
+ 
+9. Modal considerations
+
+9.1 Mode-dependent leading tones and fa–mi dissonances
+If mode makes the P5 above CF dissonant (mi–fa situation):
+    replace required P5 with consonant 6th in cadences
+ 
+10. Ternary extension (3:1)
+If meter = ternary:
+10.1 Middle note may be dissonant only if stepwise
+cp_mid is dissonant ⇒
+    is_step(cp_first, cp_mid) AND is_step(cp_mid, cp_last)
+10.2 If any leap occurs among the three notes → all must be consonant
+If ∃ skip(cp_first ↔ cp_mid OR cp_mid ↔ cp_last):
+    interval(first), interval(mid), interval(last) must ALL be consonant
+ 
+11. Global validity criterion
+A second-species counterpoint is valid iff:
+∀ measures i:
+    thesis_constraints(i)
+    arsis_constraints(i)
+    horizontal_constraints(i)
+    no_forbidden_parallels(i)
+    cadence_satisfied(if i = n or i = n-1)
+    modal_constraints_satisfied

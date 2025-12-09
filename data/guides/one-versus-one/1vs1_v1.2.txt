@@ -1,0 +1,215 @@
+“Human” Version
+1. Vertical Intervals
+Basic Rules
+1.	Write one counterpoint note for each cantus-firmus note; all notes share the same time-value, normally whole notes, except if another value is requested.
+2.	Use consonances imperfect consonances only:
+o	Perfect consonances are unison, perfect 5th, perfect 8ve.
+o	Imperfect consonances are major/minor 3rd, major/minor 6th.
+3.	Do not use more than three consecutive 3rd or 6th to ensure variety. 
+4.	Dissonances are strictly forbidden in first-species counterpoint, where one note of counterpoint is written against each note of the cantus firmus.
+5.	Beginning and final bar must be perfect consonances (customarily unison or octave; a 5th is permitted only at the opening when the counterpoint lies above the cantus firmus).
+5.	Cadence Rules: In first-species counterpoint, the relationship between the cantus firmus and the counterpoint in the penultimate bar is determined by the interval of resolution onto the final:
+•	If the counterpoint resolves to an octave above or below the cantus firmus, then the penultimate interval must be a major sixth with the cantus firmus.
+•	If the counterpoint resolves to a unison with the cantus firmus, then the penultimate interval must be a minor third with it.
+ 
+2. Treatment of Motion Between the Two Voices
+2.1 Preference for Motion
+•	Contrary or oblique motion is preferred; it prevents parallelism and preserves independence.
+2.2 Interval Categories
+Scope:
+These rules govern the vertical relationship (simultaneous interval) between the two voices and prescribe how each line must move from one note to the next in order to preserve contrapuntal independence.
+Progression Rules:
+•	Perfect → Perfect: only contrary or oblique motion; parallel or similar motion is forbidden.
+•	Perfect → Imperfect: any of the three motions (contrary, parallel, oblique) is permitted.
+•	Imperfect → Imperfect: any of the three motions is permitted.
+•	Imperfect → Perfect: only contrary or oblique motion; parallel and similar motion is forbidden.
+Purpose:
+Following these pathways ensures that successive intervals remain consonant and that each voice maintains melodic autonomy, thereby preventing exposed or hidden parallel fifths and octaves.
+2.3 Additional Prohibitions
+1.	Parallel fifths and octaves are strictly prohibited. These occur when two voices form a perfect fifth or octave, and then repeat the same interval at the next time step, moving in parallel motion (i.e., both voices move in the same direction by similar intervals). 
+2.	Direct (also called hidden) fifths and octaves are also prohibited. These occur when a perfect fifth or octave is approached by similar motion (both voices move in the same direction): one voice leaps into the perfect consonance, while the other moves conjunctly.
+2.	Avoid approaching an octave by contrary stepwise motion from a 10th (ottava battuta).
+3.	Avoid any leap into or out of a unison except at the beginning or end (see the cadence rules)
+3. Melodic Conduct Within Each Voice
+3.1 Maintain Vocal Singability
+•	No augmented, diminished or chromatic melodic intervals.
+•	Leaps larger than a perfect 5th are disallowed except (i) an ascending minor 6th, and (ii) the octave.
+3.2 Stepwise Compensation
+•	Do not chain leaps in the same direction; compensate any leap with stepwise motion in the opposite direction.
+3.3 Pitch Repetition
+•	Avoid repeating a pitch more than once consecutively (the only form of oblique motion in first species).
+3.4 Tritones
+•	No melodic or vertical tritone (mi contra fa); an augmented 4th or diminished 5th is inadmissible in strict diatonic style.
+3.5 Range
+•	Keep both parts within a practicable vocal range and steer clear of registers that are excessively high or low.
+4. Voice Disposition
+4.1 Counting Intervals
+•	When the counterpoint lies above the cantus firmus, intervals are counted upward; when below, count downward.
+4.2 Voice-Crossing
+•	Voice-crossing is not allowed in any species.
+4.3 Spacing
+•	Keep the voices neither so close that they obscure independence nor so far apart that compound intervals (≥ 11th) dominate the texture.
+5. Working Procedure, Incremental, Rule-Checked Writing
+5.1  Step-by-step construction
+1.	Begin with a cantus-firmus note-grid: request where the second voice has to be written, above or under. 
+2.	Proceed one cantus note at a time, adding exactly one note of counterpoint to the other voice, above or below, depending on which voice needs to be filled.
+5.2  Immediate compliance check for every new note
+For the freshly written note:
+Check-list (apply in this order)	Governing sections
+1 . Vertical consonance type & balance	§ 2.1, § 2.1-3
+2 . Motion category vs. previous sonority	§ 3.1-3
+3 . Forbidden parallels / hidden perfects	§ 3.3
+4 . Melodic fitness of the single line	§ 4.1-4.5
+5 . Spacing / voice-crossing constraints	§ 5.1-5.3
+6 . Modal integrity (accidental legality)	§ 1.5
+5.3  Error-handling logic
+•	If one or more checks fail:
+1.	Erase the problematic note.
+2.	Try an alternative pitch that still fulfils the basic interval requirement (perfect vs imperfect).
+•	If all feasible alternatives fail:
+1.	Step back one (or more) notes in the counterpoint.
+2.	Replace the earlier note(s) with different legal options, then resume forward writing.
+Think of the process as depth-first search with backtracking: no note is final until it survives the entire check-list.
+By incorporating this iterative “write-and-verify” routine, section 6 now prescribes a concrete workflow: every note is validated in real time, alternatives are explored whenever a rule is breached, and systematic backtracking guarantees that the finished counterpoint satisfies every requirement laid out in §§ 1-5. 
+“LLM translated” Version
+Chat GPT 5.1 thinking
+ 
+0. Core Data Types
+Pitch       = str                 # e.g. "C4", "F#3"
+Interval    = str                 # e.g. "m3", "P5"
+Motion      = Enum("Parallel", "Similar", "Contrary", "Oblique")
+
+Cantus      = List[Pitch]         # immutable input
+Counterpt   = List[Pitch]         # mutable, one element per cantus note
+
+State = {
+    "cantus"   : Cantus,
+    "cp"       : Counterpt,
+    "position" : "above" | "below"   # user choice for CP placement
+}
+ 
+1. Vertical-Interval Rules (Section 1)
+1.1  Allowed intervals
+IMPERFECT = {"m3","M3","m6","M6"}
+PERFECT   = {"P1","P5","P8"}       # restricted use
+def vertical_ok(cp: Pitch, cf: Pitch, i: int, n: int, state) -> bool:
+    inter = classify_interval(cp, cf, state["position"])
+    # (a) first & last bars must be perfect
+    if i in (0, n-1):
+        return inter in PERFECT
+    # (b) penultimate bar cadence rule
+    if i == n-2:
+        if state["cp_resolution"] == "octave" and inter == "M6": return True
+        if state["cp_resolution"] == "unison" and inter == "m3": return True
+        return False
+    # (c) everywhere else → ONLY imperfect
+    return inter in IMPERFECT
+1.2  Variety guard – “≤ 3 successive 3rds/6ths”
+def variety_ok(state, i):
+    if i < 3: return True
+    last4 = [classify_interval(state["cp"][k], state["cantus"][k], state["position"])
+             for k in range(i-3, i+1)]
+    return not all(x in IMPERFECT and x[1] in ("3","6") for x in last4)
+1.3  No dissonances
+
+Handled implicitly: any interval not in IMPERFECT or context-allowed PERFECT fails.
+ 
+2. Motion Rules (Section 2)
+TABLE = {
+  "Perfect→Perfect"     : lambda m: m in ("Contrary","Oblique"),
+  "Perfect→Imperfect"   : lambda m: True,
+  "Imperfect→Imperfect" : lambda m: True,
+  "Imperfect→Perfect"   : lambda m: m in ("Contrary","Oblique"),
+}
+
+def motion_ok(prev_int, curr_int, motion):
+    key = f"{quality(prev_int)}→{quality(curr_int)}"
+    return TABLE[key](motion)
+Additional blockers:
+def no_parallel_5_8(state, i):
+    return not forms_parallel_P5_or_P8(state, i)          # 2.3-1
+
+def no_hidden_5_8(state, i):
+    return not forms_hidden_P5_or_P8(state, i)            # 2.3-2
+
+def no_ottava_battuta(state, i):
+    return not stepwise_10th_to_octave(state, i)          # 2.3-3
+
+def no_unison_leaps(state, i):
+    return not leap_into_or_out_of_unison(state, i)       # 2.3-4
+ 
+3. Melodic-Line Rules (Section 3)
+def melodic_ok(line: Counterpt, i: int) -> bool:
+    return (  leap_size_ok(line, i)                       # 3.1
+           and compensate_leap_ok(line, i)               # 3.2
+           and no_double_repetition(line, i)             # 3.3
+           and no_melodic_tritone(line, i)               # 3.4
+           and within_sane_range(line[i]) )              # 3.5
+ 
+4. Voice-Disposition Rules (Section 4)
+def spacing_ok(cp, cf):
+    d = abs(semitone_distance(cp, cf))
+    return 3 <= d <= 18                                   # 4.3
+
+def no_voice_crossing(state, i):
+    cp = state["cp"][i]
+    cf = state["cantus"][i]
+    if state["position"] == "above":
+        return midi(cp) > midi(cf)
+    else:
+        return midi(cp) < midi(cf)
+ 
+5. Incremental Generation / Validation Pipeline (Section 5)
+
+5.1  Per-note validator
+def validate_note(state, cf, cp, i, n):
+    return ( vertical_ok(cp, cf, i, n, state)          # 1
+          and variety_ok(state, i)                     # 1.2
+          and motion_ok(prev_int(state,i),             # 2
+                        curr_int(cp,cf,state), 
+                        classify_motion(state,i,cp,cf))
+          and no_parallel_5_8(state,i)                 # 2.3-1
+          and no_hidden_5_8(state,i)                   # 2.3-2
+          and no_ottava_battuta(state,i)               # 2.3-3
+          and no_unison_leaps(state,i)                 # 2.3-4
+          and melodic_ok(state["cp"]+[cp], i)          # 3
+          and no_voice_crossing(state, i)              # 4.2
+          and spacing_ok(cp, cf) )                     # 4.3
+5.2  Depth-first search with backtracking
+def build_cp(state):
+    n = len(state["cantus"])
+    for i, cf in enumerate(state["cantus"]):
+        choices = candidate_pitches(cf, state, i, n)
+        placed = False
+        for cp in choices:
+            if validate_note(state, cf, cp, i, n):
+                state["cp"].append(cp)
+                placed = True
+                break
+        if not placed:
+            backtrack(state)      # remove earlier CP note(s)
+            return build_cp(state)
+    return state["cp"]
+ 
+6. Public API End-points
+Function	Arguments	Returns	Notes
+generate_cp(cantus, position)	List[Pitch], `“above”	“below”`	Counterpt
+validate_cp(cantus, cp, position)	same	True or first-failing-rule string	Use this to grade user-supplied solutions.
+ 
+Minimal Candidate-Pitch Generator
+def candidate_pitches(cf, state, i, n):
+    if i in (0, n-1):
+        pool = PERFECT            # opening & closing yoke
+    elif i == n-2:
+        pool = {"M6"} if state["cp_resolution"]=="octave" else {"m3"}
+    else:
+        pool = IMPERFECT
+    return [ transpose(cf, intv, state["position"]) for intv in pool ]
+ 
+Summary of Strict-New Constraints
+Area	Key differences vs. “classic” Fux	Implemented predicate
+Vertical	Only imperfect 3rds/6ths mid-piece; ≤ 3 in a row	vertical_ok, variety_ok
+Motion	Explicit ban on any parallel P5/P8 and hidden P5/P8	no_parallel_5_8, no_hidden_5_8
+Crossing	Completely disallowed	no_voice_crossing
+Cadence	Penultimate must be M6→8ve or m3→unison	handled in vertical_ok
+Workflow	Real-time rule check with full backtracking	build_cp()
