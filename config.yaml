@@ -21,19 +21,19 @@ outputs_dir: ./outputs
 # Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
-  enabled: true            # Set to true to enable single run mode
+  enabled: true                    # Set to true to enable single run mode
   
   # Required
-  file: Above_CantusFirmus_C # File to test (e.g., Above_CantusFirmus_C)
+  file: Above_CantusFirmus_C       # File to test (e.g., Above_CantusFirmus_C)
   
   # Test configuration
-  model: gemini            # chatgpt, claude, or gemini
-  model_name: gemini-3-pro         # Specific model version (optional)
-  datatype: musicxml       # musicxml, mei, abc, or humdrum
+  model: gemini                            # chatgpt, claude, or gemini
+  model_name: gemini-3-pro                 # Specific model version (optional)
+  datatype: musicxml                       # musicxml, mei, abc, or humdrum
   guide_path: data/guides/Pierre-Guide.md  # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
   
   # Model parameters
-  temperature: 0.0         # 0.0-1.0
+  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
   max_tokens: 16000        # Maximum response length (16000 prevents truncation)
 
 # =============================================================================
