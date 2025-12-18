@@ -84,12 +84,9 @@ batch_run:
 **Formats:** `musicxml`, `mei`, `abc`, `humdrum`
 
 **Files:**
-- `Fux_CantusFirmus_A`
-- `Fux_CantusFirmus_C`
-- `Fux_CantusFirmus_D`
-- `Fux_CantusFirmus_E`
-- `Fux_CantusFirmus_F`
-- `Fux_CantusFirmus_G`
+- `Above_CantusFirmus_A` (Counterpoint Above)
+- `Below_CantusFirmus_A` (Counterpoint Below)
+- ... (C, D, E, F, G)
 
 **Guides:**
 - `data/guides/Pierre-Guide.md` - Detailed counterpoint rules

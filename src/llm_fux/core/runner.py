@@ -218,10 +218,23 @@ class PromptRunner:
         return load_text_file(path)
 
     def _load_question(self) -> str:
-        # New dataset single prompt.md
+        # Determine prompt type based on file_id
+        prompt_file = "prompt_above.md"  # Default
+        if self.file_id.lower().startswith("below"):
+            prompt_file = "prompt_below.md"
+        elif self.file_id.lower().startswith("above"):
+            prompt_file = "prompt_above.md"
+            
+        # Load the selected prompt
+        prompt_path = self.base_dirs.get("prompts", Path("")) / prompt_file
+        if prompt_path.exists():
+            return load_text_file(prompt_path)
+            
+        # Fallback to generic prompt.md if specific one missing
         single_prompt = self.base_dirs.get("prompts", Path("")) / "prompt.md"
         if single_prompt.exists():
             return load_text_file(single_prompt)
+            
         # Legacy per-question naming.
         suffix = "context" if self.context else "no_context"
         legacy_dir = self.base_dirs.get("prompts", Path("")) / "questions" / suffix / self.datatype

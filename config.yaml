@@ -1,6 +1,6 @@
 # LLM-Fux Configuration
 # Choose ONE mode: single_run OR batch_run. Set enabled: true for the mode you want.
-# Then run: poetry run run-config
+# Then run: poetry run run
 
 # =============================================================================
 # GLOBAL SETTINGS (applied to all runs)
@@ -17,18 +17,18 @@ outputs_dir: ./outputs
 # =============================================================================
 # SINGLE RUN CONFIGURATION
 # =============================================================================
-# For testing one specific configuration repeatedly
+# For testing one specific configuration
 # Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
   enabled: true            # Set to true to enable single run mode
   
   # Required
-  file: Fux_CantusFirmus_C # File to test (e.g., Fux_CantusFirmus_C)
+  file: Above_CantusFirmus_C # File to test (e.g., Above_CantusFirmus_C)
   
   # Test configuration
-  model: claude            # chatgpt, claude, or gemini
-  model_name: null         # Specific model version (optional)
+  model: gemini            # chatgpt, claude, or gemini
+  model_name: gemini-3-pro         # Specific model version (optional)
   datatype: musicxml       # musicxml, mei, abc, or humdrum
   guide_path: data/guides/Pierre-Guide.md  # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
   
@@ -58,12 +58,12 @@ batch_run:
     # - humdrum
   
   files:                   # One or more file IDs
-    - Fux_CantusFirmus_C
-    - Fux_CantusFirmus_A
-    - Fux_CantusFirmus_D
-    - Fux_CantusFirmus_E
-    - Fux_CantusFirmus_F
-    - Fux_CantusFirmus_G
+    - Above_CantusFirmus_C
+    - Above_CantusFirmus_A
+    - Above_CantusFirmus_D
+    - Above_CantusFirmus_E
+    - Above_CantusFirmus_F
+    - Above_CantusFirmus_G
   
   # Context configuration
   contexts:                # Options: with, without (can include both!)

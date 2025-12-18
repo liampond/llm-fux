@@ -91,7 +91,7 @@ def find_encoded_file(
     if candidate.exists():
         return candidate
     if encoded_dir.exists():
-        matches = list(encoded_dir.glob(f"*{file_id}{ext}"))
+        matches = list(encoded_dir.rglob(f"*{file_id}{ext}"))
         if matches:
             return matches[0]
     if required:

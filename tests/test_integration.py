@@ -36,9 +36,10 @@ class TestCLIIntegration:
         data_dir = root / "data"
         if not data_dir.exists():
             pytest.skip("data directory missing")
-        mei_file = data_dir / "encoded" / "mei" / "Fux_CantusFirmus.mei"
-        if not mei_file.exists():
-            pytest.skip("cantus firmus file missing")
+        # Updated to use musicxml and new file structure
+        musicxml_file = data_dir / "encoded" / "musicxml" / "above" / "Above_CantusFirmus_C.musicxml"
+        if not musicxml_file.exists():
+            pytest.skip(f"cantus firmus file missing: {musicxml_file}")
         base_dirs = {
             "encoded": data_dir / "encoded",
             "prompts": data_dir / "prompts",
@@ -49,8 +50,8 @@ class TestCLIIntegration:
         llm = mock_all_models["chatgpt"]
         resp = PromptRunner(
             model=llm,
-            file_id="Fux_CantusFirmus",
-            datatype="mei",
+            file_id="Above_CantusFirmus_C",
+            datatype="musicxml",
             context=True,
             base_dirs=base_dirs,
             temperature=0.0,

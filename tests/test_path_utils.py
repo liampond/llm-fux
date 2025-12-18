@@ -229,14 +229,16 @@ class TestDataIntegrity:
             assert md_file.exists() or txt_file.exists(), f"Missing required file: {stem}.md or {stem}.txt"
 
     def test_sample_encoded_files_exist(self):
-        """Test that encoded mei & musicxml files exist in data directory."""
+        """Test that encoded musicxml files exist in data directory."""
         root = find_project_root()
         encoded_dir = root / "data" / "encoded"
         assert encoded_dir.exists()
-        for sub in ["mei", "musicxml"]:
+        # Only musicxml is required now
+        for sub in ["musicxml"]:
             d = encoded_dir / sub
             assert d.exists(), f"Missing encoded/{sub} directory"
-            files = list(d.glob(f"*.{sub if sub!='musicxml' else 'musicxml'}"))
+            # Use rglob to find files in subdirectories (above/below)
+            files = list(d.rglob(f"*.{sub}"))
             assert files, f"No {sub} files found"
 
     def test_file_naming_conventions(self):
