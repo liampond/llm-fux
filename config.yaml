@@ -1,15 +1,12 @@
 # LLM-Fux Configuration
-# Choose ONE mode: single_run OR batch_run. Set enabled: true for the mode you want.
+# Set enabled: true for the mode you want (single_run OR batch_run)
 # Then run: poetry run run
 
 # =============================================================================
 # GLOBAL SETTINGS (applied to all runs)
 # =============================================================================
 
-# API Settings
-timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no timeout)
-
-# Directory Settings (usually don't need to change these)
+timeout: 600
 data_dir: ./data
 dataset: ""
 outputs_dir: ./outputs
@@ -17,108 +14,34 @@ outputs_dir: ./outputs
 # =============================================================================
 # SINGLE RUN CONFIGURATION
 # =============================================================================
-# For testing one specific configuration
-# Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
-  enabled: true                    # Set to true to enable single run mode
-  
-  # Required
-  file: Above_CantusFirmus_C       # File to test (e.g., Above_CantusFirmus_C)
-  
-  # Test configuration
-  model: gemini                                          # chatgpt, claude, or gemini
-  model_name: gemini-3-pro                               # Specific model version (optional)
-  datatype: musicxml                                     # musicxml, mei, abc, or humdrum
-  
-  # Path to guide file (e.g., data/guides/LLM-Guide.md)
-  # `null` for no guide
-  # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
+  enabled: true
+  file: Above_CantusFirmus_C
+  model: gemini
+  model_name: gemini-2.0-flash
+  datatype: musicxml
   guide_path: data/guides/four-versus-one/4vs1_v1.0.txt
-
-  # Model parameters
-  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
-  max_tokens: 16000        # Maximum response length (16000 prevents truncation)
+  temperature: 0.0
+  max_tokens: 16000
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
 # =============================================================================
-# For testing multiple combinations (models × datatypes × files × contexts)
-# Set enabled: true, configure your tests, then run: poetry run run-config
 
 batch_run:
-  enabled: false           # Set to true to enable batch run mode
-  
-  # What to test (list one or more of each)
-  models:                  # One or more: chatgpt, claude, gemini
-    # - claude
-    # - chatgpt
-    - gemini
-  
-  datatypes:               # One or more: musicxml, mei, abc, humdrum
+  enabled: false
+  models:
+    - gemini-pro
+  datatypes:
     - musicxml
-    # - mei
-    # - abc
-    # - humdrum
-  
-  files:                   # One or more file IDs
+  files:
     - Above_CantusFirmus_C
-    - Above_CantusFirmus_A
-    - Above_CantusFirmus_D
-    - Above_CantusFirmus_E
-    - Above_CantusFirmus_F
-    - Above_CantusFirmus_G
-  
-  # Context configuration
-  contexts:                # Options: with, without (can include both!)
-    # - without
+    - Below_CantusFirmus_C
+  contexts:
     - with
-  
-  guide_path: data/guides/LLM-Guide.md  # Path to guide file when contexts includes "with"
-  
-  # Model parameters
-  temperature: 0.0         # 0.0-1.0
-  max_tokens: 16000        # Maximum response length
-  
-  # Execution settings
-  delay: 2                 # Seconds between API calls (respects rate limits)
-  parallel: 1              # Parallel jobs (1 = sequential, safer for rate limits)
-  retry: 0                 # Retries on failure
-
-# =============================================================================
-# EXAMPLE CONFIGURATIONS
-# =============================================================================
-#
-# Example 1: Test all models with MusicXML (no guide)
-# batch_run:
-#   enabled: true
-#   models: [chatgpt, claude, gemini]
-#   datatypes: [musicxml]
-#   files: [Fux_CantusFirmus_C]
-#   contexts: [without]
-#
-# Example 2: Test all formats with Claude
-# batch_run:
-#   enabled: true
-#   models: [claude]
-#   datatypes: [musicxml, mei, abc, humdrum]
-#   files: [Fux_CantusFirmus_C]
-#   contexts: [without]
-#
-# Example 3: Compare with/without context using LLM guide
-# batch_run:
-#   enabled: true
-#   models: [claude]
-#   datatypes: [musicxml]
-#   files: [Fux_CantusFirmus_C]
-#   contexts: [with, without]
-#   guide_path: data/guides/LLM-Guide.md
-#
-# Example 4: Full comparison matrix with custom guide
-# batch_run:
-#   enabled: true
-#   models: [chatgpt, claude, gemini]
-#   datatypes: [musicxml, mei, abc, humdrum]
-#   files: [Fux_CantusFirmus_C]
-#   contexts: [with, without]
-#   guide_path: data/guides/Pierre-Guide.md
+  guide_path: data/guides/four-versus-one/4vs1_v1.0.txt
+  temperature: 0.0
+  max_tokens: 16000
+  parallel: 1
+  retry: 0

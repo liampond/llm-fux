@@ -218,12 +218,25 @@ class PromptRunner:
         return load_text_file(path)
 
     def _load_question(self) -> str:
-        # Determine prompt type based on file_id
+        # Determine prompt type based on file_id and guide
         prompt_file = "prompt_above.md"  # Default
         if self.file_id.lower().startswith("below"):
             prompt_file = "prompt_below.md"
         elif self.file_id.lower().startswith("above"):
             prompt_file = "prompt_above.md"
+        
+        # Check if guide specifies a species (e.g., 4vs1_v1.0.txt for third species)
+        if self.guide:
+            guide_name = Path(self.guide).stem  # e.g., "4vs1_v1.0" from "4vs1_v1.0.txt"
+            if "4vs1" in guide_name:
+                # Use third species prompt for 4vs1 guide
+                prompt_file = "prompt_above_4vs1.md" if "above" in prompt_file else "prompt_below_4vs1.md"
+            elif "2vs1" in guide_name:
+                # Use second species prompt for 2vs1 guide (default already set)
+                pass
+            elif "1vs1" in guide_name:
+                # Use first species prompt for 1vs1 guide
+                prompt_file = "prompt_above_1vs1.md" if "above" in prompt_file else "prompt_below_1vs1.md"
             
         # Load the selected prompt
         prompt_path = self.base_dirs.get("prompts", Path("")) / prompt_file
