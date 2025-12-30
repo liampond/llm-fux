@@ -1,0 +1,223 @@
+﻿Guide: Third Species Counterpoint (4:1)
+Third Species counterpoint consists of writing four quarter notes against one whole note of the cantus firmus. The contrapuntal line functions as a diminution of an underlying consonant first-species framework and must always be reducible to that framework.
+All voice-leading rules of first-species counterpoint apply concurrently, except those tied specifically to first-species rhythmic conditions.
+________________
+
+
+1. Metric Positions and Rules
+Each measure of the counterpoint contains four quarter-note attacks against one whole note of the cantus firmus.
+The first quarter note of the measure (beat 1) must always form a consonant interval with the cantus firmus.
+The second quarter note (beat 2) may be consonant or dissonant. A dissonance is permitted only if it is approached and left by stepwise motion.
+The third quarter note (beat 3) must always form a consonant interval with the cantus firmus.
+The fourth quarter note (beat 4) may be consonant or dissonant, under the same condition as beat 2: any dissonance must be approached and left by step.
+When the melody continues across the barline, the first quarter note of the following measure must again be consonant.
+As a result, in any continuous passage of quarter notes, beats 1 and 3 of every measure, and beat 1 of the next measure, are obligatorily consonant. Dissonance is restricted to beats 2 and 4 only, and only under stepwise motion.
+________________
+
+
+2. Stepwise Diminution (Passing Motion)
+Dissonance is permitted only as part of a continuous stepwise melodic connection between consonant notes.
+The stepwise motion must be uninterrupted and unidirectional.
+The direction of the motion is determined by the relative pitch of the surrounding consonant notes: if the later consonant note is higher, the motion must ascend; if it is lower, the motion must descend.
+
+
+All intermediate notes produced by this stepwise motion are permitted, whether consonant or dissonant.
+No dissonance may be approached or left by a skip.
+________________
+
+
+3. Nota Cambiata (Changed Note)
+The nota cambiata is a fixed five-note melodic idiom spanning the barline. It is admitted as a strictly limited exception to the rule prohibiting skips from dissonance.
+The figure must satisfy all of the following conditions:
+1. The first note (beat 1) is consonant.
+2. The second note (beat 2) moves downward by step to a dissonance.
+3. The third note (beat 3) leaps downward by a third to a consonance.
+4. The fourth note (beat 4) moves upward by step (it may be consonant or dissonant depending on the cantus firmus).
+5. The fifth note (the first beat of the following measure) moves upward by step to a consonance.
+The skip from dissonance is permitted only between the second and third notes and must be a descending third.
+The first, third, and fifth notes must always be consonant with the cantus firmus.
+The nota cambiata is idiomatic and exceptional and must not be generalized beyond this exact configuration.
+Measured against the cantus firmus, only the following interval successions qualify as valid dissonant cambiata patterns:
+When the counterpoint is above the cantus firmus:
+– 8–7–5–6
+– 6–♭5–3–4
+When the counterpoint is below the cantus firmus:
+– 3–4–6–5
+Any other intervallic realization is invalid.
+________________
+
+
+4. Melodic Motion and Skips
+Stepwise motion is normative and preferred.
+Skips are permitted only between consonant notes, except in the nota cambiata.
+Any skip must be compensated by stepwise motion in the opposite direction.
+Larger melodic intervals (fifth, sixth, octave) cancel any potential parallel fifths or octaves between the intervals formed on successive downbeats.
+________________
+
+
+5. Rhythmic Restrictions
+Throughout the body of the exercise, the counterpoint must consist exclusively of quarter notes.
+Eighth notes, mixed rhythmic values, or rhythmic syncopations are forbidden.
+________________
+
+
+6. Cadential Treatment and Final Measure
+In the final measure, the counterpoint must consist of a single whole note (semibreve), not quarter notes.
+When approaching the final measure, the last quarter note of the penultimate measure is subject to the following constraints, depending on the position of the cantus firmus:
+If the cantus firmus is in the lower voice, the last quarter note of the counterpoint in the penultimate measure must form a major sixth with the cantus firmus and resolve to an octave with cantus firmus in the last bar.
+If the cantus firmus is in the upper voice, the last quarter note of the counterpoint in the penultimate measure must form a minor third with the cantus firmus and resolve to a unison with the cantus firmus in the last bar.
+This condition applies specifically to the final quarter note preceding the last measure and governs the melodic approach to the concluding whole note.
+________________
+
+
+7. Accidentals and Modal Integrity
+Accidentals must be used sparingly and only for functional reasons. Their primary purpose is the avoidance of the tritone (mi contra fa), not only in the vertical interval with the cantus firmus but also within the melodic contour of the counterpoint itself.
+When determining whether an accidental is required, the melodic line of the counterpoint must be examined within a local horizontal window of up to five notes before and five notes after the note in question. If this inspection reveals the formation of a tritone within the melodic line, the pitch must be adjusted accordingly by means of an accidental.
+
+
+Markdown style: 
+# Guide: Third Species Counterpoint (4:1)
+
+
+Third Species counterpoint consists of writing **four quarter notes** against **one whole note** of the cantus firmus. The contrapuntal line functions as a **diminution of an underlying consonant first-species framework** and must always be reducible to that framework.
+
+
+All voice-leading rules of first-species counterpoint apply concurrently, except those tied specifically to first-species rhythmic conditions.
+
+
+---
+
+
+## 1. Metric Positions and Rules
+
+
+Each measure of the counterpoint contains **four quarter-note attacks** against one whole note of the cantus firmus.
+
+
+- The **first quarter note of the measure (beat 1)** must always form a **consonant interval** with the cantus firmus.
+- The **second quarter note (beat 2)** may be consonant or dissonant. A dissonance is permitted only if it is **approached and left by stepwise motion**.
+- The **third quarter note (beat 3)** must always form a **consonant interval** with the cantus firmus.
+- The **fourth quarter note (beat 4)** may be consonant or dissonant under the same condition as beat 2: any dissonance must be **approached and left by step**.
+
+
+When the melody continues across the barline, the **first quarter note of the following measure** must again be consonant.
+
+
+As a result, in any continuous passage of quarter notes, **beats 1 and 3 of every measure, and beat 1 of the next measure, are obligatorily consonant**. Dissonance is restricted to **beats 2 and 4 only**, and only under stepwise motion.
+
+
+---
+
+
+## 2. Stepwise Diminution (Passing Motion)
+
+
+Dissonance is permitted **only** as part of a **continuous stepwise melodic connection** between consonant notes.
+
+
+- The stepwise motion must be **uninterrupted and unidirectional**.
+- The direction of the motion is determined by the relative pitch of the surrounding consonant notes:  
+  - if the later consonant note is higher, the motion must **ascend**;  
+  - if it is lower, the motion must **descend**.
+- All intermediate notes produced by this stepwise motion are permitted, whether consonant or dissonant.
+- No dissonance may be **approached or left by a skip**.
+
+
+---
+
+
+## 3. Nota Cambiata (Changed Note)
+
+
+The *nota cambiata* is a **fixed five-note melodic idiom** spanning the barline. It is admitted as a **strictly limited exception** to the rule prohibiting skips from dissonance.
+
+
+The figure must satisfy all of the following conditions:
+
+
+1. The **first note (beat 1)** is consonant.  
+2. The **second note (beat 2)** moves **downward by step** to a dissonance.  
+3. The **third note (beat 3)** leaps **downward by a third** to a consonance.  
+4. The **fourth note (beat 4)** moves **upward by step** (it may be consonant or dissonant depending on the cantus firmus).  
+5. The **fifth note** (the first beat of the following measure) moves **upward by step** to a consonance.
+
+
+Additional constraints:
+
+
+- The skip from dissonance is permitted **only** between the second and third notes and must be a **descending third**.
+- The **first, third, and fifth notes** must always be consonant with the cantus firmus.
+- The *nota cambiata* is idiomatic and exceptional and must not be generalized beyond this exact configuration.
+
+
+Measured against the cantus firmus, only the following interval successions qualify as valid dissonant *cambiata* patterns:
+
+
+**When the counterpoint is above the cantus firmus:**
+- 8–7–5–6  
+- 6–♭5–3–4  
+
+
+**When the counterpoint is below the cantus firmus:**
+- 3–4–6–5  
+
+
+Any other intervallic realization is invalid.
+
+
+---
+
+
+## 4. Melodic Motion and Skips
+
+
+- Stepwise motion is normative and preferred.
+- Skips are permitted only between consonant notes, except in the *nota cambiata*.
+- Any skip must be **compensated by stepwise motion in the opposite direction**.
+- Larger melodic intervals (**fifth, sixth, octave**) cancel any potential **parallel fifths or octaves** between the intervals formed on successive downbeats.
+
+
+---
+
+
+## 5. Rhythmic Restrictions
+
+
+Throughout the body of the exercise, the counterpoint must consist exclusively of **quarter notes**.
+
+
+Eighth notes, mixed rhythmic values, or rhythmic syncopations are forbidden.
+
+
+---
+
+
+## 6. Cadential Treatment and Final Measure
+
+
+In the **final measure**, the counterpoint must consist of a **single whole note (semibreve)**, not quarter notes.
+
+
+When approaching the final measure, the **last quarter note of the penultimate measure** is subject to the following constraints, depending on the position of the cantus firmus:
+
+
+- If the **cantus firmus is in the lower voice**, the last quarter note of the counterpoint in the penultimate measure must form a **major sixth** with the cantus firmus and resolve to an **octave** with the cantus firmus in the final bar.
+- If the **cantus firmus is in the upper voice**, the last quarter note of the counterpoint in the penultimate measure must form a **minor third** with the cantus firmus and resolve to a **unison** with the cantus firmus in the final bar.
+
+
+This condition applies specifically to the **final quarter note preceding the last measure** and governs the melodic approach to the concluding whole note.
+
+
+---
+
+
+## 7. Accidentals and Modal Integrity
+
+
+Accidentals must be used sparingly and only for functional reasons. Their primary purpose is the avoidance of the tritone (*mi contra fa*), not only in the vertical interval with the cantus firmus but also within the **melodic contour of the counterpoint itself**.
+
+
+When determining whether an accidental is required, the melodic line of the counterpoint must be examined within a **local horizontal window of up to five notes before and five notes after** the note in question. If this inspection reveals the formation of a tritone within the melodic line, the pitch must be adjusted accordingly by means of an accidental.
+
+
+Such alterations must remain strictly corrective and must not undermine the modal framework or introduce chromatic instability.

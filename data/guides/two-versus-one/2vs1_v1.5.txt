@@ -1,0 +1,72 @@
+﻿# Second Species Counterpoint — Operational Guide
+
+## I. Metric Framework and General Principles
+-Second-species counterpoint operates within a **binary metric structure**. 
+-The contrapuntal fabric consists of **two half notes** written against each **whole-note cantus firmus**.    
+-A second-species counterpoint may begin with a **half rest** on the downbeat to avoid excessive closeness or instability.
+-All voice-leading rules from first-species counterpoint guide apply concurrently, with the exception of the first paragraph, which is specific to first-species counterpoint and therefore does not apply in the present context.
+
+---
+
+## II. Intervallic Status of the Two Half Notes
+
+The biggest interval in Fux’s example is a 10th and therefore forms the biggest interval allowed to use in this style. 
+
+### A. Downbeat (Thesis)
+- Must be strictly **consonant**.    
+- Admissible consonances: **perfect** (unison, fifth, octave) and **imperfect** (thirds, sixths).    
+- **No dissonance** tolerated.
+
+### B.Upbeat
+– The upbeat may be dissonant only when it belongs to a stepwise melodic connection between two consonant downbeats. In such cases, the intermediate motion must proceed strictly in the direction implied by the downbeats: descending if the second downbeat is lower, ascending if it is higher. All notes produced by this stepwise connection are permitted, whether consonant or dissonant.
+– Any disjunct motion involving the upbeat (whether leaping to or from it) requires that the resulting interval with the cantus firmus be consonant.
+– Consequently, no structural dissonance is permitted on the upbeat; dissonance is tolerated solely as stepwise diminution, subordinate to an underlying consonant framework.
+
+
+## III. Forbidden Successions and Compensatory Techniques
+
+- Because the upbeat is metrically weak, Fux treats it as **quasi-absent** when assessing vertical interval succession.
+- A **skip of a third** between successive downbeats may create **implicit parallels** (fifths or octaves), even under contrary motion.
+- The upbeat does **not** break perceptual continuity.
+- Larger melodic intervals (specifically the fifth, sixth, and octave) cancel any potential parallel motion between the intervals formed on two successive downbeats. In such cases, no parallel fifths or octaves are considered to occur between the downbeats.
+
+---
+
+## IV. Cadential Requirements
+
+The intervals associated with the last note of the cantus firmus must be an octave if the cantus is below or a unison if the cantus is above. In both case the final rhythmic value must be a whole note. 
+
+### A. Counterpoint Above the Cantus
+- Penultimate bar: first half note must be a **perfect fifth** above the cantus, second half note of the bar must be a major sixth. 
+
+### B. Counterpoint Below the Cantus
+- Penultimate bar: first half note must be a **perfect fifth** above the cantus, second half note of the bar must be a minor third. 
+
+
+
+---
+
+## V. Voice-Leading Management
+
+1. When voices approach excessive closeness and contrary motion becomes impossible, two exceptional devices are authorized:
+      - a **minor sixth leap**,    
+      - or an **octave leap**.    
+      These prevent forced parallels or constrained motion.
+
+2. The composer must continually **anticipate the upcoming measure**. Second species requires forward planning.
+
+---
+
+## VI. Avoiding Latent Parallels
+
+### Typical Error
+- Imperfect consonance (downbeat) → **skip of a third** → perfect consonance (next downbeat).    
+Even under contrary motion, this may result in:
+- **latent parallel fifths**,    
+- **latent parallel octaves**.
+
+### Avoidance Strategy
+- Use **a skip larger than a third**,    
+- or revise the prior voice-leading to break continuity.
+
+

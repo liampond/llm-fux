@@ -20,6 +20,7 @@ wheels/
 .installed.cfg
 *.egg
 *.docx
+paper/
 
 # Virtual environments
 venv/

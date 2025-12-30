@@ -27,11 +27,15 @@ single_run:
   file: Above_CantusFirmus_C       # File to test (e.g., Above_CantusFirmus_C)
   
   # Test configuration
-  model: gemini                            # chatgpt, claude, or gemini
-  model_name: gemini-3-pro                 # Specific model version (optional)
-  datatype: musicxml                       # musicxml, mei, abc, or humdrum
-  guide_path: data/guides/Pierre-Guide.md  # Path to guide file (e.g., data/guides/LLM-Guide.md) or null for no guide
+  model: gemini                                          # chatgpt, claude, or gemini
+  model_name: gemini-3-pro                               # Specific model version (optional)
+  datatype: musicxml                                     # musicxml, mei, abc, or humdrum
   
+  # Path to guide file (e.g., data/guides/LLM-Guide.md)
+  # `null` for no guide
+  # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
+  guide_path: data/guides/four-versus-one/4vs1_v1.0.txt
+
   # Model parameters
   temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
   max_tokens: 16000        # Maximum response length (16000 prevents truncation)
