@@ -1,0 +1,8 @@
+{
+  "pythonVersion": "3.13",
+  "pythonPath": "/Users/folkwangadmin/Library/Caches/pypoetry/virtualenvs/llm-fux-WLt2niYE-py3.13/bin/python",
+  "venvPath": "/Users/folkwangadmin/Library/Caches/pypoetry/virtualenvs/llm-fux-WLt2niYE-py3.13",
+  "typeCheckingMode": "basic",
+  "include": ["src"],
+  "exclude": ["**/node_modules", "**/__pycache__", "**/.*"]
+}

@@ -1,78 +1,32 @@
 # LLM-Fux Configuration
-# mode: single_run OR batch_run. Set enabled: true for the mode you want.
-# Then run: poetry run run
-
-# =============================================================================
-# GLOBAL SETTINGS (applied to all runs)
-# =============================================================================
-
-# API Settings
-timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no timeout)
-
-# Directory Settings (usually don't need to change these)
+timeout: 600
 data_dir: ./data
 dataset: ""
 outputs_dir: ./outputs
 
-# =============================================================================
-# SINGLE RUN CONFIGURATION
-# =============================================================================
-# For testing one specific configuration
-# Set enabled: true, configure your test, then run: poetry run run
-
 single_run:
-  enabled: true                    # Set to true to enable single run mode
-  
-  # Required
-  file: Below_CantusFirmus_C       # File to test (e.g., Above_CantusFirmus_C)
-  
-  # Test configuration
-  model: gemini                     # chatgpt, claude, or gemini
-  model_name: gemini-2.0-flash      # Specific model version (optional)
-  datatype: musicxml                # musicxml, mei, abc, or humdrum
-  
-  # Path to guide file (e.g., data/guides/LLM-Guide.md)
-  # `null` for no guide
-  # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
+  enabled: false
+  file: Below_CantusFirmus_C
+  model: gemini
+  model_name: gemini-2.0-flash
+  datatype: musicxml
   guide_path: data/guides/four-versus-one/4vs1_v1.0.txt
-
-  # Model parameters
-  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
-  max_tokens: 16000        # Maximum response length
-
-# =============================================================================
-# BATCH RUN CONFIGURATION
-# =============================================================================
-# For testing multiple combinations (models × datatypes × files × contexts)
-# Set enabled: true, configure your tests, then run: poetry run run
+  temperature: 0.0
+  max_tokens: 16000
 
 batch_run:
-  enabled: false           # Set to true to enable batch run mode
-  
-  # Models to test
+  enabled: true
   models:
-    - gemini-pro
-    
-  # Datatypes to test
+    - claude-opus-4-5
   datatypes:
     - musicxml
-    
-  # Files to test
   files:
     - Above_CantusFirmus_C
     - Below_CantusFirmus_C
-    
-  # Context settings
   contexts:
-    - with                 # 'with' or 'without' (or both)
-    
-  # Guide path for context='with'
+    - with
   guide_path: data/guides/four-versus-one/4vs1_v1.0.txt
-  
-  # Model parameters
   temperature: 0.0
   max_tokens: 16000
-  
-  # Execution settings
-  parallel: 1              # Number of parallel jobs
-  retry: 0                 # Number of retries on failure
+  parallel: 1
+  retry: 0
