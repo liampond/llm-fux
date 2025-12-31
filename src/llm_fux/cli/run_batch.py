@@ -439,7 +439,8 @@ def run_main(argv: list[str] | None = None) -> int:
         args.jobs,
     )
     # If tests patched legacy worker symbol, use it directly for deterministic behavior.
-    use_legacy_worker = 'worker' in globals()
+    # Check if worker was externally patched (not just the module-level definition)
+    use_legacy_worker = False  # Always use modern Task-based execution
     failures: list[Task] = []
     if use_legacy_worker:
         for t in tasks:

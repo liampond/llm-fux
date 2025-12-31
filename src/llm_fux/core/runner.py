@@ -84,6 +84,8 @@ class PromptRunner:
             try:
                 # Use the same extension as the input encoded file
                 ext = f".{self.datatype}"
+                # Debug logging
+                self.logger.info(f"get_output_path params: context={self.context}, guide={self.guide}")
                 # Get the base path for responses
                 self.save_to = get_output_path(
                     outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
@@ -96,6 +98,7 @@ class PromptRunner:
                     ext=ext,
                     output_type="response",
                 )
+                self.logger.info(f"Output path set to: {self.save_to}")
             except Exception as e:  # pragma: no cover (rare path issues)
                 self.logger.error("Failed to compute output path: %s", e)
                 self.save_to = None
