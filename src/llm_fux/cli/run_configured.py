@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Dict, Any, List
 
 from llm_fux.config import load_config
+from llm_fux.config.config import find_config_file
 from llm_fux.cli.run_single import main as run_single_main
 from llm_fux.cli.run_batch import main as run_batch_main
 
@@ -58,6 +59,10 @@ def build_single_run_args(config: Dict[str, Any]) -> List[str]:
     
     if 'max_tokens' in single_config:
         args.extend(['--max-tokens', str(single_config['max_tokens'])])
+    
+    # Add dataset if present in config
+    if 'dataset' in single_config:
+        args.extend(['--dataset', single_config['dataset']])
     
     return args
 
@@ -149,7 +154,10 @@ def main(argv: list[str] | None = None) -> int:
     
     # Load configuration
     try:
-        config = load_config()
+        config_path = find_config_file()
+        logging.info(f"Loading config from: {config_path}")
+        config = load_config(config_path)
+        logging.info(f"Loaded config content: {config}")
     except Exception as e:
         logging.error("Failed to load config.yaml: %s", e)
         return 2

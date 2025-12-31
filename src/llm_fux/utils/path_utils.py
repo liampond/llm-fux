@@ -273,6 +273,7 @@ def get_output_path(
     
     # Create the base filename pattern for run number detection
     # Pattern: <file_id>_<context_label>_<run>.<ext>
+    # Use the actual file_id passed to the function, which should be correct
     base_filename = f"{file_id}_{context_label}"
     base_path = format_folder / f"{base_filename}{ext}"
     
