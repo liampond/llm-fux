@@ -219,11 +219,11 @@ class PromptRunner:
 
     def _load_question(self) -> str:
         # Determine prompt type based on file_id and guide
-        prompt_file = "prompt_above.md"  # Default
+        prompt_file = "prompt_above_2vs1.md"  # Default
         if self.file_id.lower().startswith("below"):
-            prompt_file = "prompt_below.md"
+            prompt_file = "prompt_below_2vs1.md"
         elif self.file_id.lower().startswith("above"):
-            prompt_file = "prompt_above.md"
+            prompt_file = "prompt_above_2vs1.md"
         
         # Check if guide specifies a species (e.g., 4vs1_v1.0.txt for third species)
         if self.guide:
@@ -232,8 +232,8 @@ class PromptRunner:
                 # Use third species prompt for 4vs1 guide
                 prompt_file = "prompt_above_4vs1.md" if "above" in prompt_file else "prompt_below_4vs1.md"
             elif "2vs1" in guide_name:
-                # Use second species prompt for 2vs1 guide (default already set)
-                pass
+                # Use second species prompt for 2vs1 guide
+                prompt_file = "prompt_above_2vs1.md" if "above" in prompt_file else "prompt_below_2vs1.md"
             elif "1vs1" in guide_name:
                 # Use first species prompt for 1vs1 guide
                 prompt_file = "prompt_above_1vs1.md" if "above" in prompt_file else "prompt_below_1vs1.md"
