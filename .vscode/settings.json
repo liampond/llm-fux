@@ -7,5 +7,10 @@
   },
   "python.linting.enabled": true,
   "python.analysis.extraPaths": ["./src"],
-  "python.analysis.stubPath": "./src"
+  "python.analysis.stubPath": "./src",
+  "python.analysis.typeShedPath": "/Users/folkwangadmin/Library/Caches/pypoetry/virtualenvs/llm-fux-WLt2niYE-py3.13/lib/python3.13/site-packages",
+  "python.analysis.venvPath": "/Users/folkwangadmin/Library/Caches/pypoetry/virtualenvs/llm-fux-WLt2niYE-py3.13",
+  "python.analysis.pythonVersion": "3.13",
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "pylance.analysis.typeCheckingMode": "basic"
 }
