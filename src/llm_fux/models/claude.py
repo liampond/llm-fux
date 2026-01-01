@@ -3,6 +3,7 @@ from typing import Optional
 from anthropic import Anthropic
 from llm_fux.models.base import LLMInterface, PromptInput
 from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
+from llm_fux.utils.text_utils import clean_code_blocks
 
 
 class ClaudeModel(LLMInterface):
@@ -46,4 +47,7 @@ class ClaudeModel(LLMInterface):
             system=input.system_prompt,
             messages=[{"role": "user", "content": input.user_prompt}],
         )
-        return response.content[0].text.strip()
+        
+        # Clean response: strip whitespace and remove any code block delimiters
+        raw_response = response.content[0].text.strip()
+        return clean_code_blocks(raw_response)

@@ -9,6 +9,7 @@ from llm_fux.utils.path_utils import (
     list_guides,
     load_text_file,
 )
+from llm_fux.utils.text_utils import clean_code_blocks
 
 __all__ = [
     "find_project_root",
@@ -18,4 +19,5 @@ __all__ = [
     "list_datatypes",
     "list_guides",
     "load_text_file",
+    "clean_code_blocks",
 ]
