@@ -62,12 +62,12 @@ batch_run:
     # - humdrum
   
   files:                   # One or more file IDs
-    - Above_CantusFirmus_C
-    - Above_CantusFirmus_A
-    - Above_CantusFirmus_D
-    - Above_CantusFirmus_E
-    - Above_CantusFirmus_F
-    - Above_CantusFirmus_G
+    - Above_A
+    - Above_C
+    - Above_D
+    - Above_E
+    - Above_F
+    - Above_G
   
   # Context configuration
   contexts:                # Options: with, without (can include both!)
