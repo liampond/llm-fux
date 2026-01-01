@@ -139,9 +139,16 @@ def list_file_ids(encoded_dir: Path) -> List[str]:
     for sub in encoded_dir.iterdir():
         if not sub.is_dir():
             continue
-        for f in sub.iterdir():
-            if f.is_file():
-                ids.add(f.stem)
+        
+        # If known datatype, filter by extension recursively
+        if sub.name in _DATATYPE_EXT:
+            ext = _DATATYPE_EXT[sub.name]
+            for f in sub.rglob(f"*{ext}"):
+                if f.is_file():
+                    ids.add(f.stem)
+        # Fallback: if not a known datatype, we skip it to avoid noise.
+        # (The system requires datatypes to be in _DATATYPE_EXT anyway)
+
     return sorted(ids)
 
 
@@ -161,12 +168,14 @@ def list_datatypes(encoded_dir: Path) -> List[str]:
 
 
 def list_guides(guides_dir: Path) -> List[str]:
-    """Return stems of all guide ``.txt`` and ``.md`` files (non‑recursive)."""
+    """Return relative paths of all guide ``.txt`` and ``.md`` files (recursive)."""
     if not guides_dir.exists():
         return []
     guides = []
     for ext in ["*.txt", "*.md"]:
-        guides.extend([f.stem for f in guides_dir.glob(ext) if f.is_file()])
+        for f in guides_dir.rglob(ext):
+            if f.is_file():
+                guides.append(str(f.relative_to(guides_dir)))
     return sorted(guides)
 
 
@@ -214,10 +223,11 @@ def get_output_path(
     dataset: Optional[str] = None,
     ext: str = ".txt",
     output_type: str = "response",  # 'response', 'prompt', or 'input'
+    temperature: float = 0.0,
 ) -> Path:
     """Return path for model output file with deeply nested folder-based organization.
 
-    Structure: ``outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context>_<run><ext>``
+    Structure: ``outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context>_<run><ext>``
     
     Context folder naming:
         - no-context: When context=False or no guide specified
@@ -233,6 +243,7 @@ def get_output_path(
         dataset: Dataset name (unused in new structure)
         ext: File extension
         output_type: Type of output file ('response', 'prompt', or 'input')
+        temperature: Model temperature setting (0.0-1.0)
     
     Returns:
         Path object for the output file
@@ -240,7 +251,7 @@ def get_output_path(
     if not file_id:
         raise ValueError("file_id is required for output path")
     
-    # Structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/
+    # Structure: outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/
     
     # Start with output type (response/prompt/input)
     type_folder = outputs_dir / output_type
@@ -265,8 +276,11 @@ def get_output_path(
         context_folder = model_folder / "no-context"
         context_label = "no-context"
     
+    # Then temperature folder
+    temp_folder = context_folder / f"temp-{temperature:.1f}"
+    
     # Then datatype (format)
-    format_folder = context_folder / datatype
+    format_folder = temp_folder / datatype
     
     # Create the directory structure
     ensure_dir(format_folder)

@@ -150,8 +150,8 @@ class TestPathUtils:
         guides_dir = temp_structure / "guides"
         
         guides = list_guides(guides_dir)
-        assert "harmonic_analysis" in guides
-        assert "form_analysis" in guides
+        assert "harmonic_analysis.txt" in guides
+        assert "form_analysis.txt" in guides
         assert len(guides) == 2
 
     def test_get_output_path(self, temp_structure):
@@ -168,8 +168,8 @@ class TestPathUtils:
             guide="/path/to/Pierre-Guide.md"
         )
         
-        # New structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context_label>_<run>.<ext>
-        expected = outputs_dir / "response" / "TestModel" / "context-Pierre" / "mei" / "Q1a_Pierre_1.txt"
+        # New structure: outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context_label>_<run>.<ext>
+        expected = outputs_dir / "response" / "TestModel" / "context-Pierre" / "temp-0.0" / "mei" / "Q1a_Pierre_1.txt"
         assert output_path == expected
 
     def test_get_output_path_no_context(self, temp_structure):
@@ -184,8 +184,8 @@ class TestPathUtils:
             context=False
         )
         
-        # New structure: outputs/<output_type>/<model>/<context-folder>/<datatype>/<file_id>_<context_label>_<run>.<ext>
-        expected = outputs_dir / "response" / "TestModel" / "no-context" / "abc" / "Q2b_no-context_1.txt"
+        # New structure: outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context_label>_<run>.<ext>
+        expected = outputs_dir / "response" / "TestModel" / "no-context" / "temp-0.0" / "abc" / "Q2b_no-context_1.txt"
         assert output_path == expected
 
     def test_find_project_root(self):
@@ -252,8 +252,12 @@ class TestDataIntegrity:
                 continue
             if datatype_dir.name not in {"mei", "musicxml"}:
                 continue
-            for file_path in datatype_dir.iterdir():
+            # Recursively find all files in datatype directory (handles subdirs like above/below)
+            for file_path in datatype_dir.rglob("*"):
                 if not file_path.is_file():
+                    continue
+                # Skip hidden files like .DS_Store
+                if file_path.name.startswith("."):
                     continue
                 if datatype_dir.name == "mei":
                     assert file_path.suffix == ".mei"

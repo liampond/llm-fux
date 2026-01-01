@@ -95,6 +95,7 @@ class PromptRunner:
                     dataset=self.dataset,
                     ext=ext,
                     output_type="response",
+                    temperature=self.temperature,
                 )
             except Exception as e:  # pragma: no cover (rare path issues)
                 self.logger.error("Failed to compute output path: %s", e)
@@ -313,6 +314,7 @@ class PromptRunner:
             dataset=self.dataset,
             ext=".txt",
             output_type="prompt",
+            temperature=self.temperature,
         )
 
         # Build metadata section
@@ -399,6 +401,7 @@ class PromptRunner:
             dataset=self.dataset,
             ext=".json",
             output_type="input",
+            temperature=self.temperature,
         )
         
         # Build input bundle with components and metadata
