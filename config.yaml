@@ -1,5 +1,5 @@
 # LLM-Fux Configuration
-# mode: single_run OR batch_run. Set enabled: true for the mode you want.
+# Choose ONE mode: single_run OR batch_run. Set enabled: true for the mode you want.
 # Then run: poetry run run
 
 # =============================================================================
@@ -18,18 +18,18 @@ outputs_dir: ./outputs
 # SINGLE RUN CONFIGURATION
 # =============================================================================
 # For testing one specific configuration
-# Set enabled: true, configure your test, then run: poetry run run
+# Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
-  enabled: false                   # Set to true to enable single run mode
+  enabled: true                    # Set to true to enable single run mode
   
   # Required
-  file: Below_CantusFirmus_C       # File to test (e.g., Above_CantusFirmus_C)
+  file: Above_C       # File to test (e.g., Above_C)
   
   # Test configuration
-  model: gemini                     # chatgpt, claude, or gemini
-  model_name: gemini-2.0-flash      # Specific model version (optional)
-  datatype: musicxml                # musicxml, mei, abc, or humdrum
+  model: gemini                                          # chatgpt, claude, or gemini
+  model_name: gemini-3-pro                               # Specific model version (optional)
+  datatype: musicxml                                     # musicxml, mei, abc, or humdrum
   
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
   # `null` for no guide
@@ -38,20 +38,22 @@ single_run:
 
   # Model parameters
   temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
-  max_tokens: 16000        # Maximum response length
+  max_tokens: 16000        # Maximum response length (16000 prevents truncation)
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
 # =============================================================================
 # For testing multiple combinations (models × datatypes × files × contexts)
-# Set enabled: true, configure your tests, then run: poetry run run
+# Set enabled: true, configure your tests, then run: poetry run run-config
 
 batch_run:
-  enabled: true            # Set to true to enable batch run mode
+  enabled: false           # Set to true to enable batch run mode
   
   # What to test (list one or more of each)
   models:                  # One or more: chatgpt, claude, gemini
-    - chatgpt
+    # - claude
+    # - chatgpt
+    - gemini
   
   datatypes:               # One or more: musicxml, mei, abc, humdrum
     - musicxml
@@ -60,21 +62,26 @@ batch_run:
     # - humdrum
   
   files:                   # One or more file IDs
-    - Above_CantusFirmus_C
-    - Below_CantusFirmus_C
+    - Above_A
+    - Above_C
+    - Above_D
+    - Above_E
+    - Above_F
+    - Above_G
   
   # Context configuration
   contexts:                # Options: with, without (can include both!)
     # - without
     - with
   
-  guide_path: data/guides/four-versus-one/4vs1_v1.0.txt  # Path to guide file when contexts includes "with"
+  guide_path: data/guides/LLM-Guide.md  # Path to guide file when contexts includes "with"
   
   # Model parameters
   temperature: 0.0         # 0.0-1.0
   max_tokens: 16000        # Maximum response length
   
   # Execution settings
+  delay: 2                 # Seconds between API calls (respects rate limits)
   parallel: 1              # Parallel jobs (1 = sequential, safer for rate limits)
   retry: 0                 # Retries on failure
 

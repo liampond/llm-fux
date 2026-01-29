@@ -3,6 +3,7 @@ from typing import Optional
 from openai import OpenAI
 from llm_fux.models.base import LLMInterface, PromptInput
 from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
+from llm_fux.utils.text_utils import clean_code_blocks
 
 
 class ChatGPTModel(LLMInterface):
@@ -52,5 +53,6 @@ class ChatGPTModel(LLMInterface):
             max_completion_tokens=max_tokens,
         )
 
-        # TODO: Add logging of request/response here for auditing if enabled
-        return response.choices[0].message.content.strip()
+        # Clean response: strip whitespace and remove any code block delimiters
+        raw_response = response.choices[0].message.content.strip()
+        return clean_code_blocks(raw_response)

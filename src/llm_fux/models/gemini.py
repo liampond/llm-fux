@@ -7,6 +7,7 @@ from google import genai
 
 from llm_fux.models.base import LLMInterface, PromptInput
 from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
+from llm_fux.utils.text_utils import clean_code_blocks
 
 
 class GeminiModel(LLMInterface):
@@ -55,7 +56,8 @@ class GeminiModel(LLMInterface):
 
         # Configure generation settings
         config = {
-            "temperature": input.temperature
+            "temperature": input.temperature,
+            "response_mime_type": "text/plain",  # Prevents markdown formatting in output
         }
         # Get max_tokens from input, or fall back to config default
         max_tokens = getattr(input, "max_tokens", None) or get_max_tokens()
@@ -72,5 +74,6 @@ class GeminiModel(LLMInterface):
             config=config
         )
 
-        # Return the trimmed result
-        return response.text.strip()
+        # Clean response: strip whitespace and remove any code block delimiters
+        raw_response = response.text.strip()
+        return clean_code_blocks(raw_response)
