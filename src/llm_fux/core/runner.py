@@ -26,6 +26,7 @@ from llm_fux.utils.path_utils import (
     find_question_file,
     get_output_path,
 )
+from llm_fux.utils.text_utils import fix_musicxml_durations
 
 
 class PromptRunner:
@@ -255,6 +256,12 @@ class PromptRunner:
         prompt_path = self.base_dirs.get("prompts", Path("")) / prompt_file
         if prompt_path.exists():
             return load_text_file(prompt_path)
+
+        self.logger.warning(
+            "Species-specific prompt not found: %s (detected species=%s). "
+            "Falling back to generic prompt.",
+            prompt_file, species,
+        )
             
         # Fallback to generic prompt.md if specific one missing
         single_prompt = self.base_dirs.get("prompts", Path("")) / "prompt.md"
@@ -283,6 +290,9 @@ class PromptRunner:
     def _save_response(self, response: str) -> None:
         if not self.save_to:
             return
+        # Post-process MusicXML to fix LLM duration/divisions mismatches.
+        if self.datatype == "musicxml":
+            response = fix_musicxml_durations(response)
         # Response is already in the correct location from get_output_path with output_type="response"
         self.save_to.parent.mkdir(parents=True, exist_ok=True)
         self.save_to.write_text(response, encoding="utf-8")
