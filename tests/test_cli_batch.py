@@ -124,7 +124,6 @@ class TestBatchCLI:
         code = self._invoke_main([
             "run_batch.py", "--models", "chatgpt",
             "--questions", "Q1a", "--datatypes", "abc",
-            "--jobs", "1"
         ], worker_result=True)
         assert code == 0
 
@@ -133,6 +132,5 @@ class TestBatchCLI:
         code = self._invoke_main([
             "run_batch.py", "--models", "chatgpt",
             "--questions", "Q1a", "--datatypes", "abc",
-            "--jobs", "1"
         ], worker_result=False)
         assert code == 1

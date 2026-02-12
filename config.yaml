@@ -77,7 +77,6 @@ batch_run:
   
   # Execution settings
   delay: 2                 # Seconds between API calls (respects rate limits)
-  parallel: 1              # Parallel jobs (1 = sequential, safer for rate limits)
   retry: 2                 # Retries on failure
 
 # =============================================================================

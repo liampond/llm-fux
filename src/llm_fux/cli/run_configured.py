@@ -21,7 +21,7 @@ from typing import Dict, Any, List
 
 from llm_fux.config import load_config
 from llm_fux.cli.run_single import main as run_single_main
-from llm_fux.cli.run_batch import main as run_batch_main
+from llm_fux.cli.run_batch import run_main as run_batch_main
 
 
 def build_single_run_args(config: Dict[str, Any]) -> List[str]:
@@ -110,10 +110,6 @@ def build_batch_run_args(config: Dict[str, Any]) -> List[str]:
     # Delay
     if 'delay' in batch_config:
         args.extend(['--delay', str(batch_config['delay'])])
-    
-    # Jobs (parallel)
-    if 'parallel' in batch_config:
-        args.extend(['--jobs', str(batch_config['parallel'])])
     
     # Retry
     if 'retry' in batch_config:

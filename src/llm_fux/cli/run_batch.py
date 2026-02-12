@@ -3,7 +3,7 @@
 
 Goals:
   * Parse arguments & expand cartesian product of (models × files × datatypes).
-  * Provide parallel execution with basic retry handling.
+  * Sequential execution with retry handling and optional delay.
   * Validate dataset structure & API keys early.
 
 Non‑goals:
@@ -20,7 +20,6 @@ import os
 from pathlib import Path
 from dataclasses import dataclass
 from typing import Iterable, List, Dict, Sequence, Optional
-from concurrent.futures import ThreadPoolExecutor, as_completed, Future
 from time import sleep
 from dotenv import load_dotenv
 
@@ -165,10 +164,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
         help="Number of retries for failed runs",
     )
     parser.add_argument(
-        "--jobs",
-        type=int,
-        default=1,
-        help="Number of parallel jobs",
+        "--delay",
+        type=float,
+        default=0.0,
+        help="Seconds to wait between API calls (avoids rate limits)",
     )
     parser.add_argument(
         "--verbose",
@@ -359,21 +358,15 @@ def worker(task_tuple) -> bool:  # type: ignore
 
 
 def execute_tasks(
-    tasks: List[Task], base_dirs: Dict[str, Path], jobs: int
+    tasks: List[Task], base_dirs: Dict[str, Path], delay: float = 0.0
 ) -> List[Task]:
     failures: List[Task] = []
-    if jobs <= 1:
-        for t in tasks:
-            if not run_task(t, base_dirs):
-                failures.append(t)
-        return failures
-    with ThreadPoolExecutor(max_workers=jobs) as pool:
-        future_map: Dict[Future, Task] = {
-            pool.submit(run_task, t, base_dirs): t for t in tasks
-        }
-        for fut in as_completed(future_map):
-            if not fut.result():
-                failures.append(future_map[fut])
+    for i, t in enumerate(tasks):
+        if i > 0 and delay > 0:
+            logging.debug("Waiting %.1fs before next API call...", delay)
+            sleep(delay)
+        if not run_task(t, base_dirs):
+            failures.append(t)
     return failures
 
 
@@ -405,10 +398,6 @@ def run_main(argv: list[str] | None = None) -> int:
 
     level = logging.DEBUG if args.verbose else logging.INFO
     logging.basicConfig(format="%(asctime)s [%(levelname)s] %(message)s", level=level)
-
-    if args.jobs < 1:
-        logging.error("--jobs must be >= 1")
-        return 2
 
     dataset_root = args.data_dir / args.dataset if args.dataset else args.data_dir
     base_dirs: Dict[str, Path] = {
@@ -455,18 +444,19 @@ def run_main(argv: list[str] | None = None) -> int:
 
     tasks = prepare_tasks(models, file_ids, datatypes, args)
     logging.info(
-        "Prepared %d tasks (%d models × %d files × %d datatypes) using %d job(s)",
+        "Prepared %d tasks (%d models × %d files × %d datatypes)",
         len(tasks),
         len(models),
         len(file_ids),
         len(datatypes),
-        args.jobs,
     )
     # If tests patched legacy worker symbol, use it directly for deterministic behavior.
     use_legacy_worker = 'worker' in globals()
     failures: list[Task] = []
     if use_legacy_worker:
-        for t in tasks:
+        for i, t in enumerate(tasks):
+            if i > 0 and args.delay > 0:
+                sleep(args.delay)
             tuple_task = (
                 t.model_name,
                 t.file_id,
@@ -482,7 +472,7 @@ def run_main(argv: list[str] | None = None) -> int:
             if not ok:
                 failures.append(t)
     else:
-        failures = execute_tasks(tasks, base_dirs, args.jobs)
+        failures = execute_tasks(tasks, base_dirs, delay=args.delay)
         failures = retry_failures(failures, base_dirs, args.retry)
 
     if failures:
