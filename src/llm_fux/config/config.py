@@ -16,10 +16,11 @@ import yaml
 load_dotenv()
 
 # Default models by provider
+# DO NOT CHANGE UNDER ANY CIRCUMSTANCES
 DEFAULT_MODELS = {
-    "openai": "gpt-5.1-2025-11-13",
-    "anthropic": "claude-opus-4-5",
-    "google": "gemini-3-pro-preview",
+    "openai": "gpt-5.2-2025-12-11",
+    "anthropic": "claude-3-5-sonnet-20241022",
+    "google": "gemini-2.0-flash-001",
 }
 
 # API keys from environment

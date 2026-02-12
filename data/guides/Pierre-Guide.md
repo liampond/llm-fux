@@ -6,7 +6,7 @@ _(summarised from Fux, Gradus ad Parnassum, Book I)_
 
 Here’s a correctly renumbered and structured version of your text so that each section and sub‑section follows a clear, consistent hierarchy:
 
-**1\. Conventional Procedure for Identifying the Mode of a Cantus Firmus Alone**
+**1. Conventional Procedure for Identifying the Mode of a Cantus Firmus Alone**
 
 **1.1 Find the Final**
 
@@ -63,7 +63,7 @@ The correct mode is the one that simultaneously:
 
 Establishing the mode before writing the added counterpoint ensures that the new voice will respect the tonal grammar prescribed by Fux’s method.
 
-**2\. Vertical Intervals**
+**2. Vertical Intervals**
 
 **2.1 Basic Rules**
 
@@ -78,7 +78,7 @@ Establishing the mode before writing the added counterpoint ensures that the new
     - Cantus firmus above → counterpoint forms a **minor 3rd** below it.
     - Raise the 7th scale-degree, where necessary, to create a leading tone.
 
-**3\. Treatment of Motion Between the Two Voices**
+**3. Treatment of Motion Between the Two Voices**
 
 **3.1 Preference for Motion**
 
@@ -107,7 +107,7 @@ Following these pathways ensures that successive intervals remain consonant and 
 2. Avoid approaching an octave by contrary stepwise motion from a 10th (_ottava battuta_).
 3. Avoid any leap into or out of a unison except at the beginning or end.
 
-**4\. Melodic Conduct Within Each Voice**
+**4. Melodic Conduct Within Each Voice**
 
 **4.1 Maintain Vocal Singability**
 
@@ -130,7 +130,7 @@ Following these pathways ensures that successive intervals remain consonant and 
 
 - Keep both parts within a practicable vocal range and steer clear of registers that are excessively high or low.
 
-**5\. Voice Disposition**
+**5. Voice Disposition**
 
 **5.1 Counting Intervals**
 
@@ -144,7 +144,7 @@ Following these pathways ensures that successive intervals remain consonant and 
 
 - Keep the voices neither so close that they obscure independence nor so far apart that compound intervals (≥ 11th) dominate the texture.
 
-**6\. Working Procedure — Incremental, Rule-Checked Writing**
+**6. Working Procedure — Incremental, Rule-Checked Writing**
 
 **6.1  Step-by-step construction**
 

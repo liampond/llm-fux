@@ -26,6 +26,7 @@ from dotenv import load_dotenv
 
 from llm_fux.core.dispatcher import get_llm, get_llm_with_model_name, detect_model_provider
 from llm_fux.core.runner import PromptRunner
+from llm_fux.config.config import DEFAULT_MODELS
 from llm_fux.utils.path_utils import (
     find_project_root,
     list_file_ids,
@@ -185,31 +186,60 @@ def expand_models(raw: str) -> tuple[List[str], List[str]]:
     """Expand model specification to list of model identifiers.
     
     Supports:
-    - "all" -> ["chatgpt", "claude", "gemini"] 
-    - Comma-separated provider names: "chatgpt,claude"
+    - "all" -> ["chatgpt", "claude", "gemini"] (resolves to default model versions)
+    - Comma-separated provider names: "chatgpt,claude" (resolves to default model versions)
     - Comma-separated specific model names: "gpt-5.1-2025-11-13,claude-opus-4-5"
     - Mixed: "chatgpt,gpt-5.1-2025-11-13,claude-opus-4-5"
     
     Returns:
         tuple of (original_models, provider_names) where:
-        - original_models: the original model specifications for LLM instantiation
+        - original_models: the specific model names for LLM instantiation
         - provider_names: provider names for API key validation
         
     Raises:
         ValueError: If any model specification is invalid
     """
     if raw.lower() == "all":
+        # Resolve defaults for "all"
+        resolved = [
+            DEFAULT_MODELS["openai"],    # chatgpt
+            DEFAULT_MODELS["anthropic"], # claude
+            DEFAULT_MODELS["google"],    # gemini
+        ]
         providers = ["chatgpt", "claude", "gemini"]
-        return providers, providers
+        return resolved, providers
     
-    models = [m.strip() for m in raw.split(",") if m.strip()]
+    input_models = [m.strip() for m in raw.split(",") if m.strip()]
+    resolved_models = []
     providers = []
+
+    # Map canonical provider key (from detect_model_provider) to config.py key
+    # detect return values: "chatgpt", "claude", "gemini"
+    # config.py keys: "openai", "anthropic", "google"
+    provider_to_config = {
+        "chatgpt": "openai",
+        "claude": "anthropic",
+        "gemini": "google",
+    }
     
-    for model in models:
+    for model in input_models:
         try:
             # Try to detect provider from model name (handles specific model names)
             provider = detect_model_provider(model)
             providers.append(provider)
+
+            # If user specified just the provider name/alias, use the default model
+            # Check if input text is just a provider keyword
+            if model.lower() in ["chatgpt", "claude", "gemini", "openai", "anthropic", "google"]:
+                conf_key = provider_to_config.get(provider)
+                if conf_key and conf_key in DEFAULT_MODELS:
+                    resolved_models.append(DEFAULT_MODELS[conf_key])
+                else:
+                    resolved_models.append(model)
+            else:
+                # Specific model name (e.g. gpt-4-...)
+                resolved_models.append(model)
+
         except ValueError:
             # Not a specific model name, try to validate as provider name
             from llm_fux.core.dispatcher import list_available_models
@@ -220,8 +250,9 @@ def expand_models(raw: str) -> tuple[List[str], List[str]]:
                     f"Or use specific model names like 'gpt-5.1-2025-11-13', 'claude-opus-4-5', 'gemini-3-pro-preview'."
                 )
             providers.append(model)
+            resolved_models.append(model)
     
-    return models, providers
+    return resolved_models, providers
 
 
 def prepare_tasks(

@@ -25,7 +25,7 @@ from llm_fux.cli.run_single import main as run_single_main
 from llm_fux.cli.run_batch import main as run_batch_main
 
 
-def build_single_run_args(config: Dict[str, Any]) -> List[str]:
+def build_single_run_args(config: Dict[str, Any]) -> List[str] | None:
     """Build CLI arguments for run-single from config."""
     single_config = config.get('single_run', {})
     
@@ -67,7 +67,7 @@ def build_single_run_args(config: Dict[str, Any]) -> List[str]:
     return args
 
 
-def build_batch_run_args(config: Dict[str, Any]) -> List[str]:
+def build_batch_run_args(config: Dict[str, Any]) -> List[str] | None:
     """Build CLI arguments for run-batch from config."""
     batch_config = config.get('batch_run', {})
     
@@ -109,8 +109,8 @@ def build_batch_run_args(config: Dict[str, Any]) -> List[str]:
             args.extend(['--guide', batch_config['guide_path']])
     
     # Delay
-    if 'delay' in batch_config:
-        args.extend(['--delay', str(batch_config['delay'])])
+    # if 'delay' in batch_config:
+    #     args.extend(['--delay', str(batch_config['delay'])])
     
     # Jobs (parallel)
     if 'parallel' in batch_config:
