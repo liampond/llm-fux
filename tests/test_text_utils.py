@@ -1,7 +1,7 @@
 """Tests for text_utils module."""
 
 import pytest
-from llm_fux.utils.text_utils import clean_code_blocks, fix_musicxml_durations
+from llm_fux.utils.text_utils import clean_code_blocks, fix_musicxml_durations, clean_response
 
 
 class TestCleanCodeBlocks:
@@ -177,3 +177,43 @@ class TestFixMusicxmlDurations:
         root = ET.fromstring(fixed)
         durations = [int(d.text) for d in root.iter("duration")]
         assert all(d == 2 for d in durations)
+
+
+class TestCleanResponse:
+    """Tests for the clean_response function."""
+
+    def test_strips_code_fences_musicxml(self):
+        """Code fences around MusicXML should be stripped."""
+        text = "```xml\n<?xml version=\"1.0\"?>\n<score-partwise/>\n```"
+        result = clean_response(text, "musicxml")
+        assert result.startswith("<?xml")
+        assert "```" not in result
+
+    def test_strips_preamble_text(self):
+        """Explanatory text before XML should be stripped."""
+        text = "Here is the counterpoint I composed:\n\n<?xml version=\"1.0\"?>\n<score-partwise/>"
+        result = clean_response(text, "musicxml")
+        assert result.startswith("<?xml")
+
+    def test_strips_preamble_before_doctype(self):
+        """Explanatory text before DOCTYPE should be stripped."""
+        text = "Let me analyze the cantus firmus.\n\n<!DOCTYPE score-partwise>\n<score-partwise/>"
+        result = clean_response(text, "musicxml")
+        assert result.startswith("<!DOCTYPE")
+
+    def test_no_change_clean_musicxml(self):
+        """Already-clean MusicXML should be unchanged."""
+        text = "<?xml version=\"1.0\"?>\n<score-partwise/>"
+        assert clean_response(text, "musicxml") == text
+
+    def test_no_preamble_strip_for_abc(self):
+        """ABC format should not have XML preamble stripping."""
+        text = "Here is the tune:\nX:1\nT:Test"
+        result = clean_response(text, "abc")
+        assert result == text  # code fence stripped but no XML preamble logic
+
+    def test_handles_empty(self):
+        assert clean_response("", "musicxml") == ""
+
+    def test_handles_none(self):
+        assert clean_response(None, "musicxml") is None

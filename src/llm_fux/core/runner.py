@@ -26,7 +26,7 @@ from llm_fux.utils.path_utils import (
     find_question_file,
     get_output_path,
 )
-from llm_fux.utils.text_utils import fix_musicxml_durations
+from llm_fux.utils.text_utils import fix_musicxml_durations, clean_response
 
 
 class PromptRunner:
@@ -290,6 +290,8 @@ class PromptRunner:
     def _save_response(self, response: str) -> None:
         if not self.save_to:
             return
+        # Clean LLM response: strip code fences, preamble text, etc.
+        response = clean_response(response, self.datatype)
         # Post-process MusicXML to fix LLM duration/divisions mismatches.
         if self.datatype == "musicxml":
             response = fix_musicxml_durations(response)

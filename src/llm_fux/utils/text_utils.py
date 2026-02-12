@@ -48,6 +48,53 @@ def clean_code_blocks(text: str, format_hint: Optional[str] = None) -> str:
     return text.strip()
 
 
+def clean_response(text: str, datatype: str) -> str:
+    """Clean an LLM response before saving.
+
+    1. Strip markdown code fences (```xml ... ```).
+    2. For XML-based formats (musicxml, mei), strip any text that precedes the
+       first XML declaration or root element — LLMs sometimes prepend
+       explanatory commentary.
+
+    Args:
+        text: Raw LLM response.
+        datatype: Expected encoding format (musicxml, mei, abc, humdrum).
+
+    Returns:
+        Cleaned response text.
+    """
+    if not text:
+        return text
+
+    # Step 1: strip code fences
+    text = clean_code_blocks(text, format_hint=datatype)
+
+    # Step 2: for XML formats, strip preamble text before first XML content
+    if datatype in ("musicxml", "mei"):
+        # Look for <?xml or the root element tag
+        xml_markers = [
+            "<?xml",
+            "<score-partwise",
+            "<mei",
+            "<!DOCTYPE",
+        ]
+        earliest = len(text)
+        for marker in xml_markers:
+            idx = text.find(marker)
+            if idx != -1 and idx < earliest:
+                earliest = idx
+        if earliest < len(text) and earliest > 0:
+            stripped = text[:earliest].strip()
+            if stripped:
+                logging.getLogger(__name__).info(
+                    "Stripped %d chars of preamble text from %s response",
+                    earliest, datatype,
+                )
+            text = text[earliest:]
+
+    return text.strip()
+
+
 # ---------------------------------------------------------------------------
 # MusicXML duration repair
 # ---------------------------------------------------------------------------

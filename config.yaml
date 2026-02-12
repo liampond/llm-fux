@@ -9,6 +9,13 @@
 # API Settings
 timeout: 600               # API timeout in seconds (600 = 10 minutes, 0 = no timeout)
 
+# LOCKED — Do not modify model identifiers without explicit approval.
+# These are the canonical model versions used for all experiments.
+default_models:
+  openai: gpt-5.1-2025-11-13
+  anthropic: claude-opus-4-5
+  google: gemini-3-pro-preview
+
 # Directory Settings (usually don't need to change these)
 data_dir: ./data
 dataset: ""
