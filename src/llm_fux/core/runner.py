@@ -196,10 +196,11 @@ class PromptRunner:
         return prompt_input
 
     def _load_system_prompt(self) -> str:
-        """Return empty system prompt since we don't use system_prompt.txt files.
-        
-        Format-specific prompts in base_{datatype}.md handle all necessary instructions.
-        """
+        """Load system prompt from system_prompt.txt if it exists."""
+        prompts_dir = self.base_dirs.get("prompts", Path(""))
+        system_prompt_path = prompts_dir / "system_prompt.txt"
+        if system_prompt_path.exists():
+            return load_text_file(system_prompt_path)
         return ""
 
     def _load_base_format_prompt(self) -> str:
@@ -218,26 +219,37 @@ class PromptRunner:
             raise FileNotFoundError(f"Encoded file not found: {self.file_id}.{self._EXT_MAP.get(self.datatype, '')} in {encoded_dir}")
         return load_text_file(path)
 
-    def _load_question(self) -> str:
-        # Determine prompt type based on file_id and guide
-        prompt_file = "prompt_above_2vs1.md"  # Default
-        if self.file_id.lower().startswith("below"):
-            prompt_file = "prompt_below_2vs1.md"
-        elif self.file_id.lower().startswith("above"):
-            prompt_file = "prompt_above_2vs1.md"
-        
-        # Check if guide specifies a species (e.g., 4vs1_v1.0.txt for third species)
+    # Map guide filename patterns to species names for prompt selection.
+    _SPECIES_PATTERNS = [
+        ("1vs1", "first_species"),
+        ("1_first_species", "first_species"),
+        ("2vs1", "second_species"),
+        ("2_second_species", "second_species"),
+        ("4vs1", "third_species"),
+        ("3_third_species", "third_species"),
+        ("4th species", "fourth_species"),
+        ("4_fourth_species", "fourth_species"),
+        ("5th species", "fifth_species"),
+        ("5_fifth_species", "fifth_species"),
+    ]
+
+    def _detect_species(self) -> str:
+        """Detect species from guide path. Returns species name or 'first_species' as default."""
         if self.guide:
-            guide_name = Path(self.guide).stem  # e.g., "4vs1_v1.0" from "4vs1_v1.0.txt"
-            if "4vs1" in guide_name:
-                # Use third species prompt for 4vs1 guide
-                prompt_file = "prompt_above_4vs1.md" if "above" in prompt_file else "prompt_below_4vs1.md"
-            elif "2vs1" in guide_name:
-                # Use second species prompt for 2vs1 guide
-                prompt_file = "prompt_above_2vs1.md" if "above" in prompt_file else "prompt_below_2vs1.md"
-            elif "1vs1" in guide_name:
-                # Use first species prompt for 1vs1 guide
-                prompt_file = "prompt_above_1vs1.md" if "above" in prompt_file else "prompt_below_1vs1.md"
+            guide_str = str(self.guide).lower()
+            for pattern, species in self._SPECIES_PATTERNS:
+                if pattern.lower() in guide_str:
+                    return species
+        return "first_species"
+
+    def _load_question(self) -> str:
+        # Determine position (above/below) from file_id
+        position = "below" if self.file_id.lower().startswith("below") else "above"
+
+        # Detect species from guide filename/path
+        species = self._detect_species()
+
+        prompt_file = f"prompt_{position}_{species}.md"
             
         # Load the selected prompt
         prompt_path = self.base_dirs.get("prompts", Path("")) / prompt_file

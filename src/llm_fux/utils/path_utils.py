@@ -236,7 +236,7 @@ def get_output_path(
     Args:
         outputs_dir: Root outputs directory
         model_name: Name of the model (ChatGPT, Claude, Gemini)
-        file_id: File identifier (e.g., Fux_CantusFirmus_C)
+        file_id: File identifier (e.g., Above_C)
         datatype: Format (mei, musicxml, abc, humdrum)
         context: Whether guide/context was used
         guide: Specific guide path (required when context=True)

@@ -31,12 +31,8 @@ from llm_fux.utils.path_utils import (
     find_project_root,
     list_file_ids,
     list_datatypes,
+    list_questions,
 )
-
-# Legacy compatibility: tests may patch this symbol.
-def list_questions(_path):  # type: ignore
-    return ["Q1b"]
-
 
 MODEL_ENV_VARS: Dict[str, str] = {
     "chatgpt": "OPENAI_API_KEY",
