@@ -59,6 +59,10 @@ def build_single_run_args(config: Dict[str, Any]) -> List[str]:
     if 'max_tokens' in single_config:
         args.extend(['--max-tokens', str(single_config['max_tokens'])])
     
+    # Add dataset if present in config
+    if 'dataset' in single_config:
+        args.extend(['--dataset', single_config['dataset']])
+    
     return args
 
 

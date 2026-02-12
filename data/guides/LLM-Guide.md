@@ -1,6 +1,6 @@
 **“LLM translated” Version**
 
-**0\. Core Data Types**
+**0. Core Data Types**
 
 Pitch = str # e.g. "C4", "F#3"
 
@@ -10,9 +10,9 @@ Species = Enum("Authentic", "Plagal")
 
 Motion = Enum("Parallel", "Similar", "Contrary", "Oblique")
 
-Cantus = List\[Pitch\] # immutable input
+Cantus = List[Pitch] # immutable input
 
-Counterpt = List\[Pitch\] # mutable, one element per cantus note
+Counterpt = List[Pitch] # mutable, one element per cantus note
 
 State = {
 
@@ -28,15 +28,15 @@ State = {
 
 }
 
-**1\. Mode-Detection Routine (§ 1)**
+**1. Mode-Detection Routine (§ 1)**
 
-def detect_mode(cantus: Cantus) -> tuple\[Mode, Species\]:
+def detect_mode(cantus: Cantus) -> tuple[Mode, Species]:
 
-final = cantus\[-1\] # 1.1
+final = cantus[-1] # 1.1
 
 pitches = set(cantus) # 1.2-Method-step-1
 
-candidates = \[\] # 1.2-Method-step-2
+candidates = [] # 1.2-Method-step-2
 
 for mode in six_modes: # pre-coded table from § 1.2
 
@@ -62,11 +62,11 @@ audit_accidentals(cantus, mode) # 1.5
 
 return mode, species # 1.6
 
-**2\. Note-Generation Loop (§ 6)**
+**2. Note-Generation Loop (§ 6)**
 
 def build_counterpoint(state: State) -> Counterpt:
 
-for idx, cf_note in enumerate(state\["cantus"\]):
+for idx, cf_note in enumerate(state["cantus"]):
 
 candidates = legal_consonant_pitches(cf_note, state) # § 2
 
@@ -78,7 +78,7 @@ for cp_note in candidates:
 
 if validate_all_rules(state, cf_note, cp_note, idx):
 
-state\["cp"\].append(cp_note)
+state["cp"].append(cp_note)
 
 placed = True
 
@@ -90,9 +90,9 @@ back_up(state) # erase previous CP note(s)
 
 return build_counterpoint(state)
 
-return state\["cp"\]
+return state["cp"]
 
-**3\. Rule-Validation Pipeline (§ 6.2)**
+**3. Rule-Validation Pipeline (§ 6.2)**
 
 def validate_all_rules(state, cf, cp, i) -> bool:
 
@@ -112,7 +112,7 @@ and accidental_ok(cp, state, i)) # 6.2-6 & § 1.5
 
 def vertical_consonance(cp, cf, state):
 
-interval = get_interval(cp, cf, state\["position"\])
+interval = get_interval(cp, cf, state["position"])
 
 if interval not in perfect+imperfect: return False # 2.1-2
 
@@ -126,15 +126,15 @@ def motion_ok(cp, state, i):
 
 if i == 0: return True
 
-motion = classify_motion(state\["cp"\]\[i-1\], cp,
+motion = classify_motion(state["cp"][i-1], cp,
 
-state\["cantus"\]\[i-1\], state\["cantus"\]\[i\])
+state["cantus"][i-1], state["cantus"][i])
 
-prev_int = classify_interval(state\["cp"\]\[i-1\], state\["cantus"\]\[i-1\], state)
+prev_int = classify_interval(state["cp"][i-1], state["cantus"][i-1], state)
 
-curr_int = classify_interval(cp, state\["cantus"\]\[i\], state)
+curr_int = classify_interval(cp, state["cantus"][i], state)
 
-return motion_matrix\[prev_int\]\[curr_int\](motion) # implements table § 3.2
+return motion_matrix[prev_int][curr_int](motion) # implements table § 3.2
 
 **3.3 Forbidden Parallels & Hidden Perfects (§ 3.3)**
 
@@ -142,15 +142,15 @@ def no_hidden_parallels(cp, state, i):
 
 if i == 0: return True
 
-return not forms_parallel_5th_or_8ve(state\["cp"\]\[i-1\], cp,
+return not forms_parallel_5th_or_8ve(state["cp"][i-1], cp,
 
-state\["cantus"\]\[i-1\], state\["cantus"\]\[i\])
+state["cantus"][i-1], state["cantus"][i])
 
 **3.4 Melodic Fitness (§ 4)**
 
 def melodic_ok(cp, state, i):
 
-line = state\["cp"\]
+line = state["cp"]
 
 return ( leap_size_ok(line, i) # 4.1
 
@@ -160,13 +160,13 @@ and no_pitch_triplet(line, i) # 4.3
 
 and no_melodic_tritone(line, i) # 4.4
 
-and within_range(line\[i\]) ) # 4.5
+and within_range(line[i]) ) # 4.5
 
 **3.5 Spacing / Voice-Crossing (§ 5)**
 
 def spacing_ok(cp, state, i):
 
-interval = abs(semitone_distance(cp, state\["cantus"\]\[i\]))
+interval = abs(semitone_distance(cp, state["cantus"][i]))
 
 return ( interval <= 18 # ≤ 11th (5.3)
 
@@ -180,17 +180,17 @@ def accidental_ok(cp, state, i):
 
 if is_accidental(cp):
 
-cf_last_idx = len(state\["cantus"\]) - 1
+cf_last_idx = len(state["cantus"]) - 1
 
 if i == cf_last_idx - 1 and leading_tone_ok(cp, state): return True
 
-if removes_mi_fa_tritone(state\["cp"\], i): return True
+if removes_mi_fa_tritone(state["cp"], i): return True
 
 return False
 
 return True
 
-**4\. Helper Tables & Predicates**
+**4. Helper Tables & Predicates**
 
 - perfect = {"P1","P5","P8"}
 - imperfect = {"m3","M3","m6","M6"}
@@ -198,17 +198,17 @@ return True
 - modal_scale(final, mode) returns the diatonic pitch-set of that mode.
 - licensed_accidental(...) implements § 1.2 third column.
 
-**5\. Interface End-Points**
+**5. Interface End-Points**
 
 | **Function** | **Input** | **Output** | **Behaviour** |
 | --- | --- | --- | --- |
 | analyse_mode(cantus) | Cantus | (Mode, Species) | Throws ModalError on failure. Implements section 1. |
 | generate_counterpoint(cantus, position) | Cantus, "above"/"below" | Counterpt | Returns a fully-validated CP or raises NoSolutionError. Relies on rules 2–6. |
-| validate_counterpoint(cantus, cp, position) | Cantus, Counterpt, "above"/"below" | True / list\[RuleError\] | Checks an existing CP against _all_ constraints, reporting first violation encountered. |
+| validate_counterpoint(cantus, cp, position) | Cantus, Counterpt, "above"/"below" | True / list[RuleError] | Checks an existing CP against _all_ constraints, reporting first violation encountered. |
 
 **Usage Example (in an LLM-powered composition endpoint)**
 
-cantus = \["D4","E4","F4","G4","A4","G4","F4","E4","D4"\] # Dorian
+cantus = ["D4","E4","F4","G4","A4","G4","F4","E4","D4"] # Dorian
 
 mode, species = analyse_mode(cantus)
 
@@ -216,7 +216,7 @@ state = {
 
 "cantus" : cantus,
 
-"cp" : \[\],
+"cp" : [],
 
 "mode" : mode,
 

@@ -264,8 +264,9 @@ def get_output_path(
         # Specific guide used - extract guide name from filename
         # e.g., "data/guides/Pierre-Guide.md" -> "Pierre"
         # e.g., "data/guides/LLM-Guide.md" -> "LLM"
+        # e.g., "data/guides/four-versus-one/4vs1_v1.0.txt" -> "4vs1_v1.0"
         guide_path = Path(guide)
-        guide_name = guide_path.stem  # "Pierre-Guide.md" -> "Pierre-Guide"
+        guide_name = guide_path.stem  # "Pierre-Guide.md" -> "Pierre-Guide", "4vs1_v1.0.txt" -> "4vs1_v1.0"
         # If it ends with "-Guide", take just the prefix
         if guide_name.endswith("-Guide"):
             guide_name = guide_name[:-6]  # "Pierre-Guide" -> "Pierre"

@@ -1,0 +1,51 @@
+1. Metric Framework and Rhythmic Structure
+Each measure of the counterpoint contains two half notes written against one whole note of the cantus firmus. 
+The first half note of the measure is placed on the weak beat (upbeat). The second half note is placed on the strong beat (downbeat) of the following measure and must be tied to the previous upbeat when a suspension is formed.
+Syncopation is normative in this species and should be maintained whenever possible. 
+2. Intervallic Status and Suspension Types
+A. Preparation (Upbeat)
+The upbeat must always form a consonant interval with the cantus firmus. Both perfect and imperfect consonances are permitted. No dissonance is ever allowed at the preparation stage.
+B. Suspension (Downbeat)
+Because the pitch is tied, the interval formed on the downbeat is determined by metric displacement.
+The downbeat interval may be consonant or dissonant.
+Any dissonance on the downbeat must arise exclusively as a suspension.
+C. Resolution (Following Upbeat)
+Every dissonant suspension must resolve by stepwise downward motion to a consonance.Upward resolution of dissonance is forbidden. The resolution occurs on the strong beat.
+If the syncopation is consonant (i.e., the interval formed on the downbeat is consonant), no obligatory downward resolution is required.
+In such cases, both the preparation and the syncopated downbeat are consonant, and the tied note may proceed further according to the couterpoint principles and voice leading constraints. 
+3. Dissonant syncopations: Admissible Suspensions and Resolutions
+A. Cantus Firmus in the Lower Voice (Counterpoint Above)
+Admissible suspensions:
+Ð 4Ð3
+Ð 7Ð6
+Ð 9Ð8
+Special case for Fux:
+ÐPreparation of a 9Ð8 suspension by an octave and the possible the sequence 8Ð9Ð8Ð9 is forbidden as it is considered as hidden octaves.Therefore an consonant interval with the cantus firmus and different that the octave must be used as preparation of the syncope.  
+B. Cantus Firmus in the Upper Voice (Counterpoint Below)
+Admissible suspensions:
+Ð 2Ð3
+Ð 4Ð5
+Ð 9Ð10
+The suspension 7 ? 8 is excluded by convention and should not be used.
+4. Continuity and Interruption of Syncopation
+Syncopation should normally be an ongoing process. Nevertheless, if no legal suspension can be formed at a given point, the counterpoint may temporarily abandon ties and proceed with two untied half notes.
+Syncopation must be resumed as soon as a valid preparation becomes possible. 
+Beginning and Cadential Treatment
+A. Beginning
+Because no prior preparation exists, the counterpoint may begin with a half rest. The first sounding note must occur on the weak beat and form a consonance with the cantus firmus. This note may then be tied into the following downbeat to initiate syncopation.
+B. Penultimate Measure
+The penultimate measure must prepare the final consonance by means of a standard suspension pattern. Typical cadential patterns are the following: 
+If the cantus firmus is below:
+Ð 7 ? major 6 resolving to an octave in the final bar
+If the cantus firmus is above:
+Ð 2 ? minor 3 resolving to a unison in the final bar
+C. Final Measure
+The final measure must consist of a single whole note in the counterpoint.
+The final interval must be a perfect consonance (unison or octave, depending on voice position).
+Voice-Leading Constraints
+All major prohibitions from first species remain in force:
+Ð Parallel fifths and octaves are forbidden, including under reduction
+Ð Hidden fifths and octaves must be avoided
+Ð Voice crossing is not permitted
+Ð Tritones (melodic or vertical) are forbidden
+Leaps are permitted only between consonant notes and must be compensated by stepwise motion in the opposite direction.
