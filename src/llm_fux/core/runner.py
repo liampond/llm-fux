@@ -130,6 +130,9 @@ class PromptRunner:
         self.logger.info(
             f"Running {self.file_id} [{self.datatype}] dataset={self.dataset} context={self.context} temp={self.temperature}"
         )
+        # Debug guide path
+        if self.context:
+            self.logger.info(f"Guide path: '{self.guide}'")
         
         # Capture timing for API call
         start_time = time.time()

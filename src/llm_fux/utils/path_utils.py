@@ -270,8 +270,14 @@ def get_output_path(
         # If it ends with "-Guide", take just the prefix
         if guide_name.endswith("-Guide"):
             guide_name = guide_name[:-6]  # "Pierre-Guide" -> "Pierre"
-        context_folder = model_folder / f"context-{guide_name}"
-        context_label = guide_name
+        
+        # When using 5th species guide, use the specific name format requested
+        if "5th species" in guide_name:
+            context_folder = model_folder / f"context-{guide_name}"
+            context_label = guide_name
+        else:
+            context_folder = model_folder / f"context-{guide_name}"
+            context_label = guide_name
     else:
         # No context or no guide specified
         context_folder = model_folder / "no-context"
