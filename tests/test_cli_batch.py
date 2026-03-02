@@ -41,7 +41,7 @@ class TestBatchCLI:
             "outputs": tmp_path / "outputs",
         }
 
-        task = ("chatgpt", "Q1b", "abc", True, dirs, 0.2, None, True, False)
+        task = ("chatgpt", "Q1b", "musicxml", True, dirs, 0.2, None, True, False)
 
         with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
              patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
@@ -72,7 +72,7 @@ class TestBatchCLI:
             "outputs": outputs,
         }
 
-        task = ("chatgpt", "Q1b", "abc", True, dirs, 0.0, None, True, False)
+        task = ("chatgpt", "Q1b", "musicxml", True, dirs, 0.0, None, True, False)
 
         with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
              patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
@@ -96,7 +96,7 @@ class TestBatchCLI:
             "outputs": tmp_path / "outputs",
         }
 
-        task = ("chatgpt", "Q1b", "abc", True, dirs, 0.0, None, True, False)
+        task = ("chatgpt", "Q1b", "musicxml", True, dirs, 0.0, None, True, False)
 
         with patch("llm_fux.cli.run_batch.get_llm") as mock_get_llm, \
              patch("llm_fux.cli.run_batch.PromptRunner") as mock_runner_cls:
@@ -112,7 +112,7 @@ class TestBatchCLI:
         """Helper to run main() with patched dependencies and capture exit code."""
         with patch("llm_fux.cli.run_batch.load_project_env"), \
              patch("llm_fux.cli.run_batch.list_questions", return_value=list_questions or ["Q1a"]), \
-             patch("llm_fux.cli.run_batch.list_datatypes", return_value=list_datatypes or ["abc"]), \
+             patch("llm_fux.cli.run_batch.list_datatypes", return_value=list_datatypes or ["musicxml"]), \
              patch("llm_fux.cli.run_batch.worker", return_value=worker_result), \
              patch.object(sys, "argv", argv):
             with pytest.raises(SystemExit) as exc:
@@ -123,7 +123,7 @@ class TestBatchCLI:
         """main should exit 0 when all tasks succeed."""
         code = self._invoke_main([
             "run_batch.py", "--models", "chatgpt",
-            "--questions", "Q1a", "--datatypes", "abc",
+            "--questions", "Q1a", "--datatypes", "musicxml",
         ], worker_result=True)
         assert code == 0
 
@@ -131,6 +131,6 @@ class TestBatchCLI:
         """main should exit 1 when any task fails."""
         code = self._invoke_main([
             "run_batch.py", "--models", "chatgpt",
-            "--questions", "Q1a", "--datatypes", "abc",
+            "--questions", "Q1a", "--datatypes", "musicxml",
         ], worker_result=False)
         assert code == 1

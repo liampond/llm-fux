@@ -18,7 +18,7 @@ from typing import Dict, List, Optional, Any
 import time
 import zoneinfo
 
-from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, LLMResponse, PromptInput
 from llm_fux.prompts.prompt_builder import PromptBuilder
 from llm_fux.utils.path_utils import (
     load_text_file,
@@ -36,7 +36,7 @@ class PromptRunner:
     Args:
         model: LLM interface to use for queries
         file_id: File identifier (e.g., Fux_CantusFirmus_C)
-        datatype: Encoding format (mei, musicxml, abc, humdrum)
+        datatype: Encoding format (musicxml)
         context: Whether to include guide context
         guide: Path to guide file when context=True
         dataset: Dataset subdirectory name
@@ -46,13 +46,13 @@ class PromptRunner:
         save: Whether to save outputs (always True)
     """
 
-    _EXT_MAP = {"mei": ".mei", "musicxml": ".musicxml", "abc": ".abc", "humdrum": ".krn"}
+    _EXT_MAP = {"musicxml": ".musicxml"}
 
     def __init__(
         self,
         model: LLMInterface,
         file_id: Optional[str] = None,
-        datatype: str = "mei",
+        datatype: str = "musicxml",
         context: bool = False,
         guide: Optional[str] = None,
         dataset: str = "",
@@ -132,12 +132,32 @@ class PromptRunner:
         
         # Capture timing for API call
         start_time = time.time()
-        response = self.model.query(prompt_input)
+        result = self.model.query(prompt_input)
         end_time = time.time()
         api_duration = end_time - start_time
         
         # Store timing info for later use in _persist_artifacts
         self._api_duration = api_duration
+
+        # Unpack LLMResponse — support both new LLMResponse and legacy str returns
+        if isinstance(result, LLMResponse):
+            response = result.text
+            self._token_usage = result.usage
+            self._response_model_id = result.model_id
+        else:
+            response = result
+            self._token_usage = None
+            self._response_model_id = None
+
+        # Log token usage if available
+        if self._token_usage:
+            self.logger.info(
+                "Token usage for %s — prompt: %d, completion: %d, total: %d",
+                self.file_id,
+                self._token_usage.prompt_tokens,
+                self._token_usage.completion_tokens,
+                self._token_usage.total_tokens,
+            )
         
         # Use f-string to match test expectation that the interpolated id appears directly
         self.logger.info(f"Received response for {self.file_id}")
@@ -288,119 +308,28 @@ class PromptRunner:
         self.actual_response_path = self.save_to
 
     def _persist_artifacts(self, response: str, prompt_input: PromptInput) -> None:
-        """Persist response & prompt file (best effort)."""
+        """Persist response & metadata file (best effort)."""
         try:
             self._save_response(response)
         except Exception as e:  # pragma: no cover
             self.logger.warning("Failed to save response: %s", e)
         try:
-            self._save_prompt_file(prompt_input)
+            self._save_metadata(prompt_input)
         except Exception as e:  # pragma: no cover
-            self.logger.warning("Failed to write prompt file: %s", e)
-        try:
-            self._save_input_bundle(prompt_input)
-        except Exception as e:  # pragma: no cover
-            self.logger.warning("Failed to save input bundle: %s", e)
+            self.logger.warning("Failed to write metadata file: %s", e)
 
     # ------------------------------------------------------------------
-    def _save_prompt_file(self, prompt_input: PromptInput) -> None:
-        """Write a companion .prompt.txt file with metadata and complete prompt.
+    def _save_metadata(self, prompt_input: PromptInput) -> None:
+        """Write a single metadata JSON file combining prompt text, run params, and token usage.
 
-        File saved in: prompts/<model>/<context>/<datatype>/ subfolder.
-        Contains metadata header + system prompt + user prompt with all formatting preserved.
+        Replaces the former separate prompt (.txt) and input-bundle (.json) files.
+        File saved in: metadata/<model>/<context>/<datatype>/ subfolder.
         """
         if not self.save_to:
             return
-        # Get path in prompts structure
+        # Get path in metadata structure
         from llm_fux.utils.path_utils import get_output_path
-        prompt_path = get_output_path(
-            outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
-            model_name=self._get_clean_model_name(self.model),
-            file_id=self.file_id,
-            datatype=self.datatype,
-            context=self.context,
-            guide=self.guide,
-            dataset=self.dataset,
-            ext=".txt",
-            output_type="prompt",
-            temperature=self.temperature,
-        )
-
-        # Build metadata section
-        try:
-            montreal_tz = zoneinfo.ZoneInfo("America/Montreal")
-            timestamp = datetime.now(montreal_tz).strftime("%Y-%m-%d %H:%M:%S %Z")
-        except Exception:
-            # Fallback to UTC if Montreal timezone fails
-            timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-        
-        components = getattr(self, "_last_components", {})
-        api_duration = getattr(self, "_api_duration", None)
-        
-        metadata_lines = [
-            "=== MODEL PARAMETERS ===",
-            f"Timestamp: {timestamp}",
-            f"File: {self.file_id}",
-            f"Dataset: {self.dataset}",
-            f"Datatype: {self.datatype}",
-            f"Context: {'context' if self.context else 'nocontext'}",
-            f"Guide File: {self.guide if self.guide else 'None'}",
-            f"Model: {type(self.model).__name__}",
-            f"Temperature: {self.temperature}",
-            f"Max Tokens: {self.max_tokens}",
-        ]
-        
-        if api_duration is not None:
-            metadata_lines.append(f"API Duration: {api_duration:.2f} seconds")
-            
-        # Update save path in metadata to show actual response location
-        actual_path = getattr(self, "actual_response_path", self.save_to)
-        metadata_lines.append(f"Response Path: {actual_path}")
-        
-        if prompt_input.model_name:
-            metadata_lines.append(f"Model Name Override: {prompt_input.model_name}")
-            
-        # Add component lengths for reference
-        if components:
-            metadata_lines.append("")
-            metadata_lines.append("Component Lengths:")
-            for k, v in components.items():
-                length = len(v) if isinstance(v, str) else sum(len(x) for x in v if x)
-                metadata_lines.append(f"  {k}: {length} chars")
-
-        # Build complete prompt file content
-        content_parts = ["\n".join(metadata_lines)]
-        
-        if prompt_input.system_prompt and prompt_input.system_prompt.strip():
-            content_parts.extend([
-                "",
-                "=== SYSTEM PROMPT ===",
-                prompt_input.system_prompt.strip()
-            ])
-        
-        content_parts.extend([
-            "",
-            "=== USER PROMPT ===",
-            prompt_input.user_prompt
-        ])
-        
-        full_content = "\n".join(content_parts)
-        prompt_path.write_text(full_content, encoding="utf-8")
-        self.logger.info("Saved prompt file to %s", prompt_path)
-        self.prompt_file_path = prompt_path
-
-    def _save_input_bundle(self, prompt_input: PromptInput) -> None:
-        """Write a companion .input.json file with prompt components and metadata.
-        
-        File saved in: inputs/<model>/<context>/<datatype>/ subfolder.
-        Contains all input components used to build the prompt.
-        """
-        if not self.save_to:
-            return
-        
-        # Get path in inputs structure
-        from llm_fux.utils.path_utils import get_output_path
-        bundle_path = get_output_path(
+        metadata_path = get_output_path(
             outputs_dir=self.base_dirs.get("outputs", Path("outputs")),
             model_name=self._get_clean_model_name(self.model),
             file_id=self.file_id,
@@ -409,40 +338,64 @@ class PromptRunner:
             guide=self.guide,
             dataset=self.dataset,
             ext=".json",
-            output_type="input",
+            output_type="metadata",
             temperature=self.temperature,
         )
-        
-        # Build input bundle with components and metadata
+
+        # Build metadata bundle
+        try:
+            montreal_tz = zoneinfo.ZoneInfo("America/Montreal")
+            timestamp = datetime.now(montreal_tz).strftime("%Y-%m-%d %H:%M:%S %Z")
+        except Exception:
+            timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
         components = getattr(self, "_last_components", {})
-        
-        bundle = {
+        api_duration = getattr(self, "_api_duration", None)
+        token_usage = getattr(self, "_token_usage", None)
+        response_model_id = getattr(self, "_response_model_id", None)
+        actual_path = getattr(self, "actual_response_path", self.save_to)
+
+        bundle: Dict[str, Any] = {
+            "timestamp": timestamp,
             "file_id": self.file_id,
             "dataset": self.dataset,
             "datatype": self.datatype,
             "context": self.context,
             "guide_path": self.guide if self.guide else None,
+            "model": type(self.model).__name__,
+            "model_id": response_model_id,
             "temperature": self.temperature,
             "max_tokens": self.max_tokens,
-            "model": type(self.model).__name__,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "system_prompt": prompt_input.system_prompt,
-            "user_prompt_compiled": prompt_input.user_prompt,
-            "model_name_override": prompt_input.model_name,
+            "response_path": str(actual_path),
         }
-        
-        # Add individual components
-        for key, value in components.items():
-            if key == "guides":
-                bundle["guides"] = value if isinstance(value, list) else [value] if value else []
-            else:
-                bundle[key] = value
-        
-        # Add encoded_data separately for clarity
-        if "encoded_data" in components:
-            bundle["encoded_data"] = components["encoded_data"]
-        
+
+        if api_duration is not None:
+            bundle["api_duration_seconds"] = round(api_duration, 2)
+
+        # Token usage section
+        if token_usage:
+            bundle["token_usage"] = token_usage.to_dict()
+
+        # Prompt texts
+        bundle["system_prompt"] = prompt_input.system_prompt
+        bundle["user_prompt_compiled"] = prompt_input.user_prompt
+
+        # Individual components
+        if components:
+            comp_section: Dict[str, Any] = {}
+            for key, value in components.items():
+                if key == "guides":
+                    comp_section["guides"] = value if isinstance(value, list) else [value] if value else []
+                else:
+                    comp_section[key] = value
+            # Include component char lengths for quick reference
+            comp_section["_lengths"] = {
+                k: len(v) if isinstance(v, str) else sum(len(x) for x in v if x)
+                for k, v in components.items()
+            }
+            bundle["components"] = comp_section
+
         bundle_json = json.dumps(bundle, ensure_ascii=False, indent=2)
-        bundle_path.write_text(bundle_json, encoding="utf-8")
-        self.logger.info("Saved input bundle to %s", bundle_path)
-        self.input_bundle_path = bundle_path
+        metadata_path.write_text(bundle_json, encoding="utf-8")
+        self.logger.info("Saved metadata to %s", metadata_path)
+        self.metadata_path = metadata_path

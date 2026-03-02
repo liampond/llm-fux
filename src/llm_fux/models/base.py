@@ -1,8 +1,8 @@
 # models/base.py
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
-from typing import Optional
+from dataclasses import dataclass, field
+from typing import Optional, Dict, Any
 
 
 @dataclass
@@ -11,7 +11,7 @@ class PromptInput:
     Encapsulates all parameters for a single LLM request.
     """
     system_prompt: str            # The system‐level instructions
-    user_prompt: str              # The body: format intro + encoded data + guides + question
+    user_prompt: str              # The body: format intro + MusicXML data + guides + question
     temperature: float = 0.0      # Sampling temperature
     model_name: Optional[str] = None   # Override the default model if provided
     max_tokens: Optional[int] = None   # (Optional) token limit for the response
@@ -33,6 +33,33 @@ class PromptInput:
                 raise ValueError("max_tokens must be a positive integer if provided")
 
 
+@dataclass
+class TokenUsage:
+    """Token counts returned by an LLM API call."""
+    prompt_tokens: int = 0
+    completion_tokens: int = 0
+    total_tokens: int = 0
+    extra: Dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> Dict[str, Any]:
+        d = {
+            "prompt_tokens": self.prompt_tokens,
+            "completion_tokens": self.completion_tokens,
+            "total_tokens": self.total_tokens,
+        }
+        if self.extra:
+            d["extra"] = self.extra
+        return d
+
+
+@dataclass
+class LLMResponse:
+    """Wraps the text response from an LLM together with token usage metadata."""
+    text: str
+    usage: Optional[TokenUsage] = None
+    model_id: Optional[str] = None
+
+
 class LLMInterface(ABC):
     """
     Abstract base class for all LLM wrappers.
@@ -41,14 +68,14 @@ class LLMInterface(ABC):
     """
 
     @abstractmethod
-    def query(self, input: PromptInput) -> str:
+    def query(self, input: PromptInput) -> LLMResponse:
         """
-        Send a prompt to the LLM and return the response as plain text.
+        Send a prompt to the LLM and return the response with metadata.
         
         Parameters:
             input (PromptInput): Contains system/user prompt and parameters.
         
         Returns:
-            str: The LLM's generated response.
+            LLMResponse: The LLM's generated response text and token usage.
         """
         pass

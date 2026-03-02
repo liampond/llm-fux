@@ -39,8 +39,8 @@ class TestPromptCompositionContract:
         
         builder = PromptBuilder(
             system_prompt="You are a music expert",
-            format_specific_user_prompt="Format: MEI",
-            encoded_data="<mei>test</mei>",
+            format_specific_user_prompt="Format: MusicXML",
+            encoded_data="<?xml version='1.0'?><score-partwise>test</score-partwise>",
             guides=["Guide content"],
             question_prompt="What key is this?",
             temperature=0.7
@@ -198,30 +198,21 @@ class TestPromptValidation:
 class TestPromptFormatSupport:
     """Test support for different music formats."""
     
-    @pytest.mark.parametrize("format_name", ["mei", "musicxml", "abc", "humdrum"])
-    def test_format_specific_prompts(self, format_name):
-        """System SHOULD support format-specific prompt templates."""
+    def test_format_specific_prompts(self):
+        """System SHOULD support MusicXML format-specific prompt templates."""
         from llm_fux.prompts.prompt_builder import PromptBuilder
-        
-        # Each format should have appropriate base prompt content
-        format_prompts = {
-            "mei": "Music format: MEI",
-            "musicxml": "Music format: MusicXML", 
-            "abc": "Music format: ABC notation",
-            "humdrum": "Music format: Humdrum"
-        }
         
         builder = PromptBuilder(
             system_prompt="system",
-            format_specific_user_prompt=format_prompts[format_name],
-            encoded_data=f"<{format_name}>test</{format_name}>",
+            format_specific_user_prompt="Music format: MusicXML",
+            encoded_data="<?xml version='1.0'?><score-partwise>test</score-partwise>",
             guides=["guide"],
             question_prompt="question",
             temperature=0.5
         )
         
         prompt_input = builder.build()
-        assert format_prompts[format_name] in prompt_input.user_prompt
+        assert "Music format: MusicXML" in prompt_input.user_prompt
     
     def test_format_data_validation(self):
         """System SHOULD validate format-specific data appropriately."""
@@ -232,10 +223,8 @@ class TestPromptFormatSupport:
         
         # For now, just ensure it doesn't crash with various inputs
         test_data = [
-            "<mei>valid mei content</mei>",
-            "X:1\nT:Test\nK:C\nCDEF|",  # ABC
             "<?xml version='1.0'?><score-partwise></score-partwise>",  # MusicXML
-            "**kern\n4c\n*-"  # Humdrum
+            "<?xml version='1.0'?><score-partwise><part>content</part></score-partwise>",  # MusicXML with content
         ]
         
         for data in test_data:
@@ -337,8 +326,8 @@ class TestPromptBuilderPerformance:
         # Typical prompt components
         components = {
             "system_prompt": "You are a music theory expert." * 50,  # Larger content
-            "format_specific_user_prompt": "Format: MEI notation",
-            "encoded_data": "<mei>" + "test content " * 100 + "</mei>",  # Larger data
+            "format_specific_user_prompt": "Format: MusicXML notation",
+            "encoded_data": "<?xml version='1.0'?><score-partwise>" + "test content " * 100 + "</score-partwise>",  # Larger data
             "guides": [f"Guide {i}: content " * 20 for i in range(5)],  # Multiple guides
             "question_prompt": "Analyze this musical example in detail",
             "temperature": 0.7

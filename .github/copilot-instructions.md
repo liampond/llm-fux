@@ -17,8 +17,7 @@ Specifically, do not:
 
 This is a research project for a master's thesis studying LLM-generated species
 counterpoint (music theory). The codebase sends prompts to LLM APIs (OpenAI,
-Anthropic, Google) and saves the responses as encoded music files (MusicXML, MEI,
-ABC, Humdrum).
+Anthropic, Google) and saves the responses as MusicXML encoded music files.
 
 ## Code Style
 

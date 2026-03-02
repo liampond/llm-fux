@@ -18,7 +18,7 @@ def clean_code_blocks(text: str, format_hint: Optional[str] = None) -> str:
     
     Args:
         text: The raw LLM response text
-        format_hint: Optional hint about expected format (e.g., 'musicxml', 'mei')
+        format_hint: Optional hint about expected format (e.g., 'musicxml')
                     Used to detect format-specific code block markers
     
     Returns:
@@ -36,8 +36,8 @@ def clean_code_blocks(text: str, format_hint: Optional[str] = None) -> str:
         return text
     
     # Build pattern for opening delimiter
-    # Matches: ```xml, ```musicxml, ```mei, ```abc, ```humdrum, ```krn, or just ```
-    format_patterns = r"(?:xml|musicxml|mei|abc|humdrum|krn)?"
+    # Matches: ```xml, ```musicxml, or just ```
+    format_patterns = r"(?:xml|musicxml)?"
     
     # Remove opening code block: ```format (with optional whitespace/newline)
     text = re.sub(rf'^```{format_patterns}\s*\n?', '', text, flags=re.IGNORECASE)
@@ -52,13 +52,13 @@ def clean_response(text: str, datatype: str) -> str:
     """Clean an LLM response before saving.
 
     1. Strip markdown code fences (```xml ... ```).
-    2. For XML-based formats (musicxml, mei), strip any text that precedes the
+    2. For MusicXML, strip any text that precedes the
        first XML declaration or root element — LLMs sometimes prepend
        explanatory commentary.
 
     Args:
         text: Raw LLM response.
-        datatype: Expected encoding format (musicxml, mei, abc, humdrum).
+        datatype: Expected encoding format (musicxml).
 
     Returns:
         Cleaned response text.
@@ -70,12 +70,11 @@ def clean_response(text: str, datatype: str) -> str:
     text = clean_code_blocks(text, format_hint=datatype)
 
     # Step 2: for XML formats, strip preamble text before first XML content
-    if datatype in ("musicxml", "mei"):
+    if datatype in ("musicxml",):
         # Look for <?xml or the root element tag
         xml_markers = [
             "<?xml",
             "<score-partwise",
-            "<mei",
             "<!DOCTYPE",
         ]
         earliest = len(text)

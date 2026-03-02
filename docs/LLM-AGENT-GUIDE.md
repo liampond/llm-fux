@@ -30,7 +30,7 @@ single_run:
   enabled: true                          # Enable this mode
   file: Fux_CantusFirmus_C               # Which file to test
   model: claude                          # chatgpt, claude, or gemini
-  datatype: musicxml                     # musicxml, mei, abc, or humdrum
+  datatype: musicxml                     # musicxml
   guide_path: data/guides/Pierre-Guide.md  # Context guide, or null for none
   temperature: 0.0                       # 0.0 to 1.0
   max_tokens: 16000                      # Max response length
@@ -52,9 +52,8 @@ batch_run:
     - claude
     - chatgpt
     - gemini
-  datatypes:                             # Which formats to test
+  datatypes:                             # MusicXML format
     - musicxml
-    - mei
   files:                                 # Which files to test
     - Fux_CantusFirmus_C
   contexts:                              # with, without, or both
@@ -73,7 +72,7 @@ batch_run:
 | "Run Claude on MusicXML" | single_run: model: claude, datatype: musicxml |
 | "Test all models" | batch_run: models: [chatgpt, claude, gemini] |
 | "Compare with and without context" | batch_run: contexts: [with, without] |
-| "Test all formats" | batch_run: datatypes: [musicxml, mei, abc, humdrum] |
+| "Test all formats" | batch_run: datatypes: [musicxml] |
 | "Use the Pierre guide" | guide_path: data/guides/Pierre-Guide.md |
 | "No context, raw only" | guide_path: null (single) or contexts: [without] (batch) |
 
@@ -81,7 +80,7 @@ batch_run:
 
 **Models:** `chatgpt`, `claude`, `gemini`
 
-**Formats:** `musicxml`, `mei`, `abc`, `humdrum`
+**Formats:** `musicxml`
 
 **Files:**
 - `Above_CantusFirmus_A` (Counterpoint Above)
@@ -97,15 +96,14 @@ batch_run:
 Results are saved to:
 ```
 outputs/
-├── response/{model}/{context}/{format}/    # LLM responses
-├── prompt/{model}/{context}/{format}/      # Prompts sent
-└── input/{model}/{context}/{format}/       # Input metadata
+├── response/{model}/{context}/musicxml/    # LLM responses
+├── prompt/{model}/{context}/musicxml/      # Prompts sent
+└── input/{model}/{context}/musicxml/       # Input metadata
 ```
 
 Where:
 - `{model}` = Claude, ChatGPT, or Gemini
 - `{context}` = context-Pierre, context-LLM, or no-context
-- `{format}` = musicxml, mei, abc, or humdrum
 
 Files are numbered automatically (_1, _2, _3, etc.) to prevent overwrites.
 
@@ -130,7 +128,7 @@ batch_run:
 Then run: `poetry run run`
 
 ### Example 2: Compare All Models
-**User:** "Compare all three models on ABC format"
+**User:** "Compare all three models"
 
 **Agent:** Edit config.yaml:
 ```yaml
@@ -140,7 +138,7 @@ single_run:
 batch_run:
   enabled: true
   models: [chatgpt, claude, gemini]
-  datatypes: [abc]
+  datatypes: [musicxml]
   files: [Fux_CantusFirmus_C]
   contexts: [without]
   guide_path: null

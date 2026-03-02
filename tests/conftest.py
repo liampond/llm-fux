@@ -80,23 +80,10 @@ def temp_project_structure() -> Iterator[Dict[str, Any]]:
 
         # Create encoded music files
         encoded_dir = data_dir / "encoded"
-        for datatype in ["mei", "musicxml", "abc", "humdrum"]:
-            datatype_dir = encoded_dir / datatype
-            datatype_dir.mkdir(parents=True)
-            
-            # Create sample files
-            if datatype == "mei":
-                (datatype_dir / "Q1a.mei").write_text("<mei><music>test</music></mei>")
-                (datatype_dir / "Q1b.mei").write_text("<mei><music>test2</music></mei>")
-            elif datatype == "musicxml":
-                (datatype_dir / "Q1a.musicxml").write_text("<?xml version='1.0'?><score-partwise></score-partwise>")
-                (datatype_dir / "Q1b.musicxml").write_text("<?xml version='1.0'?><score-partwise></score-partwise>")
-            elif datatype == "abc":
-                (datatype_dir / "Q1a.abc").write_text("X:1\nT:Test\nK:C\nCDEF|")
-                (datatype_dir / "Q1b.abc").write_text("X:1\nT:Test2\nK:G\nGABc|")
-            elif datatype == "humdrum":
-                (datatype_dir / "Q1a.krn").write_text("**kern\n4c\n4d\n*-")
-                (datatype_dir / "Q1b.krn").write_text("**kern\n4g\n4a\n*-")
+        datatype_dir = encoded_dir / "musicxml"
+        datatype_dir.mkdir(parents=True)
+        (datatype_dir / "Q1a.musicxml").write_text("<?xml version='1.0'?><score-partwise></score-partwise>")
+        (datatype_dir / "Q1b.musicxml").write_text("<?xml version='1.0'?><score-partwise></score-partwise>")
         
         # Create prompt templates
         prompts_dir = data_dir / "prompts"
@@ -105,10 +92,7 @@ def temp_project_structure() -> Iterator[Dict[str, Any]]:
         
         # Base format prompts
         (base_dir / "system_prompt.txt").write_text("You are a music theory expert.")
-        (base_dir / "base_mei.txt").write_text("Analyze this MEI notation.")
         (base_dir / "base_musicxml.txt").write_text("Analyze this MusicXML notation.")
-        (base_dir / "base_abc.txt").write_text("Analyze this ABC notation.")
-        (base_dir / "base_humdrum.txt").write_text("Analyze this Humdrum notation.")
         
         # Question files
         questions_context_dir = prompts_dir / "questions" / "context"
@@ -177,7 +161,7 @@ def sample_prompt_input() -> PromptInput:
     """Return a sample PromptInput instance used by multiple tests."""
     return PromptInput(
         system_prompt="You are a music theory expert.",
-        user_prompt="Analyze this musical excerpt: <mei>test</mei>",
+        user_prompt="Analyze this musical excerpt: <?xml version='1.0'?><score-partwise>test</score-partwise>",
         temperature=0.7,
         max_tokens=500,
     )
@@ -348,32 +332,7 @@ def deterministic_seed() -> None:  # pragma: no cover
 
 def generate_test_music_data(format_type: str, question_id: str = "Q1a") -> str:
     """Generate minimal synthetic music notation for the given format."""
-    if format_type == "mei":
-        return f"""<mei xmlns="http://www.music-encoding.org/ns/mei">
-    <music>
-        <body>
-            <mdiv>
-                <score>
-                    <scoreDef>
-                        <staffGrp>
-                            <staffDef n="1" lines="5" clef.shape="G" clef.line="2"/>
-                        </staffGrp>
-                    </scoreDef>
-                    <section>
-                        <measure n="1">
-                            <staff n="1">
-                                <layer n="1">
-                                    <note pname="c" oct="4" dur="4"/>
-                                </layer>
-                            </staff>
-                        </measure>
-                    </section>
-                </score>
-            </mdiv>
-        </body>
-    </music>
-</mei>"""
-    elif format_type == "musicxml":
+    if format_type == "musicxml":
         return f"""<?xml version="1.0" encoding="UTF-8"?>
 <score-partwise version="3.1">
     <part-list>
@@ -394,22 +353,5 @@ def generate_test_music_data(format_type: str, question_id: str = "Q1a") -> str:
         </measure>
     </part>
 </score-partwise>"""
-    elif format_type == "abc":
-        return f"""X:1
-T:Test Tune for {question_id}
-M:4/4
-L:1/4
-K:C
-C D E F | G A B c |"""
-    elif format_type == "humdrum":
-        return f"""**kern
-*clefG2
-*k[]
-*M4/4
-4c
-4d
-4e
-4f
-*-"""
     else:
-        raise ValueError(f"Unknown format type: {format_type}")
+        raise ValueError(f"Unsupported format type: {format_type}")

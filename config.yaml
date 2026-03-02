@@ -16,6 +16,15 @@ default_models:
   anthropic: claude-opus-4-5
   google: gemini-3-pro-preview
 
+# Per-model temperature defaults.
+# Gemini 3: Google recommends keeping temperature at 1.0 (lowering may cause
+# looping or degraded performance).  OpenAI & Anthropic: 0.0 for deterministic.
+# These are used when no explicit temperature is provided in the run config.
+model_temperatures:
+  chatgpt: 0.0
+  claude: 0.0
+  gemini: 1.0
+
 # Directory Settings (usually don't need to change these)
 data_dir: ./data
 dataset: ""
@@ -36,7 +45,7 @@ single_run:
   # Test configuration
   model: chatgpt                                         # chatgpt, claude, or gemini
   model_name:                                            # Specific model version (optional)
-  datatype: musicxml                                     # musicxml, mei, abc, or humdrum
+  datatype: musicxml                                     # musicxml
   
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
   # `null` for no guide
@@ -62,11 +71,8 @@ batch_run:
     # - chatgpt
     - gemini
   
-  datatypes:               # One or more: musicxml, mei, abc, humdrum
+  datatypes:               # musicxml
     - musicxml
-    # - mei
-    # - abc
-    # - humdrum
   
   files:                   # One or more file IDs
     - Above_C
@@ -98,11 +104,11 @@ batch_run:
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [without]
 #
-# Example 2: Test all formats with Claude
+# Example 2: Test with Claude
 # batch_run:
 #   enabled: true
 #   models: [claude]
-#   datatypes: [musicxml, mei, abc, humdrum]
+#   datatypes: [musicxml]
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [without]
 #
@@ -119,7 +125,7 @@ batch_run:
 # batch_run:
 #   enabled: true
 #   models: [chatgpt, claude, gemini]
-#   datatypes: [musicxml, mei, abc, humdrum]
+#   datatypes: [musicxml]
 #   files: [Fux_CantusFirmus_C]
 #   contexts: [with, without]
 #   guide_path: data/guides/Pierre-Guide.md

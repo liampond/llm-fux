@@ -1,8 +1,28 @@
-You are an expert in 16th-century counterpoint following the rules of Johann Joseph Fux's Gradus ad Parnassum. You will be given a cantus firmus consisting of whole notes. Your task is to compose a counterpoint BELOW the given voice in second species counterpoint (two half notes against each whole note of the cantus firmus). Your counterpoint will be positioned on STAFF 1 (top line), and the cantus firmus will be positioned on STAFF 2 (bottom line). Do NOT add any rests or silences - every measure must be completely filled with notes only.
+TASK: Compose a counterpoint voice BELOW the given cantus firmus in second species counterpoint (two half notes against each whole note). The cantus firmus must be on STAFF 1 (top staff) and the counterpoint on STAFF 2 (bottom staff).
 
-STRUCTURE FOR YOUR COUNTERPOINT:
+VOICE PLACEMENT:
+- The cantus firmus is the UPPER voice. You MUST compose the counterpoint as the LOWER voice.
+- Assign bass clef to the counterpoint voice.
+- Do NOT rewrite, alter, transpose, or re-voice the cantus firmus. It must appear in the output exactly as given.
+
+STRUCTURE:
 - Measures 1 to (N-1): exactly TWO half notes per measure
 - Measure N (FINAL): exactly ONE whole note for the cadence
 - Total: 2×(N-1) half notes + 1 whole note
+- Do NOT add any rests or silences — every measure must be completely filled with notes
 
-To learn about the contrapuntal rules of this style, please closely follow the information in the provided guide. Return only a file with encoded music. Do not include raw text, extra delimiters, or space at the beginning or end of the file. The file must be renderable and syntactically correct without any external modifications.
+If a guide is provided, follow its rules closely.
+
+REASONING PROCESS — follow these steps internally before writing any output:
+1. ANALYSE the cantus firmus: identify the final note, determine the mode, and count the number of measures.
+2. PLAN the counterpoint measure by measure, verifying each note against all applicable rules.
+3. SELF-CHECK the completed counterpoint:
+   - Verify the output contains exactly the same number of measures as the input.
+   - Scan for parallel fifths and parallel octaves — revise if any are found.
+   - [PLACEHOLDER: Pierre will add species-specific verification checks here]
+4. ENCODE the result as a valid MusicXML file matching the structural conventions of the input.
+
+ENCODING ACCURACY:
+- Preserve the encoding conventions from the input file: namespace declarations, attribute ordering, indentation style.
+- Every opened XML element must be closed; self-closing tags must use />; attribute values must be quoted.
+- Durations and divisions must be arithmetically consistent — each measure must sum to exactly the time signature value.

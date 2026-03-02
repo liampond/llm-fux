@@ -174,7 +174,7 @@ class TestDataPathContract:
         
         # Should be able to resolve paths for different data types
         data_types = ["encoded", "prompts", "questions"]
-        formats = ["mei", "musicxml", "abc", "humdrum"]
+        formats = ["musicxml"]
         
         # Test basic path resolution capabilities
         path_functions = ['resolve_path', 'get_path', 'find_file', 'resolve_file_path']
@@ -185,12 +185,12 @@ class TestDataPathContract:
                 
                 # Test with valid data structure parameters
                 try:
-                    result = func("encoded", "test_exam", "Q1b", "mei")
+                    result = func("encoded", "test_exam", "Q1b", "musicxml")
                     assert isinstance(result, (str, Path))
                 except (TypeError, ValueError):
                     # Different function signature - try alternatives
                     try:
-                        result = func("test_exam", "Q1b", "mei")
+                        result = func("test_exam", "Q1b", "musicxml")
                         assert isinstance(result, (str, Path))
                     except (TypeError, ValueError):
                         pass
@@ -200,7 +200,7 @@ class TestDataPathContract:
         """System SHOULD handle format-specific data paths."""
         from llm_fux.utils import path_utils
         
-        formats = ["mei", "musicxml", "abc", "humdrum"]
+        formats = ["musicxml"]
         
         # Should be able to handle different format requirements
         path_functions = ['resolve_path', 'get_path', 'find_file']
@@ -238,7 +238,7 @@ class TestErrorHandlingContract:
                 func = getattr(path_utils, func_name)
                 
                 try:
-                    result = func("nonexistent_exam", "nonexistent_question", "mei")
+                    result = func("nonexistent_exam", "nonexistent_question", "musicxml")
                     
                     # Should either return None/empty or raise appropriate error
                     if result is not None:
@@ -256,14 +256,14 @@ class TestErrorHandlingContract:
         
         # Test with invalid parameters
         invalid_params = [
-            (None, "Q1b", "mei"),
-            ("exam", None, "mei"), 
+            (None, "Q1b", "musicxml"),
+            ("exam", None, "musicxml"), 
             ("exam", "Q1b", None),
-            ("", "Q1b", "mei"),
-            ("exam", "", "mei"),
+            ("", "Q1b", "musicxml"),
+            ("exam", "", "musicxml"),
             ("exam", "Q1b", ""),
-            (123, "Q1b", "mei"),  # Wrong type
-            ("exam", 123, "mei"),  # Wrong type
+            (123, "Q1b", "musicxml"),  # Wrong type
+            ("exam", 123, "musicxml"),  # Wrong type
             ("exam", "Q1b", 123),  # Wrong type
         ]
         
@@ -305,7 +305,7 @@ class TestPerformanceContract:
                 
                 for i in range(100):
                     try:
-                        result = func("test_exam", f"Q{i}", "mei")
+                        result = func("test_exam", f"Q{i}", "musicxml")
                     except (TypeError, ValueError):
                         # Different function signature
                         try:
@@ -365,7 +365,7 @@ class TestSecurityContract:
                 
                 for malicious_path in malicious_paths:
                     try:
-                        result = func(malicious_path, "Q1b", "mei")
+                        result = func(malicious_path, "Q1b", "musicxml")
                         
                         if result is not None:
                             # Result should not contain directory traversal

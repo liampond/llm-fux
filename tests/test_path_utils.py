@@ -32,9 +32,8 @@ class TestPathUtils:
             encoded_dir.mkdir(parents=True)
             
             # Create files directly in the encoded_dir (simpler structure)
-            (encoded_dir / "Q1a.mei").write_text("<mei>test</mei>")
-            (encoded_dir / "Q2b.mei").write_text("<mei>test2</mei>")
-            (encoded_dir / "Q1a.abc").write_text("X:1\nT:Test")
+            (encoded_dir / "Q1a.musicxml").write_text('<?xml version="1.0"?><score-partwise/>')
+            (encoded_dir / "Q2b.musicxml").write_text('<?xml version="1.0"?><score-partwise/>')
             
             # Create question files
             questions_dir = temp_path / "questions"
@@ -69,24 +68,18 @@ class TestPathUtils:
         """Test finding encoded music files."""
         encoded_dir = temp_structure / "encoded" / "test_exam"
         
-        # Find MEI file
-        mei_file = find_encoded_file("Q1a", "mei", encoded_dir)
-        assert mei_file is not None
-        assert mei_file.name == "Q1a.mei"
-        assert mei_file.exists()
-        
-        # Find ABC file
-        abc_file = find_encoded_file("Q1a", "abc", encoded_dir)
-        assert abc_file is not None
-        assert abc_file.name == "Q1a.abc"
-        assert abc_file.exists()
+        # Find MusicXML file
+        musicxml_file = find_encoded_file("Q1a", "musicxml", encoded_dir)
+        assert musicxml_file is not None
+        assert musicxml_file.name == "Q1a.musicxml"
+        assert musicxml_file.exists()
 
     def test_find_encoded_file_not_found(self, temp_structure):
         """Test finding non-existent encoded file."""
         encoded_dir = temp_structure / "encoded" / "test_exam"
         
         with pytest.raises(FileNotFoundError):
-            find_encoded_file("Q99", "mei", encoded_dir)
+            find_encoded_file("Q99", "musicxml", encoded_dir)
 
     def test_find_question_file_context(self, temp_structure):
         """Test finding question file with context."""
@@ -131,19 +124,15 @@ class TestPathUtils:
         encoded_dir = temp_structure / "encoded"
         
         # Create datatype subdirectories like our real structure
-        mei_dir = encoded_dir / "mei"
-        abc_dir = encoded_dir / "abc"
-        mei_dir.mkdir(parents=True)
-        abc_dir.mkdir(parents=True)
+        musicxml_dir = encoded_dir / "musicxml"
+        musicxml_dir.mkdir(parents=True)
         
         # Add some files to make them valid
-        (mei_dir / "Q1a.mei").write_text("<mei>test</mei>")
-        (abc_dir / "Q1a.abc").write_text("X:1\nT:Test")
+        (musicxml_dir / "Q1a.musicxml").write_text('<?xml version="1.0"?><score-partwise/>')
         
         datatypes = list_datatypes(encoded_dir)
-        assert "mei" in datatypes
-        assert "abc" in datatypes
-        assert len(datatypes) == 2
+        assert "musicxml" in datatypes
+        assert len(datatypes) == 1
 
     def test_list_guides(self, temp_structure):
         """Test listing available guides."""
@@ -163,13 +152,13 @@ class TestPathUtils:
             outputs_dir=outputs_dir,
             model_name="TestModel",
             file_id="Q1a",
-            datatype="mei",
+            datatype="musicxml",
             context=True,
             guide="/path/to/Pierre-Guide.md"
         )
         
         # New structure: outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context_label>_<run>.<ext>
-        expected = outputs_dir / "response" / "TestModel" / "context-Pierre" / "temp-0.0" / "mei" / "Q1a_Pierre_1.txt"
+        expected = outputs_dir / "response" / "TestModel" / "context-Pierre" / "temp-0.0" / "musicxml" / "Q1a_Pierre_1.txt"
         assert output_path == expected
 
     def test_get_output_path_no_context(self, temp_structure):
@@ -180,12 +169,12 @@ class TestPathUtils:
             outputs_dir=outputs_dir,
             model_name="TestModel",
             file_id="Q2b",
-            datatype="abc",
+            datatype="musicxml",
             context=False
         )
         
         # New structure: outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context_label>_<run>.<ext>
-        expected = outputs_dir / "response" / "TestModel" / "no-context" / "temp-0.0" / "abc" / "Q2b_no-context_1.txt"
+        expected = outputs_dir / "response" / "TestModel" / "no-context" / "temp-0.0" / "musicxml" / "Q2b_no-context_1.txt"
         assert output_path == expected
 
     def test_find_project_root(self):
@@ -217,12 +206,12 @@ class TestDataIntegrity:
             assert d.is_dir()
 
     def test_base_prompts_exist(self):
-        """Test that available base prompt files exist for supported types."""
+        """Test that base_musicxml prompt file exists."""
         root = find_project_root()
         base_dir = root / "data" / "prompts" / "base"
         assert base_dir.exists()
-        # Only mei & musicxml currently required
-        for stem in ["base_mei", "base_musicxml"]:
+        # Only musicxml is now required
+        for stem in ["base_musicxml"]:
             # Support both .md and .txt extensions
             md_file = base_dir / f"{stem}.md"
             txt_file = base_dir / f"{stem}.txt"
@@ -242,7 +231,7 @@ class TestDataIntegrity:
             assert files, f"No {sub} files found"
 
     def test_file_naming_conventions(self):
-        """Basic naming checks for supported datatypes in data directory."""
+        """Basic naming checks for musicxml datatype in data directory."""
         root = find_project_root()
         encoded_dir = root / "data" / "encoded"
         if not encoded_dir.exists():
@@ -250,7 +239,7 @@ class TestDataIntegrity:
         for datatype_dir in encoded_dir.iterdir():
             if not datatype_dir.is_dir():
                 continue
-            if datatype_dir.name not in {"mei", "musicxml"}:
+            if datatype_dir.name != "musicxml":
                 continue
             # Recursively find all files in datatype directory (handles subdirs like above/below)
             for file_path in datatype_dir.rglob("*"):
@@ -259,7 +248,4 @@ class TestDataIntegrity:
                 # Skip hidden files like .DS_Store
                 if file_path.name.startswith("."):
                     continue
-                if datatype_dir.name == "mei":
-                    assert file_path.suffix == ".mei"
-                elif datatype_dir.name == "musicxml":
-                    assert file_path.suffix == ".musicxml"
+                assert file_path.suffix == ".musicxml"

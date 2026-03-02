@@ -26,7 +26,7 @@ __all__ = [
 ]
 
 _ROOT_CACHE: Optional[Path] = None
-_DATATYPE_EXT: Dict[str, str] = {"mei": ".mei", "musicxml": ".musicxml", "abc": ".abc", "humdrum": ".krn"}
+_DATATYPE_EXT: Dict[str, str] = {"musicxml": ".musicxml"}
 
 
 def _normalize_datatype(datatype: str) -> str:
@@ -217,17 +217,22 @@ def get_output_path(
     outputs_dir: Path,
     model_name: str,
     file_id: str,
-    datatype: str = "mei",
+    datatype: str = "musicxml",
     context: bool = False,
     guide: Optional[str] = None,
     dataset: Optional[str] = None,
     ext: str = ".txt",
-    output_type: str = "response",  # 'response', 'prompt', or 'input'
+    output_type: str = "response",  # 'response' or 'metadata'
     temperature: float = 0.0,
 ) -> Path:
     """Return path for model output file with deeply nested folder-based organization.
 
     Structure: ``outputs/<output_type>/<model>/<context-folder>/temp-<X.X>/<datatype>/<file_id>_<context>_<run><ext>``
+    
+    Output types:
+        - response: The raw LLM-generated file (e.g. MusicXML)
+        - metadata: Combined prompt text + run parameters + token usage (replaces
+          the former separate ``prompt`` and ``input`` output types)
     
     Context folder naming:
         - no-context: When context=False or no guide specified
@@ -237,12 +242,12 @@ def get_output_path(
         outputs_dir: Root outputs directory
         model_name: Name of the model (ChatGPT, Claude, Gemini)
         file_id: File identifier (e.g., Above_C)
-        datatype: Format (mei, musicxml, abc, humdrum)
+        datatype: Format (musicxml)
         context: Whether guide/context was used
         guide: Specific guide path (required when context=True)
         dataset: Dataset name (unused in new structure)
         ext: File extension
-        output_type: Type of output file ('response', 'prompt', or 'input')
+        output_type: Type of output file ('response' or 'metadata')
         temperature: Model temperature setting (0.0-1.0)
     
     Returns:

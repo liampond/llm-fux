@@ -74,6 +74,36 @@ def get_max_tokens() -> int:
     return get_config().get('max_tokens', 16000)
 
 
+# Per-model temperature defaults.
+# Gemini 3 models should keep temperature at 1.0 (Google recommendation to avoid
+# looping / degraded performance).  OpenAI & Anthropic: 0.0 for deterministic output.
+_DEFAULT_MODEL_TEMPERATURES = {
+    "chatgpt": 0.0,
+    "claude": 0.0,
+    "gemini": 1.0,
+}
+
+
+def get_model_temperature(model_key: str, explicit: float | None = None) -> float:
+    """Return the temperature for a given model key.
+
+    Priority: explicit value (from CLI / config) > per-model config.yaml override >
+    built-in per-model default.
+
+    ``model_key`` should be one of ``chatgpt``, ``claude``, ``gemini``.
+    """
+    if explicit is not None:
+        return float(explicit)
+
+    # Check config.yaml for per-model overrides
+    cfg = get_config()
+    model_temps = cfg.get("model_temperatures", {})
+    if model_key in model_temps:
+        return float(model_temps[model_key])
+
+    return _DEFAULT_MODEL_TEMPERATURES.get(model_key, 0.0)
+
+
 def find_config_file(start_path: Optional[Path] = None) -> Optional[Path]:
     """Search for config.yaml in current directory or project root."""
     search_path = start_path or Path.cwd()

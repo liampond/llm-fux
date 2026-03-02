@@ -28,7 +28,7 @@ def make_runner(tmp_path, mock_model=None, **kwargs):
     defaults = dict(
         model=mock_model,
         file_id="Q1b",
-        datatype="mei",
+        datatype="musicxml",
         context=True,
         base_dirs=base_dirs,
         temperature=0.2,
@@ -111,7 +111,7 @@ class TestDataHandling:
 
         with patch.object(runner, "_load_system_prompt", return_value="sys"), \
              patch.object(runner, "_load_base_format_prompt", return_value="fmt"), \
-             patch.object(runner, "_load_encoded", return_value="<mei>data</mei>"), \
+             patch.object(runner, "_load_encoded", return_value="<score-partwise>data</score-partwise>"), \
              patch.object(runner, "_load_question", return_value="Test file content"), \
              patch.object(runner, "_load_guides", return_value=["g1"]):
             _ = runner.run()
@@ -126,13 +126,13 @@ class TestDataHandling:
 
         with patch.object(runner, "_load_system_prompt", return_value="sys"), \
              patch.object(runner, "_load_base_format_prompt", return_value="fmt"), \
-             patch.object(runner, "_load_encoded", return_value="<mei>test music data</mei>"), \
+             patch.object(runner, "_load_encoded", return_value="<score-partwise>test music data</score-partwise>"), \
              patch.object(runner, "_load_question", return_value="q"), \
              patch.object(runner, "_load_guides", return_value=["g1"]):
             _ = runner.run()
 
         (prompt_input,) = mock_llm.query.call_args[0]
-        assert "<mei>test music data</mei>" in prompt_input.user_prompt
+        assert "<score-partwise>test music data</score-partwise>" in prompt_input.user_prompt
 
     def test_missing_file_handling(self, mock_api_keys, tmp_path):
         mock_llm = Mock(spec=LLMInterface)
@@ -145,28 +145,22 @@ class TestDataHandling:
 
 
 class TestFormatSupport:
-    @pytest.mark.parametrize("format_type", ["mei", "musicxml", "abc", "humdrum"])
-    def test_format_specific_execution(self, format_type, mock_api_keys, tmp_path):
+    def test_musicxml_format_execution(self, mock_api_keys, tmp_path):
         mock_llm = Mock(spec=LLMInterface)
-        mock_llm.query.return_value = f"Response for {format_type}"
-        runner = make_runner(tmp_path, mock_model=mock_llm, datatype=format_type)
+        mock_llm.query.return_value = "Response for musicxml"
+        runner = make_runner(tmp_path, mock_model=mock_llm, datatype="musicxml")
 
-        format_content = {
-            "mei": "<mei>mei content</mei>",
-            "musicxml": "<?xml version='1.0'?><score-partwise></score-partwise>",
-            "abc": "X:1\nT:Test\nK:C\nCDEF|",
-            "humdrum": "**kern\n4c\n*-",
-        }
+        musicxml_content = "<?xml version='1.0'?><score-partwise></score-partwise>"
 
         with patch.object(runner, "_load_system_prompt", return_value="sys"), \
              patch.object(runner, "_load_base_format_prompt", return_value="fmt"), \
-             patch.object(runner, "_load_encoded", return_value=format_content[format_type]), \
+             patch.object(runner, "_load_encoded", return_value=musicxml_content), \
              patch.object(runner, "_load_question", return_value="q"), \
              patch.object(runner, "_load_guides", return_value=["g1"]):
             _ = runner.run()
 
         (prompt_input,) = mock_llm.query.call_args[0]
-        assert format_content[format_type] in prompt_input.user_prompt
+        assert musicxml_content in prompt_input.user_prompt
 
 
 class TestErrorHandling:

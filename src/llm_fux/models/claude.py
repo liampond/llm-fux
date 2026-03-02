@@ -1,9 +1,12 @@
+import logging
 import os
 from typing import Optional
 from anthropic import Anthropic
-from llm_fux.models.base import LLMInterface, PromptInput
+from llm_fux.models.base import LLMInterface, LLMResponse, PromptInput, TokenUsage
 from llm_fux.config.config import DEFAULT_MODELS, get_timeout, get_max_tokens
 from llm_fux.utils.text_utils import clean_code_blocks
+
+logger = logging.getLogger(__name__)
 
 
 class ClaudeModel(LLMInterface):
@@ -21,7 +24,7 @@ class ClaudeModel(LLMInterface):
         timeout = get_timeout()
         self.client = Anthropic(api_key=self.api_key, timeout=timeout)
 
-    def query(self, input: PromptInput) -> str:
+    def query(self, input: PromptInput) -> LLMResponse:
         """
         Queries Claude API using a structured system + user prompt.
 
@@ -34,7 +37,7 @@ class ClaudeModel(LLMInterface):
                 - model_name (Optional[str])
 
         Returns:
-            str: LLM-generated response.
+            LLMResponse: LLM-generated response with token usage.
         """
         model = input.model_name or self.model_name
         # Get max_tokens from input, or fall back to config default
@@ -50,4 +53,24 @@ class ClaudeModel(LLMInterface):
         
         # Clean response: strip whitespace and remove any code block delimiters
         raw_response = response.content[0].text.strip()
-        return clean_code_blocks(raw_response)
+        cleaned = clean_code_blocks(raw_response)
+
+        # Extract token usage
+        usage = None
+        if response.usage:
+            usage = TokenUsage(
+                prompt_tokens=getattr(response.usage, "input_tokens", 0) or 0,
+                completion_tokens=getattr(response.usage, "output_tokens", 0) or 0,
+                total_tokens=(
+                    (getattr(response.usage, "input_tokens", 0) or 0)
+                    + (getattr(response.usage, "output_tokens", 0) or 0)
+                ),
+            )
+            logger.info(
+                "Token usage — prompt: %d, completion: %d, total: %d",
+                usage.prompt_tokens,
+                usage.completion_tokens,
+                usage.total_tokens,
+            )
+
+        return LLMResponse(text=cleaned, usage=usage, model_id=model)
