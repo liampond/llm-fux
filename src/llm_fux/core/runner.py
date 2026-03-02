@@ -216,11 +216,12 @@ class PromptRunner:
         return prompt_input
 
     def _load_system_prompt(self) -> str:
-        """Load system prompt from system_prompt.txt if it exists."""
+        """Load system prompt, preferring .md over .txt."""
         prompts_dir = self.base_dirs.get("prompts", Path(""))
-        system_prompt_path = prompts_dir / "system_prompt.txt"
-        if system_prompt_path.exists():
-            return load_text_file(system_prompt_path)
+        for ext in ("md", "txt"):
+            candidate = prompts_dir / f"system_prompt.{ext}"
+            if candidate.exists():
+                return load_text_file(candidate)
         return ""
 
     def _load_base_format_prompt(self) -> str:
