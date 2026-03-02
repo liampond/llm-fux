@@ -23,7 +23,6 @@ from llm_fux.prompts.prompt_builder import PromptBuilder
 from llm_fux.utils.path_utils import (
     load_text_file,
     find_encoded_file,
-    find_question_file,
     get_output_path,
 )
 from llm_fux.utils.text_utils import fix_musicxml_durations, clean_response
@@ -257,24 +256,10 @@ class PromptRunner:
         if prompt_path.exists():
             return load_text_file(prompt_path)
 
-        self.logger.warning(
-            "Species-specific prompt not found: %s (detected species=%s). "
-            "Falling back to generic prompt.",
-            prompt_file, species,
+        raise FileNotFoundError(
+            f"Species-specific prompt not found: {prompt_file} "
+            f"(position={position}, species={species})"
         )
-            
-        # Fallback to generic prompt.md if specific one missing
-        single_prompt = self.base_dirs.get("prompts", Path("")) / "prompt.md"
-        if single_prompt.exists():
-            return load_text_file(single_prompt)
-            
-        # Legacy per-question naming.
-        suffix = "context" if self.context else "no_context"
-        legacy_dir = self.base_dirs.get("prompts", Path("")) / "questions" / suffix / self.datatype
-        path = find_question_file(self.file_id, self.context, legacy_dir, required=True)
-        if not path:
-            raise FileNotFoundError(f"Question file not found for {self.file_id} in {legacy_dir}")
-        return load_text_file(path)
 
     def _load_guides(self) -> List[str]:
         collected: List[str] = []
