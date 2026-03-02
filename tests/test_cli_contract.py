@@ -65,7 +65,7 @@ class TestSingleQueryCLI:
             "--model", "chatgpt",
             "--question", "Q1b", 
             "--exam", "test_exam",
-            "--format", "mei",
+            "--format", "musicxml",
             "--context"
         ]
         
@@ -128,7 +128,7 @@ class TestSingleQueryCLI:
             "--model", "chatgpt",
             "--question", "Q1b",
             "--exam", "test_exam", 
-            "--format", "mei",
+            "--format", "musicxml",
             "--context"
         ]
         
@@ -174,7 +174,7 @@ class TestBatchProcessingCLI:
             "--models", "chatgpt,claude",
             "--questions", "Q1a,Q1b",
             "--exams", "test_exam",
-            "--formats", "mei,abc",
+            "--formats", "musicxml",
             "--context", "--no-context"
         ]
         
@@ -206,7 +206,7 @@ class TestBatchProcessingCLI:
             "--models", "chatgpt",
             "--questions", "Q1a,Q1b", 
             "--exams", "test_exam",
-            "--formats", "mei,abc",
+            "--formats", "musicxml",
             "--context"
         ]
         
@@ -271,7 +271,7 @@ class TestCLIUserExperience:
             "--models", "chatgpt",
             "--questions", "Q1a,Q1b,Q1c",
             "--exams", "test_exam",
-            "--formats", "mei", 
+            "--formats", "musicxml", 
             "--context"
         ]
         
@@ -310,7 +310,7 @@ class TestCLIUserExperience:
             "--model", "invalid_model",
             "--question", "Q1b",
             "--exam", "test_exam",
-            "--format", "mei",
+            "--format", "musicxml",
             "--context"
         ]
         
@@ -349,7 +349,7 @@ class TestCLIConfiguration:
         with patch.dict('os.environ', {
             'LLM_MUSIC_THEORY_MODEL': 'chatgpt',
             'LLM_MUSIC_THEORY_EXAM': 'default_exam',
-            'LLM_MUSIC_THEORY_FORMAT': 'mei'
+            'LLM_MUSIC_THEORY_FORMAT': 'musicxml'
         }):
             
             # Minimal args, relying on env vars
@@ -390,7 +390,7 @@ class TestCLIConfiguration:
                 "--model", "chatgpt",
                 "--question", "Q1b",
                 "--exam", "test_exam",
-                "--format", "mei",
+                "--format", "musicxml",
                 "--context",
                 "--output-format", output_format
             ]
@@ -456,7 +456,7 @@ class TestCLIPerformance:
             "--models", "chatgpt",
             "--questions", "Q1a,Q1b,Q1c,Q1d,Q1e",
             "--exams", "test_exam",
-            "--formats", "mei",
+            "--formats", "musicxml",
             "--context"
         ]
         

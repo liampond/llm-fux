@@ -70,7 +70,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     list_group.add_argument(
         "--list-datatypes",
         action="store_true",
-        help="List supported encoding formats and exit",
+        help="List supported encoding format and exit",
     )
     list_group.add_argument(
         "--list-guides",
@@ -101,8 +101,8 @@ def build_argument_parser() -> argparse.ArgumentParser:
     )
     run_group.add_argument(
         "--datatype",
-        choices=["mei", "musicxml", "abc", "humdrum"],
-        help="Encoding format",
+        choices=["musicxml"],
+        help="Encoding format (musicxml)",
     )
     run_group.add_argument(
         "--context",

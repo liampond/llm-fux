@@ -26,7 +26,7 @@ __all__ = [
 ]
 
 _ROOT_CACHE: Optional[Path] = None
-_DATATYPE_EXT: Dict[str, str] = {"mei": ".mei", "musicxml": ".musicxml", "abc": ".abc", "humdrum": ".krn"}
+_DATATYPE_EXT: Dict[str, str] = {"musicxml": ".musicxml"}
 
 
 def _normalize_datatype(datatype: str) -> str:
@@ -217,7 +217,7 @@ def get_output_path(
     outputs_dir: Path,
     model_name: str,
     file_id: str,
-    datatype: str = "mei",
+    datatype: str = "musicxml",
     context: bool = False,
     guide: Optional[str] = None,
     dataset: Optional[str] = None,
@@ -237,7 +237,7 @@ def get_output_path(
         outputs_dir: Root outputs directory
         model_name: Name of the model (ChatGPT, Claude, Gemini)
         file_id: File identifier (e.g., Above_C)
-        datatype: Format (mei, musicxml, abc, humdrum)
+        datatype: Format (musicxml)
         context: Whether guide/context was used
         guide: Specific guide path (required when context=True)
         dataset: Dataset name (unused in new structure)

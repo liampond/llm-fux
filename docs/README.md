@@ -4,7 +4,7 @@ Comprehensive documentation for the LLM-MusicTheory research framework.
 
 ## Overview
 
-LLM-MusicTheory is a research framework for studying how Large Language Models (LLMs) understand and analyze music theory concepts. The system supports multiple LLM providers, various music encoding formats, and provides both command-line and programmatic interfaces for conducting systematic studies.
+LLM-MusicTheory is a research framework for studying how Large Language Models (LLMs) understand and analyze music theory concepts. The system supports multiple LLM providers, uses MusicXML encoding, and provides both command-line and programmatic interfaces for conducting systematic studies.
 
 ## Documentation Structure
 
@@ -105,7 +105,7 @@ Constructor (simplified):
 PromptRunner(
     model: LLMInterface,
     file_id: str | None = None,            # preferred identifier
-    datatype: str = "mei",
+    datatype: str = "musicxml",
     context: bool = False,
     dataset: str = "fux-counterpoint",    # new default dataset name
     base_dirs: dict[str, Path] | None = None,
@@ -167,7 +167,7 @@ poetry run run-single [OPTIONS]
 **Options:**
 - `--model {chatgpt,claude,gemini}`: LLM provider (required) or specific model name (e.g., gpt-5.1-2025-11-13, claude-opus-4-5, gemini-3-pro-preview)
 - `--file TEXT`: File identifier (e.g., Fux_CantusFirmus_C)
-- `--datatype {mei,musicxml,abc,humdrum}`: Music format (required)
+- `--datatype {musicxml}`: Music format (required)
 - `--context`: Include context guides
 - `--guide PATH`: Path to guide file (requires --context)
 - `--temperature FLOAT`: Sampling temperature (0.0-1.0)
@@ -217,8 +217,8 @@ poetry run run-batch [OPTIONS]
 project/
 ├── outputs/
 │   ├── ChatGPT/
-│   │   ├── fux-counterpoint__Q1b_mei_context.txt
-│   │   └── fux-counterpoint__Q1b_mei_context.input.json
+│   │   ├── fux-counterpoint__Q1b_musicxml_context.txt
+│   │   └── fux-counterpoint__Q1b_musicxml_context.input.json
 │   └── Claude/
 ├── data/ (optional project‑specific dataset)
 └── experiments/
@@ -269,7 +269,7 @@ from llm_music_theory.core.dispatcher import get_llm
 
 models = ["chatgpt", "claude", "gemini"]
 questions = ["Q1a", "Q1b", "Q2a"]
-datatypes = ["mei", "musicxml"]
+datatypes = ["musicxml"]
 
 results = {}
 for model_name in models:

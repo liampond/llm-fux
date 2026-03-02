@@ -74,7 +74,7 @@ class TestCLIIntegration:
                 PromptRunner(
                     model=dummy,
                     file_id="NoFile",
-                    datatype="mei",
+                    datatype="musicxml",
                     context=False,
                     base_dirs=base_dirs,
                     temperature=0.0,
@@ -89,12 +89,12 @@ class TestCLIIntegration:
             # Create encoded file but no question file
             encoded_dir = temp_path / "encoded" / "test"
             encoded_dir.mkdir(parents=True)
-            (encoded_dir / "Q1a.mei").write_text("<mei>test</mei>")
+            (encoded_dir / "Q1a.musicxml").write_text('<?xml version="1.0"?><score-partwise/>')
             
             prompts_base = temp_path / "prompts" / "base"
             prompts_base.mkdir(parents=True)
             (prompts_base / "system_prompt.txt").write_text("System")
-            (prompts_base / "base_mei.txt").write_text("Format: MEI")
+            (prompts_base / "base_musicxml.txt").write_text("Format: MusicXML")
             
             base_dirs = {
                 "encoded": temp_path / "encoded",
@@ -109,7 +109,7 @@ class TestCLIIntegration:
             runner = PromptRunner(
                 model=mock_llm,
                 file_id="Q1a",
-                datatype="mei",
+                datatype="musicxml",
                 context=False,
                 base_dirs=base_dirs,
                 temperature=0.0,

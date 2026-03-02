@@ -14,9 +14,9 @@ class PromptBuilder:
     system_prompt: str | None
         The system / assistant role instruction (can be empty / None; passed through).
     format_specific_user_prompt: str
-        Base formatting / style instructions for the target encoding format.
+        Base formatting / style instructions for MusicXML output.
     encoded_data: str
-        The raw musical encoding contents (ABC / MEI / MusicXML / etc.).
+        The raw MusicXML encoded music contents.
     guides: Sequence[str | None] | None
         Optional list of contextual guide texts; falsey / None values are ignored.
     question_prompt: str

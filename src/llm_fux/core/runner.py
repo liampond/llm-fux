@@ -36,7 +36,7 @@ class PromptRunner:
     Args:
         model: LLM interface to use for queries
         file_id: File identifier (e.g., Fux_CantusFirmus_C)
-        datatype: Encoding format (mei, musicxml, abc, humdrum)
+        datatype: Encoding format (musicxml)
         context: Whether to include guide context
         guide: Path to guide file when context=True
         dataset: Dataset subdirectory name
@@ -46,13 +46,13 @@ class PromptRunner:
         save: Whether to save outputs (always True)
     """
 
-    _EXT_MAP = {"mei": ".mei", "musicxml": ".musicxml", "abc": ".abc", "humdrum": ".krn"}
+    _EXT_MAP = {"musicxml": ".musicxml"}
 
     def __init__(
         self,
         model: LLMInterface,
         file_id: Optional[str] = None,
-        datatype: str = "mei",
+        datatype: str = "musicxml",
         context: bool = False,
         guide: Optional[str] = None,
         dataset: str = "",

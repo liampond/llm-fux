@@ -29,7 +29,7 @@ class ChatGPTModel(LLMInterface):
         Parameters:
             input (PromptInput): 
                 - system_prompt (str): Instructions for the assistant.
-                - user_prompt (str): The combined prompt (format intro, encoded data, guides, question).
+                - user_prompt (str): The combined prompt (format intro, MusicXML data, guides, question).
                 - temperature (float): Sampling temperature.
                 - max_tokens (Optional[int]): Maximum response tokens.
                 - model_name (Optional[str]): Override default model.

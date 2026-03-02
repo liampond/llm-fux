@@ -17,11 +17,6 @@ class TestCleanCodeBlocks:
         text = "```musicxml\n<score-partwise/>\n```"
         assert clean_code_blocks(text) == "<score-partwise/>"
 
-    def test_removes_mei_code_block(self):
-        """Test removing ```mei ... ``` delimiters."""
-        text = "```mei\n<mei/>\n```"
-        assert clean_code_blocks(text) == "<mei/>"
-
     def test_removes_plain_code_block(self):
         """Test removing ``` ... ``` delimiters without format specifier."""
         text = "```\n<content/>\n```"
@@ -49,16 +44,6 @@ class TestCleanCodeBlocks:
         """Test that format specifier matching is case insensitive."""
         text = "```XML\n<note/>\n```"
         assert clean_code_blocks(text) == "<note/>"
-
-    def test_removes_abc_code_block(self):
-        """Test removing ```abc ... ``` delimiters."""
-        text = "```abc\nX:1\nT:Test\n```"
-        assert clean_code_blocks(text) == "X:1\nT:Test"
-
-    def test_removes_humdrum_code_block(self):
-        """Test removing ```humdrum ... ``` delimiters."""
-        text = "```humdrum\n**kern\n4c\n```"
-        assert clean_code_blocks(text) == "**kern\n4c"
 
 
 # ---------------------------------------------------------------------------
@@ -205,12 +190,6 @@ class TestCleanResponse:
         """Already-clean MusicXML should be unchanged."""
         text = "<?xml version=\"1.0\"?>\n<score-partwise/>"
         assert clean_response(text, "musicxml") == text
-
-    def test_no_preamble_strip_for_abc(self):
-        """ABC format should not have XML preamble stripping."""
-        text = "Here is the tune:\nX:1\nT:Test"
-        result = clean_response(text, "abc")
-        assert result == text  # code fence stripped but no XML preamble logic
 
     def test_handles_empty(self):
         assert clean_response("", "musicxml") == ""

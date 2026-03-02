@@ -42,8 +42,3 @@ WHEN A GUIDE IS PROVIDED:
 WHEN NO GUIDE IS PROVIDED:
 - Apply standard first-species Fux counterpoint rules as your default framework.
 - Prioritise: consonance on every beat, no parallel fifths/octaves, stepwise motion with compensated leaps, proper cadential formulas, and modal integrity.
-
-SELF-CHECK:
-Once you have created an output, double check the file for:
-- Syntax errors (the file must be renderable without modifications)
-- Correct counterpoint - parallel fifths/octaves (both hidden and direct), illegal leaps, tritones, voice-crossing violations, and any rule breach. Confirm the generated voice is on the correct side of the cantus firmus. Verify the cantus firmus is reproduced exactly as given and the total number of measures is unchanged. If a violation is found, revise before producing output.

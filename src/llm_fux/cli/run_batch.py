@@ -121,7 +121,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--datatypes",
         nargs="*",
-        help="List of formats (default: all)",
+        help="List of formats (default: musicxml)",
     )
     parser.add_argument(
         "--data-dir",

@@ -11,7 +11,7 @@ class PromptInput:
     Encapsulates all parameters for a single LLM request.
     """
     system_prompt: str            # The system‐level instructions
-    user_prompt: str              # The body: format intro + encoded data + guides + question
+    user_prompt: str              # The body: format intro + MusicXML data + guides + question
     temperature: float = 0.0      # Sampling temperature
     model_name: Optional[str] = None   # Override the default model if provided
     max_tokens: Optional[int] = None   # (Optional) token limit for the response
