@@ -6,4 +6,6 @@ STRUCTURE FOR YOUR COUNTERPOINT:
 - Rhythmic variety is essential — avoid writing consecutive measures in the same species
 - Suspensions (4th species) should be used where possible, especially approaching cadences
 
+You will also be provided with a reference example by Fux showing a correct fifth species counterpoint on a cantus firmus in D. Study this example carefully to understand the expected style, voice leading, and interval usage. Relate what you observe in the example to the rules described in the provided guide, as the guide explicitly formalizes the principles illustrated by this example. Use both the guide and the example as complementary references before composing your own counterpoint.
+
 To learn about the contrapuntal rules of this style, please closely follow the information in the provided guide. Return only a file with encoded music. Do not include raw text, extra delimiters, or space at the beginning or end of the file. The file must be renderable and syntactically correct without any external modifications.

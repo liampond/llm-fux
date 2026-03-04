@@ -1,0 +1,107 @@
+Procedure: First Species Counterpoint
+
+1. Vertical Intervals
+1.1 Basic Rhythmic Constraint
+Write one counterpoint note for each cantus-firmus note. All notes share the same time-value, normally whole notes, except if another value is requested.
+1.2 Consonance Classification
+Only consonances are permitted between the two voices at every simultaneity.
+* Perfect consonances: unison, perfect 5th, perfect octave.
+* Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+* Dissonances (strictly forbidden): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+1.3 Imperfect Consonance Preference
+Use more imperfect consonances than perfect consonances. Perfect consonances lack harmonic richness in a two-voice texture, so they must not dominate. Do not use more than three consecutive intervals of the same type of imperfect consonance (three consecutive 3rds, three consecutive 6ths, or three consecutive 10ths) to ensure variety.
+1.4 First and Last Bar
+Both the opening and final bars must consist of perfect consonances. Permitted opening intervals are the unison or the octave. The perfect 5th is permitted only at the beginning, and only when the counterpoint lies above the cantus firmus. (If the counterpoint lies below, the inversion of the 5th would produce a perfect 4th, which is a dissonance in two-voice writing.)
+1.5 Cadence Logic (Penultimate and Final Bar)
+The choice of the perfect consonance in the final bar is determined by the intervallic configuration of the penultimate bar. The cadential logic proceeds from the penultimate sonority toward the final resolution:
+* If the cantus firmus is in the lower voice: the penultimate bar must contain a major 6th between the cantus firmus and the counterpoint. The two voices then resolve outward by contrary motion to an octave (or unison) in the final bar. This requires raising the seventh degree of the mode to create a leading tone if one does not occur naturally (applies in Dorian, Mixolydian, and Aeolian modes).
+* If the cantus firmus is in the upper voice: the penultimate bar must contain a minor 3rd between the cantus firmus and the counterpoint. The two voices then resolve inward by contrary motion to a unison in the final bar.
+1.6 Modal Integrity Constraint
+The counterpoint must remain strictly within the diatonic pitches of the mode of the cantus firmus. No chromatic alterations are permitted except for the mandatory leading-tone inflection at the cadence as described in ¤1.5. The counterpoint must begin and end on a note that confirms the mode (the tonic or its octave). An LLM must not introduce accidentals to "beautify" a line; the diatonic pitch set is a hard constraint.
+
+2. Treatment of Motion Between the Two Voices
+2.1 Definitions of Motion
+* Contrary motion: one voice ascends while the other descends.
+* Oblique motion: one voice moves while the other remains stationary.
+* Similar (direct) motion: both voices move in the same direction, at least one by leap.
+* Parallel motion: both voices move in the same direction by the same interval size (a subset of similar motion).
+2.2 Preference for Motion
+Contrary or oblique motion is preferred at every opportunity. These motions preserve the independence of the two voices and reduce the risk of forbidden parallels.
+2.3 Interval-Category Progression Rules
+These rules govern how the vertical interval between the two voices may change from one beat to the next:
+* Perfect ? Perfect: only contrary or oblique motion is permitted. Parallel and similar motion are forbidden.
+* Perfect ? Imperfect: any motion (contrary, parallel, oblique, similar) is permitted.
+* Imperfect ? Imperfect: any motion is permitted.
+* Imperfect ? Perfect: only contrary or oblique motion is permitted. Parallel and similar motion are forbidden.
+2.4 Specific Prohibitions
+1. Parallel 5ths and parallel octaves are strictly prohibited. These occur when two voices form a perfect 5th (or octave), then move in parallel motion to another perfect 5th (or octave) at the next beat.
+2. Direct (hidden) 5ths and octaves are prohibited. These occur when a perfect 5th or octave is approached by similar motion (both voices moving in the same direction) where at least one voice leaps. Even if only one of the two intervals is "open" and the other "hidden," diminution would reveal consecutive perfect consonances.
+3. Ottava battuta (beaten octave): Avoid approaching an octave by contrary stepwise motion from a 10th (i.e., the upper voice descending by step and the lower voice ascending by step, converging onto an octave on the downbeat). This is a hard constraint in strict two-voice writing, even though Fux calls it a "small error."
+4. Unison approach by leap: Avoid any leap into or out of a unison except at the very beginning or the very end of the exercise (governed by cadence rules). A unison reached by step from a 3rd by contrary motion nullifies the distinctness of the two voices and is also to be avoided in the interior of the exercise.
+
+3. Melodic Conduct Within Each Voice
+3.1 Vocal Singability
+Every melodic interval in the counterpoint line must be singable. The following melodic intervals are permitted:
+* Unison (repetition, see ¤3.2), minor 2nd, major 2nd, minor 3rd, major 3rd, perfect 4th, perfect 5th, ascending minor 6th, perfect octave.
+The following melodic intervals are forbidden:
+* Major 6th, descending minor 6th, all 7ths, all augmented intervals, all diminished intervals, all chromatic intervals, and any interval larger than an octave.
+3.2 Pitch Repetition
+The same pitch may be repeated once (i.e., AÐA is permitted as the only form of oblique motion in first species). However, repeating the same pitch twice consecutively (AÐAÐA) is forbidden. Use pitch repetition sparingly.
+3.3 Tritone Prohibition (Mi contra Fa)
+The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
+1. Vertical: No simultaneous tritone between the two voices at any beat.
+2. Melodic (direct): No melodic leap of a tritone in either voice.
+3. Melodic (outlined): A melodic line must not outline a tritone across a stepwise passage. For example, the stepwise ascent FÐGÐAÐB outlines an augmented 4th (F to B) and is forbidden, even though no single leap of a tritone occurs. If the line continues stepwise in the same direction through the tritone (e.g., FÐGÐAÐBÐC), the tritone is "resolved" and the passage becomes acceptable. The prohibition applies when the line reverses direction at the tritone boundary, thereby exposing the dissonant frame.
+3.4 Melodic Range of the Counterpoint Line
+The total span of the counterpoint line (from its lowest note to its highest note) should not exceed a 10th. This ensures the line remains within a practicable single vocal register and preserves the "singable" character Fux requires.
+
+4. Voice Disposition
+4.1 Counting Intervals
+When the counterpoint lies above the cantus firmus, intervals are counted upward from the cantus firmus note. When the counterpoint lies below, intervals are counted downward from the cantus firmus note. This is essential: a "5th below" the cantus firmus means counting five scale steps downward, not upward.
+4.2 Voice-Crossing
+Voice-crossing is not permitted. The voice designated as "above" must remain above the cantus firmus at all times, and vice versa.
+Note: Fux does allow voice-crossing as an occasional expedient in later examples (see Fig. 14), but for a strict, rule-checked protocol, enforce the prohibition to avoid complications with interval counting and spacing.
+4.3 Spacing
+The vertical distance between the two voices must be kept within a manageable range:
+* Maximum interval: 10th (a compound 3rd). Intervals of an 11th or greater are forbidden.
+* Minimum interval in the interior: 3rd. The unison is permitted only in the first bar or the last bar. Between the first and last bar, the smallest permissible interval is a 3rd.
+* The voices should neither be so close that they obscure independence nor so far apart that the texture becomes hollow.
+
+5. Working Procedure: Incremental, Rule-Checked Writing
+5.1 Step-by-Step Construction
+1. Begin with the cantus-firmus note-grid. Establish whether the counterpoint is to be written above or below.
+2. Confirm the mode of the cantus firmus. Identify the diatonic pitch set and the tonic.
+3. Proceed one cantus-firmus note at a time, adding exactly one note of counterpoint.
+5.2 Immediate Compliance Check for Every New Note
+For each freshly written note, apply the following checklist in order:
+Check
+What to verify
+Governing sections
+1. Vertical consonance
+Is the interval a legal consonance? Is the balance of perfect vs. imperfect maintained? No more than three consecutive same-type imperfect consonances?
+¤1.2, ¤1.3
+2. First/last bar rule
+If this is the first or last bar, is the interval a perfect consonance? If penultimate, does it satisfy cadence requirements?
+¤1.4, ¤1.5
+3. Modal integrity
+Does the note belong to the diatonic pitch set of the mode? Is any accidental limited to the cadential leading tone?
+¤1.6
+4. Motion category
+What type of motion exists between the previous beat and this beat? Does the interval-category progression rule permit it?
+¤2.2, ¤2.3
+5. Forbidden parallels/hiddens
+Are there parallel 5ths or octaves? Direct (hidden) 5ths or octaves? Ottava battuta? Illegal unison approach?
+¤2.4
+6. Melodic fitness
+Is the melodic interval from the previous counterpoint note legal and singable? Does it avoid outlined tritones? Does the total range stay within a 10th?
+¤3.1, ¤3.3, ¤3.4
+7. Spacing and crossing
+Is the vertical interval between 3rd and 10th (inclusive) in the interior? Is there no voice-crossing? Is the unison only at bar 1 or the final bar?
+¤4.2, ¤4.3
+5.3 Error-Handling Logic (Depth-First Search with Backtracking)
+If one or more checks fail:
+1. Erase the problematic note.
+2. Try an alternative pitch that still fulfils the basic interval requirement (select from the available consonances above or below the cantus-firmus note, within the diatonic pitch set).
+3. If all feasible alternatives at this position fail: step back one (or more) notes in the counterpoint. Replace the earlier note(s) with different legal options, then resume forward writing.
+No note is final until it survives the entire checklist. Think of the process as depth-first search with backtracking: the algorithm explores the most promising pitch first, validates it against all rules, and retreats systematically when a dead end is reached.
+

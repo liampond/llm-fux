@@ -5,4 +5,6 @@ STRUCTURE FOR YOUR COUNTERPOINT:
 - Measure N (FINAL): exactly ONE whole note for the cadence
 - Total: 4×(N-1) quarter notes + 1 whole note
 
+You will also be provided with a reference example by Fux showing a correct third species counterpoint on a cantus firmus in D. Study this example carefully to understand the expected style, voice leading, and interval usage. Relate what you observe in the example to the rules described in the provided guide, as the guide explicitly formalizes the principles illustrated by this example. Use both the guide and the example as complementary references before composing your own counterpoint.
+
 To learn about the contrapuntal rules of this style, please closely follow the information in the provided guide. Return only a file with encoded music. Do not include raw text, extra delimiters, or space at the beginning or end of the file. The file must be renderable and syntactically correct without any external modifications.

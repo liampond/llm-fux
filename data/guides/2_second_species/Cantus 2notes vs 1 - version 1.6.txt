@@ -1,0 +1,39 @@
+# Second Species Counterpoint — Operational Guide
+
+This guide establishes the precise constraints and logic required to generate or evaluate second-species counterpoint, following the principles of Gradus ad Parnassum.
+I. Structural Framework
+	1	Metric Ratio: 2:1. Two half notes (minims) in the counterpoint against one whole note (semibreve) in the Cantus Firmus (CF).
+	2	Terminology: The first half note is the Thesis (downbeat); the second is the Arsis (upbeat).
+	3	The Opening: The first measure may begin with a half rest on the Thesis. The first sounding note must be a perfect consonance (1, 5, or 8).
+	4	The Conclusion: The final measure must always be a whole note (consonant unison or octave).
+II. Intervallic Constraints
+	1	Thesis (Downbeat) Rule: Every Thesis note must be strictly consonant (Unison, 3rd, 5th, 6th, 8th, or 10th). Dissonance is never permitted on the downbeat.
+	2	Arsis (Upbeat) Rules:
+	◦	Passing Dissonance: A dissonance is permitted only as a passing tone. It must be approached by step and left by step in the same direction (filling the space of a 3rd between two consonant downbeats).
+	◦	Consonant Leap: If the Arsis note is approached or left by a leap (skip), that note must be consonant with the CF.
+	3	Unison Restriction: Avoid the unison within the exercise; it is permitted only in the first and last measures.
+III. Progression Logic 
+Structural stability is determined by the relationship between successive downbeats. The upbeat does not always "clear" the path for the next downbeat.
+	1	Successive Perfect Intervals: Parallel 5ths or 8ths occurring on consecutive downbeats are forbidden.
+	2	The "Third" Limitation: An intervening note on the Arsis that is only a third away from the Thesis does not break the perception of a parallel. The ear "remembers" the first note.
+	3	The Leap Rule: To successfully invalidate a potential parallel between two downbeats, the Arsis must move by a leap of a 4th, 5th, or 6th. This distance causes the ear to "forget" the previous structural note.
+	4	Imperfect to Perfect: When moving from an imperfect consonance to a perfect consonance on consecutive downbeats, contrary motion is required unless a leap of a 4th or larger on the Arsis mitigates the direct succession.
+IV. Formulas for the Cadences
+The penultimate measure must follow these specific intervallic patterns to resolve to the final whole note.
+A. Counterpoint Above the CF:
+	•	Measure (n-1): Thesis = 5th | Arsis = Major 6th
+	•	Final Measure: Whole note = Octave
+B. Counterpoint Below the CF:
+	•	Measure (n-1): Thesis = 5th | Arsis = minor 3rd
+	•	Final Measure: Whole note = Unison (or Octave)
+V. Strategic Exceptions and Planning
+	1	Register Reset: If the voices become too close or contrary motion is impossible, use a leap of a minor 6th or an octave to reposition the counterpoint.
+	2	Forward Planning: Each measure must be chosen not only for its own correctness but to facilitate a valid progression into the following two measures.
+	3	Prohibited Intervals: Avoid all augmented and diminished intervals (e.g., the Tritone) in the melodic line, even if reached stepwise, unless the line continues correctly to resolve the tension.
+VI. Summary Checklist for Generation
+	•	[ ] Does every measure have a 2:1 ratio (except the last)?
+	•	[ ] Is every Thesis note consonant?
+	•	[ ] Is every dissonant Arsis a passing tone (approached/left by step)?
+	•	[ ] Are there parallel 5ths/8ths between downbeats? (If yes, is the Arsis leap more or equal to a 4th?)
+	•	[ ] Does the penultimate measure follow the 5-6 (above) or 5-3 (below) formula?
+	•	[ ] Is the "Mi against Fa" (Tritone) avoided?

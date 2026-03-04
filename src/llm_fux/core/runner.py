@@ -156,12 +156,14 @@ class PromptRunner:
         encoded_data = self._load_encoded()
         question_text = self._load_question()
         guides = self._load_guides()
+        example_text = self._load_example()
         # Stash raw components for later logging
         self._last_components = {
             "system_prompt": system_prompt,
             "format_prompt": format_prompt,
             "encoded_data": encoded_data,
             "guides": guides,
+            "example": example_text,
             "question_prompt": question_text,
         }
         # Dataset-specific ordering logic. For the default fux counterpoint dataset
@@ -173,12 +175,14 @@ class PromptRunner:
             ordering = [
                 "question_prompt",  # prompt.md baseline instructions
                 "guides",  # contextual guide(s)
+                "example",  # Fux reference example
                 "format_prompt",  # base_format instructions
                 "encoded_data",  # the score / encoded file
             ]
             section_headers = {
                 "question_prompt": "Task",
                 "guides": "Guide",
+                "example": "Reference Example (by Fux)",
                 "format_prompt": f"Output Format ({self.datatype.upper()})",
                 "encoded_data": f"Encoded {self.datatype.upper()} Source",
             }
@@ -193,6 +197,7 @@ class PromptRunner:
             model_name=None,
             ordering=ordering,
             section_headers=section_headers,
+            example=example_text,
         )
         prompt_input = builder.build()
         if self.max_tokens is not None:
@@ -289,6 +294,74 @@ class PromptRunner:
             else:
                 self.logger.warning("Guide file not found: %s", self.guide)
         return collected
+
+    # Map species names to example file identifiers.
+    _SPECIES_EXAMPLE_FILES = {
+        "first_species": "Example_D_1st_species",
+        "second_species": "Example_D_2nd_species",
+        "third_species": "Example_D_3rd_species",
+        "fourth_species": "Example_D_4th_species",
+        "fifth_species": "Example_D_5th_species",
+    }
+
+    def _load_example(self) -> Optional[str]:
+        """Load a Fux reference example for the detected species and datatype.
+
+        Looks for files in data/examples/<datatype>/ matching the species.
+        Returns the file content or None if no example is available.
+        """
+        species = self._detect_species()
+        example_name = self._SPECIES_EXAMPLE_FILES.get(species)
+        if not example_name:
+            return None
+
+        # Determine position (above/below) from file_id to select the right half
+        position = "below" if self.file_id.lower().startswith("below") else "above"
+
+        # Look for example file in data/examples/<datatype>/
+        data_dir = self.base_dirs.get("encoded", Path("encoded")).parent
+        examples_dir = data_dir / "examples" / self.datatype
+        ext = self._EXT_MAP.get(self.datatype, ".musicxml")
+        example_path = examples_dir / f"{example_name}{ext}"
+
+        if not example_path.is_file():
+            self.logger.debug("No example file found at %s", example_path)
+            return None
+
+        self.logger.info("Loading %s species example for counterpoint %s: %s", species, position, example_path)
+        raw = load_text_file(example_path)
+
+        # The Fux examples contain both above and below counterpoint in one file,
+        # separated by a light-light barline. Extract the relevant half.
+        # Above = first section (counterpoint above CF), Below = second section (counterpoint below CF)
+        if self.datatype == "musicxml":
+            return self._extract_example_section(raw, position)
+
+        return raw
+
+    def _extract_example_section(self, musicxml_content: str, position: str) -> str:
+        """Extract the above or below section from a combined Fux example MusicXML file.
+
+        The files contain two examples separated by a double barline (light-light):
+        - Measures 1-11: Counterpoint ABOVE the cantus firmus
+        - Measures 12-22: Counterpoint BELOW the cantus firmus
+
+        We return the full file with an annotation indicating which section is the
+        relevant example, rather than splitting the XML (which would break the document).
+        """
+        if position == "above":
+            annotation = (
+                "This example shows Fux's counterpoint ABOVE the cantus firmus (D) "
+                "in the first section (measures 1 through the first double barline). "
+                "Use this section as your reference for writing counterpoint above the cantus firmus."
+            )
+        else:
+            annotation = (
+                "This example shows Fux's counterpoint BELOW the cantus firmus (D) "
+                "in the second section (from the second double barline to the end). "
+                "Use this section as your reference for writing counterpoint below the cantus firmus."
+            )
+        return f"{annotation}\n\n{musicxml_content}"
 
     def _save_response(self, response: str) -> None:
         if not self.save_to:
