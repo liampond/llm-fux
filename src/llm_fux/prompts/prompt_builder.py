@@ -34,7 +34,7 @@ class PromptBuilder:
     """
 
     # Maintain explicit set of section keys for validation/extensibility.
-    SECTION_KEYS = ("format_prompt", "encoded_data", "guides", "question_prompt")
+    SECTION_KEYS = ("format_prompt", "encoded_data", "guides", "example", "question_prompt")
 
     def __init__(
         self,
@@ -47,6 +47,7 @@ class PromptBuilder:
         model_name: Optional[str] = None,
         ordering: Optional[List[str]] = None,
         section_headers: Optional[Dict[str, str]] = None,
+        example: Optional[str] = None,
     ) -> None:
         self.system_prompt: Optional[str] = system_prompt
         self.format_prompt: str = format_specific_user_prompt
@@ -57,6 +58,7 @@ class PromptBuilder:
             for g in (guides or []) if g
         ]
         self.question_prompt: str = question_prompt
+        self.example: Optional[str] = example.strip() if example else None
         # Store raw; validation + coercion deferred to build() to satisfy contract tests
         self.temperature = temperature  # type: ignore[assignment]
         self.model_name: Optional[str] = model_name
@@ -85,6 +87,7 @@ class PromptBuilder:
             "format_prompt": self.format_prompt,
             "encoded_data": self.encoded_data,
             "guides": [g for g in self.guides if g],
+            "example": self.example or "",
             "question_prompt": self.question_prompt,
         }
 

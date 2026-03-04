@@ -107,20 +107,24 @@ def build_batch_run_args(config: Dict[str, Any]) -> List[str]:
         if 'guide_path' in batch_config and batch_config['guide_path']:
             args.extend(['--guide', batch_config['guide_path']])
     
-    # Delay
-    if 'delay' in batch_config:
-        args.extend(['--delay', str(batch_config['delay'])])
-    
+    # Parallel jobs
+    if 'parallel' in batch_config:
+        args.extend(['--jobs', str(batch_config['parallel'])])
+
     # Retry
     if 'retry' in batch_config:
         args.extend(['--retry', str(batch_config['retry'])])
-    
-    # Temperature from global config
-    if 'temperature' in config:
+
+    # Temperature: prefer batch_run config, fall back to global config
+    if 'temperature' in batch_config:
+        args.extend(['--temperature', str(batch_config['temperature'])])
+    elif 'temperature' in config:
         args.extend(['--temperature', str(config['temperature'])])
-    
-    # Max tokens from global config
-    if 'max_tokens' in config:
+
+    # Max tokens: prefer batch_run config, fall back to global config
+    if 'max_tokens' in batch_config:
+        args.extend(['--max-tokens', str(batch_config['max_tokens'])])
+    elif 'max_tokens' in config:
         args.extend(['--max-tokens', str(config['max_tokens'])])
     
     return args

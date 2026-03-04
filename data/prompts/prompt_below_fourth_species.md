@@ -13,6 +13,12 @@ STRUCTURE:
 
 If a guide is provided, follow its rules closely.
 
+REFERENCE EXAMPLE:
+- A Fux reference example for this species (cantus firmus in D) is provided alongside the input.
+- Study it carefully for style, voice leading, and interval usage.
+- Cross-reference what you observe with the rules in the guide — the guide formalizes the principles the example illustrates.
+- Use both the guide and the example as complementary references before composing.
+
 REASONING PROCESS — follow these steps internally before writing any output:
 1. ANALYSE the cantus firmus: identify the final note, determine the mode, and count the number of measures.
 2. PLAN the counterpoint measure by measure, verifying each note against all applicable rules.

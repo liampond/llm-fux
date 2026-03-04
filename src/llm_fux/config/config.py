@@ -15,31 +15,13 @@ import yaml
 # Load environment variables from .env
 load_dotenv()
 
-# Hardcoded fallback models — only used if config.yaml has no default_models section.
-_FALLBACK_MODELS = {
-    "openai": "gpt-5.1-2025-11-13",
-    "anthropic": "claude-opus-4-5",
-    "google": "gemini-3-pro-preview",
+# Default models by provider
+# DO NOT CHANGE UNDER ANY CIRCUMSTANCES
+DEFAULT_MODELS = {
+    "openai": "gpt-5.2-2025-12-11",
+    "anthropic": "claude-3-5-sonnet-20241022",
+    "google": "gemini-2.0-flash-001",
 }
-
-
-def _load_default_models() -> dict:
-    """Load default model identifiers from config.yaml, falling back to hardcoded values."""
-    try:
-        cfg = load_config()
-        yaml_models = cfg.get("default_models", {})
-        if yaml_models:
-            return {
-                "openai": yaml_models.get("openai", _FALLBACK_MODELS["openai"]),
-                "anthropic": yaml_models.get("anthropic", _FALLBACK_MODELS["anthropic"]),
-                "google": yaml_models.get("google", _FALLBACK_MODELS["google"]),
-            }
-    except Exception:
-        pass
-    return dict(_FALLBACK_MODELS)
-
-
-DEFAULT_MODELS = _load_default_models()
 
 # API keys from environment
 API_KEYS = {
