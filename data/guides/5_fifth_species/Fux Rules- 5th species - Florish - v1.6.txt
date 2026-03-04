@@ -39,7 +39,7 @@ o The motion of two consonances after each other can in third species logic happ
 d. Fourth Species logic 
 o Preparation (beat 3): A consonant half note on beat 3 is tied across the barline to beat 1 of the next measure.
 o Suspension (beat 1): The tied note, now metrically displaced onto the strong beat, may form either a consonance or a dissonance with the cantus firmus. This is the only context in which a dissonance on beat 1 is admissible.
-o Resolution (beat 2): The suspended note resolves by descending step to a consonant interval. Upward resolution is forbidden.
+o Resolution: The suspended note must resolve by descending step to a consonant interval. Upward resolution is forbidden. The resolution occurs on beat 3 if the suspension is sustained until that point, or on beat 2 if intervening quarter-note diminution is introduced.
 Any dissonance not falling under the models listed above is forbidden.
 V. Dynamic Species Selection as a Decision Protocol
 In fifth-species counterpoint, rhythm, pitch, and species logic are evaluated jointly at every step, and none of these parameters may be selected in isolation. The generative process unfolds through incremental constraint satisfaction: metric position limits the rhythmic options available at each moment, voice-leading rules continuously filter the resulting rhythmÐpitch combinations, and viable solutions are gradually retained or discarded as the counterpoint progresses. Species choice is therefore not fixed in advance but emerges dynamically from this ongoing process of evaluation and selection. 
@@ -65,15 +65,19 @@ B. Preparation
 C. Treatment of the dissonance
 In fifth species, the preparation does not necessarily reappear as a tied half note on the strong beat. Two realizations are permitted:
 1. Classical fourth-species realization: The preparation is tied into the first beat as a half note.
-2. Division into two quarter notes on the beat 1 and 2: 
+2. Division\diminution into two quarter notes on the beat 1 and 2: 
 The first quarter note must be identical in pitch to the preparation and therefore forms the suspension dissonance and is tied to the prior half note. 
 The second quarter note may serve one of the following functions:
 ¥ resolution by descending stepwise motion,
 ¥ anticipation, understood as repetition of the pitch of the upcoming resolution on the following weak beat,
 ¥ consonant accented skip to a consonant interval above or below, not exceeding a perfect fifth, provided that the actual resolution occurs on the subsequent weak beat and that all voice-leading principles are respected.
-In all cases involving dissonance: the resolution must occur by descending step, upward resolution remains forbidden.
-In both realizations, in case of the cantus above, the only permitted dissonance is a second resolving to a third. Do not use any fourth as syncopation in this case.
-In both realizations, in case of the cantus below, the syncopation of a second on beat 1 resolving into a unison on beat 2 is prohibited. Use instead 9Ð8, 7Ð6, or 4Ð3 suspension types.
+In all cases involving dissonance: the resolution must occur by descending step. Upward resolution remains forbidden.
+
+When the cantus firmus is placed above: the only permitted dissonant intervals between the cantus firmus and the generated voice are: a 2nd resolving to a 3rd, a 4th resolving to a 5th, and a 9th resolving to a 10th.
+When the cantus firmus is placed below: the admissible suspension patterns are 4Ð3 and 7Ð6.
+
+The 2Ð1 suspension is permitted only if the preparation forms a third in the preceding measure. The same principle applies to the 9Ð8 suspension, which is allowed only when the preparation forms a tenth in the preceding measure. This restriction exists to prevent delayed parallel octaves: if a 9Ð8 suspension were prepared by an 8th, the structural reduction would reveal an 8Ð8 succession, which is forbidden. By requiring a 10th as preparation, the reduction yields 10Ð8, which is legal. The LLM must apply this as a hard constraint and must not seek workarounds by re-labeling the preparation interval.
+
 D. Consonant Syncopation
 If a half note on beat 3 is tied to a consonant interval on beat 1 of the next measure, no obligatory resolution is required, and the line may proceed freely, subject to general voice leading and rhythmic constraints.
 VII. Eighth-Note Groupings and Ornamental Repetition
@@ -99,9 +103,8 @@ VIII. Melodic Conduct and Line Priority
 1. Stepwise motion is normative.
 2. Leaps are permitted only between consonant notes.
 3. Any leap must be compensated by stepwise motion in the opposite direction.
-4. Chains of leaps in the same direction are forbidden.
-5. Melodic tritones (augmented fourths or diminished fifths) are forbidden.
-6. Pitch repetition is avoided except when rhythmically justified for anticipations.
+4. Melodic tritones (augmented fourths or diminished fifths) are forbidden.
+5. Pitch repetition is avoided except when rhythmically justified for anticipations.
 IX. Beginning, Penultimate Measure, and Final Cadence
 A. Beginning
 1. The counterpoint may begin with a rest.
@@ -113,7 +116,7 @@ The last note of the penultimate measure must prepare the final consonance accor
 o major sixth resolving to an octave,
 * counterpoint below the cantus:
 o minor third resolving to a unison.
-Do not forget to put the right accidentals like in the following table. 
+Do not forget to put the right accidentals for the cadential resolution like in the following table. 
 Final
 Accidental for cadential resolution
 D
@@ -121,7 +124,7 @@ C?
 E
 F?
 F
-B? (use it anywhere, to suppress the melodic tritone)
+B?
 G
 F?
 A
@@ -136,11 +139,8 @@ X. Forbidden Successions and Voice-Leading Constraints
 All prohibitions from first and second species apply without exception:
 * Parallel fifths and octaves are forbidden. The presence of intervening diminutions or ornamental figures does not neutralize forbidden parallels if they remain perceptible under reduction. Pay particular attention that the last note of the generated voice with the cantus in one measure does not create parallel fifths with the interval on the first beat of the next measure.
 * Direct (hidden) fifths and octaves are forbidden. A direct fifth or octave occurs when two voices move in similar motion (both ascending or both descending) into a perfect fifth or octave, without at least one voice arriving by step. To avoid this, use contrary motion instead in the generated voice.
-* Voice crossing is forbidden. If the cantus firmus is the lower voice, the counterpoint must remain above it at all times. If the cantus firmus is the upper voice, the counterpoint must remain below it at all times.
+* Voice crossing is almost forbidden. If the cantus firmus is the lower voice, the counterpoint must remain above it at all times. If the cantus firmus is the upper voice, the counterpoint must remain below it at all times.
 * Excessive spacing is forbidden. The interval between the cantus firmus and the counterpoint must not exceed a tenth.
 * Leaps into or out of unison are forbidden, except at the beginning and the end.
 * Immediate pitch repetition is forbidden. A pitch may not be repeated on consecutive beats. The sole exception occurs in the ornamental resolution of a syncopation, where a repeated pitch between beats 2 and 3 may appear as part of the prescribed ornamental figure.
-
 Please check at the end if all those rules are correct and if not correct yourself. 
-
-
