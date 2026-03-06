@@ -1,16 +1,21 @@
 Operational Guide: Third Species Counterpoint (4:1)
-I. Metric Framework
-- The Ratio: 4:1. Four quarter notes (crotchets) against one whole note (semibreve) of the Cantus Firmus (CF).
+I. Consonance Classification (reference for all interval judgments in this guide)
+- Perfect consonances: unison, perfect 5th, perfect octave.
+- Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+- Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+When interval quality is not specified, the diatonic pitches of the mode govern the quality automatically. Accidentals are applied only where explicitly required by the cadential accidentals table.
+II. Metric Framework
+- The Ratio: 4:1. Four quarter notes (crotchets) against one whole note of the Cantus Firmus (CF).
 - The Opening: The first sounding note must be a perfect consonance (1, 5, or 8). No rest is permitted in the first measure.
 - The Conclusion: The final measure must be a single whole note (unison or octave).
-II. Intervallic Rules 
+III. Intervallic Rules 
 1. Beat 1 : MUST always be consonant with the CF.
 2. Beat 2: Dissonant ONLY as a passing tone (approached and left by step).
 3. Beat 3: - Default: Consonant.
 o The Four-Note Scalar Rule: Beat 3 may be dissonant ONLY if it is part of a unidirectional 4-note scale (e.g., 1-2-3-4). Beat 2 and Beat 4 must be consonant. If the melody changes direction, Beat 3 MUST be consonant.
 4. Beat 4: Dissonant ONLY as a passing tone leading to the next consonant downbeat.
 5. Unison: Generally prohibited within the exercise; permitted only in the first and last measures.
-III. The Nota Cambiata (Authorized Exception)
+IV. The Nota Cambiata 
 The only figure where a dissonance is left by a leap. It must follow this exact 5-note pattern:
 1. Step 1: Beat 1 or 3 is Consonant.
 2. Step 2: Next note is Dissonant (moves down by step).
@@ -20,16 +25,15 @@ The only figure where a dissonance is left by a leap. It must follow this exact 
 Standard Interval Patterns:
 - Counterpoint ABOVE CF: 8 - 7 - 5 - 6 | 8
 - Counterpoint BELOW CF: 3 - 4 - 6 - 5 | 1
-IV. Parallelism & Voice Leading Logic
+The Nota Cambiata should not be used multiples times in a row. 
+V. Parallelism & Voice Leading Logic
 1. The Structural Reduction (1:1 Check): Extract Beat 1 and Beat 3 of every measure. This reduction must not contain parallel 5ths or 8ths.
 2. The Syncopated Parallel (T4-T1): Beat 4 of Measure A must not form the same perfect interval (5th or 8th) as Beat 1 of Measure B.
 3. Voice Crossing: Permitted only as an emergency measure. Must resolve within three quarter notes.
 4. Leap Compensation: Any melodic leap > 3rd must be followed immediately by stepwise motion in the opposite direction.
-This is an excellent addition. Allowing the Nota Cambiata as a cadential bridge is historically accurate and provides the melodic flexibility needed to avoid awkward leaps when approaching the final tonic.
-Here is the updated Section V and the Strategic Checklist, incorporating the rule that the Cambiata is valid in cadences as long as the structural target (Maj6 or min3) is hit on the fourth beat.
-________________________________________
-V. Cadential Treatment (Penultimate Measure)
-The penultimate measure must lead the counterpoint to the final tonic. This is achieved by targeting a specific interval on Beat 4 to create the required expansion or contraction.
+5. Spacing: The vertical distance between the two voices must not exceed a 10th (compound 3rd) at any point. Intervals of an 11th or greater are forbidden. This constraint applies to every quarter note.
+VI. Cadential Treatment (Penultimate Measure)
+The penultimate measure must lead the counterpoint to the final. This is achieved by targeting a specific interval on Beat 4 to create the required expansion or contraction.
 A. Counterpoint ABOVE the CF:
 Target Interval: The last quarter note (Beat 4) of the penultimate measure MUST be a Major 6th.
 Formula of Successions:
@@ -41,14 +45,24 @@ Formulas of  Successions:
 Stepwise: 3-4-5-6 | 8
 Cambiata Option: The 3-4-6-5 pattern is permitted here, provided the 5 (which functions as the 5th of the pattern but results in the required minor 3rd against the CF) occurs on Beat 4 to resolve to the Unison/Octave.
 C. Special Cadential Rule:
-In both cases, the formula of the Nota Cambiata may be used for the cadence under the condition that it 
-VI. Strategic Checklist for Generation
+In both cases, the formula of the Nota Cambiata may be used for the cadence under the condition that it uses the interval pattern of §III for above and below.
+D. Cadential Accidentals (applies to Beat 4 of the penultimate measure — the last note before the final whole note)
+The following accidentals must be applied where required. Apply the following table based on the final note of the cantus firmus:
+	Final note / Required accidental
+	D / C#
+	C / none
+	E / none
+	F / none
+	G / F#
+	A / G#
+VII. Strategic Checklist for Generation
 [ ] Reduction Check: No parallel 5ths/8ths between structural T1 and T3 notes.
 [ ] T4-T1 Check: Beat 4 does not repeat a perfect interval on the next downbeat.
 [ ] T3 Dissonance: If T3 is dissonant, is the melody a 4-note scale in one direction?
-[ ] Tritone Window: Is the 5-note melodic window free of augmented/diminished outlines?
 [ ] Cambiata Pattern: Does the skip from dissonance strictly follow the 8-7-5-6 or 3-4-6-5 formulas?
 [ ] Cadential Cambiata: If a Cambiata is used in the penultimate measure, does it land on the Maj6 (above) or min3 (below) on Beat 4?
-[ ] Cadence Target: Does Beat 4 of the penultimate measure reach the required interval to resolve to the tonic?
+[ ] Cadence Target: Does Beat 4 of the penultimate measure reach the required interval to resolve to the final?
+[ ] Cadential Accidental: Is the cadential accidental applied correctly to Beat 4 of the penultimate measure (D/C#, G/F#, A/G#)?
+[ ] Spacing: Does the vertical interval between the two voices stay within a 10th at every quarter note?
 [ ] Rhythmic Conclusion: Does the flow of quarter notes stop exactly on the first beat of the last measure?
-[ ] Final Value: Is the final measure a single whole note (semibreve) resolving to the tonic?
+[ ] Final Value: Is the final measure a single whole note resolving to the final?

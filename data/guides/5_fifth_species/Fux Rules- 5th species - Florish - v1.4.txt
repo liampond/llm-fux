@@ -1,4 +1,4 @@
-Fifth Species Counterpoint Ñ Operational Guide (Florid Counterpoint)
+Fifth Species Counterpoint — Operational Guide (Florid Counterpoint)
 I. General Definition and Scope
 Fifth-species counterpoint consists of a strictly regulated synthesis of all rhythmic and contrapuntal procedures admitted in first-, second-, third-, and fourth-species counterpoint within a single exercise. This guide defines the conditions under which such a synthesis is to be constructed, evaluated, and validated.
 The fifth species functions as a synthetic species, not as an autonomous rule system. All general voice-leading rules from previous species and guides remain fully in force throughout, except where explicitly modified in the present guide.
@@ -72,23 +72,23 @@ o resolve to a consonance within the same durational span as the dissonant value
 5. Any dissonance not falling under the models listed above is forbidden.
 
 V. Dynamic Species Selection as a Decision Protocol
-In fifth-species counterpoint, rhythm, pitch, and species logic are evaluated jointly at every step, and none of these parameters may be selected in isolation. The generative process unfolds through incremental constraint satisfaction: metric position limits the rhythmic options available at each moment, voice-leading rules continuously filter the resulting rhythmÐpitch combinations, and viable solutions are gradually retained or discarded as the counterpoint progresses. Species choice is therefore not fixed in advance but emerges dynamically from this ongoing process of evaluation and selection.
+In fifth-species counterpoint, rhythm, pitch, and species logic are evaluated jointly at every step, and none of these parameters may be selected in isolation. The generative process unfolds through incremental constraint satisfaction: metric position limits the rhythmic options available at each moment, voice-leading rules continuously filter the resulting rhythm–pitch combinations, and viable solutions are gradually retained or discarded as the counterpoint progresses. Species choice is therefore not fixed in advance but emerges dynamically from this ongoing process of evaluation and selection.
 1. Metric Position Identification
 For each new note, the system first determines the metric position (strong beat or weak beat). This determination constrains which rhythmic values and species logics may be activated at that point, in accordance with the rules governing strong and weak beats.
-2. Joint Generation of RhythmÐPitch Candidates
+2. Joint Generation of Rhythm–Pitch Candidates
 Given the metric position, the system generates joint (rhythm, pitch) candidates. A candidate is admissible only if the pitch lies within a valid melodic range, forms a potentially legal interval with the cantus firmus, and does not immediately violate any voice-leading constraint (such as forbidden repetition, illegal leap, or improper spacing). If no pitch can realize a given rhythmic option without violation, that option is excluded.
 3. Local Validation and Progressive Constraint Filtering
 At each step, all admissible joint candidates are evaluated for local voice-leading correctness. Candidates that satisfy both metric constraints and voice-leading rules remain viable, indicating that a locally coherent solution exists at that temporal point. The system then advances to the next temporal point (the following beat or subdivision), where the same evaluation is repeated. When conflicts arise, the set of viable candidates is progressively narrowed, eliminating choices that lead to impasses in later continuation.
 4. Commitment and Backtracking
-If no viable candidate remains at a given point, the system must return to the most recent decision point and attempt an alternative joint (rhythm, pitch) choice. Backtracking operates on the combined rhythmÐpitch decision, rather than on rhythm or pitch alone, ensuring that the generative process remains coherent and responsive to emerging constraints.
+If no viable candidate remains at a given point, the system must return to the most recent decision point and attempt an alternative joint (rhythm, pitch) choice. Backtracking operates on the combined rhythm–pitch decision, rather than on rhythm or pitch alone, ensuring that the generative process remains coherent and responsive to emerging constraints.
 VI. Special Cases in Fifth Species: Syncopation and Expanded Fourth-Species Treatment
 This section describes special cases specific to fifth-species counterpoint, in which fourth-species logic is retained but expanded through rhythmic realizations that do not occur in isolated fourth-species exercises.
 
 A. General Principle
 Syncopation remains governed by fourth-species logic but admits expanded rhythmic realizations in fifth species. A syncopation still consists of:
-¥ a consonant preparation,
-¥ a metrically displaced dissonance (when applicable),
-¥ a resolution governed by stepwise motion.
+• a consonant preparation,
+• a metrically displaced dissonance (when applicable),
+• a resolution governed by stepwise motion.
 No syncopation may violate these structural components.
 B. Preparation
 1. The preparation must always form a consonant interval with the cantus firmus.
@@ -99,29 +99,29 @@ Classical fourth-species realization: The preparation is tied into the strong be
 Division into two quarter notes on the strong beat: 
 The first quarter note must be identical in pitch to the preparation and therefore forms the suspension dissonance and is tied to the prior half note. 
 The second quarter note may serve one of the following functions:
-¥ resolution by descending stepwise motion,
-¥ anticipation, understood as repetition of the pitch of the upcoming resolution on the following weak beat,
-¥ consonant accented skip to a consonant interval above or below, not exceeding a perfect fifth, provided that the actual resolution occurs on the subsequent weak beat and that all voice-leading principles are respected.
+• resolution by descending stepwise motion,
+• anticipation, understood as repetition of the pitch of the upcoming resolution on the following weak beat,
+• consonant accented skip to a consonant interval above or below, not exceeding a perfect fifth, provided that the actual resolution occurs on the subsequent weak beat and that all voice-leading principles are respected.
 In all cases involving dissonance: the resolution must occur by descending step, upward resolution remains forbidden.
 D. Consonant Syncopation
 If the metrically displaced note forms a consonant interval on the strong beat, no obligatory resolution is required, and the line may proceed freely, subject to general melodic and rhythmic constraints.
 VII. Eighth-Note Groupings and Ornamental Repetition
-This section describes an ornamental extension specific to fifth species, combining fourth- and third-species logic in a manner not prescribed in their isolated forms. In syncopation contexts, a grouping of two eighth notes may function as an ornamental elaboration of the suspensionÐresolution process, replacing the second quarter note on the strong beat, provided that the following conditions are met:
-¥ the structural resolution of the suspension remains a descending stepwise motion to a consonant interval,
-¥ the eighth-note pair does not redefine the point of resolution, but decorates either the resolution pitch itself or the approach to that resolution,
-¥ the ornamental figure remains strictly conjunct.
+This section describes an ornamental extension specific to fifth species, combining fourth- and third-species logic in a manner not prescribed in their isolated forms. In syncopation contexts, a grouping of two eighth notes may function as an ornamental elaboration of the suspension–resolution process, replacing the second quarter note on the strong beat, provided that the following conditions are met:
+• the structural resolution of the suspension remains a descending stepwise motion to a consonant interval,
+• the eighth-note pair does not redefine the point of resolution, but decorates either the resolution pitch itself or the approach to that resolution,
+• the ornamental figure remains strictly conjunct.
 A. Ornamented Accent
-If the preparation (e.g., D as a half note) is tied into a quarter note forming the suspension dissonance, the subsequent eighth-note figure (e.g., EÐD) may precede the consonant resolution pitch (e.g., C as a quarter note).
+If the preparation (e.g., D as a half note) is tied into a quarter note forming the suspension dissonance, the subsequent eighth-note figure (e.g., E–D) may precede the consonant resolution pitch (e.g., C as a quarter note).
 In this case:
-¥ the eighth-note ascent functions as an ornamented accent,
-¥ the true resolution of the syncopation remains the following consonant pitch,
-¥ abstracting away the ornament, the suspension is interpreted as resolving downward without interruption.
+• the eighth-note ascent functions as an ornamented accent,
+• the true resolution of the syncopation remains the following consonant pitch,
+• abstracting away the ornament, the suspension is interpreted as resolving downward without interruption.
 B. Ornamented Anticipation
-If the eighth-note pair decorates the pitch of the upcoming resolution (e.g., DÐCÐBÐC), the lower neighbor functions as an ornamental anticipation.
+If the eighth-note pair decorates the pitch of the upcoming resolution (e.g., D–C–B–C), the lower neighbor functions as an ornamental anticipation.
 In this case:
-¥ the resolution pitch is already implied metrically,
-¥ the eighth-note figure elaborates the weak-beat resolution,
-¥ the suspension remains structurally descending, despite surface ornamentation.
+• the resolution pitch is already implied metrically,
+• the eighth-note figure elaborates the weak-beat resolution,
+• the suspension remains structurally descending, despite surface ornamentation.
 In both cases, the suspension is always interpreted as descending at the structural level, the eighth-note grouping functions as an ornamental intensification rather than a deviation from fourth-species logic, and melodic continuity is not considered interrupted.
 VIII. Melodic Conduct and Line Priority
 1. Stepwise motion is normative.
