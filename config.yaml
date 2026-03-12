@@ -50,8 +50,8 @@ single_run:
   file: Below_C       # File to test (e.g., Above_C)
   
   # Test configuration
-  model: claude                                          # chatgpt, claude, or gemini
-  model_name: claude-opus-4-5                            # Specific model version (optional)
+  model: chatgpt                                         # chatgpt, claude, or gemini
+  model_name: gpt-5.1-2025-11-13                         # Specific model version (optional)
   datatype: musicxml                                     # musicxml
   
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
@@ -60,8 +60,8 @@ single_run:
   guide_path: "data/guides/5_fifth_species/Fux Rules- 5th species - Florish - v2.3.txt"
 
   # Model parameters
-  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
-  max_tokens: 16000        # Claude: standard budget is sufficient
+  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output.
+  max_tokens: 16000        # Standard budget sufficient for OpenAI models
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
