@@ -20,6 +20,13 @@ default_models:
 # Gemini 3: Google recommends keeping temperature at 1.0 (lowering may cause
 # looping or degraded performance).  OpenAI & Anthropic: 0.0 for deterministic.
 # These are used when no explicit temperature is provided in the run config.
+#
+# IMPORTANT — Gemini thinking models & max_tokens:
+# gemini-3-pro-preview (and other "thinking" Gemini models) consume a large number
+# of tokens internally for reasoning BEFORE producing any output. With max_tokens=16000
+# the model spent ~15 000 tokens on thinking and only had ~600 left for the actual
+# MusicXML response, causing truncated/incomplete files.
+# Always set max_tokens to at least 65536 when using a Gemini thinking model.
 model_temperatures:
   chatgpt: 0.0
   claude: 0.0
@@ -37,24 +44,24 @@ outputs_dir: ./outputs
 # Set enabled: true, configure your test, then run: poetry run run-config
 
 single_run:
-  enabled: false                   # Set to true to enable single run mode
+  enabled: true                    # Set to true to enable single run mode
   
   # Required
-  file: Above_D       # File to test (e.g., Above_C)
+  file: Below_C       # File to test (e.g., Above_C)
   
   # Test configuration
-  model: chatgpt                                         # chatgpt, claude, or gemini
-  model_name:                                            # Specific model version (optional)
+  model: claude                                          # chatgpt, claude, or gemini
+  model_name: claude-opus-4-5                            # Specific model version (optional)
   datatype: musicxml                                     # musicxml
   
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
   # `null` for no guide
   # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
-  guide_path: data/guides/1_first_species/1vs1_v1.2.txt
+  guide_path: "data/guides/5_fifth_species/Fux Rules- 5th species - Florish - v2.3.txt"
 
   # Model parameters
-  temperature: 0.5         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
-  max_tokens: 16000        # Maximum response length (16000 prevents truncation)
+  temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output, 1.0 for creative.
+  max_tokens: 16000        # Claude: standard budget is sufficient
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
@@ -63,7 +70,7 @@ single_run:
 # Set enabled: true, configure your tests, then run: poetry run run-config
 
 batch_run:
-  enabled: true            # Set to true to enable batch run mode
+  enabled: false           # Set to true to enable batch run mode
   
   # What to test (list one or more of each)
   models:                  # One or more: chatgpt, claude, gemini
