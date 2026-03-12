@@ -6,10 +6,15 @@ VOICE PLACEMENT:
 - Do NOT rewrite, alter, transpose, or re-voice the cantus firmus. It must appear in the output exactly as given.
 
 STRUCTURE:
-- Each measure may freely combine rhythmic values from all previous species: whole notes (1st), half notes (2nd), quarter notes (3rd), and syncopated/tied half notes (4th)
+- Fifth species is florid counterpoint: the defining quality is CONTINUOUS RHYTHMIC VARIETY flowing naturally from measure to measure. Each measure draws freely from all four textures:
+    * 1st-species texture: a single whole note (used sparingly, for emphasis or rest)
+    * 2nd-species texture: two half notes (no tie across barline)
+    * 3rd-species texture: four quarter notes
+    * 4th-species texture: a half note tied across the barline into the next measure (suspension + resolution)
+  These textures may also be mixed WITHIN a single measure (e.g. two quarters + one half, or a tied half + two quarters).
+- The exercise should feel like a single continuous melodic line that changes its rhythmic character often. No single texture should dominate for more than two consecutive measures.
 - Measure N (FINAL): exactly ONE whole note for the cadence
-- Rhythmic variety is essential — avoid writing consecutive measures in the same species
-- Suspensions (4th species) should be used where possible, especially approaching cadences
+- Measure N-1 (PENULTIMATE): exactly two half notes — the first is the suspended dissonance (7th or 2nd), the second is its resolution
 
 If a guide is provided, follow its rules closely.
 
@@ -25,7 +30,10 @@ REASONING PROCESS — follow these steps internally before writing any output:
 3. SELF-CHECK the completed counterpoint:
    - Verify the output contains exactly the same number of measures as the input.
    - Scan for parallel fifths and parallel octaves — revise if any are found.
-   - [PLACEHOLDER: Pierre will add species-specific verification checks here]
+   - CHECK VARIETY: read through your rhythmic texture measure by measure. If any single texture (e.g. all half notes, all quarters) appears more than twice in a row, revise those measures to restore variety.
+   - CHECK every downbeat (beat 1): the vertical interval must be a perfect consonance (P8, P5, P1) or imperfect consonance (3rd, 6th, 10th). A 4th, 7th, or 2nd on beat 1 is forbidden except when it is the dissonant suspension in a 4th-species measure.
+   - CHECK the penultimate measure: beat 1 must be a dissonant suspension (7-6 or 2-3), beat 3 must be the resolution.
+   - CHECK the final measure: exactly one whole note forming a perfect consonance (P8 or P1) with the cantus firmus.
 4. ENCODE the result as a valid MusicXML file matching the structural conventions of the input.
 
 ENCODING ACCURACY:
