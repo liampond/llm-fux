@@ -1,0 +1,76 @@
+Operational Guide: Third Species Counterpoint (4:1)
+I. Consonance Classification (reference for all interval judgments in this guide)
+- Perfect consonances: unison, perfect 5th, perfect octave.
+- Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+- Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+When interval quality is not specified, the diatonic pitches of the mode govern the quality automatically. Accidentals are applied only where explicitly required by the cadential accidentals table or by the Bb rule for F (see §V).
+II. Metric Framework
+Metrical hierarchy: the primary metric layer is binary. Each measure divides first into two half-note positions: Thesis (first half, beats 1 and 2) and Arsis (second half, beats 3 and 4). Beat 1 is the onset of the Thesis; beat 3 is the onset of the Arsis. Beats 2 and 4 are interior positions within their respective halves: beat 2 belongs to the Thesis, beat 4 to the Arsis. Any rule stated in terms of Thesis and Arsis governs this half-note layer. Beat numbers name metric positions within that layer; they describe location, not rhythmic value.
+- The Ratio: 4:1. Four quarter notes (crotchets) against one whole note of the Cantus Firmus (CF).
+- The Opening: The first sounding note must be a perfect consonance (1, 5, or 8). No rest is permitted in the first measure.
+- The Conclusion: The final measure must be a single whole note (unison or octave).
+III. Intervallic Rules
+1. Beat 1 : MUST always be consonant with the CF.
+2. Beat 2: Dissonant ONLY as a passing tone (approached and left by step).
+3. Beat 3: - Default: Consonant.
+o The Four-Note Scalar Rule: Beat 3 may be dissonant ONLY if it is part of a unidirectional 4-note scale (e.g., 1-2-3-4). Beat 2 and Beat 4 must be consonant. If the melody changes direction, Beat 3 MUST be consonant.
+4. Beat 4: Dissonant ONLY as a passing tone leading to the next consonant downbeat.
+5. Unison: Generally prohibited within the exercise; permitted only in the first and last measures.
+IV. The Nota Cambiata
+The only figure where a dissonance is left by a leap. It must follow this exact 5-note pattern:
+1. Step 1: Beat 1 or 3 is Consonant.
+2. Step 2: Next note is Dissonant (moves down by step).
+3. Step 3: Next note is Consonant (reached by leap of a 3rd down).
+4. Step 4: Next note is Consonant (moves up by step).
+5. Step 5: Next note is Consonant (moves up by step).
+Standard Interval Patterns:
+- Counterpoint ABOVE CF: 8 - 7 - 5 - 6 | 8
+- Counterpoint BELOW CF: 3 - 4 - 6 - 5 | 1
+The Nota Cambiata should not be used multiples times in a row.
+V. Cantus Firmus in F (Bb Rule)
+When the cantus firmus is in F (Lydian mode), B must be lowered to Bb in the generated voice wherever it would create a melodic tritone. This applies in two specific situations:
+(a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
+(b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
+This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. The rule applies to every quarter note — passing tones and the nota cambiata figure included. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
+VI. Parallelism & Voice Leading Logic
+1. The Structural Reduction (1:1 Check): Extract Beat 1 and Beat 3 of every measure. This reduction must not contain parallel 5ths or 8ths.
+2. The Syncopated Parallel (T4-T1): Beat 4 of Measure A must not form the same perfect interval (5th or 8th) as Beat 1 of Measure B.
+3. Voice Crossing: Permitted only as an emergency measure. Must resolve within three quarter notes.
+4. Leap Compensation: Any melodic leap > 3rd must be followed immediately by stepwise motion in the opposite direction.
+5. Spacing: The vertical distance between the two voices must not exceed a 10th (compound 3rd) at any point. Intervals of an 11th or greater are forbidden. This constraint applies to every quarter note.
+VII. Cadential Treatment (Penultimate Measure)
+The penultimate measure must lead the counterpoint to the final. This is achieved by targeting a specific interval on Beat 4 to create the required expansion or contraction.
+A. Counterpoint ABOVE the CF:
+Target Interval: The last quarter note (Beat 4) of the penultimate measure MUST be a Major 6th.
+Formula of Successions:
+Stepwise: 3-5-4-3 | 1 or 6-5-4-3 | 1
+Cambiata Option: The 8-7-5-6 pattern is permitted here, provided the 6 (Major 6th) occurs on Beat 4 to resolve to the Octave.
+Note on the 5th (generated voice above, cantus below): any 5th appearing within these formulas (beat 1 or 2 of the penultimate measure, or the third position of the Cambiata pattern) must be a perfect 5th. When the penultimate CF note is B, the diatonic 5th above is F natural — a diminished 5th, which is forbidden. Apply F# to produce a perfect 5th. Example: cantus in A, penultimate CF note = B → the 5th in the formula = F# (P5).
+B. Counterpoint BELOW the CF:
+Target Interval: The last quarter note (Beat 4) of the penultimate measure MUST be a minor 3rd.
+Formulas of  Successions:
+Stepwise: 3-4-5-6 | 8
+Cambiata Option: The 3-4-6-5 pattern is permitted here, provided the 5 (which functions as the 5th of the pattern but results in the required minor 3rd against the CF) occurs on Beat 4 to resolve to the Unison/Octave.
+C. Special Cadential Rule:
+In both cases, the formula of the Nota Cambiata may be used for the cadence under the condition that it uses the interval pattern of §III for above and below.
+D. Cadential Accidentals (applies to Beat 4 of the penultimate measure — the last note before the final whole note)
+The following accidentals must be applied where required. Apply the following table based on the final note of the cantus firmus:
+	Final note / Required accidental
+	D / C#
+	C / none
+	E / none
+	F / none
+	G / F#
+	A / G#
+VIII. Strategic Checklist for Generation
+[ ] Reduction Check: No parallel 5ths/8ths between structural T1 and T3 notes.
+[ ] T4-T1 Check: Beat 4 does not repeat a perfect interval on the next downbeat.
+[ ] T3 Dissonance: If T3 is dissonant, is the melody a 4-note scale in one direction?
+[ ] Cambiata Pattern: Does the skip from dissonance strictly follow the 8-7-5-6 or 3-4-6-5 formulas?
+[ ] Cadential Cambiata: If a Cambiata is used in the penultimate measure, does it land on the Maj6 (above) or min3 (below) on Beat 4?
+[ ] Cadence Target: Does Beat 4 of the penultimate measure reach the required interval to resolve to the final?
+[ ] Cadential Accidental: Is the cadential accidental applied correctly to Beat 4 of the penultimate measure (D/C#, G/F#, A/G#)?
+[ ] Spacing: Does the vertical interval between the two voices stay within a 10th at every quarter note?
+[ ] Rhythmic Conclusion: Does the flow of quarter notes stop exactly on the first beat of the last measure?
+[ ] Final Value: Is the final measure a single whole note resolving to the final?
+[ ] Bb Rule: If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
