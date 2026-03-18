@@ -5,6 +5,10 @@ I. Vertical Intervals
 Write one counterpoint note for each cantus-firmus note. All notes share the same time-value, normally whole notes.
 2. Consonance Classification
 Only consonances are permitted between the two voices at every simultaneity.
+Interval Counting Convention: The cantus firmus (CF) is always the reference voice and the starting point for interval counting. The direction of counting is determined by the position of the CF relative to the counterpoint:
+- CF is the LOWER voice (counterpoint above): count UPWARD from the CF to the counterpoint. Example: CF = E4, CP = D5 — count up E4→F4→G4→A4→B4→C5→D5 = 7 steps = 7th (m7, dissonant).
+- CF is the UPPER voice (counterpoint below): count DOWNWARD from the CF to the counterpoint. Example: CF = G4, CP = D4 — count down G4→F4→E4→D4 = 4 steps = 4th (P4, dissonant).
+The interval number is identical regardless of direction; the convention simply anchors counting to the CF at all times. Before identifying or notating any interval, confirm which voice is the CF, then begin counting from it in the appropriate direction.
 -  Perfect consonances: unison, perfect 5th, perfect octave.
 -  Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
 -  Dissonances (strictly forbidden): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
@@ -62,7 +66,7 @@ The total span of the counterpoint line (from its lowest note to its highest not
 
 IV. Voice Disposition
 1. Counting Intervals
-When the counterpoint lies above the cantus firmus, intervals are counted upward from the cantus firmus note. When the counterpoint lies below, intervals are counted downward from the cantus firmus note. This is essential: a "5th below" the cantus firmus means counting five scale steps downward, not upward.
+See §I.2 for the full interval counting convention. In summary: always start from the CF and count upward when the CF is the lower voice, or downward when the CF is the upper voice. This is essential: a "5th below" the cantus firmus means counting five scale steps downward from the CF, not upward.
 2. Voice-Crossing
 Voice-crossing is not permitted. The voice designated as "above" must remain above the cantus firmus at all times, and vice versa.
 3. Spacing

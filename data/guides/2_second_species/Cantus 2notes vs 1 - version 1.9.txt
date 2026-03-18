@@ -2,6 +2,10 @@
 
 This guide establishes the precise constraints and logic required to generate or evaluate second-species counterpoint, following the principles of Gradus ad Parnassum.
 I. Consonance Classification (reference for all interval judgments in this guide)
+Interval Counting Convention: The cantus firmus (CF) is always the reference voice and the starting point for interval counting. The direction of counting is determined by the position of the CF relative to the counterpoint:
+- CF is the LOWER voice (counterpoint above): count UPWARD from the CF to the counterpoint. Example: CF = E4, CP = D5 — count up E4→F4→G4→A4→B4→C5→D5 = 7 steps = 7th (m7, dissonant).
+- CF is the UPPER voice (counterpoint below): count DOWNWARD from the CF to the counterpoint. Example: CF = G4, CP = D4 — count down G4→F4→E4→D4 = 4 steps = 4th (P4, dissonant).
+The interval number is identical regardless of direction; the convention simply anchors counting to the CF at all times. Before identifying or notating any interval, confirm which voice is the CF, then begin counting from it in the appropriate direction.
 - Perfect consonances: unison, perfect 5th, perfect octave.
 - Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
 - Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
@@ -24,6 +28,8 @@ Structural stability is determined by the relationship between successive downbe
 	2	The "Third" Limitation: An intervening note on the Arsis that is only a third away from the Thesis does not break the perception of a parallel. The ear "remembers" the first note.
 	3	The Leap Rule: To successfully invalidate a potential parallel between two downbeats, the Arsis must move by a leap of a 4th, 5th, or 6th. This distance causes the ear to "forget" the previous structural note.
 	4	Imperfect to Perfect: When moving from an imperfect consonance to a perfect consonance on consecutive downbeats, contrary motion is required unless a leap of a 4th or larger on the Arsis mitigates the direct succession.
+	5	Cross-Barline Parallel (Arsis → Thesis): CRITICAL. The Arsis note of measure N and the Thesis note of measure N+1 are heard in direct melodic succession. They must not both form a perfect 5th, or both form a perfect octave, against their respective CF notes. The barline creates a visual separation but no audible break; the parallel is fully perceptible and forbidden. Before writing any Arsis note, compute its interval against the current CF, then compute the interval the following Thesis will form against the next CF note. If both are P5, or both are P8, the Arsis note must be replaced. This check must be applied at every barline without exception. Note that this is independent of the Thesis→Thesis parallel rule in §IV.1: both checks must pass.
+	6	Cross-Barline Pitch Repetition (Arsis → Thesis): The Arsis note of measure N must not be identical in pitch to the Thesis note of measure N+1. A repeated pitch across the barline produces stagnant motion and eliminates the forward impulse required at the downbeat. Before finalising any Arsis note, confirm that its pitch differs from the Thesis note that follows it.
 V. Formulas for the Cadences
 The penultimate measure must follow these specific intervallic patterns to resolve to the final whole note.
 A. Counterpoint Above the CF:
@@ -55,7 +61,9 @@ VII. Summary Checklist for Generation
 	- 	[ ] Does every measure have a 2:1 ratio (except the last)?
 	- 	[ ] Is every Thesis note consonant?
 	- 	[ ] Is every dissonant Arsis a passing tone (approached/left by step)?
-	- 	[ ] Are there parallel 5ths/8ths between downbeats? (If yes, is the Arsis leap more or equal to a 4th?)
+	- 	[ ] Are there parallel 5ths/8ths between downbeats (Thesis→Thesis)? (If yes, is the Arsis leap more or equal to a 4th?)
+	- 	[ ] Cross-barline parallel (Arsis→Thesis): does the Arsis of measure N form the same type of perfect interval (P5 or P8) as the Thesis of measure N+1 against their respective CF notes? If yes, replace the Arsis note.
+	- 	[ ] Cross-barline pitch repetition: is the Arsis note of measure N different in pitch from the Thesis note of measure N+1?
 	- 	[ ] Does the spacing stay within a 10th at every note (Thesis and Arsis)?
 	- 	[ ] Does the penultimate measure follow the 5-6 (above) or 5-3 (below) formula?
 	- 	[ ] Is the cadential accidental applied correctly to the Arsis of the penultimate measure (D/C#, G/F#, A/G#)?

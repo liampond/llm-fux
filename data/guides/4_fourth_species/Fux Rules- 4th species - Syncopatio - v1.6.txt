@@ -1,5 +1,9 @@
 Fourth Species Counterpoint: Operational Guide
 I. Consonance Classification (reference for all interval judgments in this guide)
+Interval Counting Convention: The cantus firmus (CF) is always the reference voice and the starting point for interval counting. The direction of counting is determined by the position of the CF relative to the counterpoint:
+- CF is the LOWER voice (counterpoint above): count UPWARD from the CF to the counterpoint. Example: CF = E4, CP = D5 — count up E4→F4→G4→A4→B4→C5→D5 = 7 steps = 7th (m7, dissonant).
+- CF is the UPPER voice (counterpoint below): count DOWNWARD from the CF to the counterpoint. Example: CF = G4, CP = D4 — count down G4→F4→E4→D4 = 4 steps = 4th (P4, dissonant).
+The interval number is identical regardless of direction; the convention simply anchors counting to the CF at all times. Before identifying or notating any interval, confirm which voice is the CF, then begin counting from it in the appropriate direction.
 - Perfect consonances: unison, perfect 5th, perfect octave.
 - Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
 - Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
@@ -20,12 +24,12 @@ C. Resolution (Following Upbeat)
 - Dissonant Suspensions: MUST resolve by stepwise downward motion to a consonance. Upward resolution of a dissonance is strictly forbidden.
 - Consonant Syncopations: If the interval formed on the downbeat is consonant, the tied note is not bound by the law of resolution. It may proceed further by stepwise motion (ascending or descending) or by leaping to another consonant interval.
 IV. Admissible Suspensions and Successions
-A. Counterpoint Above the Cantus Firmus
+A. Cantus Firmus Below, Counterpoint Above
 - Admissible with no restriction: 7-6, 4-3, 9-8.
+- Admissible with restriction (2-1): The suspension 2-1 resolves the 2nd downward by step to a unison (the CP, being above, steps down to meet the CF). Its use must be sporadic: at most once per exercise, and only when no other admissible continuation is available.
 - Admissible with restriction: A 9-8 suspension must not be prepared by an octave. The succession 8-9-8 is forbidden as it constitutes hidden octaves in the reduction. A consonant interval other than the octave (e.g., a 10th) must prepare the 9th.
-B. Counterpoint Below the Cantus Firmus
+B. Cantus Firmus Above, Counterpoint Below
 - Admissible: 2-3, 4-5, 9-10.
-- Admissible with restriction (2-1): The suspension 2-1 resolves the 2nd downward by step to a unison. Its use must be sporadic: at most once per exercise, and only when no other admissible continuation is available.
 - Prohibition (7-8): The suspension 7-8 is excluded by convention and must not be used.
 C. Unison as Pivot Note (Counterpoint Below CF, exceptional)
 The unison is never permitted on the thesis (downbeat) except in the final measure. On the arsis, the unison is consonant and may serve as a preparation note; however, its use mid-exercise is subject to the restrictions below.
