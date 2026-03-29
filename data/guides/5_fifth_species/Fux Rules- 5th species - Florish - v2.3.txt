@@ -110,7 +110,7 @@ The counterpoint is the upper voice. Count up from the CF to identify the interv
 Preparation restriction (below-CF): the 9-8 suspension must be prepared by a 10th, not an octave. If prepared by an octave, the reduction yields 8-8 (forbidden). The LLM must apply this as a hard constraint and must not seek workarounds by re-labeling the preparation interval.
 
 D. Consonant Syncopation
-If a half note on beat 3 is tied to a consonant interval on beat 1 of the next measure, no obligatory resolution is required, and the line may proceed freely, subject to general voice leading and rhythmic constraints.
+At least one consonant syncopation must be used in the exercise. A consonant syncopation occurs when a half note on beat 3 is tied to a consonant interval on beat 1 of the next measure; no obligatory resolution is required, and the line may proceed freely, subject to general voice leading and rhythmic constraints. Fux characteristically uses consonant syncopations to create suspension chains that induce rhythmic diminution through scalar motion, introducing quarter notes on beats 2, 3, and 4.
 E. Consonant Mediation and Resolution Repetition
 Two additional ornamental patterns using only quarter notes extend the syncopation framework through licensed interval progressions over beats 1–3. No eighth notes are involved; the elaboration is entirely at the quarter-note level. The preparation requirement (consonant half note on beat 3 of the preceding measure, consonant with that measure's CF) applies in full to all patterns in this section.
 Cantus Firmus Below (counterpoint above):
