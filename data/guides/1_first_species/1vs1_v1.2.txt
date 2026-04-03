@@ -37,7 +37,7 @@ Following these pathways ensures that successive intervals remain consonant and 
 3.2 Stepwise Compensation
 •	Do not chain leaps in the same direction; compensate any leap with stepwise motion in the opposite direction.
 3.3 Pitch Repetition
-•	Avoid repeating a pitch more than once consecutively (the only form of oblique motion in first species).
+•	A pitch may be repeated up to three consecutive appearances (two repetitions) provided the vertical interval against the cantus firmus changes at each repetition. More than three consecutive appearances are forbidden. Pitch repetition is the only form of oblique motion in first species; it preserves singability by preventing excessive melodic motion. Use sparingly.
 3.4 Tritones
 •	No melodic or vertical tritone (mi contra fa); an augmented 4th or diminished 5th is inadmissible in strict diatonic style.
 3.5 Range

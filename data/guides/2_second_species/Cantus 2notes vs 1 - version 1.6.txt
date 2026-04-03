@@ -1,4 +1,4 @@
-# Second Species Counterpoint — Operational Guide
+Second Species Counterpoint — Operational Guide
 
 This guide establishes the precise constraints and logic required to generate or evaluate second-species counterpoint, following the principles of Gradus ad Parnassum.
 I. Structural Framework
@@ -31,9 +31,9 @@ V. Strategic Exceptions and Planning
 	2	Forward Planning: Each measure must be chosen not only for its own correctness but to facilitate a valid progression into the following two measures.
 	3	Prohibited Intervals: Avoid all augmented and diminished intervals (e.g., the Tritone) in the melodic line, even if reached stepwise, unless the line continues correctly to resolve the tension.
 VI. Summary Checklist for Generation
-	- 	[ ] Does every measure have a 2:1 ratio (except the last)?
-	- 	[ ] Is every Thesis note consonant?
-	- 	[ ] Is every dissonant Arsis a passing tone (approached/left by step)?
-	- 	[ ] Are there parallel 5ths/8ths between downbeats? (If yes, is the Arsis leap more or equal to a 4th?)
-	- 	[ ] Does the penultimate measure follow the 5-6 (above) or 5-3 (below) formula?
-	- 	[ ] Is the "Mi against Fa" (Tritone) avoided?
+	-  Does every measure have a 2:1 ratio (except the last)?
+	-  Is every Thesis note consonant?
+	-  Is every dissonant Arsis a passing tone (approached/left by step)?
+	-  Are there parallel 5ths/8ths between downbeats? (If yes, is the Arsis leap more or equal to a 4th?)
+	-  Does the penultimate measure follow the 5-6 (above) or 5-3 (below) formula?
+	-  Is the "Mi against Fa" (Tritone) avoided?

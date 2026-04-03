@@ -57,7 +57,7 @@ single_run:
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
   # `null` for no guide
   # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
-  guide_path: "data/guides/2_second_species/Cantus 2notes vs 1 - version 1.9.txt"
+  guide_path: "data/guides/2_second_species/Cantus 2notes vs 1 - Schubert version 2.0.txt"
 
   # Model parameters
   temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output.

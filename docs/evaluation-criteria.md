@@ -30,8 +30,14 @@ Binary pass/fail or violation count. These criteria are directly verifiable agai
 | U14 | Modal integrity | No chromatic alterations except: (a) the mandatory cadential inflection (D/C#, G/F#, A/G#), and (b) Bb when CF is in F (see U16) | Count |
 | U15 | Motion category progression | Perfect→Perfect: only contrary/oblique. Imperfect→Perfect: only contrary/oblique. Other transitions: any motion permitted. | Count |
 | U16 | Bb rule (CF in F) | When CF is in F (Lydian), B must be lowered to Bb wherever it creates a melodic tritone with F, either as a direct leap or as the boundary of a stepwise passage. Not a blanket substitution: only where B participates in a tritone relationship with F. | Count |
-| U17 | Leap compensation | Every melodic leap > 3rd must be immediately followed by stepwise motion in the opposite direction | Count |
+| U17 | Leap compensation and skip recovery (Schubert SR-3) | Every melodic leap of a 4th or larger must be immediately followed by stepwise motion in the opposite direction (mandatory). For skips of a 3rd, at least one adjacent note (the approach or the departure) should move by step in the opposite direction (strong preference). It is additionally preferable to precede any skip with a step in the opposite direction. | Count |
 | U18 | Legit dissonances | Every dissonance must fit the requirements of the active species logic. A dissonance not derivable from any licensed treatment (passing tone, suspension, cambiata, four-note scalar rule) is an error. | Count |
+| U19 | Step preference (Schubert SR-1) | Steps must be used more frequently than skips throughout the exercise. The proportion of skips (3rd or larger) to steps must remain clearly low. | Count (flag if skip count ≥ step count) |
+| U20 | Skip succession limit (Schubert SR-4) | No more than two consecutive skips (intervals of a 3rd or larger) in succession, in any direction. | Count |
+| U21 | Small successive skips (Schubert SR-5) | If two consecutive skips move in the same direction, both must be small (a 3rd or a 4th). A succession of two same-direction skips where either interval is a 5th or larger is forbidden. | Count |
+| U22 | Pyramid principle (Schubert SR-6) | When skips or steps move consecutively in the same direction, the larger interval must appear first (ascending: larger comes first; descending: smaller comes first). | Count |
+| U23 | Avoid hanging peaks (Schubert SR-7) | A temporary high or low point in the line must not be approached by skip and left by skip simultaneously. At least one adjacent motion (approach or departure) must be a step. | Count |
+| U24 | Bb immediate descent (Schubert SR-8) | An accidental Bb must be followed by descending motion: the very next note in the counterpoint line must move downward. This complements U16 (long-range Bb → A resolution). | Count |
 
 ## 1B. Species-Specific Rules
 

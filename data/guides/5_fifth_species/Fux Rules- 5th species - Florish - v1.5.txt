@@ -92,7 +92,7 @@ In this case:
 • the eighth-note figure elaborates the weak-beat resolution,
 • the suspension remains structurally descending, despite surface ornamentation.
 In both cases, the suspension is always interpreted as descending at the structural level, the eighth-note grouping functions as an ornamental intensification rather than a deviation from fourth-species logic, and melodic continuity is not considered interrupted.
-Eighth notes are not permitted in any context other than the prescribed cases of the ornamented accent and the ornamented anticipation. Groupings of four consecutive eighth notes must not be generated, as they do not conform to these rules and are inconsistent with Fux’s compositional practice.
+Eighth notes are not permitted in any context other than the prescribed cases of the ornamented accent and the ornamented anticipation. Groupings of four consecutive eighth notes must not be generated, as they do not conform to these rules and are inconsistent with Fux's compositional practice.
 VIII. Melodic Conduct and Line Priority
 1.	Stepwise motion is normative.
 2.	Leaps are permitted only between consonant notes.
@@ -131,6 +131,4 @@ All prohibitions from first and second species apply without exception:
 •	Excessive spacing is forbidden. The interval between the cantus firmus and the counterpoint must not exceed a tenth.
 •	Leaps into or out of unison are forbidden, except at the beginning and the end.
 •	Immediate pitch repetition is forbidden. A pitch may not be repeated on consecutive beats. The sole exception occurs in the ornamental resolution of a syncopation, where a repeated pitch between beats 2 and 3 may appear as part of the prescribed ornamental figure.
-Please check at the end if all those rules are correct and if not correct yourself. 
-
-
+Please check at the end if all those rules are correct and if not correct yourself.

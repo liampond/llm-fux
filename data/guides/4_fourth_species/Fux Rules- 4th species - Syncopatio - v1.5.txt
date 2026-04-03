@@ -8,7 +8,7 @@ II. Metric Framework and Rhythmic Structure
 Metrical hierarchy: the primary metric layer is binary. Each measure divides first into two half-note positions: Thesis (first half, beats 1 and 2) and Arsis (second half, beats 3 and 4). Beat 1 is the onset of the Thesis; beat 3 is the onset of the Arsis. Beats 2 and 4 are interior positions within their respective halves: beat 2 belongs to the Thesis, beat 4 to the Arsis. Any rule stated in terms of Thesis and Arsis governs this half-note layer. Beat numbers name metric positions within that layer; they describe location, not rhythmic value.
 - Ratio: Two half notes against one whole note of the cantus firmus.
 - The Ligature: The first half note is placed on the weak beat (upbeat/arsis). The second half note is placed on the strong beat (downbeat/thesis) of the following measure and must be tied to the previous upbeat.
-- Syncopation: This is the normative state. Ties should be maintained throughout the exercise. If a valid suspension is impossible, the syncopation may be temporarily interrupted with two untied half notes but must resume in the following measure.
+- Syncopation: This is the normative state. Ties should be maintained throughout the exercise. If a valid suspension is impossible, the syncopation may be temporarily interrupted with two untied half notes in consonances but must resume in the following measure.
 III. Intervallic Status and Suspension Mechanism
 A valid syncopation follows a three-phase logical sequence:
 A. Preparation (Upbeat)
