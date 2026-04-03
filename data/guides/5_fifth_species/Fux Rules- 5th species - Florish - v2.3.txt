@@ -167,12 +167,22 @@ VII. Melodic Conduct and Line Priority
 1. Stepwise motion is normative.
 2. Leaps are permitted only between consonant notes.
 3. Any leap must be compensated by stepwise motion in the opposite direction.
-4. Melodic tritones (augmented fourths or diminished fifths) are forbidden.
+4. Tritone Prohibition (Mi contra Fa): The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
+   1. Vertical: No simultaneous tritone between the two voices at any sounding moment. One exception applies: a vertical diminished 5th formed by B below and F above is permitted if it resolves immediately and directly by contrary stepwise motion to a major 3rd (B → C, F → E). This inward resolution neutralises the dissonance and is sanctioned by Fux.
+   2. Melodic (direct): No melodic leap of a tritone in the generated voice.
+   3. Melodic (outlined): A melodic line must not outline a tritone across a stepwise passage. For example, the stepwise ascent F–G–A–B outlines an augmented 4th and is forbidden, even though no single leap of a tritone occurs. If the line continues stepwise in the same direction through the tritone (e.g., F–G–A–B–C), the tritone is resolved and the passage becomes acceptable. The prohibition applies when the line reverses direction at the tritone boundary, thereby exposing the dissonant frame.
 5. Cantus Firmus in F (Bb Rule): When the cantus firmus is in F (Lydian mode), B must be lowered to Bb in the generated voice wherever it would create a melodic tritone. This applies in two specific situations:
    (a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
    (b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
    This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. The rule applies to every rhythmic value — passing tones, preparation notes, suspension notes, and resolution notes included. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
-6. Pitch repetition is avoided except when rhythmically justified for anticipations.
+6. Chromatic Alteration and Resolution Obligation (after Lewin, "An Interesting Global Rule for Species Counterpoint", Yale University, unpublished, n.d.): When a raised or lowered pitch is introduced in the counterpoint line, it creates a resolution obligation: a designated resolution pitch must appear at some later point in the same register, though not necessarily on the immediately following note. Obligatory resolution tones:
+   - Bb → A
+   - Eb → D
+   - C# → D
+   - G# → A
+   - F# → G (or G#, if the chromatic ascent continues)
+   Once a chromatically altered pitch has appeared, its unaltered (natural) form is forbidden in the line until after the resolution pitch has sounded in the same register. The rule applies to every rhythmic value — passing tones, preparation notes, suspension notes, and resolution notes included.
+7. Pitch repetition is avoided except when rhythmically justified for anticipations.
 VIII. Beginning, Penultimate Measure, and Final Cadence
 A. Beginning
 1. The counterpoint may begin with a rest.
@@ -210,6 +220,7 @@ IX. Forbidden Successions and Voice-Leading Constraints
 All prohibitions from first and second species apply without exception:
 - Parallel fifths and octaves are forbidden. The presence of intervening diminutions or ornamental figures does not neutralize forbidden parallels if they remain perceptible under reduction.
 CRITICAL — Cross-barline parallel fifths and octaves: The last sounding note before a barline and the first sounding note of the following measure must not form two consecutive perfect fifths or two consecutive perfect octaves with their respective cantus firmus notes. This is one of the most persistent errors in fifth species. The barline creates a visual illusion of separation, but the two notes are heard in direct succession. Before writing the last note of any measure, compute its interval against the current CF, then compute the interval the first note of the next measure will form against the next CF note: if both are P5, or both are P8, the parallel must be eliminated. The correction is not necessarily limited to changing a single note: depending on the context, the solution may require revising the melodic motion within the current measure, choosing a different pitch for the first note of the following measure, or reconsidering the rhythmic layout of the surrounding passage. Explore all alternatives before committing to a fix. This check applies regardless of rhythmic value and must be performed at every barline without exception.
+- Consecutive Imperfect Consonances: No more than three consecutive vertical intervals of the same type of imperfect consonance are permitted across all sounding notes. Three consecutive 3rds, three consecutive 6ths, or three consecutive 10ths is the maximum; a fourth consecutive interval of the same type must be avoided.
 - Direct (hidden) fifths and octaves are forbidden. A direct fifth or octave occurs when two voices move in similar motion (both ascending or both descending) into a perfect fifth or octave, without at least one voice arriving by step. To avoid this, use contrary motion instead in the generated voice.
 - Voice crossing: Permitted only as an exceptional measure when no other voice-leading solution is possible. To be valid, the crossing must be resolved within three beats by leaping out to restore the original vocal register.
 - Excessive spacing is forbidden. The interval between the cantus firmus and the counterpoint must not exceed a tenth at any sounding moment. This is a hard limit that applies to every single note, including passing tones and tied notes. When the cantus firmus rises to its highest pitches, the counterpoint below must rise accordingly to stay within a tenth. For example, if the CF reaches A4, the counterpoint below must be no lower than F3 (A4 to F3 = M10). Plan ahead: if the CF ascends, the counterpoint must ascend with it. Failing to track the CF's register is the most common cause of spacing violations. The constraint applies without exception to beat 3 (the preparation note of a syncopation). At beat 1, a single exception applies: in a consonant syncopation, if the tied note forms a consonant interval against the new cantus firmus note but that interval exceeds a 10th (up to a 12th), this wider spacing is tolerated provided the counterpoint immediately leaps on the following note to restore spacing within a 10th.
@@ -231,11 +242,16 @@ For each note written, verify the following in order:
 - Voice crossing: If a crossing occurs, is it resolved within three beats?
 - Spacing: Does every note stay within a 10th? In particular, does beat 3 (the preparation) stay within a 10th without exception? If a consonant syncopation produces a 12th on beat 1, does the counterpoint immediately leap back within a 10th on the following note? When the CF is high and the counterpoint is below, verify that the counterpoint has risen high enough.
 - P4 check (below CF): For every note in the counterpoint below the CF, verify that the interval from the counterpoint up to the CF is NOT a perfect 4th. A P4 is dissonant even when the counterpoint is the lower voice. If you find a P4, replace it with a consonance (3rd, 5th, 6th, 8ve, or 10th).
-- Melodic conduct: Is every melodic interval singable? Is every leap followed by stepwise contrary motion? Are melodic tritones (direct or outlined) absent?
+- Melodic conduct: Is every melodic interval singable? Is every leap followed by stepwise contrary motion?
+- Consecutive Imperfect Consonances: Do no more than three vertical intervals of the same type of imperfect consonance (3rds, 6ths, or 10ths) occur in succession across all sounding notes?
+- Tritone (vertical): Is every simultaneous tritone absent? If a vertical dim5 (B below, F above) appears, does it resolve immediately by contrary step to a major 3rd (B→C, F→E)?
+- Tritone (melodic direct): Is every melodic leap free of tritones?
+- Tritone (melodic outlined): Does no stepwise passage reverse direction at a tritone boundary, exposing a tritone frame?
 - Pitch repetition: Is immediate pitch repetition avoided (except for ornamental syncopation figures)?
 - Rhythmic variety: Does the exercise use a mix of rhythmic values without excessive repetition of the same pattern?
 - Cadence: Does the penultimate measure use a 7–6 suspension resolving to an octave (above) or a 2–3 suspension resolving to a unison (below)? Is the cadential accidental applied correctly to the resolution note (D/C#, G/F#, A/G#)?
 - Opening: Does the first sounding note form a perfect consonance (unison, octave, or fifth if above)?
 - Closing: Is the final measure a single whole note forming a perfect consonance (unison or octave)?
 - Bb Rule: If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
+- Chromatic resolution (Lewin): If any accidental is used, has its designated resolution pitch appeared subsequently in the same register, before the unaltered form of that pitch recurs?
 Please check at the end if all those rules are correct and if not correct yourself.

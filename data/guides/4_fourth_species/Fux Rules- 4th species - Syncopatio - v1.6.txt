@@ -38,7 +38,12 @@ V. The Principle of Reduction
 The structural integrity of this species is verified through reduction. If the ties (ligatures) are removed and the syncopated notes are treated as direct attacks on the downbeat, the resulting first-species framework must be valid.
 - Parallelism Check: Successions of unisons, fifths, or octaves that appear in the reduction are forbidden. If removing the retardation reveals a 1-1, 5-5, or 8-8 movement, the syncopation is invalid.
 VI. Voice-Leading Constraints
-- General Prohibitions: All prohibitions from the first species remain in force (no parallel perfect intervals, avoid hidden fifths/octaves, no tritones).
+- General Prohibitions: All prohibitions from the first species remain in force (no parallel perfect intervals, avoid hidden fifths/octaves).
+- Consecutive Imperfect Consonances: No more than three consecutive vertical intervals of the same type of imperfect consonance are permitted across all sounding notes (preparation, suspension, and resolution). Three consecutive 3rds, three consecutive 6ths, or three consecutive 10ths is the maximum; a fourth consecutive interval of the same type must be avoided.
+- Tritone Prohibition (Mi contra Fa): The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
+   1. Vertical: No simultaneous tritone between the two voices at any sounding moment. One exception applies: a vertical diminished 5th formed by B below and F above is permitted if it resolves immediately and directly by contrary stepwise motion to a major 3rd (B → C, F → E). This inward resolution neutralises the dissonance and is sanctioned by Fux.
+   2. Melodic (direct): No melodic leap of a tritone in the generated voice.
+   3. Melodic (outlined): A melodic line must not outline a tritone across a stepwise passage. For example, the stepwise ascent F–G–A–B outlines an augmented 4th and is forbidden, even though no single leap of a tritone occurs. If the line continues stepwise in the same direction through the tritone (e.g., F–G–A–B–C), the tritone is resolved and the passage becomes acceptable. The prohibition applies when the line reverses direction at the tritone boundary, thereby exposing the dissonant frame.
 - Leaps: Permitted only between consonant notes and must be compensated by stepwise motion in the opposite direction.
 - Spacing: The vertical distance between the two voices must not exceed a 10th at any sounding moment. This constraint applies without exception to the upbeat (preparation): the preparation note must always form an interval of a 10th or less against its cantus firmus note. At the downbeat, a single exception applies: in a consonant syncopation, if the tied note forms a consonant interval against the new cantus firmus note but that interval exceeds a 10th (up to a 12th), this wider spacing is tolerated provided the counterpoint immediately leaps on the following upbeat to restore spacing within a 10th.
 - Voice Crossing: Permitted only on an exceptional basis as it is a case where no alternatives are possible. To be valid, the crossing must result in a consonant syncopation and the generated voice must leap again immediately to suppress the crossing and return to the original register.
@@ -46,6 +51,13 @@ VI. Voice-Leading Constraints
    (a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
    (b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
    This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. The rule applies to every note, including preparations, suspensions, and resolutions. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
+- Chromatic Alteration and Resolution Obligation (after Lewin, "An Interesting Global Rule for Species Counterpoint", Yale University, unpublished, n.d.): When a raised or lowered pitch is introduced in the counterpoint line, it creates a resolution obligation: a designated resolution pitch must appear at some later point in the same register, though not necessarily on the immediately following note. Obligatory resolution tones:
+   - Bb → A
+   - Eb → D
+   - C# → D
+   - G# → A
+   - F# → G (or G#, if the chromatic ascent continues)
+   Once a chromatically altered pitch has appeared, its unaltered (natural) form is forbidden in the line until after the resolution pitch has sounded in the same register. The rule applies to every note, including preparations, suspensions, and resolutions.
 VII. Cadential Treatment and Conclusion
 A. The Opening
 - The counterpoint begins with a half rest on the downbeat. The first sounding note occurs on the upbeat and must be a perfect consonance (1, 5, 8). This note initiates the first tie.
@@ -75,6 +87,10 @@ VIII. Strategic Checklist for Verification
 - Unison pivot (below): If a unison appears on the arsis as a pivot, is it strictly the result of a 3rd on the thesis blocking the syncopation chain, and is it followed immediately by a thesis half note leading back into syncopations?
 - Cadential Accidental: Is the required accidental applied correctly to the resolution note of the penultimate suspension (D/C#, G/F#, A/G#)?
 - Continuity: Is the syncopation resumed immediately after any necessary interruption?
-- Tritones: Are vertical or melodic tritones absent from the texture?
+- Consecutive Imperfect Consonances: Do no more than three vertical intervals of the same type of imperfect consonance (3rds, 6ths, or 10ths) occur in succession across all sounding notes?
+- Tritone (vertical): Is every simultaneous tritone absent? If a vertical dim5 (B below, F above) appears, does it resolve immediately by contrary step to a major 3rd (B→C, F→E)?
+- Tritone (melodic direct): Is every melodic leap free of tritones?
+- Tritone (melodic outlined): Does no stepwise passage reverse direction at a tritone boundary, exposing a tritone frame?
 - Bb Rule: If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
+- Chromatic resolution (Lewin): If any accidental is used, has its designated resolution pitch appeared subsequently in the same register, before the unaltered form of that pitch recurs?
 

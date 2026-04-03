@@ -50,18 +50,18 @@ single_run:
   file: Below_C       # File to test (e.g., Above_C)
   
   # Test configuration
-  model: chatgpt                                         # chatgpt, claude, or gemini
-  model_name: gpt-5.1-2025-11-13                         # Specific model version (optional)
+  model: claude                                          # chatgpt, claude, or gemini
+  model_name: claude-opus-4-5                            # Specific model version (optional)
   datatype: musicxml                                     # musicxml
   
   # Path to guide file (e.g., data/guides/LLM-Guide.md)
   # `null` for no guide
   # To copy the path, right click the file you're looking for in VSCode and select "Copy Relative Path"
-  guide_path: "data/guides/5_fifth_species/Fux Rules- 5th species - Florish - v2.3.txt"
+  guide_path: "data/guides/2_second_species/Cantus 2notes vs 1 - version 1.9.txt"
 
   # Model parameters
   temperature: 0.0         # 0.0-1.0. 0.0 for deterministic output.
-  max_tokens: 16000        # Standard budget sufficient for OpenAI models
+  max_tokens: 16000        # Standard budget sufficient for Claude
 
 # =============================================================================
 # BATCH RUN CONFIGURATION
