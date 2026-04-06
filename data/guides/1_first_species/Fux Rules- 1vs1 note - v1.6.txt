@@ -2,7 +2,7 @@ First Species Counterpoint — Operational Guide
 
 I. Vertical Intervals
 1. Basic Rhythmic Constraint
-Write one counterpoint note for each cantus-firmus note. All notes share the same time-value, normally whole notes, except if another value is requested.
+Write one counterpoint note for each cantus-firmus note. All notes share the same time-value, normally whole notes.
 2. Consonance Classification
 Only consonances are permitted between the two voices at every simultaneity.
 -  Perfect consonances: unison, perfect 5th, perfect octave.
@@ -47,7 +47,7 @@ Every melodic interval in the counterpoint line must be singable. The following 
 The following melodic intervals are forbidden:
 -  Major 6th, descending minor 6th, all 7ths, all augmented intervals, all diminished intervals, all chromatic intervals, and any interval larger than an octave.
 2. Pitch Repetition
-The same pitch may be repeated once (i.e., A-A is permitted as the only form of oblique motion in first species). However, repeating the same pitch twice consecutively (A-A-A) is forbidden. Use pitch repetition sparingly.
+The same pitch may be repeated when the vertical interval against the cantus firmus changes at each repetition. Up to two consecutive repetitions (A-A-A, i.e., the same pitch sounding three times in a row) are permitted, provided every repetition produces a different vertical interval. More than three consecutive appearances of the same pitch are forbidden. Pitch repetition preserves singability by preventing excessive melodic motion, and it is the only form of oblique motion in first species. Use it sparingly.
 3. Tritone Prohibition (Mi contra Fa)
 The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
 1. Vertical: No simultaneous tritone between the two voices at any beat.

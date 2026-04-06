@@ -41,7 +41,7 @@ Formulas of  Successions:
 Stepwise: 3-4-5-6 | 8
 Cambiata Option: The 3-4-6-5 pattern is permitted here, provided the 5 (which functions as the 5th of the pattern but results in the required minor 3rd against the CF) occurs on Beat 4 to resolve to the Unison/Octave.
 C. Special Cadential Rule:
-In both cases, the formula of the Nota Cambiata may be used for the cadence under the condition that it 
+In both cases, the formula of the Nota Cambiata may be used for the cadence under the condition that it that it uses the interval pattern of section III for above and below. 
 VI. Strategic Checklist for Generation
 [ ] Reduction Check: No parallel 5ths/8ths between structural T1 and T3 notes.
 [ ] T4-T1 Check: Beat 4 does not repeat a perfect interval on the next downbeat.

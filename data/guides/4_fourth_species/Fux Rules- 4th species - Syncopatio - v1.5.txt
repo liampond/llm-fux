@@ -1,0 +1,70 @@
+Fourth Species Counterpoint: Operational Guide
+I. Consonance Classification (reference for all interval judgments in this guide)
+- Perfect consonances: unison, perfect 5th, perfect octave.
+- Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+- Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+When interval quality is not specified, the diatonic pitches of the mode govern the quality automatically. Accidentals are applied only where explicitly required by the cadential accidentals table or by the Bb rule for F (see §VI).
+II. Metric Framework and Rhythmic Structure
+Metrical hierarchy: the primary metric layer is binary. Each measure divides first into two half-note positions: Thesis (first half, beats 1 and 2) and Arsis (second half, beats 3 and 4). Beat 1 is the onset of the Thesis; beat 3 is the onset of the Arsis. Beats 2 and 4 are interior positions within their respective halves: beat 2 belongs to the Thesis, beat 4 to the Arsis. Any rule stated in terms of Thesis and Arsis governs this half-note layer. Beat numbers name metric positions within that layer; they describe location, not rhythmic value.
+- Ratio: Two half notes against one whole note of the cantus firmus.
+- The Ligature: The first half note is placed on the weak beat (upbeat/arsis). The second half note is placed on the strong beat (downbeat/thesis) of the following measure and must be tied to the previous upbeat.
+- Syncopation: This is the normative state. Ties should be maintained throughout the exercise. If a valid suspension is impossible, the syncopation may be temporarily interrupted with two untied half notes in consonances but must resume in the following measure.
+III. Intervallic Status and Suspension Mechanism
+A valid syncopation follows a three-phase logical sequence:
+A. Preparation (Upbeat)
+- The upbeat must always be a consonant interval (1, 3, 5, 6, 8, 10). No dissonance is permitted at this stage.
+B. Suspension (Downbeat)
+- The interval formed on the downbeat by the tied note may be consonant or dissonant.
+- If it is a dissonant suspension, it functions as a retardation of the note following it.
+C. Resolution (Following Upbeat)
+- Dissonant Suspensions: MUST resolve by stepwise downward motion to a consonance. Upward resolution of a dissonance is strictly forbidden.
+- Consonant Syncopations: If the interval formed on the downbeat is consonant, the tied note is not bound by the law of resolution. It may proceed further by stepwise motion (ascending or descending) or by leaping to another consonant interval.
+IV. Admissible Suspensions and Successions
+A. Counterpoint Above the Cantus Firmus
+- Admissible with no restriction: 7-6, 4-3, 9-8.
+- Admissible with restriction: A 9-8 suspension must not be prepared by an octave. The succession 8-9-8 is forbidden as it constitutes hidden octaves in the reduction. A consonant interval other than the octave (e.g., a 10th) must prepare the 9th.
+B. Counterpoint Below the Cantus Firmus
+- Admissible: 2-3, 4-5, 9-10.
+- Prohibition (7-8): The suspension 7-8 is excluded by convention and must not be used.
+V. The Principle of Reduction
+The structural integrity of this species is verified through reduction. If the ties (ligatures) are removed and the syncopated notes are treated as direct attacks on the downbeat, the resulting first-species framework must be valid.
+- Parallelism Check: Successions of unisons, fifths, or octaves that appear in the reduction are forbidden. If removing the retardation reveals a 1-1, 5-5, or 8-8 movement, the syncopation is invalid.
+VI. Voice-Leading Constraints
+- General Prohibitions: All prohibitions from the first species remain in force (no parallel perfect intervals, avoid hidden fifths/octaves, no tritones).
+- Leaps: Permitted only between consonant notes and must be compensated by stepwise motion in the opposite direction.
+- Spacing: The vertical distance between the two voices must not exceed a 10th at any sounding moment. This constraint applies without exception to the upbeat (preparation): the preparation note must always form an interval of a 10th or less against its cantus firmus note. At the downbeat, a single exception applies: in a consonant syncopation, if the tied note forms a consonant interval against the new cantus firmus note but that interval exceeds a 10th (up to a 12th), this wider spacing is tolerated provided the counterpoint immediately leaps on the following upbeat to restore spacing within a 10th.
+- Voice Crossing: Permitted only on an exceptional basis as it is a case where no alternatives are possible. To be valid, the crossing must result in a consonant syncopation and the generated voice must leap again immediately to suppress the crossing and return to the original register.
+- Cantus Firmus in F (Bb Rule): When the cantus firmus is in F (Lydian mode), B must be lowered to Bb in the generated voice wherever it would create a melodic tritone. This applies in two specific situations:
+   (a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
+   (b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
+   This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. The rule applies to every note, including preparations, suspensions, and resolutions. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
+VII. Cadential Treatment and Conclusion
+A. The Opening
+- The counterpoint begins with a half rest on the downbeat. The first sounding note occurs on the upbeat and must be a perfect consonance (1, 5, 8). This note initiates the first tie.
+B. Penultimate Measure
+- The penultimate measure must employ a formulaic dissonant suspension resolving to the required cadential note with the correct accidental applied.
+- CF Below: Use a 7-6 suspension. The suspension (7th) falls on the downbeat of the penultimate measure, prepared by a consonant upbeat in the antepenultimate measure (the measure before the penultimate), tied across the barline. The 6 (Major 6th) is the resolution and is the last note of the penultimate measure, resolving to the octave in the final bar.
+- CF Above: Use a 2-3 suspension. The suspension (2nd) falls on the downbeat of the penultimate measure, prepared by a consonant upbeat in the antepenultimate measure, tied across the barline. The 3 (minor 3rd) is the resolution and is the last note of the penultimate measure, resolving to the unison in the final bar.
+- Cadential Accidentals (applies to the resolution note — the upbeat of the penultimate measure, which is the last note before the final whole note):
+  The following accidentals must be applied where required. Apply the following table based on the final note of the cantus firmus:
+  Final note / Required accidental
+  D / C#
+  C / none
+  E / none
+  F / none
+  G / F#
+  A / G#
+C. Final Measure
+- The final measure must consist of a single whole note. It must resolve to a perfect consonance (unison or octave).
+VIII. Strategic Checklist for Verification
+- Reduction: If the ties are removed, are there forbidden parallel unisons, fifths, or octaves?
+- Consonant Resolution: If the syncope was consonant, does the following note move by step (up/down) or leap to another consonance?
+- Dissonant Resolution: Does every dissonant suspension resolve strictly downward by step?
+- Spacing: Does every upbeat (preparation) stay within a 10th? If a consonant syncopation produces a 12th on the downbeat, does the counterpoint immediately leap back within a 10th on the following upbeat?
+- Voice Crossing: If a crossing occurs, is the syncopation consonant and followed by a leap to exit the crossing?
+- Syncopations: Have 7-8 (below) and 8-9-8 (above) successions been avoided?
+- Cadential Accidental: Is the required accidental applied correctly to the resolution note of the penultimate suspension (D/C#, G/F#, A/G#)?
+- Continuity: Is the syncopation resumed immediately after any necessary interruption?
+- Tritones: Are vertical or melodic tritones absent from the texture?
+- Bb Rule: If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
+

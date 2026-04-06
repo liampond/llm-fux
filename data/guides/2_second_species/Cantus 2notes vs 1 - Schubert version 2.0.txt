@@ -1,0 +1,102 @@
+# Second Species Counterpoint — Operational Guide
+
+This guide establishes the precise constraints and logic required to generate or evaluate second-species counterpoint, following the principles of Gradus ad Parnassum.
+I. Consonance Classification (reference for all interval judgments in this guide)
+Interval Counting Convention: The cantus firmus (CF) is always the reference voice and the starting point for interval counting. The direction of counting is determined by the position of the CF relative to the counterpoint:
+- CF is the LOWER voice (counterpoint above): count UPWARD from the CF to the counterpoint. Example: CF = E4, CP = D5 — count up E4→F4→G4→A4→B4→C5→D5 = 7 steps = 7th (m7, dissonant).
+- CF is the UPPER voice (counterpoint below): count DOWNWARD from the CF to the counterpoint. Example: CF = G4, CP = D4 — count down G4→F4→E4→D4 = 4 steps = 4th (P4, dissonant).
+The interval number is identical regardless of direction; the convention simply anchors counting to the CF at all times. Before identifying or notating any interval, confirm which voice is the CF, then begin counting from it in the appropriate direction.
+- Perfect consonances: unison, perfect 5th, perfect octave.
+- Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+- Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+When interval quality is not specified, the diatonic pitches of the mode govern the quality automatically. Accidentals are applied only where explicitly required by the cadential accidentals table or by the Bb rule for F (see §VI.5).
+II. Metric Framework & Note Values
+Metrical hierarchy: the primary metric layer is binary. Each measure divides first into two half-note positions: Thesis (first half, beats 1 and 2) and Arsis (second half, beats 3 and 4). Beat 1 is the onset of the Thesis; beat 3 is the onset of the Arsis. Beats 2 and 4 are interior positions within their respective halves: beat 2 belongs to the Thesis, beat 4 to the Arsis. Any rule stated in terms of Thesis and Arsis governs this half-note layer. Beat numbers name metric positions within that layer; they describe location, not rhythmic value.
+	1	Metric Ratio: 2:1. Two half notes (minims) in the counterpoint against one whole note in the Cantus Firmus (CF).
+	2	Values: The counterpoint line must consist entirely of half notes, with only two exceptions.
+	3	The Opening: The first measure may begin with a half rest on the Thesis. The first sounding note must be a perfect consonance (1, 5, or 8).
+	4	The Conclusion: The final measure must always be a whole note (consonant unison or octave).
+III. Intervallic Constraints
+	1	Thesis (Downbeat) Rule: Every Thesis note must be strictly consonant (Unison, 3rd, 5th, 6th, 8th, or 10th). Dissonance is never permitted on the downbeat.
+	2	Arsis (Upbeat) Rules:
+	- 	Passing Dissonance: A dissonance is permitted only as a passing tone. It must be approached by step and left by step in the same direction (filling the space of a 3rd between two consonant downbeats).
+	- 	Consonant Leap: If the Arsis note is approached or left by a leap (skip), that note must be consonant with the CF. It is preferable to precede and/or follow any skip (interval of a 3rd or larger) with a step in the opposite direction. For leaps of a 4th or larger, this compensation is mandatory: the leap must be immediately followed by stepwise motion in the opposite direction. For skips of a 3rd, at least one adjacent note (the approach or the departure) should move by step in the opposite direction. (Schubert, SR-3)
+	3	Unison Restriction: A unison on the Thesis (downbeat) is permitted almost only in the first and last measures. A unison on the Arsis (upbeat, second half of the measure) is acceptable but must be used very rarely: it will of necessity be arrived at by oblique motion, which mitigates the effect of the sudden disappearance of a voice, and it does not produce the quality of a premature cadence. No more than one such Arsis unison should appear in an exercise.
+IV. Progression Logic
+Structural stability is determined by the relationship between successive downbeats. The upbeat does not always "clear" the path for the next downbeat.
+	1	Successive Perfect Intervals: Parallel 5ths or 8ths occurring on consecutive downbeats are forbidden.
+	2	The "Third" Limitation: An intervening note on the Arsis that is only a third away from the Thesis does not break the perception of a parallel. The ear "remembers" the first note.
+	3	The Leap Rule: To successfully invalidate a potential parallel between two downbeats, the Arsis must move by a leap of a 4th, 5th, or 6th. This distance causes the ear to "forget" the previous structural note.
+	4	Imperfect to Perfect: When moving from an imperfect consonance to a perfect consonance on consecutive downbeats, contrary motion is required unless a leap of a 4th or larger on the Arsis mitigates the direct succession.
+	4b	Consecutive Imperfect Consonances: No more than three consecutive vertical intervals of the same type of imperfect consonance are permitted across all sounding notes (Thesis and Arsis). Three consecutive 3rds, three consecutive 6ths, or three consecutive 10ths is the maximum; a fourth consecutive interval of the same type must be avoided.
+	5	Cross-Barline Parallel (Arsis → Thesis): CRITICAL. The Arsis note of measure N and the Thesis note of measure N+1 are heard in direct melodic succession. They must not both form a perfect 5th, or both form a perfect octave, against their respective CF notes. The barline creates a visual separation but no audible break; the parallel is fully perceptible and forbidden. Before writing any Arsis note, compute its interval against the current CF, then compute the interval the following Thesis will form against the next CF note. If both are P5, or both are P8, the Arsis note must be replaced. This check must be applied at every barline without exception. Note that this is independent of the Thesis→Thesis parallel rule in §IV.1: both checks must pass.
+	6	Cross-Barline Pitch Repetition (Arsis → Thesis): The Arsis note of measure N must not be identical in pitch to the Thesis note of measure N+1. A repeated pitch across the barline produces stagnant motion and eliminates the forward impulse required at the downbeat. Before finalising any Arsis note, confirm that its pitch differs from the Thesis note that follows it.
+V. Formulas for the Cadences
+The penultimate measure must follow these specific intervallic patterns to resolve to the final whole note.
+A. Counterpoint Above the CF:
+	- 	Measure (n-1): Thesis = perfect 5th | Arsis = Major 6th
+	- 	Final Measure: Whole note = Octave
+	Note on the Thesis: the 5th on the downbeat must be a perfect 5th. When the penultimate CF note is B, the diatonic 5th above is F natural, which is a diminished 5th — this is forbidden. Apply F# to produce a perfect 5th. Example: cantus in A, penultimate CF note = B → counterpoint Thesis = F# (P5), Arsis = G# (M6), resolving to the octave on A.
+B. Counterpoint Below the CF:
+	- 	Measure (n-1): Thesis = 5th | Arsis = minor 3rd
+	- 	Final Measure: Whole note = Unison (or Octave)
+C. Cadential Accidentals (applies to the Arsis of the penultimate measure — the last note before the final whole note)
+The following accidentals must be applied where required. Apply the following table based on the final note of the cantus firmus:
+	Final note / Required accidental
+	D / C#
+	C / none
+	E / none
+	F / none
+	G / F#
+	A / G#
+VI. Strategic Exceptions and Planning
+	1	Register Reset: If the voices become too close or contrary motion is impossible, use a leap of a minor 6th or an octave to reposition the counterpoint.
+	2	Forward Planning: Each measure must be chosen not only for its own correctness but to facilitate a valid progression into the following two measures.
+	3	Tritone Prohibition (Mi contra Fa): The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
+   1. Vertical: No simultaneous tritone between the two voices at any sounding moment. One exception applies: a vertical diminished 5th formed by B below and F above is permitted if it resolves immediately and directly by contrary stepwise motion to a major 3rd (B → C, F → E). This inward resolution neutralises the dissonance and is sanctioned by Fux.
+   2. Melodic (direct): No melodic leap of a tritone in the generated voice.
+   3. Melodic (outlined): A melodic line must not outline a tritone across a stepwise passage. For example, the stepwise ascent F–G–A–B outlines an augmented 4th and is forbidden, even though no single leap of a tritone occurs. If the line continues stepwise in the same direction through the tritone (e.g., F–G–A–B–C), the tritone is resolved and the passage becomes acceptable. The prohibition applies when the line reverses direction at the tritone boundary, thereby exposing the dissonant frame.
+	4	Spacing: The vertical distance between the two voices must not exceed a 10th (compound 3rd) at any point. Intervals of an 11th or greater are forbidden. This constraint applies to every note, including the Arsis.
+	5	Cantus Firmus in F (Bb Rule): When the cantus firmus is in F (Lydian mode), B must be lowered to Bb in the generated voice wherever it would create a melodic tritone. This applies in two specific situations:
+   (a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
+   (b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
+   This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. This rule applies to both Thesis and Arsis notes. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
+	6	Chromatic Alteration and Resolution Obligation (after Lewin, "An Interesting Global Rule for Species Counterpoint", Yale University, unpublished, n.d., pp. 42–44): When a raised or lowered pitch is introduced in the counterpoint line, it creates a resolution obligation: a designated resolution pitch must appear at some later point in the same register, though not necessarily on the immediately following note. Obligatory resolution tones:
+   - Bb → A
+   - Eb → D
+   - C# → D
+   - G# → A
+   - F# → G (or G#, if the chromatic ascent continues)
+   Once a chromatically altered pitch has appeared, its unaltered (natural) form is forbidden in the line until after the resolution pitch has sounded in the same register. For example: once Bb has been used, B-natural must not appear until an A has first been heard in the same register. Additionally, an accidental Bb must be followed by descending motion: the note placed after the Bb in the counterpoint line must move downward. This immediate descent is a local complement to the long-range resolution obligation (Bb → A): the descent governs the direction of the very next note, while the resolution to A governs the eventual return. (Schubert, SR-8)
+	7	Step Preference: Use steps more frequently than skips. Stepwise motion must predominate throughout the exercise; the proportion of skips (intervals of a 3rd or larger) to steps must remain clearly low. (Schubert, SR-1)
+	8	Skip Succession Limit: Do not use more than two skips in succession, whether in the same direction or not. (Schubert, SR-4)
+	9	Small Successive Skips: If two successive skips move in the same direction, keep them small: a 3rd or a 4th. A succession of two same-direction skips where either interval is a 5th or larger is forbidden. (Schubert, SR-5)
+	10	Pyramid Principle: When two or more consecutive melodic intervals move in the same direction, place the larger interval in the lower part of the pitch span and the smaller interval in the upper part (pyramid principle). Ascending passage: the larger interval comes first (lower in pitch space, earlier in time), the smaller interval comes second. Correct: D → A (ascending P5, large) → C (ascending m3, small) ✓. Forbidden: D → F (ascending m3, small) → C (ascending P5, large) ✗. Descending passage: the smaller interval comes first (higher in pitch space, earlier in time), the larger interval comes second. Correct: A → F (descending m3, small) → C (descending P4, large) ✓. Forbidden: A → E (descending P4, large) → C (descending m3, small) ✗. This applies to both skips and steps when they move consecutively in the same direction. (Schubert, SR-6)
+	11	Avoid Hanging Peaks: Avoid skipping both to and from a temporary high or low point. This leaves the peak note "hanging," detached from the rest of the line. At least one side of the peak — the approach or the departure — must be a step. (Schubert, SR-7)
+VII. Summary Checklist for Generation
+	- 	[ ] Does every measure have a 2:1 ratio (except the last)?
+	- 	[ ] Is every Thesis note consonant?
+	- 	[ ] Is every dissonant Arsis a passing tone (approached/left by step)?
+	- 	[ ] Are there parallel 5ths/8ths between downbeats (Thesis→Thesis)? (If yes, is the Arsis leap more or equal to a 4th?)
+	- 	[ ] Cross-barline parallel (Arsis→Thesis): does the Arsis of measure N form the same type of perfect interval (P5 or P8) as the Thesis of measure N+1 against their respective CF notes? If yes, replace the Arsis note.
+	- 	[ ] Cross-barline pitch repetition: is the Arsis note of measure N different in pitch from the Thesis note of measure N+1?
+	- 	[ ] Does the spacing stay within a 10th at every note (Thesis and Arsis)?
+	- 	[ ] Does the penultimate measure follow the 5-6 (above) or 5-3 (below) formula?
+	- 	[ ] Is the cadential accidental applied correctly to the Arsis of the penultimate measure (D/C#, G/F#, A/G#)?
+	- 	[ ] Tritone (vertical): Is every simultaneous tritone absent? If a vertical dim5 (B below, F above) appears, does it resolve immediately by contrary step to a major 3rd (B→C, F→E)?
+	- 	[ ] Tritone (melodic direct): Is every melodic leap free of tritones?
+	- 	[ ] Tritone (melodic outlined): Does no stepwise passage reverse direction at a tritone boundary, exposing a tritone frame?
+	- 	[ ] If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
+	- 	[ ] Chromatic resolution (Lewin): If any accidental is used, has its designated resolution pitch appeared subsequently in the same register, before the unaltered form of that pitch recurs?
+	- 	[ ] Step preference (Schubert SR-1): Is stepwise motion predominant? Is the proportion of skips (3rds or larger) clearly lower than the proportion of steps?
+	- 	[ ] Skip recovery (Schubert SR-3): For every leap of a 4th or larger, is it immediately followed by a step in the opposite direction? For every skip of a 3rd, is at least one adjacent note a step in the opposite direction?
+	- 	[ ] Skip succession limit (Schubert SR-4): Are there no more than two consecutive skips (3rds or larger) in succession?
+	- 	[ ] Small successive skips (Schubert SR-5): If two consecutive same-direction skips occur, are both a 3rd or a 4th (not a 5th or larger)?
+	- 	[ ] Pyramid principle (Schubert SR-6): When consecutive melodic intervals move in the same direction, does the larger interval appear first (below the smaller in the series)?
+	- 	[ ] Hanging peaks (Schubert SR-7): At every local melodic peak (high or low point), is at least one side (approach or departure) by step?
+	- 	[ ] Bb descent (Schubert SR-8): After every accidental Bb, does the very next note move downward?
+
+---
+Bibliographical Note
+Schubert, Peter. Modal Counterpoint, Renaissance Style. 2nd ed. New York: Oxford University Press, 2008, p. 22.
+Lewin, David. "An Interesting Global Rule for Species Counterpoint." Unpublished document, n.d. (Yale University), pp. 42–44.

@@ -1,0 +1,257 @@
+Fifth Species Counterpoint : Operational Guide (Florid Counterpoint) — v2.3
+I. General Definition and Scope
+Fifth-species counterpoint consists of a strictly regulated synthesis of all rhythmic and contrapuntal procedures admitted in first-, second-, third-, and fourth-species counterpoint within a single exercise. This guide defines the conditions under which such a synthesis is to be constructed, evaluated, and validated.
+The fifth species functions as a synthetic species, not as an autonomous rule system. All general voice-leading rules from previous species and guides remain fully in force throughout, except where explicitly modified in the present guide.
+No new categories of consonance, dissonance, or voice-leading motion are introduced.
+All musical events must be derivable from rules already validated in the earlier species.
+1. In a four beats measure, beats 1 and 3 are defined as strong beats, beats 2 and 4 are defined as weak beats.
+2. The cantus firmus is written in whole notes throughout and cannot be modified.
+3. The counterpoint may combine:
+o whole notes (1:1),
+o half notes (2:1),
+o quarter notes (4:1),
+o eighth notes (8:1),
+o tied half notes forming syncopations.
+4. Mixed rhythmic values within a single measure are permitted. A measured degree of rhythmic variety must be implemented in order to prevent the excessive repetition of identical rhythmic patterns. However, it must be explicitly stated that rhythmic variety does not authorize any deviation from the governing contrapuntal rules. All rules remain binding and must be strictly observed at all times. The rhythmic variety of fifth species must always serve melodic coherence, not obscure it.
+5. Half-note frequency: half notes must be used less frequently than quarter notes and syncopations (ornamented or not) combined. The quarter note and the tied syncopation are the normative rhythmic values of the fifth species; half notes serve only as structural punctuation — preparation notes, isolated moments of stability — and must not dominate the texture. An exercise where half notes outnumber or equal quarter notes and syncopations lacks the flowing character that defines florid counterpoint.
+II. Consonance Classification (reference for all interval judgments in this guide)
+Interval Counting Convention: The cantus firmus (CF) is always the reference voice and the starting point for interval counting. The direction of counting is determined by the position of the CF relative to the counterpoint:
+- CF is the LOWER voice (counterpoint above): count UPWARD from the CF to the counterpoint. Example: CF = E4, CP = D5 — count up E4→F4→G4→A4→B4→C5→D5 = 7 steps = 7th (m7, dissonant).
+- CF is the UPPER voice (counterpoint below): count DOWNWARD from the CF to the counterpoint. Example: CF = G4, CP = D4 — count down G4→F4→E4→D4 = 4 steps = 4th (P4, dissonant).
+The interval number is identical regardless of direction; the convention simply anchors counting to the CF at all times. Before identifying or notating any interval, confirm which voice is the CF, then begin counting from it in the appropriate direction.
+- Perfect consonances: unison, perfect 5th, perfect octave.
+- Imperfect consonances: major 3rd, minor 3rd, major 6th, minor 6th, major 10th, minor 10th.
+- Dissonances (all other intervals): seconds, perfect 4th, diminished 5th, tritone (augmented 4th), sevenths, and all compounds of these with the octave.
+CRITICAL — The perfect 4th (P4) is ALWAYS dissonant in two-voice counterpoint, regardless of which voice is higher. When writing below the cantus firmus, do not confuse the P4 with a P5: if the counterpoint is a 4th below the CF, the interval is a P4 and it is dissonant. For example, CF = D4, CP = A3: counting downward from CF D4→C4→B3→A3 = 4 steps = P4 (dissonant), not P5. A P5 below D4 would be G3 (D4→C4→B3→A3→G3 = 5 steps). Apply the interval counting convention above: start from the CF and count in the appropriate direction.
+FORBIDDEN P4 PITCHES — When writing below the CF, the following counterpoint pitches create a dissonant P4 and must NEVER appear on a strong beat (beat 1 or 3) unless part of a valid tied suspension:
+  CF = C4 → forbidden P4 below: G3 (G3–C4 = P4)
+  CF = D4 → forbidden P4 below: A3 (A3–D4 = P4)
+  CF = E4 → forbidden P4 below: B3 (B3–E4 = P4)
+  CF = F4 → forbidden P4 below: C3 or C4 (C–F = P4)
+  CF = G4 → forbidden P4 below: D3 or D4 (D–G = P4)
+  CF = A3 → forbidden P4 below: E3 (E3–A3 = P4)
+  CF = A4 → forbidden P4 below: E3 or E4 (E–A = P4)
+Before placing any note on beat 1 or beat 3, check this table. If the pitch appears in the "forbidden" column for the current CF note, choose a different pitch.
+When interval quality is not specified, the diatonic pitches of the mode govern the quality automatically. Accidentals are applied only where explicitly required by the cadential accidentals table or by the Bb rule for F (see §VII.5).
+III. Metric Framework and Rhythmic Organization
+Metrical hierarchy: the primary metric layer is binary. Each measure divides first into two half-note positions: Thesis (first half, beats 1 and 2) and Arsis (second half, beats 3 and 4). Beat 1 is the onset of the Thesis; beat 3 is the onset of the Arsis. Beats 2 and 4 are interior positions within their respective halves: beat 2 belongs to the Thesis, beat 4 to the Arsis. Any rule stated in terms of Thesis and Arsis governs this half-note layer. Beat numbers name metric positions within that layer; they describe location, not rhythmic value.
+A correct identification of the beat number is the key component in the writing of the fifth-species as the choice of the species to write depends on the local metrical context of the progression.
+o Beats 1 and 3 constitute structural points of stability. As a general rule, notes placed on 1 and 3 must form a consonant interval with the cantus firmus, except in the specific context mentioned thereafter.
+o Beats 2 and 4 may host consonant or dissonant intervals, but their function and admissibility depend on the rhythmic value and the species logic activated by that value.
+o The admissibility and function of notes on strong beats depend on the species logic activated by their rhythmic value.
+a. First Species logic
+o First-species counterpoint coincides exclusively with beat 1, since the cantus firmus is articulated in whole notes.
+o A whole note on a strong beat must therefore always form a consonant interval with the cantus firmus.
+o No dissonance is admissible in this context.
+o This rhythmic configuration, consisting exclusively of whole-note values, occurs only in the final bars of the fifth species.
+b. Second Species logic
+o In second species, the note placed on the strong beat must always be consonant.
+o Dissonance on beat 1 is categorically forbidden in this species. Fux does not use any passing half note on beat 3, therefore they are also prohibited.
+o The consonant must respect all traditional voice-leading constraints (motion categories, avoidance of parallels, spacing).
+o A half note on beat 2 or 4 is strictly forbidden.
+o A quarter note on beat 4 tied across the barline to a quarter note on beat 1 of the following measure is equally forbidden. This figure creates a displaced half-note effect starting on beat 4, which is metrically equivalent to a half note on beat 4 and violates the same constraint. The only valid tie across the barline is the fourth-species ligature: a half note on beat 3 tied to beat 1.
+o In the fifth species, Fux does not use more than two distinct half notes after each other.
+o No pitch repetition is allowed
+c. Third Species logic (quarter-note writing)
+o The first quarter note on beat 1 must be always consonant.
+o Consequently, third-species usage follows a stepwise motion logic for the following pattern consonance → dissonance → consonance  pattern, either on beat 1, 2, 3 or 3, 4, 1.
+o A dissonance is possible on beat 3 but must be followed by a consonance by step on beat 4. This creates the stepwise pattern on each beat of the measure consonance (beat 1) → dissonance (beat 2) → dissonance (beat 3) → consonance  (beat 4).
+o The motion of two consonances after each other can in third species logic happen on every beat by step or by leap as long as it does not create voice leading errors.
+o Cross-barline motion (beat 4 to beat 1): when quarter-note writing spans a barline, the default melodic motion from beat 4 to the following beat 1 is conjunct (stepwise). Leaps across this barline are strongly discouraged and must not accumulate. The one licensed exception follows this exact figure: beat 1 ascending by step to beat 2, beat 2 ascending by step to beat 3, beat 3 descending by a third to beat 4, then a leap from beat 4 to a consonant interval on the next beat 1. Even this figure must be used sparingly and must never result from or produce a long unbroken run of leaps.
+d. Fourth Species logic
+o Preparation (beat 3): A consonant half note on beat 3 is tied across the barline to beat 1 of the next measure.
+o Suspension (beat 1): The tied note, now metrically displaced onto the strong beat, may form either a consonance or a dissonance with the cantus firmus. This is the only context in which a dissonance on beat 1 is admissible.
+o Resolution: The suspended note must resolve by descending step to a consonant interval. Upward resolution is forbidden. The resolution occurs on beat 3 if the suspension is sustained until that point, or on beat 2 if intervening quarter-note diminution is introduced.
+Any dissonance not falling under the models listed above is forbidden.
+IV. Dynamic Species Selection as a Decision Protocol
+In fifth-species counterpoint, rhythm, pitch, and species logic are evaluated jointly at every step, and none of these parameters may be selected in isolation. The generative process unfolds through incremental constraint satisfaction: metric position limits the rhythmic options available at each moment, voice-leading rules continuously filter the resulting rhythm-pitch combinations, and viable solutions are gradually retained or discarded as the counterpoint progresses. Species choice is therefore not fixed in advance but emerges dynamically from this ongoing process of evaluation and selection.
+1. Metric Position Identification
+For each new note, the system first determines the metric position (beat 1 or 2 or 3 or 4). This determination constrains which rhythmic values and species logics may be activated at that point, in accordance with the rules governing beats 1, 2, 3 and 4.
+2. Joint Generation of Rhythm-Pitch Candidates
+Given the metric position, the system generates joint (rhythm, pitch) candidates. A candidate is admissible only if the pitch lies within a valid melodic range, forms a potentially legal interval with the cantus firmus, and does not immediately violate any voice-leading constraint (such as forbidden repetition, illegal leap, or improper spacing). If no pitch can realize a given rhythmic option without violation, that option is excluded.
+3. Local Validation and Progressive Constraint Filtering
+At each step, all admissible joint candidates are evaluated for local voice-leading correctness. Candidates that satisfy both metric constraints and voice-leading rules remain viable, indicating that a locally coherent solution exists at that temporal point. The system then advances to the next temporal point (the following beat or subdivision), where the same evaluation is repeated. When conflicts arise, the set of viable candidates is progressively narrowed, eliminating choices that lead to impasses in later continuation.
+4. Commitment and Backtracking
+If no viable candidate remains at a given point, the system must return to the most recent decision point and attempt an alternative joint (rhythm, pitch) choice. Backtracking operates on the combined rhythm-pitch decision, rather than on rhythm or pitch alone, ensuring that the generative process remains coherent and responsive to emerging constraints.
+V. Special Cases in Fifth Species: Syncopation and Expanded Fourth-Species Treatment
+This section describes special cases specific to fifth-species counterpoint, in which fourth-species logic is retained but expanded through rhythmic realizations that do not occur in isolated fourth-species exercises.
+A. General Principle
+Syncopation remains governed by fourth-species logic but admits expanded rhythmic realizations in fifth species. A syncopation still consists of:
+- a consonant preparation,
+- a metrically displaced dissonance (when applicable),
+- a resolution governed by stepwise motion.
+No syncopation may violate these structural components.
+B. Preparation
+1. The preparation must always form a consonant interval with the cantus firmus.
+2. The preparation is typically a half note, but in fifth species it may serve as the source for varied rhythmic continuations, provided that its consonant and preparatory function is preserved.
+C. Treatment of the dissonance
+In fifth species, the preparation does not necessarily reappear as a tied half note on the strong beat. Two realizations are permitted:
+1. Classical fourth-species realization: The preparation is tied into the first beat as a half note.
+2. Division\diminution into two quarter notes on the beat 1 and 2:
+The first quarter note must be identical in pitch to the preparation and therefore forms the suspension dissonance and is tied to the prior half note.
+The second quarter note may serve one of the following functions:
+- resolution by descending stepwise motion,
+- anticipation, understood as repetition of the pitch of the upcoming resolution on the following weak beat,
+- consonant accented skip to a consonant interval above or below, not exceeding a perfect fifth, provided that the actual resolution occurs on the subsequent weak beat and that all voice-leading principles are respected.
+In all cases involving dissonance: the resolution must occur by descending step. Upward resolution remains forbidden.
+
+ABOVE-CF SUSPENSION TABLE — CF above, counterpoint below (intervals measured DOWNWARD from CF to CP, per the counting convention):
+The counterpoint is the lower voice. Count down from the CF to identify the interval. All resolutions are DOWNWARD by step in the counterpoint; the interval number increases as the lower voice descends further from the CF.
+  • 2-3 suspension: CP forms a 2nd below CF on beat 1, resolves DOWN to a 3rd. Example: CF = D4; CP = C3 (preparation: consonant m10) → tied to beat 1 = m2 against D4 (dissonant) → resolves down to B2 = m3 against D4 (consonant).
+  • 4-5 suspension: CP forms a 4th below CF on beat 1, resolves DOWN to a 5th. Example: CF = G4; CP = D3 (preparation: P5, consonant) → tied to beat 1 = P4 against G4 (dissonant) → resolves down to C3 = P5 against G4 (consonant).
+  • 9-10 suspension: CP forms a 9th below CF on beat 1, resolves DOWN to a 10th. Example: CF = E4; CP = D3 (preparation: M10, consonant) → tied to beat 1 = M9 against E4 (dissonant) → resolves down to C3 = M10 against E4 (consonant).
+Preparation restriction (above-CF): the 9-10 suspension must be prepared by a 10th, not an octave. If prepared by an octave, the reduction yields 8-8 (forbidden parallel octaves). The 2-1 suspension (resolving to unison) must be prepared by a 3rd for the same reason.
+
+BELOW-CF SUSPENSION TABLE — CF below, counterpoint above (intervals measured UPWARD from CF to CP, per the counting convention):
+The counterpoint is the upper voice. Count up from the CF to identify the interval. All resolutions are DOWNWARD by step in the counterpoint; the interval number decreases as the upper voice descends toward the CF.
+  • 7-6 suspension: CP forms a 7th above CF on beat 1, resolves DOWN to a 6th. Example: CF moves D4→E4; CP = D5 (preparation: P8 with D4, consonant) → tied to beat 1 = m7 against E4 (dissonant) → resolves down to C5 = m6 against E4 (consonant).
+  • 4-3 suspension: CP forms a 4th above CF on beat 1, resolves DOWN to a 3rd. Example: CF moves G4→A4; CP = D5 (preparation: P5 with G4, consonant) → tied to beat 1 = P4 against A4 (dissonant) → resolves down to C5 = m3 against A4 (consonant).
+  • 9-8 suspension: CP forms a 9th above CF on beat 1, resolves DOWN to an 8th. Example: CF moves C4→D4; CP = E5 (preparation: M10 with C4, consonant) → tied to beat 1 = M9 against D4 (dissonant) → resolves down to D5 = P8 against D4 (consonant).
+Preparation restriction (below-CF): the 9-8 suspension must be prepared by a 10th, not an octave. If prepared by an octave, the reduction yields 8-8 (forbidden). The LLM must apply this as a hard constraint and must not seek workarounds by re-labeling the preparation interval.
+
+D. Consonant Syncopation
+At least one consonant syncopation must be used in the exercise. A consonant syncopation occurs when a half note on beat 3 is tied to a consonant interval on beat 1 of the next measure; no obligatory resolution is required, and the line may proceed freely, subject to general voice leading and rhythmic constraints. Fux characteristically uses consonant syncopations to create suspension chains that induce rhythmic diminution through scalar motion, introducing quarter notes on beats 2, 3, and 4.
+E. Consonant Mediation and Resolution Repetition
+Two additional ornamental patterns using only quarter notes extend the syncopation framework through licensed interval progressions over beats 1–3. No eighth notes are involved; the elaboration is entirely at the quarter-note level. The preparation requirement (consonant half note on beat 3 of the preceding measure, consonant with that measure's CF) applies in full to all patterns in this section.
+Cantus Firmus Below (counterpoint above):
+- 7-3-6 (Consonant Mediation): beat 1 = 7th (quarter, tied suspension); beat 2 = 3rd (quarter, consonant mediation — a downward leap from the suspension note, not exceeding a perfect fifth); beat 3 = 6th (quarter or half, structural resolution). The 3rd on beat 2 functions as an intermediate consonance between the suspension and the resolution; under reduction, the suspension still resolves 7→6. The downward leap from the 7th to the 3rd must be consonant and must not form a melodic tritone. The upward motion from the 3rd to the 6th on beat 3 provides the directional compensation for the preceding downward leap.
+- 7-6-6 (Resolution Repetition): beat 1 = 7th (quarter, tied suspension); beat 2 = 6th (quarter, resolution); beat 3 = 6th (quarter or half, restatement of the resolution). The resolution pitch is stated on beat 2 and immediately restated on beat 3. The pitch repetition between beats 2 and 3 is a licensed exception to the general prohibition on immediate pitch repetition, valid only in this ornamental context. Fux employs this figure with particular preference in the antepenultimate measure (two measures before the final).
+Cantus Firmus Above (counterpoint below):
+- 2-6-3 (Consonant Mediation): beat 1 = 2nd (quarter, tied suspension — CP is one step below CF); beat 2 = 6th (quarter, consonant mediation — CP descends by leap to a position a 6th below CF, not exceeding a perfect fifth from the suspension note); beat 3 = 3rd (quarter or half, structural resolution — CP ascends back toward CF). Under reduction, the suspension resolves 2→3.
+- 2-3-3 (Resolution Repetition): beat 1 = 2nd (quarter, tied suspension); beat 2 = 3rd (quarter, resolution — CP descends by step); beat 3 = 3rd (quarter or half, restatement of the resolution). Licensed pitch repetition between beats 2 and 3, parallel to the 7-6-6 pattern above.
+F. Syncopation Chains
+Fux employs chains of two consecutive syncopations — most characteristically in the approach to the cadence — as a preferred stylistic pattern. A syncopation chain consists of two adjoining measures in which the resolution of the first syncopation serves simultaneously as the preparation for the second: the resolution note on beat 3 of measure N is tied across the barline to form a new suspension at beat 1 of measure N+1.
+When the cantus firmus admits a valid chain (i.e., the consecutive CF notes create the interval conditions for two successive suspensions), the chain should be preferred over isolated syncopations or quarter-note writing for those measures. The chain should be identified during planning: check whether the resolution of any given syncopation is consonant with the following CF note and will form a valid suspension interval against the CF after that. If so, commit to the chain.
+Any of the ornamentation patterns described in §V.C, §V.E, and §VI may be applied to individual members of the chain. When ornamenting a chained syncopation, verify that the ornamented version still leaves beat 3 of the current measure free to serve as the preparation for the next suspension — that is, the note on beat 3 must remain consonant with the current CF and must form a valid suspension interval against the following CF when tied.
+VI. Eighth-Note Groupings and Ornamental Repetition
+General constraint: Eighth notes may only appear on beats 2 and 4. They are strictly forbidden on beats 1 and 3. This applies without exception to every context in which eighth notes are used.
+This section describes an ornamental extension specific to fifth species, combining fourth- and third-species logic in a manner not prescribed in their isolated forms. During a syncopation, a grouping of two eighth notes may function as an ornamental elaboration of the suspension-resolution process, replacing the second quarter note on beat 2, provided that the following conditions are met:
+- the structural resolution of the suspension remains a descending stepwise motion to a consonant interval,
+- the eighth-note pair does not redefine the point of resolution, but decorates either the resolution pitch itself or the approach to that resolution,
+- the ornamental figure remains strictly conjunct.
+A. Ornamented Accent
+If the preparation (e.g., D as a half note) is tied into a quarter note forming the suspension dissonance, the subsequent eighth-note figure (e.g., E-D) may precede the consonant resolution pitch (e.g., C as a quarter note).
+In this case:
+- the eighth-note ascent functions as an ornamented accent,
+- the true resolution of the syncopation remains the following consonant pitch,
+- abstracting away the ornament, the suspension is interpreted as resolving downward without interruption.
+B. Ornamented Anticipation
+If the eighth-note pair decorates the pitch of the upcoming resolution (e.g., D-C-B-C), the lower neighbor functions as an ornamental anticipation.
+In this case:
+- the resolution pitch is already implied metrically,
+- the eighth-note figure elaborates the weak-beat resolution,
+- the suspension remains structurally descending, despite surface ornamentation.
+In both cases, the suspension is always interpreted as descending at the structural level, the eighth-note grouping functions as an ornamental intensification rather than a deviation from fourth-species logic, and melodic continuity is not considered interrupted.
+C. Scalar Gap Fill
+A third use of two eighth notes is permitted to fill a melodic third-gap within a scalar passage in third-species logic. The patterns differ depending on the position of the cantus firmus.
+Cantus Firmus Below (counterpoint above): Two patterns are admissible.
+- Ascending: The scalar pattern 5-6-8 contains a third-gap between the 6th and the 8th. The quarter note at the 6th may be subdivided into two eighth notes (6-7), yielding: quarter (5th) | eighth-eighth (6th-7th) | quarter (8th). This pattern is restricted to beats 1-2-3 (eighth pair on beat 2). It must not start on beat 3: arriving at the octave on the following beat 1 would risk being misread as a cadential gesture.
+- Descending: The mirror pattern 3-[5-4]-3 inverts the same principle. The counterpoint leaps up a third from the 3rd to the 5th on the first eighth, then descends stepwise through the 4th back to the 3rd: quarter (3rd) | eighth-eighth (5th-4th) | quarter (3rd). The 4th on the second eighth is a passing dissonance between two consonances. This pattern may be placed on beats 1-2-3 or beats 3-4-1.
+The two eighth notes must be diatonic and strictly conjunct in both patterns.
+Cantus Firmus Above (counterpoint below): Two patterns are admissible. In both, the counterpoint leaps down by a third on beat 2 (first eighth) and then returns stepwise through the second eighth to the original interval class on beat 3.
+- Pattern 6-[8-7]-6: quarter (6th) | eighth-eighth (8th-7th) | quarter (6th).
+- Pattern 3-[5-4]-3: quarter (3rd) | eighth-eighth (5th-4th) | quarter (3rd).
+The seventh and fourth appearing on the second eighth are passing dissonances between the surrounding consonances. The figure may be placed on beats 1-2-3 (eighth pair on beat 2) or beats 3-4-1 (eighth pair on beat 4).
+D. Ornamented Resolution
+A fourth use of two eighth notes extends ornamental treatment to the resolution itself. Instead of placing the structural resolution on beat 2 as a quarter note, the resolution pitch is stated first as a brief eighth note, followed immediately by a second eighth note that continues one step further in the same direction; beat 3 then re-establishes the resolution interval by returning one step. This creates a neighbor-note or passing ornament around the resolution, while leaving its structural role intact.
+Preparation requirement: the standard fourth-species mechanism applies without exception. The note on beat 3 of the preceding measure must be consonant with the CF of that measure and must form the suspension dissonance when tied across the barline to beat 1 of the current measure. The suspended note must resolve by descending step. Do not confuse beat 3 of the current measure (where the resolution is re-established) with the preparation, which belongs to the preceding measure.
+Cantus Firmus Below (counterpoint above):
+- 7-(6-5)-6: beat 1 = 7th (suspension quarter, tied); beat 2 = sixth (first eighth, ornamental anticipation of the resolution) + fifth (second eighth, lower consonant neighbor — P5); beat 3 = sixth (quarter, structural resolution). The reduction reads 7 → 6; everything on beat 2 is ornamental.
+- 4-(3-2)-3: beat 1 = 4th (suspension quarter, tied); beat 2 = third (first eighth, ornamental anticipation of the resolution) + second (second eighth, lower dissonant neighbor — M2 or m2, approached and left by step); beat 3 = third (quarter, structural resolution). The reduction reads 4 → 3.
+Cantus Firmus Above (counterpoint below):
+- 2-(3-4)-3: beat 1 = 2nd (suspension quarter, tied — CP is one step below CF); beat 2 = third (first eighth, ornamental anticipation of the resolution — CP descends) + fourth (second eighth — CP descends a further step; the resulting P4 is dissonant but approached and left by step); beat 3 = third (quarter, structural resolution — CP ascends by step). The reduction reads 2 → 3.
+- 4-(5-6)-5: beat 1 = 4th (suspension quarter, tied — CP is a fourth below CF); beat 2 = fifth (first eighth, ornamental anticipation of the resolution — CP descends) + sixth (second eighth — CP descends a further step; the resulting 6th is consonant); beat 3 = fifth (quarter, structural resolution — CP ascends by step). The reduction reads 4 → 5.
+In all four patterns, the structural resolution falls on beat 3. Under reduction, the suspension on beat 1 resolves directly to the resolution interval on beat 3; the two eighth notes on beat 2 are entirely ornamental. The first eighth on beat 2 anticipates the resolution pitch but does not constitute the structural resolution; the second eighth steps further away; beat 3 is where the resolution properly arrives. The eighth-note pair must be strictly conjunct and diatonic. The figure spans beats 1-2-3; the eighth notes fall on beat 2. As with all ornamental figures, the resulting voice-leading must be verified against the cross-barline parallel check at every barline.
+Eighth notes are not permitted in any context other than the prescribed cases of the ornamented accent, the ornamented anticipation, the scalar gap fill, and the ornamented resolution. Groupings of four consecutive eighth notes must not be generated, as they do not conform to these rules and are inconsistent with Fux's compositional practice.
+VII. Melodic Conduct and Line Priority
+1. Stepwise motion is normative.
+2. Leaps are permitted only between consonant notes.
+3. Any leap must be compensated by stepwise motion in the opposite direction.
+4. Tritone Prohibition (Mi contra Fa): The tritone (augmented 4th / diminished 5th) is forbidden in three distinct contexts:
+   1. Vertical: No simultaneous tritone between the two voices at any sounding moment. One exception applies: a vertical diminished 5th formed by B below and F above is permitted if it resolves immediately and directly by contrary stepwise motion to a major 3rd (B → C, F → E). This inward resolution neutralises the dissonance and is sanctioned by Fux.
+   2. Melodic (direct): No melodic leap of a tritone in the generated voice.
+   3. Melodic (outlined): A melodic line must not outline a tritone across a stepwise passage. For example, the stepwise ascent F–G–A–B outlines an augmented 4th and is forbidden, even though no single leap of a tritone occurs. If the line continues stepwise in the same direction through the tritone (e.g., F–G–A–B–C), the tritone is resolved and the passage becomes acceptable. The prohibition applies when the line reverses direction at the tritone boundary, thereby exposing the dissonant frame.
+5. Cantus Firmus in F (Bb Rule): When the cantus firmus is in F (Lydian mode), B must be lowered to Bb in the generated voice wherever it would create a melodic tritone. This applies in two specific situations:
+   (a) Direct leap: if the generated voice leaps between F and B (or B and F), lower B to Bb to eliminate the augmented 4th.
+   (b) Stepwise outline: if the generated voice moves stepwise through a passage whose outer boundary is a tritone — for example, the ascending line F–G–A–B or the descending line B–A–G–F — lower B to Bb to break the tritone frame.
+   This inflection is not a blanket substitution of every B in the exercise; it applies wherever B participates in either of these two tritone-producing relationships with F. The rule applies to every rhythmic value — passing tones, preparation notes, suspension notes, and resolution notes included. Fux consistently uses this adjustment in all species when writing over the F cantus firmus.
+6. Chromatic Alteration and Resolution Obligation (after Lewin, "An Interesting Global Rule for Species Counterpoint", Yale University, unpublished, n.d.): When a raised or lowered pitch is introduced in the counterpoint line, it creates a resolution obligation: a designated resolution pitch must appear at some later point in the same register, though not necessarily on the immediately following note. Obligatory resolution tones:
+   - Bb → A
+   - Eb → D
+   - C# → D
+   - G# → A
+   - F# → G (or G#, if the chromatic ascent continues)
+   Once a chromatically altered pitch has appeared, its unaltered (natural) form is forbidden in the line until after the resolution pitch has sounded in the same register. The rule applies to every rhythmic value — passing tones, preparation notes, suspension notes, and resolution notes included.
+7. Pitch repetition is avoided except when rhythmically justified for anticipations.
+VIII. Beginning, Penultimate Measure, and Final Cadence
+A. Beginning
+1. The counterpoint may begin with a rest.
+2. The first sounding note must form a consonance with the cantus firmus.
+3. Perfect consonances are required at the opening (unison or octave; fifth only if the counterpoint is above).
+B. Penultimate Measure
+The penultimate measure must use a syncopated cadential suspension following fourth-species logic. This is not optional: Fux consistently employs a syncopated cadence in all fifth-species examples.
+- Counterpoint above the cantus firmus: use a 7–6 suspension. The 6 (Major 6th) is the resolution and must be the last note of the penultimate measure, resolving to the octave in the final bar.
+- Counterpoint below the cantus firmus: use a 2–3 suspension. The 3 (minor 3rd) is the resolution and must be the last note of the penultimate measure, resolving to the unison in the final bar.
+
+CONCRETE CADENCE EXAMPLE — Counterpoint below CF in E:
+  The CF for the last three measures is: M8 = E4, M9 = F4, M10 = E4.
+  Step 1 — Choose preparation (M8, beat 3): Find a note consonant with E4 that will form a 2nd with F4 when tied into M9. The note E3 is consonant with E4 (P8) and E3 to F4 = m2 (a valid suspension interval below CF). Place E3 as a half note on beat 3 of M8.
+  Step 2 — Suspension (M9, beat 1): E3 is tied across the barline. E3 to F4 = m2 (dissonant). This is a valid 2-3 suspension below the CF. ✓
+  Step 3 — Resolution (M9, beat 3): E3 resolves DOWN by step to D3. D3 to F4 = m3 (compound) = minor 10th (consonant). D3 is the last sounding note of the penultimate measure. ✓
+  Step 4 — Final (M10): E3 whole note. E3 to E4 = P8 (octave). ✓
+  No cadential accidental is needed when the CF ends on E (the table says E / none).
+
+RULE FOR BELOW-CF CADENCE: In the antepenultimate measure, place a consonant half note on beat 3 that will form a 2nd (or compound 2nd) with the CF of the penultimate measure when tied across the barline. Resolve downward by step on beat 3 of the penultimate measure to form a 3rd (or compound 3rd). The resolution note is the last sounding note before the final whole note.
+
+The suspension is prepared by a consonant half note on beat 3 of the antepenultimate measure (the measure before the penultimate), tied across the barline to beat 1 of the penultimate measure (i.e., standard fourth-species ligature). The resolution falls on beat 3 of the penultimate measure, or earlier via quarter-note diminution, provided the structural resolution pitch (the Major 6th above or minor 3rd below) remains the last sounding note before the final bar.
+Note on the 5th (generated voice above, cantus below): whenever a 5th appears in the penultimate measure — including as a quarter note on beat 2 within an ornamented syncopation — it must be a perfect 5th. When the penultimate CF note is B, the diatonic 5th above is F natural — a diminished 5th, which is forbidden. Apply F# to produce a perfect 5th. Example: cantus in A, penultimate CF note = B → any 5th in the counterpoint = F# (P5).
+Apply the required accidental to the resolution note where it does not occur naturally:
+Final note of CF / Required accidental on resolution note:
+D / C#
+C / none
+E / none
+F / none
+G / F#
+A / G#
+C. Final Measure
+1. The final note of the generated voice must be a whole note and must correspond with the last note of the cantus firmus voice. No further notes are allowed to be added.
+2. The final interval must be a perfect consonance (unison or octave).
+IX. Forbidden Successions and Voice-Leading Constraints
+All prohibitions from first and second species apply without exception:
+- Parallel fifths and octaves are forbidden. The presence of intervening diminutions or ornamental figures does not neutralize forbidden parallels if they remain perceptible under reduction.
+CRITICAL — Cross-barline parallel fifths and octaves: The last sounding note before a barline and the first sounding note of the following measure must not form two consecutive perfect fifths or two consecutive perfect octaves with their respective cantus firmus notes. This is one of the most persistent errors in fifth species. The barline creates a visual illusion of separation, but the two notes are heard in direct succession. Before writing the last note of any measure, compute its interval against the current CF, then compute the interval the first note of the next measure will form against the next CF note: if both are P5, or both are P8, the parallel must be eliminated. The correction is not necessarily limited to changing a single note: depending on the context, the solution may require revising the melodic motion within the current measure, choosing a different pitch for the first note of the following measure, or reconsidering the rhythmic layout of the surrounding passage. Explore all alternatives before committing to a fix. This check applies regardless of rhythmic value and must be performed at every barline without exception.
+- Consecutive Imperfect Consonances: No more than three consecutive vertical intervals of the same type of imperfect consonance are permitted across all sounding notes. Three consecutive 3rds, three consecutive 6ths, or three consecutive 10ths is the maximum; a fourth consecutive interval of the same type must be avoided.
+- Direct (hidden) fifths and octaves are forbidden. A direct fifth or octave occurs when two voices move in similar motion (both ascending or both descending) into a perfect fifth or octave, without at least one voice arriving by step. To avoid this, use contrary motion instead in the generated voice.
+- Voice crossing: Permitted only as an exceptional measure when no other voice-leading solution is possible. To be valid, the crossing must be resolved within three beats by leaping out to restore the original vocal register.
+- Excessive spacing is forbidden. The interval between the cantus firmus and the counterpoint must not exceed a tenth at any sounding moment. This is a hard limit that applies to every single note, including passing tones and tied notes. When the cantus firmus rises to its highest pitches, the counterpoint below must rise accordingly to stay within a tenth. For example, if the CF reaches A4, the counterpoint below must be no lower than F3 (A4 to F3 = M10). Plan ahead: if the CF ascends, the counterpoint must ascend with it. Failing to track the CF's register is the most common cause of spacing violations. The constraint applies without exception to beat 3 (the preparation note of a syncopation). At beat 1, a single exception applies: in a consonant syncopation, if the tied note forms a consonant interval against the new cantus firmus note but that interval exceeds a 10th (up to a 12th), this wider spacing is tolerated provided the counterpoint immediately leaps on the following note to restore spacing within a 10th.
+- Leaps into or out of unison are forbidden, except at the beginning and the end.
+- Immediate pitch repetition is forbidden. A pitch may not be repeated on consecutive beats. The sole exception occurs in the ornamental resolution of a syncopation, where a repeated pitch between beats 2 and 3 may appear as part of the prescribed ornamental figure.
+X. Summary Checklist for Generation and Verification
+For each note written, verify the following in order:
+- Species identification: Is the active species logic (1st, 2nd, 3rd, or 4th) correctly determined by the metric position and rhythmic value?
+- Beat 1 consonance: Is beat 1 consonant? If dissonant, is it a valid fourth-species suspension tied from beat 3 of the previous measure?
+- Beat 3 consonance: Is beat 3 consonant? A half note on beat 3 MUST be consonant (it follows second-species logic). If dissonant, does it satisfy the third-species four-note scalar rule (unidirectional stepwise motion with consonant beats 2 and 4)? A dissonant half note on beat 3 is NEVER permitted — only a dissonant quarter note on beat 3 can be valid (as part of a four-quarter-note passage).
+- Passing dissonance: Is every dissonance on beats 2 or 4 approached and left by step in the same direction?
+- Suspension mechanism: Does every dissonant suspension follow the three-phase sequence (consonant preparation, suspension, resolution by descending step)? Verify that the PREPARATION is consonant — if the half note on beat 3 that gets tied is itself dissonant against the CF, the syncopation is invalid and must be reworked.
+- Admissible suspensions: Are suspension intervals limited to 7-6, 4-3, 9-8 (above) or 2-3, 4-5, 9-10 (below)? Is the 9-8 / 2-1 restriction on preparation interval respected? When writing below the CF, remember that the resolution is always DOWNWARD and the interval number INCREASES (2→3, 4→5, 9→10).
+- Consonant mediation and resolution repetition (§V.E): If a 7-3-6 or 2-6-3 figure is used, is the mediation note on beat 2 consonant with the CF, and does the leap not exceed a P5 or create a melodic tritone? If a 7-6-6 or 2-3-3 figure is used, is the pitch repetition between beats 2 and 3 limited to this licensed context?
+- Syncopation chains (§V.F): When two consecutive syncopations are possible given the CF, is the chain preferred over isolated syncopation? When ornamenting a chained syncopation, does beat 3 of the current measure remain consonant with the current CF and form a valid suspension interval against the following CF?
+- Eighth-note usage: Do all eighth notes fall strictly on beats 2 or 4? Are eighth notes used only as ornamented accent, ornamented anticipation (within a syncopation context), scalar gap fill, or ornamented resolution (§VI.D)? No groupings of four eighth notes? If an ornamented resolution figure is used, does beat 3 re-establish the resolution interval, and is the preparation on beat 3 of the preceding measure consonant with that measure's CF?
+- Parallel fifths and octaves: Does the reduction (removing ties and diminutions) reveal any parallel or hidden fifths or octaves?
+- Cross-barline parallel (last note → beat 1): Does the last sounding note of each measure form the same type of perfect interval (P5 or P8) as the first note of the following measure against their respective CF notes? If yes, this is a forbidden cross-barline parallel — eliminate it by exploring all available alternatives: change the last note of the current measure, change the first note of the following measure, revise the internal melodic motion, or reconsider the rhythmic layout of the surrounding passage. Do not limit the correction to a single note if a broader revision is needed. Apply this check at every barline without exception.
+- Voice crossing: If a crossing occurs, is it resolved within three beats?
+- Spacing: Does every note stay within a 10th? In particular, does beat 3 (the preparation) stay within a 10th without exception? If a consonant syncopation produces a 12th on beat 1, does the counterpoint immediately leap back within a 10th on the following note? When the CF is high and the counterpoint is below, verify that the counterpoint has risen high enough.
+- P4 check (below CF): For every note in the counterpoint below the CF, verify that the interval from the counterpoint up to the CF is NOT a perfect 4th. A P4 is dissonant even when the counterpoint is the lower voice. If you find a P4, replace it with a consonance (3rd, 5th, 6th, 8ve, or 10th).
+- Melodic conduct: Is every melodic interval singable? Is every leap followed by stepwise contrary motion?
+- Consecutive Imperfect Consonances: Do no more than three vertical intervals of the same type of imperfect consonance (3rds, 6ths, or 10ths) occur in succession across all sounding notes?
+- Tritone (vertical): Is every simultaneous tritone absent? If a vertical dim5 (B below, F above) appears, does it resolve immediately by contrary step to a major 3rd (B→C, F→E)?
+- Tritone (melodic direct): Is every melodic leap free of tritones?
+- Tritone (melodic outlined): Does no stepwise passage reverse direction at a tritone boundary, exposing a tritone frame?
+- Pitch repetition: Is immediate pitch repetition avoided (except for ornamental syncopation figures)?
+- Rhythmic variety: Does the exercise use a mix of rhythmic values without excessive repetition of the same pattern?
+- Cadence: Does the penultimate measure use a 7–6 suspension resolving to an octave (above) or a 2–3 suspension resolving to a unison (below)? Is the cadential accidental applied correctly to the resolution note (D/C#, G/F#, A/G#)?
+- Opening: Does the first sounding note form a perfect consonance (unison, octave, or fifth if above)?
+- Closing: Is the final measure a single whole note forming a perfect consonance (unison or octave)?
+- Bb Rule: If the CF is in F, is B written as Bb wherever it creates a melodic tritone with F (direct leap or stepwise outline)?
+- Chromatic resolution (Lewin): If any accidental is used, has its designated resolution pitch appeared subsequently in the same register, before the unaltered form of that pitch recurs?
+Please check at the end if all those rules are correct and if not correct yourself.
